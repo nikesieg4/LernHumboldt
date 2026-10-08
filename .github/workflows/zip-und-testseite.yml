@@ -23,11 +23,15 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      bereit: ${{ steps.projekt.outputs.bereit }}
     steps:
       - uses: actions/checkout@v4
 
       - name: ZIP entpacken (falls vorhanden)
         run: |
+          # Immer mit dem neuesten Stand arbeiten (wichtig bei „Re-run jobs“ eines älteren Laufs)
+          git fetch -q origin main && git reset -q --hard origin/main
           ZIP=$(find . -path ./.git -prune -o -type f -name '*.zip' -print | head -n 1)
           if [ -z "$ZIP" ]; then echo "Keine ZIP-Datei im Repository, nichts zu entpacken."; exit 0; fi
           echo "Entpacke $ZIP"
@@ -52,25 +56,44 @@ jobs:
         with:
           node-version: 20
 
-      - name: Inhalte prüfen
+      - name: Projekt und GitHub Pages prüfen
+        id: projekt
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          if [ ! -f scripts/check-content.mjs ]; then echo "::error::Das Projekt fehlt noch. Lade lernseite.zip hoch."; exit 1; fi
+          if [ ! -f scripts/check-content.mjs ]; then
+            echo "::notice::Noch kein Projekt im Repository. Lade jetzt lernseite.zip hoch."
+            echo "bereit=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          ANTWORT=$(gh api "repos/${{ github.repository }}/pages" --jq .build_type 2>&1 || true)
+          if echo "$ANTWORT" | grep -q "Not Found"; then
+            echo "::error::GitHub Pages ist noch nicht eingeschaltet. Settings → Pages → Build and deployment → Source: „GitHub Actions“ wählen. Danach hier oben rechts „Re-run jobs“ → „Re-run all jobs“."
+            exit 1
+          elif [ "$ANTWORT" = "legacy" ]; then
+            echo "::error::GitHub Pages steht auf „Deploy from a branch“. Settings → Pages → Source auf „GitHub Actions“ umstellen. Danach „Re-run all jobs“."
+            exit 1
+          fi
           node scripts/check-content.mjs
+          echo "bereit=true" >> "$GITHUB_OUTPUT"
 
       - name: Testseite bauen
+        if: steps.projekt.outputs.bereit == 'true'
         run: |
           mkdir -p _site
           node scripts/build-testseite.mjs _site/index.html
           touch _site/.nojekyll
 
-      - uses: actions/configure-pages@v5
+      - if: steps.projekt.outputs.bereit == 'true'
+        uses: actions/configure-pages@v5
 
-      - uses: actions/upload-pages-artifact@v3
+      - if: steps.projekt.outputs.bereit == 'true'
+        uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
   deploy:
     needs: build
+    if: needs.build.outputs.bereit == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
