@@ -1,0 +1,80 @@
+# Für das Hochladen vom iPad (oder überall, wo man keine versteckten Dateien sieht):
+# Lege diese Datei auf GitHub unter  .github/workflows/zip-und-testseite.yml  an.
+# Danach reicht es, lernseite.zip hochzuladen. Der Workflow
+#   1. entpackt die ZIP ins Repository (ohne .github, .env, data, node_modules) und löscht sie,
+#   2. prüft die Inhalte, baut die Testseite und veröffentlicht sie auf GitHub Pages.
+# Auch jede spätere Änderung (z. B. eine Übung direkt auf GitHub bearbeitet) baut die Seite neu.
+name: ZIP entpacken und Testseite veröffentlichen
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: ZIP entpacken (falls vorhanden)
+        run: |
+          ZIP=$(find . -path ./.git -prune -o -type f -name '*.zip' -print | head -n 1)
+          if [ -z "$ZIP" ]; then echo "Keine ZIP-Datei im Repository, nichts zu entpacken."; exit 0; fi
+          echo "Entpacke $ZIP"
+          TMP=$(mktemp -d)
+          unzip -q "$ZIP" -d "$TMP"
+          SRC="$TMP"
+          # Liegt alles in einem einzigen Ordner (z. B. lernseite/), dessen Inhalt nehmen
+          if [ "$(ls -A "$TMP" | wc -l)" -eq 1 ] && [ -d "$TMP/$(ls -A "$TMP")" ]; then SRC="$TMP/$(ls -A "$TMP")"; fi
+          # Niemals übernehmen: Geheimnisse, Datenbank, installierte Pakete.
+          # .github wird übersprungen, weil Workflows nicht automatisch geändert werden dürfen.
+          rm -rf "$SRC/.env" "$SRC/data" "$SRC/node_modules" "$SRC/.github" "$SRC/testseite.html"
+          git rm -q "$ZIP"
+          cp -a "$SRC"/. .
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "ZIP entpackt: $(basename "$ZIP")"
+          git push
+          echo "Dateien übernommen und ZIP entfernt."
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Inhalte prüfen
+        run: |
+          if [ ! -f scripts/check-content.mjs ]; then echo "::error::Das Projekt fehlt noch. Lade lernseite.zip hoch."; exit 1; fi
+          node scripts/check-content.mjs
+
+      - name: Testseite bauen
+        run: |
+          mkdir -p _site
+          node scripts/build-testseite.mjs _site/index.html
+          touch _site/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
