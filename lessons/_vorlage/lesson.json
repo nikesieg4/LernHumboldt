@@ -1,0 +1,9 @@
+{
+  "title": "Titel der Lerneinheit",
+  "subject": "Fach",
+  "description": "Ein bis zwei Sätze, worum es geht.",
+  "minutes": 10,
+  "order": 100,
+  "classes": null,
+  "hidden": false
+}

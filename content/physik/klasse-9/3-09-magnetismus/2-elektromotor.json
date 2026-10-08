@@ -1,0 +1,108 @@
+{
+  "id": "k9-elektromotor",
+  "titel": "Kraft auf Leiter und Elektromotor",
+  "kurz": "Warum sich ein stromdurchflossener Leiter im Magnetfeld bewegt und wie daraus ein Motor wird.",
+  "reihenfolge": 2,
+  "lernziele": [
+    { "id": "lz1", "niveau": "E", "text": "Die Kraft auf einen stromführenden Leiter im Magnetfeld beschreiben" },
+    { "id": "lz2", "niveau": "E", "text": "Angeben, wovon Richtung und Betrag dieser Kraft abhängen" },
+    { "id": "lz3", "niveau": "F", "text": "Aufbau und Funktionsweise eines Elektromotors erklären" }
+  ],
+  "verstehen": {
+    "einstieg": "Ein Draht hängt locker zwischen den Polen eines Hufeisenmagneten. Sobald Strom fließt, schwingt er zur Seite. Woher kommt diese Kraft?",
+    "abschnitte": [
+      {
+        "titel": "Der Versuch mit der Leiterschaukel",
+        "text": "Ein Leiterstück hängt beweglich im Feld eines Hufeisenmagneten. Fließt Strom, wird es aus dem Magnetfeld **herausgedrückt oder hineingezogen**. Die Kraft wirkt **senkrecht** zur Stromrichtung und senkrecht zu den Feldlinien.\n\nDer Grund: Der stromdurchflossene Leiter hat ein eigenes Magnetfeld. Dieses Feld und das Feld des Magneten beeinflussen sich gegenseitig. Man nennt die Kraft auch **Lorentzkraft**."
+      },
+      {
+        "titel": "Wovon hängt die Kraft ab?",
+        "text": "**Richtung:** Wird die Stromrichtung umgekehrt, kehrt sich die Kraft um. Dasselbe passiert, wenn man den Magneten umdreht. Ändert man beides, wirkt die Kraft wieder in die ursprüngliche Richtung.\n\n**Betrag:** Die Kraft wird größer, wenn die **Stromstärke** steigt, wenn das **Magnetfeld** stärker ist und wenn ein **längeres Leiterstück** im Feld liegt (z. B. eine Spule mit vielen Windungen)."
+      },
+      {
+        "titel": "Der Elektromotor",
+        "text": "Ein einfacher Gleichstrommotor besteht aus einem feststehenden **Feldmagneten** (Stator) und einer drehbaren **Spule** (Rotor oder Anker).\n\nFließt Strom durch die Spule, wird sie zum Elektromagneten. Ihre Pole werden von den ungleichnamigen Polen des Feldmagneten angezogen, und die Spule dreht sich.\n\nStehen sich die ungleichnamigen Pole gegenüber, würde die Spule stehen bleiben. Deshalb kehrt der **Kommutator** (Polwender) genau in diesem Moment die Stromrichtung in der Spule um. Jetzt stoßen sich gleichnamige Pole ab, und die Spule dreht sich weiter. Über **Bürsten** (Schleifkontakte) gelangt der Strom in die drehende Spule.\n\nDamit der Motor gleichmäßiger läuft und nicht in einer „Totpunktlage“ stehen bleibt, verwendet man mehrere Spulen (Trommelanker)."
+      }
+    ],
+    "merksatz": "Auf einen stromdurchflossenen Leiter im Magnetfeld wirkt eine Kraft. Ihre Richtung hängt von Stromrichtung und Feldrichtung ab, ihr Betrag von Stromstärke, Feldstärke und Leiterlänge.\n\nIm Elektromotor sorgt der **Kommutator** dafür, dass sich die Spule immer weiterdreht.",
+    "alltag": "Elektromotoren wandeln elektrische Energie in Bewegungsenergie um, z. B. in E-Autos, Bohrmaschinen, Ventilatoren und der Vibration deines Handys."
+  },
+  "interaktiv": [],
+  "uebungen": [
+    {
+      "id": "k9-mo-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz3",
+      "frage": "Welche Aufgabe hat der Kommutator in einem Gleichstrommotor?",
+      "optionen": [
+        { "text": "Er kehrt nach jeder halben Umdrehung die Stromrichtung in der Spule um.", "richtig": true },
+        { "text": "Er erzeugt das Magnetfeld des Motors.", "feedback": "Das Magnetfeld erzeugen der Feldmagnet und die stromdurchflossene Spule." },
+        { "text": "Er bremst den Motor ab.", "feedback": "Der Kommutator sorgt im Gegenteil dafür, dass sich der Motor weiterdreht." }
+      ],
+      "erklaerung": "Ohne Umpolung würde die Spule stehen bleiben, sobald sich ungleichnamige Pole gegenüberstehen. Der Kommutator tauscht dann die Pole der Spule, und die Abstoßung treibt sie weiter."
+    },
+    {
+      "id": "k9-mo-02", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Eine Leiterschaukel schwingt bei Stromfluss nach außen. Nun wird nur die Stromrichtung umgekehrt. Was passiert?",
+      "optionen": [
+        { "text": "Die Schaukel schwingt nach innen.", "richtig": true },
+        { "text": "Die Schaukel schwingt wieder nach außen.", "feedback": "Die Richtung der Kraft hängt von der Stromrichtung ab." },
+        { "text": "Die Schaukel bewegt sich nicht mehr.", "feedback": "Es fließt weiterhin Strom, also wirkt weiterhin eine Kraft, nur in die andere Richtung." }
+      ],
+      "erklaerung": "Kehrt man die Stromrichtung um, kehrt sich auch die Richtung der Kraft auf den Leiter um."
+    },
+    {
+      "id": "k9-mo-03", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz2",
+      "frage": "Bei der Leiterschaukel werden gleichzeitig die Stromrichtung **und** die Pole des Magneten vertauscht. Wie bewegt sich die Schaukel jetzt im Vergleich zu vorher?",
+      "optionen": [
+        { "text": "In dieselbe Richtung wie vorher", "richtig": true },
+        { "text": "In die entgegengesetzte Richtung", "feedback": "Jede Änderung allein kehrt die Kraft um. Zwei Umkehrungen heben sich gegenseitig auf." },
+        { "text": "Gar nicht", "feedback": "Strom und Magnetfeld sind weiterhin vorhanden, also wirkt eine Kraft." }
+      ],
+      "erklaerung": "Zweimal umkehren ergibt wieder die ursprüngliche Richtung. Deshalb dreht sich z. B. ein Gleichstrommotor mit Elektromagnet als Feldmagnet auch mit Wechselstrom in eine Richtung (Universalmotor)."
+    },
+    {
+      "id": "k9-mo-04", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Wie kann man die Kraft auf einen stromdurchflossenen Leiter im Magnetfeld vergrößern?",
+      "optionen": [
+        { "text": "Die Stromstärke erhöhen", "richtig": true },
+        { "text": "Einen stärkeren Magneten verwenden", "richtig": true },
+        { "text": "Statt eines Drahtes eine Spule mit vielen Windungen ins Feld bringen", "richtig": true },
+        { "text": "Einen Draht mit dickerer Isolierung verwenden", "feedback": "Die Isolierung hat keinen Einfluss auf die Kraft." }
+      ],
+      "erklaerung": "Die Kraft wächst mit der Stromstärke, der Stärke des Magnetfelds und der Länge des Leiters im Feld. Viele Windungen bedeuten viel Leiterlänge im Feld."
+    },
+    {
+      "id": "k9-mo-05", "typ": "reihenfolge", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Bringe die Vorgänge in einem Gleichstrommotor in die richtige Reihenfolge.",
+      "elemente": [
+        "Strom fließt über Bürsten und Kommutator in die Spule.",
+        "Die Spule wird zum Elektromagneten.",
+        "Ungleichnamige Pole von Spule und Feldmagnet ziehen sich an, die Spule dreht sich.",
+        "Stehen sich die Pole gegenüber, kehrt der Kommutator die Stromrichtung um.",
+        "Jetzt stoßen sich gleichnamige Pole ab, und die Spule dreht sich weiter."
+      ],
+      "erklaerung": "Dieser Ablauf wiederholt sich nach jeder halben Umdrehung. So entsteht eine fortlaufende Drehung."
+    },
+    {
+      "id": "k9-mo-06", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz3",
+      "frage": "Ordne jedem Bauteil des Elektromotors seine Aufgabe zu.",
+      "paare": [
+        { "links": "Feldmagnet (Stator)", "rechts": "erzeugt ein feststehendes Magnetfeld" },
+        { "links": "Spule (Rotor, Anker)", "rechts": "dreht sich als Elektromagnet" },
+        { "links": "Kommutator", "rechts": "polt den Strom in der Spule um" },
+        { "links": "Bürsten", "rechts": "verbinden die drehende Spule mit der Stromquelle" }
+      ],
+      "erklaerung": "Bürsten (meist aus Kohle) schleifen auf dem Kommutator und leiten den Strom in die sich drehende Spule."
+    },
+    {
+      "id": "k9-mo-07", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Erkläre, warum sich ein Motor ohne Kommutator nicht dauerhaft drehen würde.",
+      "stichworte": [
+        { "aspekt": "Die Spule dreht sich, bis sich ungleichnamige Pole gegenüberstehen", "woerter": ["gegenueber", "ungleichnamig", "nord und sued", "angezogen"] },
+        { "aspekt": "Dort bleibt sie stehen bzw. pendelt (Gleichgewicht)", "woerter": ["stehen", "bleibt", "gleichgewicht", "pendelt", "haelt an", "stoppt"] },
+        { "aspekt": "Ohne Umpolung kehrt sich die Stromrichtung nicht um", "woerter": ["umpol", "stromrichtung", "umkehr", "polung", "pole tauschen", "umgepolt"] }
+      ],
+      "musterloesung": "Ohne Kommutator fließt der Strom immer in derselben Richtung durch die Spule. Die Spule dreht sich deshalb nur so lange, bis ihre Pole den ungleichnamigen Polen des Feldmagneten gegenüberstehen. Dort ziehen sich die Pole gegenseitig an, und die Spule bleibt in dieser Lage stehen (oder pendelt kurz und bleibt dann stehen). Erst wenn die Stromrichtung genau in diesem Moment umgekehrt wird, stoßen sich die Pole ab, und die Drehung geht weiter.",
+      "erklaerung": "Der Kommutator macht aus einem „Hin- und Herzappeln“ eine fortlaufende Drehung."
+    }
+  ]
+}

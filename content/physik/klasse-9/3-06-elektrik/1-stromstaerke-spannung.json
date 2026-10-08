@@ -1,0 +1,130 @@
+{
+  "id": "k9-stromstaerke-spannung",
+  "titel": "Stromstärke und Spannung",
+  "kurz": "Was „Strom“ und „Spannung“ eigentlich bedeuten und wie man sie richtig misst.",
+  "reihenfolge": 1,
+  "lernziele": [
+    { "id": "lz1", "niveau": "E", "text": "Die Stromstärke als Ladung pro Zeit beschreiben und in Ampere angeben" },
+    { "id": "lz2", "niveau": "E", "text": "Die Spannung als Antrieb des elektrischen Stroms beschreiben und in Volt angeben" },
+    { "id": "lz3", "niveau": "E", "text": "Strommesser und Spannungsmesser richtig in einen Stromkreis schalten" },
+    { "id": "lz4", "niveau": "D", "text": "Messwerte ablesen, protokollieren und Fehlerquellen nennen" }
+  ],
+  "verstehen": {
+    "einstieg": "Dieselbe kleine Lampe leuchtet an einer 4,5-V-Batterie heller als an einer 1,5-V-Batterie. Was ist an der größeren Batterie „stärker“, und was fließt dabei durch die Lampe?",
+    "abschnitte": [
+      {
+        "titel": "Stromstärke: Wie viel Ladung fließt?",
+        "text": "Elektrischer Strom ist die gerichtete Bewegung von Ladungsträgern. In Metallen sind das die frei beweglichen **Elektronen**.\n\nDie **Stromstärke** `I` gibt an, wie viel elektrische Ladung `Q` in einer bestimmten Zeit `t` durch den Querschnitt eines Leiters fließt. Ihre Einheit ist das **Ampere** (A). Fließt in jeder Sekunde eine Ladung von 1 Coulomb, beträgt die Stromstärke 1 A.\n\nMan kann sich das wie bei einem Wasserkreislauf vorstellen: Die Stromstärke entspricht der Wassermenge, die pro Sekunde durch ein Rohr fließt."
+      },
+      {
+        "titel": "Spannung: Der Antrieb des Stroms",
+        "text": "Eine Batterie oder ein Netzteil trennt Ladungen: Am Minuspol herrscht Elektronenüberschuss, am Pluspol Elektronenmangel. Diese Ladungstrennung ist der **Antrieb** für den Strom. Man nennt ihn **elektrische Spannung** `U`, die Einheit ist das **Volt** (V).\n\nOhne Spannung fließt kein Strom. Je größer die Spannung, desto stärker werden die Elektronen durch den Stromkreis „geschoben“. Im Wassermodell entspricht die Spannung dem Druckunterschied, den eine Pumpe erzeugt.\n\nTypische Werte: Mignon-Batterie 1,5 V, Autobatterie 12 V, Steckdose 230 V."
+      },
+      {
+        "titel": "Richtig messen",
+        "text": "**Strommesser (Amperemeter)** werden **in Reihe** geschaltet, denn der Strom muss durch das Messgerät hindurchfließen. Sie haben einen sehr kleinen Innenwiderstand, damit sie den Strom kaum behindern.\n\n**Spannungsmesser (Voltmeter)** werden **parallel** zu dem Bauteil geschaltet, an dem man die Spannung messen will. Sie haben einen sehr großen Innenwiderstand, damit kaum Strom durch sie fließt.\n\nWenn du die Größe des Messwerts nicht kennst, beginnst du immer mit dem **größten Messbereich**. Fehlerquellen sind z. B. schräges Ablesen, die Messungenauigkeit des Geräts oder schlechte Kontakte."
+      }
+    ],
+    "formeln": [
+      { "formel": "I = \\frac{Q}{t}", "bedeutung": "`I` Stromstärke in A, `Q` Ladung in C (Coulomb), `t` Zeit in s. Also 1 A = 1 C/s." },
+      { "formel": "Q = I · t", "bedeutung": "Umgestellt: Welche Ladung fließt bei der Stromstärke `I` in der Zeit `t`?" }
+    ],
+    "merksatz": "Die **Stromstärke** sagt, wie viel Ladung pro Sekunde fließt (Ampere). Die **Spannung** ist der Antrieb dafür (Volt).\n\nStrommesser **in Reihe**, Spannungsmesser **parallel**.",
+    "alltag": "Eine LED braucht etwa 20 mA, eine 60-W-Glühlampe an 230 V etwa 0,26 A und ein Wasserkocher etwa 9 A. Ein Handy-Ladegerät liefert typisch 1 bis 3 A."
+  },
+  "interaktiv": ["k9-ohmsches-gesetz"],
+  "uebungen": [
+    {
+      "id": "k9-ss-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Welche Einheit hat die elektrische Spannung?",
+      "optionen": [
+        { "text": "Ampere (A)", "feedback": "Ampere ist die Einheit der **Stromstärke**." },
+        { "text": "Volt (V)", "richtig": true },
+        { "text": "Ohm (Ω)", "feedback": "Ohm ist die Einheit des **Widerstands**." },
+        { "text": "Watt (W)", "feedback": "Watt ist die Einheit der **Leistung**." }
+      ],
+      "erklaerung": "Die Spannung `U` wird in **Volt** gemessen, benannt nach Alessandro Volta, der die erste Batterie baute."
+    },
+    {
+      "id": "k9-ss-02", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz3",
+      "frage": "Wie schaltest du einen Strommesser, um die Stromstärke durch eine Lampe zu messen?",
+      "optionen": [
+        { "text": "In Reihe mit der Lampe", "richtig": true },
+        { "text": "Parallel zur Lampe", "feedback": "Ein Strommesser hat einen sehr kleinen Widerstand. Parallel geschaltet würde fast der ganze Strom an der Lampe vorbei durch das Messgerät fließen. Das ist praktisch ein Kurzschluss, der das Gerät beschädigen kann." },
+        { "text": "Das ist egal", "feedback": "Es ist nicht egal: Nur in Reihe fließt derselbe Strom durch Lampe und Messgerät." }
+      ],
+      "erklaerung": "Der Strom, den du messen willst, muss **durch** das Messgerät fließen. Deshalb wird der Strommesser **in Reihe** geschaltet."
+    },
+    {
+      "id": "k9-ss-03", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ordne jeder Größe ihre Einheit zu.",
+      "paare": [
+        { "links": "Stromstärke I", "rechts": "Ampere (A)" },
+        { "links": "Spannung U", "rechts": "Volt (V)" },
+        { "links": "Ladung Q", "rechts": "Coulomb (C)" },
+        { "links": "Zeit t", "rechts": "Sekunde (s)" }
+      ],
+      "extraRechts": ["Watt (W)"],
+      "erklaerung": "Es gilt 1 A = 1 C / 1 s: Eine Stromstärke von einem Ampere bedeutet, dass pro Sekunde ein Coulomb Ladung fließt. Watt ist die Einheit der Leistung."
+    },
+    {
+      "id": "k9-ss-04", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Durch eine Lampe fließt in 10 Sekunden eine Ladung von 3 C. Wie groß ist die Stromstärke?",
+      "gegeben": "`Q = 3 C`, `t = 10 s`", "gesucht": "Stromstärke `I`", "gesuchtSymbol": "I",
+      "loesung": 0.3, "einheit": "A", "alternativEinheiten": { "mA": 0.001 },
+      "rechenweg": ["Formel: `I = \\frac{Q}{t}`", "Einsetzen: `I = \\frac{3 C}{10 s}`", "Ergebnis: `I = 0,3 A` (= 300 mA)"],
+      "hinweis": "Stromstärke ist Ladung geteilt durch Zeit.",
+      "erklaerung": "Pro Sekunde fließen 0,3 Coulomb durch die Lampe, also beträgt die Stromstärke 0,3 A."
+    },
+    {
+      "id": "k9-ss-05", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Ein Ladegerät liefert eine Stromstärke von 2 A. Welche Ladung fließt in einer Minute?",
+      "gegeben": "`I = 2 A`, `t = 1 min`", "gesucht": "Ladung `Q`", "gesuchtSymbol": "Q",
+      "loesung": 120, "einheit": "C",
+      "rechenweg": ["Zeit umrechnen: `t = 1 min = 60 s`", "Formel: `Q = I · t`", "Einsetzen: `Q = 2 A · 60 s = 120 C`"],
+      "hinweis": "Rechne die Zeit zuerst in Sekunden um und stelle `I = Q / t` nach `Q` um.",
+      "erklaerung": "Bei 2 A fließen jede Sekunde 2 C. In 60 Sekunden sind das 120 C."
+    },
+    {
+      "id": "k9-ss-06", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Welche Aussagen über einen Spannungsmesser sind richtig?",
+      "optionen": [
+        { "text": "Er wird parallel zum Bauteil geschaltet.", "richtig": true },
+        { "text": "Er hat einen sehr großen Innenwiderstand.", "richtig": true },
+        { "text": "Er wird in Reihe zum Bauteil geschaltet.", "feedback": "In Reihe würde sein großer Widerstand den Stromkreis fast unterbrechen." },
+        { "text": "Er misst, wie viel Ladung pro Sekunde fließt.", "feedback": "Ladung pro Sekunde ist die **Stromstärke**, die misst der Strommesser." }
+      ],
+      "erklaerung": "Ein Spannungsmesser vergleicht den Antrieb an zwei Punkten. Er wird deshalb an beide Anschlüsse des Bauteils, also parallel, angeschlossen. Sein großer Innenwiderstand sorgt dafür, dass er den Stromkreis kaum verändert."
+    },
+    {
+      "id": "k9-ss-07", "typ": "text", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Erkläre mit deinen eigenen Worten den Unterschied zwischen Stromstärke und Spannung. Du darfst ein Modell (z. B. Wasserkreislauf) benutzen.",
+      "stichworte": [
+        { "aspekt": "Stromstärke: wie viel Ladung pro Zeit fließt", "woerter": ["ladung", "elektronen", "wie viel", "menge", "pro sekunde", "pro zeit"] },
+        { "aspekt": "Spannung: Antrieb bzw. Ursache des Stroms", "woerter": ["antrieb", "ursache", "druck", "treibt", "schiebt", "antreib"] },
+        { "aspekt": "Einheiten Ampere und Volt", "woerter": ["ampere", "volt"] }
+      ],
+      "musterloesung": "Die **Stromstärke** gibt an, wie viel elektrische Ladung pro Sekunde durch einen Leiter fließt. Sie wird in Ampere gemessen. Im Wassermodell entspricht sie der Wassermenge pro Sekunde.\n\nDie **Spannung** ist der Antrieb, der die Ladungen durch den Stromkreis bewegt. Sie wird in Volt gemessen. Im Wassermodell entspricht sie dem Druckunterschied, den die Pumpe erzeugt. Ohne Spannung fließt kein Strom.",
+      "erklaerung": "Spannung ist die **Ursache**, Strom die **Wirkung**: Erst der Antrieb (Spannung) sorgt dafür, dass Ladung fließt (Stromstärke)."
+    },
+    {
+      "id": "k9-ss-08", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Dein Messgerät hat die Messbereiche 200 mA und 10 A. Du weißt nicht, wie groß die Stromstärke in deiner Schaltung ist. Welchen Messbereich wählst du zuerst?",
+      "optionen": [
+        { "text": "10 A", "richtig": true },
+        { "text": "200 mA", "feedback": "Ist der Strom größer als 200 mA, wird das Messgerät überlastet. Die interne Sicherung kann durchbrennen." },
+        { "text": "Das ist egal, das Messgerät schaltet automatisch um.", "feedback": "Manche Geräte können das, viele Schulmessgeräte aber nicht. Darauf solltest du dich nicht verlassen." }
+      ],
+      "erklaerung": "Man beginnt immer mit dem **größten Messbereich**, um das Messgerät nicht zu überlasten. Ist der Ausschlag sehr klein, schaltet man danach auf einen kleineren Bereich, um genauer ablesen zu können."
+    },
+    {
+      "id": "k9-ss-09", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz1",
+      "frage": "Auf einer Autobatterie steht „60 Ah“ (Amperestunden). Das ist die Ladung, die sie liefern kann. Wie lange kann sie theoretisch eine Stromstärke von 4 A liefern?",
+      "gegeben": "`Q = 60 Ah`, `I = 4 A`", "gesucht": "Zeit `t`", "gesuchtSymbol": "t",
+      "loesung": 15, "einheit": "h", "alternativEinheiten": { "min": 0.016666666666666666 },
+      "rechenweg": ["Formel umstellen: `t = \\frac{Q}{I}`", "Einsetzen: `t = \\frac{60 Ah}{4 A}`", "Ergebnis: `t = 15 h`"],
+      "hinweis": "Amperestunden geteilt durch Ampere ergibt Stunden.",
+      "erklaerung": "Die Einheit Ah ist eine Ladungseinheit: 1 Ah = 1 A · 3600 s = 3600 C. Geteilt durch die Stromstärke ergibt sich direkt die Zeit in Stunden."
+    }
+  ]
+}

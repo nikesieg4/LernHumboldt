@@ -1,0 +1,13 @@
+{
+  "nummer": "3.7", "reihenfolge": 1,
+  "titel": "Gleichförmige und beschleunigte Bewegungen",
+  "beschreibung": "Bewegungen beschreiben, messen und in Diagrammen darstellen.",
+  "inhalte": [
+    "Bewegung, Bewegungsarten und Bezugssystem",
+    "Momentan- und Durchschnittsgeschwindigkeit",
+    "Bewegungsgesetze der gleichförmigen und gleichmäßig beschleunigten Bewegung, s(t)- und v(t)-Diagramme",
+    "Freier Fall und Fallbeschleunigung",
+    "Waagerechter Wurf als zusammengesetzte Bewegung (qualitativ)",
+    "Zufällige und systematische Fehler, Brems- und Anhalteweg"
+  ]
+}

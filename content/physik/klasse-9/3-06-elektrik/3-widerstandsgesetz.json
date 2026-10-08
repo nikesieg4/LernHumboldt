@@ -1,0 +1,114 @@
+{
+  "id": "k9-widerstandsgesetz",
+  "titel": "Widerstandsgesetz",
+  "kurz": "Warum lange, dünne Drähte schlechter leiten und welche Rolle das Material spielt.",
+  "reihenfolge": 3,
+  "lernziele": [
+    { "id": "lz1", "niveau": "E", "text": "Beschreiben, wie der Widerstand eines Drahtes von Länge, Querschnittsfläche und Material abhängt" },
+    { "id": "lz2", "niveau": "F", "text": "Das Widerstandsgesetz `R = ρ · l / A` anwenden" },
+    { "id": "lz3", "niveau": "G", "text": "Materialien mithilfe des spezifischen Widerstands vergleichen und ihren Einsatz begründen" }
+  ],
+  "verstehen": {
+    "einstieg": "Warum ist das Kabel eines Wasserkochers dicker als das Kabel einer Schreibtischlampe?",
+    "abschnitte": [
+      {
+        "titel": "Länge und Querschnitt",
+        "text": "**Länge `l`:** Ein doppelt so langer Draht hat einen doppelt so großen Widerstand. Die Elektronen müssen einen doppelt so langen Weg mit doppelt so vielen Zusammenstößen zurücklegen. Es gilt `R ~ l`.\n\n**Querschnittsfläche `A`:** Ein Draht mit doppelter Querschnittsfläche hat nur den halben Widerstand. Es stehen gewissermaßen doppelt so viele „Wege“ nebeneinander zur Verfügung, wie bei einem breiteren Rohr. Es gilt `R ~ 1 / A`.\n\nAchtung beim Durchmesser: Die Fläche eines runden Drahtes ist `A = π · r^{2}`. Doppelter Durchmesser bedeutet **vierfache** Fläche und damit nur **ein Viertel** des Widerstands."
+      },
+      {
+        "titel": "Das Material: spezifischer Widerstand",
+        "text": "Wie gut ein Material leitet, beschreibt der **spezifische Widerstand** `ρ` (griechisch „rho“). Er gibt den Widerstand eines Drahtes von 1 m Länge und 1 mm² Querschnitt an.\n\nEinige Werte bei 20 °C in Ω·mm²/m: Silber 0,016 · Kupfer 0,017 · Aluminium 0,028 · Eisen 0,10 · Konstantan 0,50.\n\nKupfer leitet fast so gut wie Silber, ist aber viel billiger. Deshalb bestehen Leitungen meist aus Kupfer. Konstantan nutzt man für Messwiderstände, weil sich sein Widerstand mit der Temperatur kaum ändert."
+      }
+    ],
+    "formeln": [
+      { "formel": "R = ρ · \\frac{l}{A}", "bedeutung": "`ρ` spezifischer Widerstand in Ω·mm²/m, `l` Länge in m, `A` Querschnittsfläche in mm²" },
+      { "formel": "A = π · r^{2} = \\frac{π · d^{2}}{4}", "bedeutung": "Querschnittsfläche eines runden Drahtes mit Radius `r` bzw. Durchmesser `d`" }
+    ],
+    "merksatz": "Der Widerstand eines Drahtes ist umso **größer**, je **länger** und je **dünner** er ist, und je größer der spezifische Widerstand seines Materials ist: `R = ρ · l / A`.",
+    "alltag": "Ein Kabel für große Stromstärken muss dick sein. Ein dünnes Kabel hätte einen zu großen Widerstand, würde sich stark erwärmen und könnte schmoren oder sogar einen Brand auslösen."
+  },
+  "interaktiv": [],
+  "uebungen": [
+    {
+      "id": "k9-wg-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ein Draht wird durch einen Draht aus gleichem Material und mit gleichem Querschnitt ersetzt, der doppelt so lang ist. Wie ändert sich der Widerstand?",
+      "optionen": [
+        { "text": "Er verdoppelt sich.", "richtig": true },
+        { "text": "Er halbiert sich.", "feedback": "Ein längerer Weg bedeutet mehr Zusammenstöße, also mehr Widerstand." },
+        { "text": "Er bleibt gleich.", "feedback": "Der Widerstand hängt von der Länge ab: `R ~ l`." }
+      ],
+      "erklaerung": "Der Widerstand ist proportional zur Länge: `R ~ l`. Doppelte Länge ergibt doppelten Widerstand."
+    },
+    {
+      "id": "k9-wg-02", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Wie ändert sich der Widerstand, wenn die Querschnittsfläche eines Drahtes verdoppelt wird (gleiche Länge, gleiches Material)?",
+      "optionen": [
+        { "text": "Er verdoppelt sich.", "feedback": "Ein dickerer Draht bietet den Elektronen mehr Platz. Er leitet also besser." },
+        { "text": "Er halbiert sich.", "richtig": true },
+        { "text": "Er viertelt sich.", "feedback": "Ein Viertel ergibt sich, wenn sich der **Durchmesser** verdoppelt, denn dann vervierfacht sich die Fläche." }
+      ],
+      "erklaerung": "Der Widerstand ist umgekehrt proportional zur Querschnittsfläche: `R ~ 1 / A`."
+    },
+    {
+      "id": "k9-wg-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Ein Kupferkabel ist 100 m lang und hat eine Querschnittsfläche von 1,5 mm². Berechne seinen Widerstand. (`ρ_{Kupfer}` = 0,017 Ω·mm²/m)",
+      "gegeben": "`l = 100 m`, `A = 1,5 mm²`, `ρ = 0,017 Ω·mm²/m`", "gesucht": "Widerstand `R`", "gesuchtSymbol": "R",
+      "loesung": 1.1333333333, "einheit": "Ω", "toleranz": 0.03,
+      "rechenweg": ["Formel: `R = ρ · \\frac{l}{A}`", "Einsetzen: `R = 0,017 \\frac{Ω·mm²}{m} · \\frac{100 m}{1,5 mm²}`", "Ergebnis: `R ≈ 1,13 Ω`"],
+      "hinweis": "Die Einheiten m und mm² kürzen sich heraus, wenn du direkt einsetzt.",
+      "erklaerung": "Selbst 100 m Kupferkabel haben nur gut 1 Ω Widerstand. Deshalb verwendet man Kupfer für Leitungen."
+    },
+    {
+      "id": "k9-wg-04", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Aus welchem Material bestehen elektrische Leitungen im Haus meistens, und warum?",
+      "optionen": [
+        { "text": "Kupfer, weil es sehr gut leitet und bezahlbar ist", "richtig": true },
+        { "text": "Silber, weil es am besten leitet", "feedback": "Silber leitet zwar noch etwas besser als Kupfer, ist aber viel zu teuer für kilometerlange Leitungen." },
+        { "text": "Konstantan, weil sein Widerstand konstant bleibt", "feedback": "Konstantan hat einen etwa 30-mal so großen spezifischen Widerstand wie Kupfer. Man verwendet es für Messwiderstände, nicht für Leitungen." },
+        { "text": "Eisen, weil es besonders stabil ist", "feedback": "Eisen leitet etwa 6-mal schlechter als Kupfer. Die Leitungen würden sich stark erwärmen." }
+      ],
+      "erklaerung": "Für Leitungen wählt man ein Material mit **kleinem spezifischem Widerstand**, das gleichzeitig günstig und gut zu verarbeiten ist. Kupfer erfüllt beides."
+    },
+    {
+      "id": "k9-wg-05", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Aus Konstantandraht (`ρ` = 0,5 Ω·mm²/m) mit 0,2 mm² Querschnitt soll ein Widerstand von 10 Ω gewickelt werden. Wie lang muss der Draht sein?",
+      "gegeben": "`R = 10 Ω`, `A = 0,2 mm²`, `ρ = 0,5 Ω·mm²/m`", "gesucht": "Länge `l`", "gesuchtSymbol": "l",
+      "loesung": 4, "einheit": "m", "alternativEinheiten": { "cm": 0.01 },
+      "rechenweg": ["Formel umstellen: `l = \\frac{R · A}{ρ}`", "Einsetzen: `l = \\frac{10 Ω · 0,2 mm²}{0,5 Ω·mm²/m}`", "Ergebnis: `l = 4 m`"],
+      "hinweis": "Stelle `R = ρ · l / A` nach `l` um: mit `A` multiplizieren und durch `ρ` teilen.",
+      "erklaerung": "Für 10 Ω braucht man 4 m dieses Drahtes. Deshalb werden solche Widerstände als Spule aufgewickelt."
+    },
+    {
+      "id": "k9-wg-06", "typ": "zuordnung", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Ein Draht wird verändert. Ordne zu, wie sich sein Widerstand ändert (Material bleibt gleich).",
+      "paare": [
+        { "links": "Die Länge wird verdreifacht.", "rechts": "dreimal so groß" },
+        { "links": "Die Querschnittsfläche wird verdoppelt.", "rechts": "halb so groß" },
+        { "links": "Der Durchmesser wird verdoppelt.", "rechts": "ein Viertel so groß" },
+        { "links": "Länge und Querschnittsfläche werden beide verdoppelt.", "rechts": "bleibt gleich" }
+      ],
+      "extraRechts": ["viermal so groß"],
+      "erklaerung": "Es gilt `R ~ l / A`. Beim Durchmesser musst du bedenken, dass die Fläche mit dem Quadrat wächst: `A = π · d^{2} / 4`. Verdoppeln sich Länge und Fläche, heben sich beide Effekte auf."
+    },
+    {
+      "id": "k9-wg-07", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz2",
+      "frage": "Ein Kupferdraht hat einen Durchmesser von 0,5 mm und ist 20 m lang. Wie groß ist sein Widerstand? (`ρ_{Kupfer}` = 0,017 Ω·mm²/m)",
+      "gegeben": "`d = 0,5 mm`, `l = 20 m`, `ρ = 0,017 Ω·mm²/m`", "gesucht": "Widerstand `R`", "gesuchtSymbol": "R",
+      "loesung": 1.7316, "einheit": "Ω", "toleranz": 0.03,
+      "rechenweg": ["Radius: `r = 0,25 mm`", "Querschnittsfläche: `A = π · (0,25 mm)^{2} ≈ 0,196 mm²`", "Widerstand: `R = 0,017 · \\frac{20}{0,196} Ω ≈ 1,73 Ω`"],
+      "hinweis": "Berechne zuerst die Querschnittsfläche aus dem Durchmesser: `A = π · r^{2}`.",
+      "erklaerung": "Der häufigste Fehler ist, den Durchmesser direkt als Fläche einzusetzen. Für die Fläche brauchst du den Radius im Quadrat."
+    },
+    {
+      "id": "k9-wg-08", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Begründe, warum das Anschlusskabel eines Wasserkochers (2000 W) dicker sein muss als das einer LED-Schreibtischlampe (5 W).",
+      "stichworte": [
+        { "aspekt": "Durch den Wasserkocher fließt eine viel größere Stromstärke", "woerter": ["grosse strom", "hohe strom", "viel strom", "mehr strom", "stromstaerke", "groesserer strom", "hoeherer strom"] },
+        { "aspekt": "Ein dickeres Kabel hat einen kleineren Widerstand", "woerter": ["kleiner widerstand", "kleineren widerstand", "geringer widerstand", "geringeren widerstand", "widerstand sinkt", "weniger widerstand", "widerstand ist kleiner"] },
+        { "aspekt": "So erwärmt sich das Kabel weniger (keine Brandgefahr)", "woerter": ["waerme", "warm", "heiss", "erhitz", "brand", "schmor", "erwaerm"] }
+      ],
+      "musterloesung": "Der Wasserkocher hat eine viel größere Leistung. Bei gleicher Spannung von 230 V fließt durch sein Kabel deshalb eine viel größere Stromstärke (etwa 9 A statt etwa 0,02 A). Fließt ein großer Strom durch einen Widerstand, wird viel Wärme frei. Ein dickeres Kabel hat eine größere Querschnittsfläche und damit einen kleineren Widerstand. So erwärmt es sich weniger, und es besteht keine Brandgefahr.",
+      "erklaerung": "Weil `R ~ 1 / A` gilt, haben dicke Kabel einen kleinen Widerstand. Deshalb sind für jeden Kabelquerschnitt höchstzulässige Stromstärken festgelegt."
+    }
+  ]
+}

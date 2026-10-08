@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stromkreis-Labor: ohmsches Gesetz</title>
+<link rel="stylesheet" href="../../static/lesson-kit.css">
+<style>
+  .meter { fill: var(--card); stroke: var(--line); stroke-width: 2; }
+  .meter-txt { font-size: 14px; font-weight: 700; text-anchor: middle; dominant-baseline: central; }
+  .flow { fill: var(--pos); }
+  .bulb-glow { fill: var(--lamp); transition: opacity .2s; }
+  .series-line { fill: none; stroke-width: 2; }
+  table { border-collapse: collapse; width: 100%; font-size: .85rem; font-variant-numeric: tabular-nums; }
+  td, th { padding: 3px 6px; border-bottom: 1px solid var(--border); text-align: right; }
+  th:first-child, td:first-child { text-align: left; }
+  .tablewrap { max-height: 170px; overflow: auto; margin-top: 8px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; font-size: .82rem; margin-top: 6px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+</style>
+</head>
+<body>
+<h1>Stromkreis-Labor: ohmsches Gesetz</h1>
+<p class="muted small">Stelle Spannung und Bauteil ein, schließe den Schalter und lies die Messgeräte ab. Mit „Messwert eintragen“ entsteht die Kennlinie.</p>
+
+<div class="lk-grid">
+  <div>
+    <div class="lk-card">
+      <svg id="circuit" viewBox="0 0 520 290" role="img" aria-labelledby="c-title">
+        <title id="c-title">Schaltplan: Spannungsquelle, Schalter, Bauteil, Strommesser in Reihe, Spannungsmesser parallel zum Bauteil</title>
+        <!-- Leitungen -->
+        <path class="wire" d="M70 126 V50 H150"/>
+        <path class="wire" d="M200 50 H400 V100"/>
+        <path class="wire" d="M400 180 V240 H246"/>
+        <path class="wire" d="M214 240 H70 V146"/>
+        <path class="wire thin" d="M400 76 H470 V124"/>
+        <path class="wire thin" d="M470 156 V204 H400"/>
+        <circle cx="400" cy="76" r="3" fill="var(--line)"/><circle cx="400" cy="204" r="3" fill="var(--line)"/>
+        <!-- Quelle -->
+        <line x1="50" y1="126" x2="90" y2="126" stroke="var(--line)" stroke-width="3"/>
+        <line x1="60" y1="146" x2="80" y2="146" stroke="var(--line)" stroke-width="6"/>
+        <text x="100" y="124" class="lbl">+</text><text x="100" y="156" class="lbl">−</text>
+        <text x="16" y="140" class="lbl">U</text>
+        <text id="tU" x="16" y="158" class="val"></text>
+        <!-- Schalter -->
+        <circle cx="150" cy="50" r="3.5" fill="var(--line)"/><circle cx="200" cy="50" r="3.5" fill="var(--line)"/>
+        <line id="blade" x1="152" y1="50" x2="196" y2="28" class="wire"/>
+        <text x="175" y="78" class="lbl" text-anchor="middle">Schalter</text>
+        <!-- Bauteil: Widerstand oder Lampe -->
+        <g id="resistor"><rect x="388" y="100" width="24" height="80" rx="3" fill="var(--card)" stroke="var(--line)" stroke-width="2.2"/></g>
+        <g id="lamp" hidden>
+          <path class="wire" d="M400 100 V118 M400 162 V180"/>
+          <circle id="glow" class="bulb-glow" cx="400" cy="140" r="34" opacity="0"/>
+          <circle cx="400" cy="140" r="22" fill="var(--card)" stroke="var(--line)" stroke-width="2.2"/>
+          <path class="wire" d="M385 125 L415 155 M415 125 L385 155"/>
+        </g>
+        <text id="partLabel" x="356" y="144" class="lbl" text-anchor="end">R</text>
+        <!-- Messgeräte -->
+        <circle cx="230" cy="240" r="16" class="meter"/><text x="230" y="240" class="meter-txt">A</text>
+        <text id="tI" x="230" y="274" class="val" text-anchor="middle"></text>
+        <circle cx="470" cy="140" r="16" class="meter"/><text x="470" y="140" class="meter-txt">V</text>
+        <text id="tUR" x="470" y="178" class="val" text-anchor="middle"></text>
+        <!-- Stromfluss -->
+        <path id="loop" d="M70 126 V50 H400 V240 H70 V146" fill="none" stroke="none"/>
+        <g id="dots"></g>
+      </svg>
+      <p class="small muted" style="margin:6px 0 0">Die Punkte zeigen die technische Stromrichtung (von + nach −). Je schneller sie laufen, desto größer ist die Stromstärke. Die Elektronen selbst bewegen sich in die Gegenrichtung.</p>
+    </div>
+
+    <div class="lk-card">
+      <h2>Kennlinie: Stromstärke <span class="f">I</span> gegen Spannung <span class="f">U</span></h2>
+      <svg id="chart" viewBox="0 0 520 270" role="img" aria-label="Diagramm der eingetragenen Messwerte"></svg>
+      <div class="legend" id="legend"></div>
+      <div class="tablewrap"><table><thead><tr><th>Bauteil</th><th>U in V</th><th>I in A</th><th>U / I in Ω</th></tr></thead><tbody id="rows"></tbody></table></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="lk-card">
+      <h2>Einstellungen</h2>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Bauteil wählen">
+          <button type="button" id="bRes" aria-pressed="true">Widerstand</button>
+          <button type="button" id="bLamp" aria-pressed="false">Glühlampe 12 V / 6 W</button>
+        </div>
+      </div>
+      <label class="ctrl" id="rCtrl"><span>Widerstand <span class="f">R</span> <output id="oR"></output></span>
+        <input type="range" id="sR" min="10" max="100" step="5" value="20"></label>
+      <label class="ctrl"><span>Spannung <span class="f">U</span> <output id="oU"></output></span>
+        <input type="range" id="sU" min="0" max="12" step="0.5" value="6"></label>
+      <div class="row">
+        <button type="button" id="bSwitch" class="primary">Schalter schließen</button>
+      </div>
+      <div class="readouts">
+        <div class="readout"><span>Spannung am Bauteil</span><b id="rU">–</b></div>
+        <div class="readout"><span>Stromstärke</span><b id="rI">–</b></div>
+        <div class="readout"><span><span class="f">U / I</span></span><b id="rR">–</b></div>
+      </div>
+      <div class="row" style="margin-top:12px">
+        <button type="button" id="bAdd">Messwert eintragen</button>
+        <button type="button" id="bSweep">Messreihe 0–12 V</button>
+        <button type="button" id="bClear">Diagramm leeren</button>
+      </div>
+      <p id="hint" class="small muted" aria-live="polite"></p>
+    </div>
+
+    <div class="lk-card tasks">
+      <h2>Entdecke selbst <span class="small muted" data-task-count></span></h2>
+      <div class="task" data-goal="r20"><p class="task-q">Nimm mit dem 20-Ω-Widerstand mindestens 4 verschiedene Messwerte auf.</p></div>
+      <div class="task">
+        <p class="task-q">Was passiert beim Widerstand mit der Stromstärke, wenn du die Spannung verdoppelst?</p>
+        <div class="choices">
+          <button data-ok data-fb="Richtig: I ~ U. Der Quotient U / I bleibt gleich.">Sie verdoppelt sich.</button>
+          <button data-fb="Probiere es aus: 3 V und 6 V, vergleiche die Stromstärken.">Sie halbiert sich.</button>
+          <button data-fb="Schau noch einmal auf den Strommesser.">Sie bleibt gleich.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Nimm auch eine Messreihe mit 60 Ω auf. Welche Gerade ist steiler?</p>
+        <div class="choices">
+          <button data-ok data-fb="Genau: Kleinerer Widerstand bedeutet bei gleicher Spannung mehr Strom, also eine steilere Gerade.">Die von 20 Ω</button>
+          <button data-fb="Vergleiche bei derselben Spannung: Welcher Widerstand lässt mehr Strom durch?">Die von 60 Ω</button>
+          <button data-fb="Nimm beide Messreihen auf und vergleiche sie im Diagramm.">Beide sind gleich steil.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task" data-goal="lamp"><p class="task-q">Nimm eine Kennlinie der Glühlampe auf (mindestens 4 Messwerte).</p></div>
+      <div class="task">
+        <p class="task-q">Warum ist die Kennlinie der Glühlampe keine Gerade?</p>
+        <div class="choices">
+          <button data-ok data-fb="Richtig: Der Draht wird heiß, sein Widerstand steigt. Deshalb wächst die Stromstärke immer weniger.">Der Widerstand des Drahtes steigt, wenn er heißer wird.</button>
+          <button data-fb="Schau in die Tabelle: U / I ist bei der Lampe nicht konstant, sondern wird größer.">Der Widerstand wird kleiner, wenn sie heller leuchtet.</button>
+          <button data-fb="Die Messgeräte messen richtig. Es liegt am Bauteil selbst.">Die Messgeräte sind ungenau.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="all-done">Alles entdeckt! Weiter geht es mit den Übungen.</div>
+    </div>
+  </div>
+</div>
+
+<script src="../../static/lesson-kit.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var S = { part: 'res', R: 20, U: 6, closed: false };
+  var series = {};            // Name → { color, pts: [[U, I], ...] }
+  var COLORS = ['var(--accent)', 'var(--pos)', 'var(--ok)', 'var(--c3)', 'var(--warn)'];
+
+  // Glühlampe 12 V / 6 W: Wolframdraht, I ≈ 0,5 A · (U / 12 V)^0,6 (Widerstand steigt mit der Temperatur)
+  function current(U, part, R) {
+    if (part === 'lamp') return U <= 0 ? 0 : 0.5 * Math.pow(U / 12, 0.6);
+    return U / R;
+  }
+  function partName() { return S.part === 'lamp' ? 'Glühlampe' : 'R = ' + S.R + ' Ω'; }
+
+  // ---------------------------------------------- Diagramm
+  var X0 = 56, X1 = 500, Y0 = 228, Y1 = 30, UMAX = 12, IMAX = 1.2;
+  var px = function (u) { return X0 + (X1 - X0) * u / UMAX; };
+  var py = function (i) { return Y0 - (Y0 - Y1) * i / IMAX; };
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    (parent || chart).appendChild(e);
+    return e;
+  }
+  var chart = $('chart');
+  function drawChart() {
+    chart.innerHTML = '';
+    for (var u = 0; u <= UMAX; u += 2) {
+      el('line', { x1: px(u), x2: px(u), y1: Y1, y2: Y0, class: 'gridline' });
+      el('text', { x: px(u), y: Y0 + 18, 'text-anchor': 'middle', class: 'val' }).textContent = u;
+    }
+    for (var i = 0; i <= IMAX + 1e-9; i += 0.2) {
+      el('line', { x1: X0, x2: X1, y1: py(i), y2: py(i), class: 'gridline' });
+      el('text', { x: X0 - 8, y: py(i) + 4, 'text-anchor': 'end', class: 'val' }).textContent = LK.fmt(i, 1);
+    }
+    el('line', { x1: X0, x2: X1, y1: Y0, y2: Y0, class: 'axis' });
+    el('line', { x1: X0, x2: X0, y1: Y0, y2: Y1, class: 'axis' });
+    el('text', { x: X1, y: Y0 + 36, 'text-anchor': 'end', class: 'lbl' }).textContent = 'U in V';
+    el('text', { x: 8, y: 12, class: 'lbl' }).textContent = 'I in A';
+    var legend = '', rows = '';
+    Object.keys(series).forEach(function (name) {
+      var s = series[name];
+      var pts = s.pts.slice().sort(function (a, b) { return a[0] - b[0]; });
+      if (pts.length > 1) el('polyline', { points: pts.map(function (p) { return px(p[0]) + ',' + py(Math.min(p[1], IMAX)); }).join(' '), class: 'series-line', stroke: s.color, opacity: .55 });
+      pts.forEach(function (p) {
+        el('circle', { cx: px(p[0]), cy: py(Math.min(p[1], IMAX)), r: 4.5, fill: s.color });
+        rows += '<tr><td>' + name + '</td><td>' + LK.fmt(p[0], 1) + '</td><td>' + LK.fmt(p[1], 3) + '</td><td>' + (p[1] > 0 ? LK.fmt(p[0] / p[1], 1) : '–') + '</td></tr>';
+      });
+      legend += '<span><i style="background:' + s.color + '"></i>' + name + '</span>';
+    });
+    $('legend').innerHTML = legend;
+    $('rows').innerHTML = rows || '<tr><td colspan="4" class="muted">Noch keine Messwerte.</td></tr>';
+  }
+
+  function addPoint(U, I) {
+    var name = partName();
+    if (!series[name]) series[name] = { color: COLORS[Object.keys(series).length % COLORS.length], pts: [] };
+    var pts = series[name].pts;
+    var same = pts.findIndex(function (p) { return p[0] === U; });
+    if (same >= 0) pts[same] = [U, I]; else pts.push([U, I]);
+    drawChart();
+    if (series['R = 20 Ω'] && series['R = 20 Ω'].pts.filter(function (p) { return p[0] > 0; }).length >= 4) LK.reach('r20');
+    if (series['Glühlampe'] && series['Glühlampe'].pts.filter(function (p) { return p[0] > 0; }).length >= 4) LK.reach('lamp');
+  }
+
+  // ---------------------------------------------- Schaltung
+  var loop = $('loop'), LEN = loop.getTotalLength(), N = 18, dots = [], offset = 0;
+  for (var k = 0; k < N; k++) dots.push(el('circle', { r: 3.5, class: 'flow', opacity: 0 }, $('dots')));
+
+  function I() { return S.closed ? current(S.U, S.part, S.R) : 0; }
+
+  function update() {
+    var i = I(), uPart = S.closed ? S.U : 0;
+    $('oR').textContent = S.R + ' Ω';
+    $('oU').textContent = LK.fmt(S.U, 1) + ' V';
+    $('tU').textContent = LK.fmt(S.U, 1) + ' V';
+    $('tI').textContent = LK.fmt(i, 3) + ' A';
+    $('tUR').textContent = LK.fmt(uPart, 1) + ' V';
+    $('rU').textContent = LK.fmt(uPart, 1) + ' V';
+    $('rI').textContent = i < 1 ? LK.fmt(i * 1000, 0) + ' mA' : LK.fmt(i, 2) + ' A';
+    $('rR').textContent = i > 0 ? LK.fmt(uPart / i, 1) + ' Ω' : '–';
+    $('partLabel').textContent = S.part === 'lamp' ? 'Lampe' : 'R = ' + S.R + ' Ω';
+    $('resistor').toggleAttribute('hidden', S.part === 'lamp');
+    $('lamp').toggleAttribute('hidden', S.part !== 'lamp');
+    $('glow').setAttribute('opacity', S.part === 'lamp' ? Math.min(1, i / 0.5) * 0.8 : 0);
+    $('rCtrl').hidden = S.part === 'lamp';
+    $('blade').setAttribute('x2', S.closed ? 198 : 196);
+    $('blade').setAttribute('y2', S.closed ? 50 : 28);
+    $('bSwitch').textContent = S.closed ? 'Schalter öffnen' : 'Schalter schließen';
+    $('hint').textContent = S.closed ? '' : 'Der Schalter ist offen: Es fließt kein Strom, und am Bauteil liegt keine Spannung.';
+  }
+
+  var last = performance.now();
+  function frame(t) {
+    var dt = Math.min(0.05, (t - last) / 1000); last = t;
+    var i = I();
+    offset = (offset + dt * i * 160) % (LEN / N);
+    dots.forEach(function (d, j) {
+      var p = loop.getPointAtLength((j * LEN / N + offset) % LEN);
+      d.setAttribute('cx', p.x); d.setAttribute('cy', p.y);
+      d.setAttribute('opacity', i > 0.001 ? 0.85 : 0);
+    });
+    requestAnimationFrame(frame);
+  }
+
+  function setPart(p) {
+    S.part = p;
+    $('bRes').setAttribute('aria-pressed', p === 'res');
+    $('bLamp').setAttribute('aria-pressed', p === 'lamp');
+    update();
+  }
+  $('bRes').onclick = function () { setPart('res'); };
+  $('bLamp').onclick = function () { setPart('lamp'); };
+  $('sR').oninput = function () { S.R = Number(this.value); update(); };
+  $('sU').oninput = function () { S.U = Number(this.value); update(); };
+  $('bSwitch').onclick = function () { S.closed = !S.closed; update(); };
+  $('bAdd').onclick = function () {
+    if (!S.closed) { $('hint').textContent = 'Schließe zuerst den Schalter, sonst misst du nur null.'; return; }
+    addPoint(S.U, current(S.U, S.part, S.R));
+  };
+  $('bSweep').onclick = function () {
+    S.closed = true; update();
+    for (var u = 0; u <= 12; u += 2) addPoint(u, current(u, S.part, S.R));
+  };
+  $('bClear').onclick = function () { series = {}; drawChart(); };
+
+  update(); drawChart(); requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "nummer": "3.6", "reihenfolge": 1,
+  "titel": "Elektrische Stromstärke, Spannung, Widerstand und Leistung",
+  "beschreibung": "Elektrische Größen messen, berechnen und ihr Zusammenspiel in Schaltungen verstehen.",
+  "inhalte": [
+    "Stromstärke und Spannung als physikalische Größen",
+    "Ohmsches Gesetz, Widerstand und seine Abhängigkeit von der Temperatur",
+    "Stromstärke und Spannung in Reihen- und Parallelschaltung",
+    "Widerstandsgesetz",
+    "Elektrische Leistung und Energie"
+  ],
+  "erweiterung": "Komponenten technischer Systeme identifizieren und ihr Zusammenwirken erklären (z. B. Lampenlabor)"
+}

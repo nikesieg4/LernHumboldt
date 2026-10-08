@@ -1,0 +1,124 @@
+{
+  "id": "k9-strahlungsarten",
+  "titel": "α-, β- und γ-Strahlung",
+  "kurz": "Die drei Arten radioaktiver Strahlung, wie man sie nachweist und wodurch man sie abschirmt.",
+  "reihenfolge": 2,
+  "lernziele": [
+    { "id": "lz1", "niveau": "F", "text": "α-, β- und γ-Strahlung nach ihrer Natur unterscheiden" },
+    { "id": "lz2", "niveau": "G", "text": "Die Strahlungsarten nach Durchdringungsfähigkeit ordnen und geeignete Abschirmungen angeben" },
+    { "id": "lz3", "niveau": "G", "text": "Das Ionisierungsvermögen beschreiben und die Wechselwirkung mit Materie erläutern" },
+    { "id": "lz4", "niveau": "G", "text": "Messwerte eines Zählrohrs auswerten und dabei den Nulleffekt berücksichtigen" }
+  ],
+  "verstehen": {
+    "einstieg": "Ein Blatt Papier hält manche radioaktive Strahlung vollständig auf. Für andere braucht man zentimeterdicke Bleiplatten. Woran liegt das?",
+    "abschnitte": [
+      {
+        "titel": "Drei Arten von Strahlung",
+        "text": "**α-Strahlung** (Alpha) besteht aus **Heliumkernen**: je 2 Protonen und 2 Neutronen. Die Teilchen sind vergleichsweise schwer und zweifach positiv geladen.\n\n**β-Strahlung** (Beta) besteht aus schnellen **Elektronen**, die bei einer Umwandlung im Atomkern entstehen (ein Neutron wandelt sich in ein Proton und ein Elektron um). Sie sind leicht und negativ geladen.\n\n**γ-Strahlung** (Gamma) ist energiereiche **elektromagnetische Strahlung**, ähnlich wie Röntgenstrahlung, aber meist noch energiereicher. Sie hat weder Masse noch Ladung."
+      },
+      {
+        "titel": "Durchdringung und Abschirmung",
+        "text": "**α:** In Luft nur wenige Zentimeter Reichweite. Schon ein **Blatt Papier** oder die oberste Hautschicht hält sie auf.\n\n**β:** In Luft einige Meter Reichweite. Einige **Millimeter Aluminium** oder Plexiglas halten sie auf.\n\n**γ:** Sehr durchdringend. Sie wird durch dicke Schichten **Blei** oder Beton nur **abgeschwächt**, aber nie ganz aufgehalten.\n\nIm Magnetfeld werden α- und β-Strahlung in entgegengesetzte Richtungen abgelenkt, weil sie entgegengesetzt geladen sind. γ-Strahlung wird nicht abgelenkt."
+      },
+      {
+        "titel": "Ionisierung und Nachweis",
+        "text": "Radioaktive Strahlung kann Elektronen aus Atomen herausschlagen. Dabei entstehen Ionen, deshalb heißt sie **ionisierende Strahlung**. Genau dadurch kann sie Zellen schädigen.\n\nα-Strahlung ionisiert **am stärksten**. Sie gibt ihre Energie auf kurzer Strecke ab und kommt deshalb nicht weit. γ-Strahlung ionisiert am schwächsten und dringt am tiefsten ein.\n\nNachgewiesen wird die Strahlung z. B. mit einem **Geiger-Müller-Zählrohr**: Jedes Teilchen, das im Zählrohr ionisiert, erzeugt einen Impuls („Knacken“). Auch ohne Präparat zählt das Rohr einige Impulse pro Minute. Das ist der **Nulleffekt** durch die natürliche Strahlung der Umgebung. Er muss von Messwerten abgezogen werden."
+      }
+    ],
+    "merksatz": "**α**: Heliumkerne, stärkste Ionisierung, Papier schirmt ab.\n**β**: schnelle Elektronen, wenige mm Aluminium schirmen ab.\n**γ**: elektromagnetische Strahlung, nur durch dickes Blei abschwächbar.\n\nBei Messungen immer den **Nulleffekt** berücksichtigen.",
+    "alltag": "Rauchmelder enthalten oft eine winzige α-Quelle: Die Strahlung ionisiert die Luft in einer Messkammer. Dringt Rauch ein, ändert sich der Strom durch die Kammer, und der Melder schlägt Alarm."
+  },
+  "interaktiv": ["k9-strahlungsarten"],
+  "uebungen": [
+    {
+      "id": "k9-sa-01", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ordne jeder Strahlungsart zu, woraus sie besteht.",
+      "paare": [
+        { "links": "α-Strahlung", "rechts": "Heliumkerne (2 Protonen, 2 Neutronen)" },
+        { "links": "β-Strahlung", "rechts": "schnelle Elektronen aus dem Atomkern" },
+        { "links": "γ-Strahlung", "rechts": "energiereiche elektromagnetische Strahlung" }
+      ],
+      "extraRechts": ["Neutronen aus der Atomhülle"],
+      "erklaerung": "α und β sind Teilchenstrahlung (mit Masse und Ladung), γ ist elektromagnetische Strahlung wie Licht, nur viel energiereicher."
+    },
+    {
+      "id": "k9-sa-02", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Welche Strahlungsart wird schon durch ein Blatt Papier abgeschirmt?",
+      "optionen": [
+        { "text": "α-Strahlung", "richtig": true },
+        { "text": "β-Strahlung", "feedback": "β-Strahlung durchdringt Papier und wird erst durch einige Millimeter Aluminium aufgehalten." },
+        { "text": "γ-Strahlung", "feedback": "γ-Strahlung durchdringt Papier praktisch ungehindert." }
+      ],
+      "erklaerung": "α-Teilchen sind schwer und doppelt geladen. Sie ionisieren sehr stark und geben ihre Energie deshalb schon auf kürzester Strecke ab."
+    },
+    {
+      "id": "k9-sa-03", "typ": "zuordnung", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Ordne jeder Strahlungsart eine geeignete Abschirmung zu.",
+      "paare": [
+        { "links": "α-Strahlung", "rechts": "ein Blatt Papier" },
+        { "links": "β-Strahlung", "rechts": "einige Millimeter Aluminium" },
+        { "links": "γ-Strahlung", "rechts": "dicke Bleiplatte (nur Abschwächung)" }
+      ],
+      "extraRechts": ["eine Glasscheibe hält alles auf"],
+      "erklaerung": "Je durchdringender die Strahlung, desto dicker und dichter muss die Abschirmung sein. γ-Strahlung lässt sich nie vollständig abschirmen, nur stark abschwächen."
+    },
+    {
+      "id": "k9-sa-04", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Welche Strahlungsart hat das größte Ionisierungsvermögen?",
+      "optionen": [
+        { "text": "α-Strahlung", "richtig": true },
+        { "text": "β-Strahlung", "feedback": "β-Teilchen ionisieren weniger stark als α-Teilchen, deshalb reichen sie weiter." },
+        { "text": "γ-Strahlung", "feedback": "γ-Strahlung ionisiert am schwächsten. Deshalb dringt sie so tief ein." }
+      ],
+      "erklaerung": "Großes Ionisierungsvermögen und geringe Reichweite hängen zusammen: Wer seine Energie schnell abgibt, kommt nicht weit."
+    },
+    {
+      "id": "k9-sa-05", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Welche Strahlung wird in einem Magnetfeld **nicht** abgelenkt?",
+      "optionen": [
+        { "text": "γ-Strahlung", "richtig": true },
+        { "text": "α-Strahlung", "feedback": "α-Teilchen sind positiv geladen und werden abgelenkt." },
+        { "text": "β-Strahlung", "feedback": "β-Teilchen (Elektronen) sind negativ geladen und werden abgelenkt, entgegengesetzt zu α." }
+      ],
+      "erklaerung": "Magnetfelder lenken nur bewegte **Ladungen** ab. γ-Strahlung trägt keine Ladung."
+    },
+    {
+      "id": "k9-sa-06", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Messung mit einem Zählrohr (Nulleffekt: 25 Impulse pro Minute):\n\nohne Abschirmung: 800 Imp./min\nmit Papier: 790 Imp./min\nmit 5 mm Aluminium: 25 Imp./min\n\nWelche Strahlung sendet das Präparat aus?",
+      "optionen": [
+        { "text": "Nur β-Strahlung", "richtig": true },
+        { "text": "Nur α-Strahlung", "feedback": "Dann wäre die Zählrate schon mit Papier auf den Nulleffekt gesunken." },
+        { "text": "β- und γ-Strahlung", "feedback": "γ-Strahlung würde auch 5 mm Aluminium durchdringen. Die Zählrate läge dann deutlich über dem Nulleffekt." },
+        { "text": "Nur γ-Strahlung", "feedback": "γ-Strahlung würde durch 5 mm Aluminium kaum geschwächt." }
+      ],
+      "erklaerung": "Papier ändert fast nichts, also gibt es (praktisch) keine α-Strahlung. Aluminium senkt die Rate genau auf den Nulleffekt, also gibt es keine γ-Strahlung. Übrig bleibt β-Strahlung."
+    },
+    {
+      "id": "k9-sa-07", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Ein Zählrohr zeigt auch ohne radioaktives Präparat etwa 20 Impulse pro Minute an. Woran liegt das?",
+      "optionen": [
+        { "text": "An der natürlichen Strahlung aus Boden, Luft, Baumaterialien und Weltall (Nulleffekt)", "richtig": true },
+        { "text": "Das Zählrohr ist defekt.", "feedback": "Jedes funktionierende Zählrohr misst diese Grundstrahlung." },
+        { "text": "An den Funkwellen von Handys im Raum", "feedback": "Funkwellen sind nicht ionisierend und werden vom Zählrohr nicht registriert." }
+      ],
+      "erklaerung": "Wir sind ständig von natürlicher Strahlung umgeben. Diesen **Nulleffekt** misst man vor jedem Versuch und zieht ihn von den Messwerten ab."
+    },
+    {
+      "id": "k9-sa-08", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Begründe, warum ein α-Strahler außerhalb des Körpers relativ ungefährlich ist, eingeatmet oder verschluckt aber sehr gefährlich.",
+      "stichworte": [
+        { "aspekt": "Außen: Die Strahlung wird schon von Luft bzw. der obersten Hautschicht aufgehalten", "woerter": ["haut", "papier", "hautschicht", "abgeschirmt", "reichweite", "luft", "kommt nicht"] },
+        { "aspekt": "Innen: Die Strahlung trifft direkt auf lebende Zellen (z. B. der Lunge)", "woerter": ["lunge", "zellen", "inneren", "organ", "im koerper", "direkt"] },
+        { "aspekt": "Wegen der starken Ionisierung richtet sie dort großen Schaden an", "woerter": ["ionisier", "schaed", "zerstoer", "energie ab", "erbgut", "dna", "schaden"] }
+      ],
+      "musterloesung": "α-Strahlung hat in Luft nur wenige Zentimeter Reichweite und wird schon von der obersten, abgestorbenen Hautschicht aufgehalten. Von außen erreicht sie lebende Zellen deshalb kaum. Gelangt ein α-Strahler aber in den Körper, z. B. als eingeatmetes Radon in die Lunge, trifft die Strahlung direkt auf lebende Zellen. Weil α-Strahlung sehr stark ionisiert, gibt sie dort ihre gesamte Energie auf kleinstem Raum ab und kann das Erbgut der Zellen schwer schädigen.",
+      "erklaerung": "Deshalb gilt beim Umgang mit radioaktiven Stoffen: nicht essen, nicht trinken, nichts einatmen."
+    },
+    {
+      "id": "k9-sa-09", "typ": "reihenfolge", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Ordne die Strahlungsarten nach ihrer Durchdringungsfähigkeit, beginnend mit der **geringsten**.",
+      "elemente": ["α-Strahlung", "β-Strahlung", "γ-Strahlung"],
+      "erklaerung": "α wird von Papier aufgehalten, β von wenigen Millimetern Aluminium, γ wird selbst von Blei nur abgeschwächt."
+    }
+  ]
+}

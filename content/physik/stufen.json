@@ -1,0 +1,13 @@
+{
+  "fach": "Physik",
+  "quelle": "Schulinternes Curriculum Physik, Humboldt-Gymnasium Berlin-Tegel, Stand August 2021",
+  "hinweis": "Eine Klassenstufe wird angezeigt, sobald es den Ordner klasse-<n> mit mindestens einem Themenfeld gibt. Für 11/12 einfach Einträge ergänzen.",
+  "stufen": [
+    { "stufe": 5, "name": "Klasse 5" },
+    { "stufe": 6, "name": "Klasse 6" },
+    { "stufe": 7, "name": "Klasse 7" },
+    { "stufe": 8, "name": "Klasse 8" },
+    { "stufe": 9, "name": "Klasse 9" },
+    { "stufe": 10, "name": "Klasse 10" }
+  ]
+}

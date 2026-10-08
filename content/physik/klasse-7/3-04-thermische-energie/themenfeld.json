@@ -1,0 +1,12 @@
+{
+  "nummer": "3.4", "reihenfolge": 2,
+  "titel": "Thermische Energie und Wärme",
+  "beschreibung": "Temperaturausgleich, Phasenübergänge und die drei Arten des Wärmetransports.",
+  "inhalte": [
+    "Zusammenhang zwischen thermischer Energie und Wärme",
+    "Temperaturausgleich unterschiedlich temperierter Körper",
+    "Schmelzwärme, Verdampfungswärme, Verdunstungskälte",
+    "Wärmeleitung, Wärmeströmung, Wärmestrahlung",
+    "Wärmeleitung im Teilchenmodell"
+  ]
+}

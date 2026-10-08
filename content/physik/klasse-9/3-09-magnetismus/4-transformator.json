@@ -1,0 +1,284 @@
+{
+  "id": "k9-transformator",
+  "titel": "Der Transformator",
+  "kurz": "Wie man Wechselspannungen hoch- und heruntertransformiert und warum Fernleitungen Hochspannung führen.",
+  "reihenfolge": 4,
+  "lernziele": [
+    {
+      "id": "lz1",
+      "niveau": "E",
+      "text": "Den Aufbau eines Transformators beschreiben"
+    },
+    {
+      "id": "lz2",
+      "niveau": "F",
+      "text": "Die Funktion des Transformators mit der Induktion erklären"
+    },
+    {
+      "id": "lz3",
+      "niveau": "F",
+      "text": "Die Spannungsübersetzung des unbelasteten Transformators berechnen"
+    },
+    {
+      "id": "lz4",
+      "niveau": "G",
+      "text": "Den Einsatz von Transformatoren bei der Energieübertragung begründen"
+    }
+  ],
+  "verstehen": {
+    "einstieg": "Dein Handy-Ladegerät macht aus 230 V eine Spannung von 5 V. Überlandleitungen führen dagegen 380 000 V. Wie lassen sich Spannungen so stark verändern?",
+    "abschnitte": [
+      {
+        "titel": "Aufbau",
+        "text": "Ein Transformator (kurz Trafo) besteht aus zwei Spulen auf einem gemeinsamen, geschlossenen **Eisenkern**. Die **Primärspule** (Eingangsspule) wird an die Spannungsquelle angeschlossen, an der **Sekundärspule** (Ausgangsspule) wird die neue Spannung abgenommen.\n\nDie beiden Spulen sind **elektrisch nicht verbunden**. Die Energie wird über das Magnetfeld übertragen."
+      },
+      {
+        "titel": "Funktion",
+        "text": "Fließt Wechselstrom durch die Primärspule, erzeugt sie ein Magnetfeld, das sich ständig ändert und seine Richtung wechselt. Der Eisenkern leitet dieses Feld durch die Sekundärspule. Dort ändert sich das Magnetfeld also ebenfalls ständig, und es wird eine Wechselspannung **induziert**.\n\nMit **Gleichspannung** funktioniert ein Transformator nicht: Das Magnetfeld wäre konstant, und ohne Änderung gibt es keine Induktion. Nur beim Ein- und Ausschalten entsteht ein kurzer Spannungsstoß."
+      },
+      {
+        "titel": "Spannungsübersetzung",
+        "text": "Beim unbelasteten Transformator (an der Sekundärspule ist nichts angeschlossen) verhalten sich die Spannungen wie die **Windungszahlen**: Hat die Sekundärspule doppelt so viele Windungen wie die Primärspule, ist die Ausgangsspannung doppelt so groß.\n\nMehr Windungen auf der Sekundärseite: Die Spannung wird **hochtransformiert**. Weniger Windungen: Sie wird **heruntertransformiert**."
+      },
+      {
+        "titel": "Warum Hochspannung im Netz?",
+        "text": "Um eine bestimmte Leistung `P = U · I` zu übertragen, kann man eine hohe Spannung mit kleiner Stromstärke oder eine kleine Spannung mit großer Stromstärke wählen.\n\nIn den Leitungen geht Energie als Wärme verloren, und diese Verluste wachsen mit der Stromstärke stark an. Deshalb transformiert man die Spannung für den Transport auf bis zu 380 000 V hoch. Die Stromstärke wird dadurch klein, und die Verluste bleiben gering. Vor Ort wird die Spannung in Umspannwerken wieder auf 230 V heruntertransformiert."
+      }
+    ],
+    "formeln": [
+      {
+        "formel": "\\frac{U_{2}}{U_{1}} = \\frac{N_{2}}{N_{1}}",
+        "bedeutung": "`U_{1}`, `N_{1}`: Spannung und Windungszahl der Primärspule; `U_{2}`, `N_{2}`: Sekundärspule (unbelastet)"
+      },
+      {
+        "formel": "U_{2} = U_{1} · \\frac{N_{2}}{N_{1}}",
+        "bedeutung": "Umgestellt nach der Ausgangsspannung"
+      }
+    ],
+    "merksatz": "Ein Transformator funktioniert nur mit **Wechselspannung**. Beim unbelasteten Trafo gilt: `U_{2} / U_{1} = N_{2} / N_{1}`.\n\nFür den Energietransport wird hochtransformiert, damit die Stromstärke und damit die Wärmeverluste klein bleiben.",
+    "alltag": "Transformatoren stecken in Ladegeräten (heute oft als kleine, schnelle Schaltnetzteile), in Umspannwerken, Schweißgeräten und in der Zündanlage von Gasherden."
+  },
+  "interaktiv": [
+    "k9-transformator"
+  ],
+  "uebungen": [
+    {
+      "id": "k9-tr-01",
+      "typ": "single",
+      "schwierigkeit": "leicht",
+      "lernziel": "lz2",
+      "frage": "Mit welcher Spannung funktioniert ein Transformator dauerhaft?",
+      "optionen": [
+        {
+          "text": "Nur mit Wechselspannung",
+          "richtig": true
+        },
+        {
+          "text": "Nur mit Gleichspannung",
+          "feedback": "Gleichspannung erzeugt ein konstantes Magnetfeld. Ohne Änderung des Feldes wird nichts induziert."
+        },
+        {
+          "text": "Mit beiden gleich gut",
+          "feedback": "Mit Gleichspannung entsteht nur beim Ein- und Ausschalten ein kurzer Spannungsstoß."
+        }
+      ],
+      "erklaerung": "Die Sekundärspannung entsteht durch Induktion. Dafür muss sich das Magnetfeld ständig ändern, und das tut es nur bei Wechselspannung."
+    },
+    {
+      "id": "k9-tr-02",
+      "typ": "zahl",
+      "schwierigkeit": "leicht",
+      "lernziel": "lz3",
+      "frage": "Ein Transformator hat 500 Windungen auf der Primärseite und 1000 Windungen auf der Sekundärseite. An der Primärspule liegen 6 V. Welche Spannung liegt an der Sekundärspule (unbelastet)?",
+      "gegeben": "`N_{1} = 500`, `N_{2} = 1000`, `U_{1} = 6 V`",
+      "gesucht": "`U_{2}`",
+      "gesuchtSymbol": "U_{2}",
+      "loesung": 12,
+      "einheit": "V",
+      "rechenweg": [
+        "Formel: `U_{2} = U_{1} · \\frac{N_{2}}{N_{1}}`",
+        "Einsetzen: `U_{2} = 6 V · \\frac{1000}{500}`",
+        "Ergebnis: `U_{2} = 12 V`"
+      ],
+      "erklaerung": "Doppelt so viele Windungen auf der Sekundärseite ergeben die doppelte Spannung."
+    },
+    {
+      "id": "k9-tr-03",
+      "typ": "zahl",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz3",
+      "frage": "Ein Netzteil soll aus 230 V eine Spannung von 12 V machen. Die Primärspule hat 1150 Windungen. Wie viele Windungen braucht die Sekundärspule?",
+      "gegeben": "`U_{1} = 230 V`, `U_{2} = 12 V`, `N_{1} = 1150`",
+      "gesucht": "`N_{2}`",
+      "gesuchtSymbol": "N_{2}",
+      "loesung": 60,
+      "einheit": "",
+      "toleranz": 0.01,
+      "rechenweg": [
+        "Formel umstellen: `N_{2} = N_{1} · \\frac{U_{2}}{U_{1}}`",
+        "Einsetzen: `N_{2} = 1150 · \\frac{12 V}{230 V}`",
+        "Ergebnis: `N_{2} = 60` Windungen"
+      ],
+      "hinweis": "Die Spannungen verhalten sich wie die Windungszahlen. Stelle nach `N_{2}` um.",
+      "erklaerung": "Die Spannung wird um den Faktor 230/12 ≈ 19 heruntertransformiert, also hat die Sekundärspule etwa 19-mal weniger Windungen."
+    },
+    {
+      "id": "k9-tr-04",
+      "typ": "zahl",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz3",
+      "frage": "Primärspule: 200 Windungen an 230 V. Sekundärspule: 50 Windungen. Welche Spannung liegt an der Sekundärspule (unbelastet)?",
+      "gegeben": "`N_{1} = 200`, `N_{2} = 50`, `U_{1} = 230 V`",
+      "gesucht": "`U_{2}`",
+      "gesuchtSymbol": "U_{2}",
+      "loesung": 57.5,
+      "einheit": "V",
+      "rechenweg": [
+        "`U_{2} = 230 V · \\frac{50}{200}`",
+        "`U_{2} = 230 V · 0,25 = 57,5 V`"
+      ],
+      "erklaerung": "Ein Viertel der Windungen ergibt ein Viertel der Spannung."
+    },
+    {
+      "id": "k9-tr-05",
+      "typ": "single",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz4",
+      "frage": "Warum wird die Spannung für den Transport über weite Strecken hochtransformiert?",
+      "optionen": [
+        {
+          "text": "Damit bei gleicher Leistung die Stromstärke klein ist und in den Leitungen wenig Energie als Wärme verloren geht",
+          "richtig": true
+        },
+        {
+          "text": "Damit der Strom schneller beim Verbraucher ankommt",
+          "feedback": "Die Spannung beeinflusst nicht, wie schnell sich die elektrische Energie ausbreitet."
+        },
+        {
+          "text": "Weil Kraftwerke nur Hochspannung erzeugen können",
+          "feedback": "Generatoren in Kraftwerken erzeugen meist etwa 10 000 bis 27 000 V. Erst Transformatoren machen daraus Höchstspannung."
+        }
+      ],
+      "erklaerung": "Wegen `P = U · I` braucht man bei hoher Spannung für dieselbe Leistung nur eine kleine Stromstärke. Die Wärmeverluste in den Leitungen hängen stark von der Stromstärke ab."
+    },
+    {
+      "id": "k9-tr-06",
+      "typ": "multi",
+      "schwierigkeit": "leicht",
+      "lernziel": "lz1",
+      "frage": "Welche Bauteile gehören zu einem Transformator?",
+      "optionen": [
+        {
+          "text": "Primärspule",
+          "richtig": true
+        },
+        {
+          "text": "Sekundärspule",
+          "richtig": true
+        },
+        {
+          "text": "Geschlossener Eisenkern",
+          "richtig": true
+        },
+        {
+          "text": "Kommutator",
+          "feedback": "Ein Kommutator gehört zum Gleichstrommotor. Ein Trafo hat keine beweglichen Teile."
+        },
+        {
+          "text": "Dauermagnet",
+          "feedback": "Das Magnetfeld erzeugt die Primärspule selbst."
+        }
+      ],
+      "erklaerung": "Zwei Spulen auf einem gemeinsamen Eisenkern, mehr braucht ein Transformator nicht. Er hat keine beweglichen Teile."
+    },
+    {
+      "id": "k9-tr-07",
+      "typ": "text",
+      "schwierigkeit": "schwer",
+      "lernziel": "lz2",
+      "frage": "Erkläre, warum ein Transformator an einer Batterie (Gleichspannung) keine dauerhafte Ausgangsspannung liefert.",
+      "stichworte": [
+        {
+          "aspekt": "Gleichstrom erzeugt in der Primärspule ein konstantes Magnetfeld",
+          "woerter": [
+            "konstant",
+            "aendert sich nicht",
+            "gleich bleibt",
+            "bleibt gleich",
+            "gleichbleibend",
+            "unveraendert",
+            "nicht aendert",
+            "nicht veraendert",
+            "konstantes"
+          ]
+        },
+        {
+          "aspekt": "Induktion braucht eine Änderung des Magnetfelds",
+          "woerter": [
+            "aenderung",
+            "aendern",
+            "induk",
+            "veraender",
+            "induz",
+            "aendert",
+            "wechselndes"
+          ]
+        },
+        {
+          "aspekt": "Deshalb entsteht in der Sekundärspule keine Spannung (nur beim Ein-/Ausschalten kurz)",
+          "woerter": [
+            "sekundaer",
+            "keine spannung",
+            "zweite spule",
+            "ausgangsspule",
+            "einschalten",
+            "ausschalten"
+          ]
+        }
+      ],
+      "musterloesung": "An einer Batterie fließt Gleichstrom durch die Primärspule. Er erzeugt ein Magnetfeld, das sich nicht ändert. In der Sekundärspule wird aber nur dann eine Spannung induziert, wenn sich das Magnetfeld in ihr ändert. Deshalb liefert der Transformator keine dauerhafte Ausgangsspannung. Nur beim Einschalten und Ausschalten ändert sich das Feld kurz, und es entsteht ein kurzer Spannungsstoß.",
+      "erklaerung": "Diese kurzen Spannungsstöße beim Schalten nutzt man z. B. in Zündanlagen."
+    },
+    {
+      "id": "k9-tr-08",
+      "typ": "zahl",
+      "schwierigkeit": "schwer",
+      "lernziel": "lz3",
+      "frage": "Ein Zündtransformator soll aus 230 V eine Spannung von 23 000 V erzeugen. Die Primärspule hat 100 Windungen. Wie viele Windungen braucht die Sekundärspule (unbelastet)?",
+      "gegeben": "`U_{1} = 230 V`, `U_{2} = 23 000 V`, `N_{1} = 100`",
+      "gesucht": "`N_{2}`",
+      "gesuchtSymbol": "N_{2}",
+      "loesung": 10000,
+      "einheit": "",
+      "toleranz": 0.01,
+      "rechenweg": [
+        "Übersetzungsverhältnis: `\\frac{U_{2}}{U_{1}} = \\frac{23 000 V}{230 V} = 100`",
+        "`N_{2} = 100 · N_{1} = 100 · 100 = 10 000` Windungen"
+      ],
+      "hinweis": "Um welchen Faktor soll die Spannung größer werden? Um denselben Faktor muss die Windungszahl größer sein.",
+      "erklaerung": "Für so hohe Spannungen braucht man sehr viele Windungen aus dünnem Draht. Deshalb sind Hochspannungsspulen oft dick und schwer."
+    },
+    {
+      "id": "k9-tr-09",
+      "typ": "single",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz3",
+      "frage": "Bei einem unbelasteten Transformator wird die Windungszahl der Sekundärspule halbiert. Was passiert mit der Ausgangsspannung?",
+      "optionen": [
+        {
+          "text": "Sie halbiert sich.",
+          "richtig": true
+        },
+        {
+          "text": "Sie verdoppelt sich.",
+          "feedback": "Weniger Windungen auf der Ausgangsseite bedeuten **weniger** Spannung."
+        },
+        {
+          "text": "Sie bleibt gleich.",
+          "feedback": "Die Ausgangsspannung ist proportional zur Windungszahl der Sekundärspule."
+        }
+      ],
+      "erklaerung": "Es gilt `U_{2} ~ N_{2}`: In jeder Windung wird gleich viel Spannung induziert. Halb so viele Windungen ergeben halb so viel Spannung."
+    }
+  ]
+}

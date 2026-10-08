@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reihen- und Parallelschaltung</title>
+<link rel="stylesheet" href="../../static/lesson-kit.css">
+<style>
+  .res { fill: var(--card); stroke: var(--line); stroke-width: 2.2; }
+  .flow { fill: var(--pos); }
+  .gap { stroke: var(--warn); stroke-width: 2; stroke-dasharray: 4 3; fill: none; }
+  .vals { font-size: 12.5px; font-variant-numeric: tabular-nums; }
+  table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: .9rem; }
+  td, th { padding: 4px 6px; border-bottom: 1px solid var(--border); text-align: right; }
+  th:first-child, td:first-child { text-align: left; }
+  tr.total td { font-weight: 700; }
+</style>
+</head>
+<body>
+<h1>Reihen- und Parallelschaltung</h1>
+<p class="muted small">Wähle die Schaltung, verändere die Widerstände und beobachte, wie sich Stromstärke und Spannung verteilen. Die Dicke der Strompunkte zeigt die Stromstärke.</p>
+
+<div class="lk-grid">
+  <div class="lk-card">
+    <svg id="svg" viewBox="0 0 520 300" role="img" aria-label="Schaltplan mit zwei Widerständen"></svg>
+    <table style="margin-top:8px">
+      <thead><tr><th></th><th>Spannung</th><th>Stromstärke</th><th>Widerstand</th></tr></thead>
+      <tbody id="tbl"></tbody>
+    </table>
+    <p id="note" class="small muted" aria-live="polite"></p>
+  </div>
+
+  <div>
+    <div class="lk-card">
+      <h2>Einstellungen</h2>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Schaltung wählen">
+          <button type="button" id="bSer" aria-pressed="true">Reihenschaltung</button>
+          <button type="button" id="bPar" aria-pressed="false">Parallelschaltung</button>
+        </div>
+      </div>
+      <label class="ctrl"><span>Spannung <span class="f">U</span> <output id="oU"></output></span>
+        <input type="range" id="sU" min="0" max="12" step="0.5" value="12"></label>
+      <label class="ctrl"><span>Widerstand <span class="f">R<sub>1</sub></span> <output id="oR1"></output></span>
+        <input type="range" id="sR1" min="10" max="100" step="5" value="20"></label>
+      <label class="ctrl"><span>Widerstand <span class="f">R<sub>2</sub></span> <output id="oR2"></output></span>
+        <input type="range" id="sR2" min="10" max="100" step="5" value="40"></label>
+      <div class="row"><button type="button" id="bRemove">R₂ herausnehmen</button></div>
+    </div>
+
+    <div class="lk-card tasks">
+      <h2>Entdecke selbst <span class="small muted" data-task-count></span></h2>
+      <div class="task">
+        <p class="task-q">Reihenschaltung: Vergleiche die Stromstärken <span class="f">I<sub>1</sub></span> und <span class="f">I<sub>2</sub></span>.</p>
+        <div class="choices">
+          <button data-ok data-fb="Richtig: Es gibt nur einen Weg, deshalb fließt überall derselbe Strom.">Sie sind immer gleich groß.</button>
+          <button data-fb="Verändere R₁ und R₂ und schau genau auf die Tabelle.">Durch den größeren Widerstand fließt mehr.</button>
+          <button data-fb="Verändere R₁ und R₂ und schau genau auf die Tabelle.">Durch den kleineren Widerstand fließt mehr.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Reihenschaltung: Mache <span class="f">R<sub>2</sub></span> größer. Was passiert mit der Spannung <span class="f">U<sub>2</sub></span>?</p>
+        <div class="choices">
+          <button data-ok data-fb="Genau: Am größeren Widerstand liegt der größere Teil der Spannung. U₁ + U₂ bleibt gleich U.">Sie wird größer, U₁ wird kleiner.</button>
+          <button data-fb="Probiere es aus und beobachte U₂ in der Tabelle.">Sie wird kleiner.</button>
+          <button data-fb="In der Reihenschaltung teilt sich die Spannung auf. Beobachte die Tabelle.">Sie bleibt gleich.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Parallelschaltung: Welche Spannung liegt an <span class="f">R<sub>1</sub></span> und an <span class="f">R<sub>2</sub></span>?</p>
+        <div class="choices">
+          <button data-ok data-fb="Richtig: Jeder Zweig ist direkt mit der Quelle verbunden.">An beiden die volle Spannung U.</button>
+          <button data-fb="Wechsle zur Parallelschaltung und vergleiche U₁, U₂ und U.">Die Spannung teilt sich auf.</button>
+          <button data-fb="Wechsle zur Parallelschaltung und vergleiche U₁, U₂ und U.">Am größeren Widerstand liegt mehr Spannung.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Parallelschaltung: Durch welchen Widerstand fließt der größere Strom?</p>
+        <div class="choices">
+          <button data-ok data-fb="Genau: Bei gleicher Spannung gilt I = U / R. Kleiner Widerstand bedeutet großer Strom.">Durch den kleineren.</button>
+          <button data-fb="Bei gleicher Spannung gilt I = U / R. Überlege, was ein großer Widerstand bewirkt.">Durch den größeren.</button>
+          <button data-fb="Stelle R₁ und R₂ verschieden ein und vergleiche I₁ und I₂.">Durch beide gleich viel.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task" data-goal="removed"><p class="task-q">Nimm <span class="f">R<sub>2</sub></span> einmal in der Reihen- und einmal in der Parallelschaltung heraus. Was passiert jeweils mit <span class="f">I<sub>1</sub></span>?</p></div>
+      <div class="task">
+        <p class="task-q">Parallelschaltung: Wie groß ist der Gesamtwiderstand im Vergleich zu <span class="f">R<sub>1</sub></span> und <span class="f">R<sub>2</sub></span>?</p>
+        <div class="choices">
+          <button data-ok data-fb="Richtig: Jeder weitere Zweig ist ein zusätzlicher Weg für den Strom.">Kleiner als der kleinste Einzelwiderstand.</button>
+          <button data-fb="Schau in die Tabelle: Vergleiche R_ges mit R₁ und R₂.">Die Summe von R₁ und R₂.</button>
+          <button data-fb="Schau in die Tabelle: Vergleiche R_ges mit R₁ und R₂.">Zwischen R₁ und R₂.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="all-done">Alles entdeckt! Weiter geht es mit den Übungen.</div>
+    </div>
+  </div>
+</div>
+
+<script src="../../static/lesson-kit.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var S = { mode: 'ser', U: 12, R1: 20, R2: 40, removed: false };
+  var seen = { ser: false, par: false };
+  var svg = $('svg'), segs = [];
+
+  function el(tag, a, parent) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); (parent || svg).appendChild(e); return e; }
+  function txt(x, y, s, cls, anchor) { var t = el('text', { x: x, y: y, class: cls || 'vals', 'text-anchor': anchor || 'start' }); t.textContent = s; return t; }
+  var A = function (i) { return LK.fmt(i, 2) + ' A'; }, V = function (u) { return LK.fmt(u, 1) + ' V'; };
+
+  function solve() {
+    var R2 = S.removed ? Infinity : S.R2;
+    if (S.mode === 'ser') {
+      var R = S.R1 + R2, I = isFinite(R) ? S.U / R : 0;
+      return { R: R, I: I, I1: I, I2: I, U1: I * S.R1, U2: isFinite(R2) ? I * R2 : S.U };
+    }
+    var I1 = S.U / S.R1, I2 = isFinite(R2) ? S.U / R2 : 0;
+    return { R: isFinite(R2) ? 1 / (1 / S.R1 + 1 / R2) : S.R1, I: I1 + I2, I1: I1, I2: I2, U1: S.U, U2: S.U };
+  }
+
+  function resistor(x, y, horizontal, label, removed) {
+    if (removed) { el('path', { class: 'gap', d: horizontal ? 'M' + (x - 40) + ' ' + y + ' h80' : 'M' + x + ' ' + (y - 40) + ' v80' }); }
+    else el('rect', horizontal ? { class: 'res', x: x - 40, y: y - 11, width: 80, height: 22, rx: 3 } : { class: 'res', x: x - 11, y: y - 40, width: 22, height: 80, rx: 3 });
+    txt(horizontal ? x : x + 20, horizontal ? y - 18 : y + 5, label, 'lbl', horizontal ? 'middle' : 'start');
+  }
+
+  function draw() {
+    svg.innerHTML = '';
+    var r = solve();
+    // Quelle
+    el('line', { x1: 40, y1: 128, x2: 80, y2: 128, stroke: 'var(--line)', 'stroke-width': 3 });
+    el('line', { x1: 50, y1: 148, x2: 70, y2: 148, stroke: 'var(--line)', 'stroke-width': 6 });
+    txt(88, 126, '+', 'lbl'); txt(88, 158, '−', 'lbl');
+    txt(72, 205, 'U = ' + V(S.U)); txt(72, 221, 'I = ' + A(r.I));
+    segs = [];
+    if (S.mode === 'ser') {
+      el('path', { class: 'wire', d: 'M60 128 V60 H180 M260 60 H420 V110 M420 190 V240 H60 V148' });
+      resistor(220, 60, true, 'R₁ = ' + S.R1 + ' Ω');
+      resistor(420, 150, false, S.removed ? 'R₂ fehlt' : 'R₂ = ' + S.R2 + ' Ω', S.removed);
+      txt(220, 92, 'U₁ = ' + V(r.U1) + ' · I₁ = ' + A(r.I1), 'vals', 'middle');
+      txt(440, 175, 'U₂ = ' + V(r.U2), 'vals'); txt(440, 191, 'I₂ = ' + A(r.I2), 'vals');
+      segs.push({ d: 'M60 128 V60 H420 V240 H60 V148', i: r.I });
+    } else {
+      el('path', { class: 'wire', d: 'M60 128 V60 H420 V110 M420 190 V240 H60 V148 M300 60 V110 M300 190 V240' });
+      el('circle', { cx: 300, cy: 60, r: 3.5, fill: 'var(--line)' }); el('circle', { cx: 300, cy: 240, r: 3.5, fill: 'var(--line)' });
+      resistor(300, 150, false, 'R₁ = ' + S.R1 + ' Ω');
+      resistor(420, 150, false, S.removed ? 'R₂ fehlt' : 'R₂ = ' + S.R2 + ' Ω', S.removed);
+      txt(320, 175, 'U₁ = ' + V(r.U1)); txt(320, 191, 'I₁ = ' + A(r.I1));
+      txt(440, 175, 'U₂ = ' + V(r.U2)); txt(440, 191, 'I₂ = ' + A(r.I2));
+      segs.push({ d: 'M60 128 V60 H300', i: r.I }, { d: 'M300 60 H420', i: r.I2 }, { d: 'M300 60 V240', i: r.I1 },
+        { d: 'M420 60 V240', i: r.I2 }, { d: 'M420 240 H300', i: r.I2 }, { d: 'M300 240 H60 V148', i: r.I });
+    }
+    var g = el('g', {});
+    segs.forEach(function (s) {
+      s.path = el('path', { d: s.d, fill: 'none', stroke: 'none' }, g);
+      s.len = s.path.getTotalLength();
+      s.n = Math.max(2, Math.round(s.len / 28));
+      s.off = 0;
+      s.dots = [];
+      var rad = 2 + Math.min(4, s.i * 4);
+      for (var k = 0; k < s.n; k++) s.dots.push(el('circle', { r: rad, class: 'flow', opacity: s.i > 0.001 ? 0.85 : 0 }, g));
+    });
+    // Tabelle
+    var rows = [
+      ['Gesamt', V(S.U), A(r.I), isFinite(r.R) ? LK.fmt(r.R, 1) + ' Ω' : '∞ (unterbrochen)', 'total'],
+      ['R₁', V(r.U1), A(r.I1), S.R1 + ' Ω', ''],
+      ['R₂', S.removed ? '–' : V(r.U2), S.removed ? '–' : A(r.I2), S.removed ? 'fehlt' : S.R2 + ' Ω', '']
+    ];
+    $('tbl').innerHTML = rows.map(function (x) { return '<tr class="' + x[4] + '"><td>' + x[0] + '</td><td>' + x[1] + '</td><td>' + x[2] + '</td><td>' + x[3] + '</td></tr>'; }).join('');
+    $('note').textContent = S.removed ? (S.mode === 'ser'
+      ? 'Der Stromkreis ist unterbrochen: Ohne R₂ fließt auch durch R₁ kein Strom mehr.'
+      : 'Nur der Zweig von R₂ ist unterbrochen. Durch R₁ fließt weiterhin derselbe Strom.') : '';
+    $('oU').textContent = V(S.U); $('oR1').textContent = S.R1 + ' Ω'; $('oR2').textContent = S.R2 + ' Ω';
+    $('bSer').setAttribute('aria-pressed', S.mode === 'ser'); $('bPar').setAttribute('aria-pressed', S.mode === 'par');
+    $('bRemove').textContent = S.removed ? 'R₂ wieder einsetzen' : 'R₂ herausnehmen';
+  }
+
+  var last = performance.now();
+  function frame(t) {
+    var dt = Math.min(0.05, (t - last) / 1000); last = t;
+    segs.forEach(function (s) {
+      var gap = s.len / s.n;
+      s.off = (s.off + dt * s.i * 90) % gap;
+      s.dots.forEach(function (d, k) {
+        var p = s.path.getPointAtLength((k * gap + s.off) % s.len);
+        d.setAttribute('cx', p.x); d.setAttribute('cy', p.y);
+      });
+    });
+    requestAnimationFrame(frame);
+  }
+
+  $('bSer').onclick = function () { S.mode = 'ser'; draw(); };
+  $('bPar').onclick = function () { S.mode = 'par'; draw(); };
+  $('sU').oninput = function () { S.U = Number(this.value); draw(); };
+  $('sR1').oninput = function () { S.R1 = Number(this.value); draw(); };
+  $('sR2').oninput = function () { S.R2 = Number(this.value); draw(); };
+  $('bRemove').onclick = function () {
+    S.removed = !S.removed;
+    if (S.removed) { seen[S.mode] = true; if (seen.ser && seen.par) LK.reach('removed'); }
+    draw();
+  };
+  draw(); requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

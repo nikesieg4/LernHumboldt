@@ -1,0 +1,109 @@
+{
+  "id": "k9-strahlung-mensch",
+  "titel": "Strahlung in Umwelt und Mensch",
+  "kurz": "Woher natürliche Strahlung kommt, wie sie auf den Körper wirkt und wie man sich schützt.",
+  "reihenfolge": 4,
+  "lernziele": [
+    { "id": "lz1", "niveau": "F", "text": "Natürliche und künstliche Strahlenquellen in unserer Umwelt nennen" },
+    { "id": "lz2", "niveau": "F", "text": "Biologische Wirkungen ionisierender Strahlung qualitativ beschreiben" },
+    { "id": "lz3", "niveau": "G", "text": "Regeln zum Strahlenschutz begründen und anwenden" },
+    { "id": "lz4", "niveau": "G", "text": "Nutzen und Risiken beim Einsatz von Strahlung (z. B. in der Medizin) abwägen" }
+  ],
+  "verstehen": {
+    "einstieg": "Jeder Mensch ist ständig radioaktiver Strahlung ausgesetzt, auch ohne Kernkraftwerk in der Nähe. Woher kommt sie, und wann wird sie gefährlich?",
+    "abschnitte": [
+      {
+        "titel": "Strahlung um uns herum",
+        "text": "**Natürliche Quellen:** Das radioaktive Edelgas **Radon** strömt aus dem Boden und sammelt sich in Kellern und schlecht gelüfteten Räumen. Es ist in Deutschland die größte natürliche Strahlenquelle. Dazu kommen **kosmische Strahlung** aus dem Weltall (stärker in großer Höhe, z. B. beim Fliegen), **Gestein und Baumaterialien** sowie radioaktive Stoffe in **Nahrung und im eigenen Körper** (z. B. Kalium-40).\n\n**Künstliche Quellen:** Den größten Teil machen **medizinische Anwendungen** aus (Röntgen, Computertomografie, Nuklearmedizin).\n\nIn Deutschland erhält ein Mensch im Durchschnitt etwa 4 Millisievert pro Jahr, ungefähr zur Hälfte aus natürlichen und zur Hälfte aus medizinischen Quellen. (Sievert ist die Einheit für die Wirkung von Strahlung auf den Menschen.)"
+      },
+      {
+        "titel": "Wie Strahlung auf den Körper wirkt",
+        "text": "Ionisierende Strahlung kann Moleküle in den Zellen verändern, vor allem das **Erbgut (DNA)**. Meist kann die Zelle den Schaden reparieren oder stirbt ab. Wird sie falsch repariert, kann sie sich unkontrolliert teilen. Dann kann **Krebs** entstehen, oft erst nach Jahren (Spätschäden).\n\nSehr hohe Dosen in kurzer Zeit führen zur **Strahlenkrankheit** (Übelkeit, Haarausfall, Blutbildschäden). Je größer die Dosis, desto größer ist das Risiko.\n\nWichtig: Wer von außen bestrahlt wird, wird dadurch **nicht selbst radioaktiv**. Gefährlich ist es, radioaktive Stoffe in den Körper aufzunehmen (Inkorporation)."
+      },
+      {
+        "titel": "Strahlenschutz",
+        "text": "Die wichtigsten Regeln lassen sich mit vier Wörtern merken:\n\n**Abstand:** Strahlung nimmt mit der Entfernung stark ab. Bei einer punktförmigen Quelle bedeutet doppelter Abstand nur noch ein Viertel der Strahlung.\n**Abschirmung:** Geeignetes Material zwischen Quelle und Körper bringen (Blei, Beton).\n**Aufenthaltsdauer:** So kurz wie möglich in der Nähe bleiben.\n**Aufnahme vermeiden:** Nicht essen, trinken oder rauchen, Hände waschen, Staub nicht einatmen."
+      }
+    ],
+    "merksatz": "Wir sind ständig natürlicher Strahlung ausgesetzt, vor allem durch **Radon**. Ionisierende Strahlung kann das Erbgut schädigen und Krebs auslösen.\n\nSchutzregeln: **Abstand, Abschirmung, kurze Aufenthaltsdauer, keine Aufnahme in den Körper**.",
+    "alltag": "In Radon-belasteten Gegenden hilft regelmäßiges Lüften von Kellern und Erdgeschosswohnungen. Bei einer Röntgenaufnahme schützt eine Bleischürze die Körperteile, die nicht untersucht werden."
+  },
+  "interaktiv": [],
+  "uebungen": [
+    {
+      "id": "k9-sm-01", "typ": "multi", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Welche dieser Strahlenquellen sind **natürlich**?",
+      "optionen": [
+        { "text": "Radon aus dem Erdboden", "richtig": true },
+        { "text": "Kosmische Strahlung aus dem Weltall", "richtig": true },
+        { "text": "Kalium-40 in Nahrung und im eigenen Körper", "richtig": true },
+        { "text": "Eine Röntgenaufnahme beim Zahnarzt", "feedback": "Röntgenstrahlung wird künstlich in einer Röntgenröhre erzeugt." }
+      ],
+      "erklaerung": "Natürliche Strahlung gab es schon immer auf der Erde. Künstliche Strahlung stammt vor allem aus der Medizin."
+    },
+    {
+      "id": "k9-sm-02", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Warum ist ionisierende Strahlung für Lebewesen gefährlich?",
+      "optionen": [
+        { "text": "Sie kann Moleküle in den Zellen, besonders das Erbgut, verändern oder zerstören.", "richtig": true },
+        { "text": "Sie macht den Körper selbst radioaktiv.", "feedback": "Bestrahlung von außen macht den Körper nicht radioaktiv. Radioaktiv wird man nur, wenn man radioaktive Stoffe aufnimmt." },
+        { "text": "Sie erhitzt den Körper stark.", "feedback": "Die Wärmewirkung ist bei normalen Dosen winzig. Gefährlich ist die Ionisierung." }
+      ],
+      "erklaerung": "Durch Ionisierung können chemische Bindungen in der DNA aufbrechen. Fehlerhaft reparierte DNA kann zu Krebs führen."
+    },
+    {
+      "id": "k9-sm-03", "typ": "zuordnung", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Ordne jeder Schutzregel die passende Maßnahme zu.",
+      "paare": [
+        { "links": "Abstand", "rechts": "Präparat mit einer langen Zange anfassen" },
+        { "links": "Abschirmung", "rechts": "Präparat in einem Bleibehälter aufbewahren" },
+        { "links": "Aufenthaltsdauer", "rechts": "Präparat nur so kurz wie nötig aus dem Behälter nehmen" },
+        { "links": "Aufnahme vermeiden", "rechts": "im Physikraum nicht essen und nach dem Versuch Hände waschen" }
+      ],
+      "erklaerung": "Alle vier Regeln zusammen halten die Dosis so klein wie möglich."
+    },
+    {
+      "id": "k9-sm-04", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Du verdoppelst deinen Abstand zu einer punktförmigen γ-Quelle. Wie ändert sich die Strahlung, die dich trifft (ohne Abschirmung)?",
+      "optionen": [
+        { "text": "Sie sinkt auf ein Viertel.", "richtig": true },
+        { "text": "Sie halbiert sich.", "feedback": "Die Strahlung verteilt sich auf eine Kugelfläche, und deren Fläche wächst mit dem **Quadrat** des Abstands." },
+        { "text": "Sie bleibt gleich, γ-Strahlung hat eine unbegrenzte Reichweite.", "feedback": "Auch ohne Abschirmung verteilt sich die Strahlung mit wachsendem Abstand auf eine immer größere Fläche." }
+      ],
+      "erklaerung": "Die Strahlung breitet sich in alle Richtungen aus. Bei doppeltem Abstand verteilt sie sich auf die vierfache Fläche, also trifft dich nur ein Viertel. Abstand ist deshalb ein sehr wirksamer Schutz."
+    },
+    {
+      "id": "k9-sm-05", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Welche natürliche Strahlenquelle trägt in Deutschland am meisten zur Strahlenbelastung bei?",
+      "optionen": [
+        { "text": "Radon in Gebäuden", "richtig": true },
+        { "text": "Kosmische Strahlung", "feedback": "Sie trägt bei, aber auf Meereshöhe deutlich weniger als Radon." },
+        { "text": "Strahlung von Handys", "feedback": "Handys senden Funkwellen. Diese sind nicht ionisierend." }
+      ],
+      "erklaerung": "Radon entsteht beim Zerfall von Uran im Boden, gelangt als Gas in Häuser und wird eingeatmet. Regelmäßiges Lüften senkt die Belastung."
+    },
+    {
+      "id": "k9-sm-06", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Bewerte die Aussage: „Röntgenaufnahmen sollte man nie machen lassen, weil Strahlung immer gefährlich ist.“",
+      "stichworte": [
+        { "aspekt": "Röntgen hat einen großen Nutzen (Diagnose, z. B. Knochenbruch erkennen)", "woerter": ["diagnose", "erkennen", "nutzen", "knochenbruch", "krankheit", "untersuch", "behandl"] },
+        { "aspekt": "Man muss Nutzen und Risiko abwägen; die Dosis ist meist gering", "woerter": ["abwaeg", "risiko", "gering", "kleine dosis", "niedrige dosis", "verhaeltnis", "vergleich"] },
+        { "aspekt": "Nur wenn nötig und mit Schutzmaßnahmen (Bleischürze)", "woerter": ["noetig", "notwendig", "schutz", "bleischuerze", "so selten", "nur wenn"] }
+      ],
+      "musterloesung": "Die Aussage ist zu pauschal. Röntgenstrahlung ist ionisierend und kann in hoher Dosis schaden. Eine einzelne Röntgenaufnahme hat aber meist nur eine sehr geringe Dosis, oft weniger als die natürliche Strahlung weniger Tage. Ihr Nutzen kann dagegen sehr groß sein, z. B. wenn ein Knochenbruch oder eine Krankheit erkannt und richtig behandelt wird. Man sollte deshalb Nutzen und Risiko abwägen: Röntgen nur, wenn es medizinisch nötig ist, und dabei Schutzmaßnahmen wie eine Bleischürze verwenden.",
+      "erklaerung": "In der Medizin gilt: Jede Anwendung von Strahlung muss gerechtfertigt sein, und die Dosis soll so gering wie möglich bleiben."
+    },
+    {
+      "id": "k9-sm-07", "typ": "multi", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Im Physikunterricht wird mit einem radioaktiven Präparat gearbeitet. Welche Verhaltensweisen sind sinnvoll?",
+      "optionen": [
+        { "text": "Das Präparat nur mit Zange oder Pinzette anfassen", "richtig": true },
+        { "text": "Nach dem Versuch die Hände waschen", "richtig": true },
+        { "text": "Das Präparat nur so lange wie nötig aus dem Schutzbehälter nehmen", "richtig": true },
+        { "text": "Das Präparat kurz in die Hosentasche stecken, um die Hände frei zu haben", "feedback": "Am Körper ist der Abstand null und die Aufenthaltsdauer lang. Das ist genau das Gegenteil von Strahlenschutz." },
+        { "text": "Während des Versuchs etwas essen", "feedback": "Beim Essen könnten radioaktive Stoffe in den Körper gelangen." }
+      ],
+      "erklaerung": "Abstand, Abschirmung, kurze Dauer und keine Aufnahme in den Körper. Schulpräparate sind schwach, aber man übt damit den richtigen Umgang."
+    }
+  ]
+}

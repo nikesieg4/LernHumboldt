@@ -1,0 +1,319 @@
+{
+  "id": "k9-ohmsches-gesetz",
+  "titel": "Widerstand und ohmsches Gesetz",
+  "kurz": "Wie Spannung, Stromstärke und Widerstand zusammenhängen und warum eine Glühlampe aus der Reihe tanzt.",
+  "reihenfolge": 2,
+  "lernziele": [
+    {
+      "id": "lz1",
+      "niveau": "E",
+      "text": "Den elektrischen Widerstand als Quotient `R = U / I` beschreiben und in Ohm angeben"
+    },
+    {
+      "id": "lz2",
+      "niveau": "E",
+      "text": "Das ohmsche Gesetz kennen und zum Berechnen von `U`, `I` oder `R` anwenden"
+    },
+    {
+      "id": "lz3",
+      "niveau": "E",
+      "text": "Einen Stromstärke-Spannungs-Zusammenhang messen und als Diagramm auswerten"
+    },
+    {
+      "id": "lz4",
+      "niveau": "F",
+      "text": "Die Temperaturabhängigkeit des Widerstands beschreiben und mit dem Teilchenmodell erklären"
+    }
+  ],
+  "verstehen": {
+    "einstieg": "Legst du dieselbe Spannung an einen dünnen Konstantandraht und an ein dickes Kupferkabel, fließen völlig unterschiedliche Ströme. Woran liegt das?",
+    "abschnitte": [
+      {
+        "titel": "Der elektrische Widerstand",
+        "text": "Jedes Bauteil behindert den Strom mehr oder weniger stark. Dieses „Hemmen“ beschreibt der **elektrische Widerstand** `R`. Er gibt an, wie viel Spannung man braucht, damit eine bestimmte Stromstärke fließt: `R = U / I`.\n\nDie Einheit ist das **Ohm** (Ω): 1 Ω = 1 V / 1 A. Bei einem Widerstand von 100 Ω braucht man also 100 V für 1 A, oder 1 V für 10 mA.\n\nIm Teilchenmodell stoßen die Elektronen auf ihrem Weg durch den Leiter immer wieder mit den Atomrümpfen zusammen und werden dabei gebremst."
+      },
+      {
+        "titel": "Das ohmsche Gesetz",
+        "text": "Bei vielen Leitern, z. B. Metalldrähten bei **gleichbleibender Temperatur**, ist die Stromstärke proportional zur Spannung: `I ~ U`. Doppelte Spannung bedeutet doppelte Stromstärke. Der Widerstand `R = U / I` ist dann **konstant**. Solche Bauteile heißen **ohmsche Widerstände**.\n\nTrägt man `I` (nach oben) gegen `U` (nach rechts) auf, ergibt sich eine **Ursprungsgerade**. Je steiler die Gerade, desto kleiner ist der Widerstand, denn bei gleicher Spannung fließt mehr Strom."
+      },
+      {
+        "titel": "Widerstand und Temperatur",
+        "text": "Bei Metallen **steigt der Widerstand mit der Temperatur**. Die Atomrümpfe schwingen dann stärker, und die Elektronen stoßen häufiger mit ihnen zusammen.\n\nDeshalb ist eine **Glühlampe kein ohmscher Widerstand**: Ihr Glühdraht wird mit zunehmender Spannung sehr heiß, sein Widerstand wächst, und die Kennlinie wird immer flacher. Kalt hat der Draht einen viel kleineren Widerstand, deshalb fließt beim Einschalten kurz ein besonders großer Strom.\n\nEs gibt auch Bauteile, die warm **besser** leiten: sogenannte Heißleiter (NTC) aus Halbleitermaterial. Sie werden z. B. als Temperatursensoren genutzt."
+      }
+    ],
+    "formeln": [
+      {
+        "formel": "R = \\frac{U}{I}",
+        "bedeutung": "Widerstand `R` in Ω, Spannung `U` in V, Stromstärke `I` in A"
+      },
+      {
+        "formel": "U = R · I",
+        "bedeutung": "Umgestellt nach der Spannung"
+      },
+      {
+        "formel": "I = \\frac{U}{R}",
+        "bedeutung": "Umgestellt nach der Stromstärke"
+      }
+    ],
+    "merksatz": "**Ohmsches Gesetz:** Bei konstanter Temperatur ist die Stromstärke durch einen metallischen Leiter proportional zur Spannung. Der Widerstand `R = U / I` ist dann konstant.\n\nBei Metallen steigt der Widerstand mit der Temperatur.",
+    "alltag": "Glühlampen brennen meist im Moment des Einschaltens durch: Der kalte Draht hat einen kleinen Widerstand, deshalb fließt kurz ein sehr großer Strom."
+  },
+  "interaktiv": [
+    "k9-ohmsches-gesetz"
+  ],
+  "uebungen": [
+    {
+      "id": "k9-oh-01",
+      "typ": "single",
+      "schwierigkeit": "leicht",
+      "lernziel": "lz1",
+      "frage": "In welcher Einheit wird der elektrische Widerstand angegeben?",
+      "optionen": [
+        {
+          "text": "Volt (V)",
+          "feedback": "Volt ist die Einheit der Spannung."
+        },
+        {
+          "text": "Ohm (Ω)",
+          "richtig": true
+        },
+        {
+          "text": "Ampere (A)",
+          "feedback": "Ampere ist die Einheit der Stromstärke."
+        },
+        {
+          "text": "Joule (J)",
+          "feedback": "Joule ist die Einheit der Energie."
+        }
+      ],
+      "erklaerung": "Der Widerstand wird in **Ohm** angegeben (nach Georg Simon Ohm). Es gilt 1 Ω = 1 V / A."
+    },
+    {
+      "id": "k9-oh-02",
+      "typ": "zahl",
+      "schwierigkeit": "leicht",
+      "lernziel": "lz2",
+      "frage": "An einem Widerstand liegt eine Spannung von 12 V. Es fließt ein Strom von 0,5 A. Wie groß ist der Widerstand?",
+      "gegeben": "`U = 12 V`, `I = 0,5 A`",
+      "gesucht": "Widerstand `R`",
+      "gesuchtSymbol": "R",
+      "loesung": 24,
+      "einheit": "Ω",
+      "rechenweg": [
+        "Formel: `R = \\frac{U}{I}`",
+        "Einsetzen: `R = \\frac{12 V}{0,5 A}`",
+        "Ergebnis: `R = 24 Ω`"
+      ],
+      "hinweis": "Widerstand = Spannung geteilt durch Stromstärke.",
+      "erklaerung": "Für 1 A bräuchte man 24 V. Der Widerstand beträgt also 24 Ω."
+    },
+    {
+      "id": "k9-oh-03",
+      "typ": "zahl",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz2",
+      "frage": "Ein Widerstand von 220 Ω liegt an einer Spannung von 4,4 V. Welche Stromstärke fließt?",
+      "gegeben": "`R = 220 Ω`, `U = 4,4 V`",
+      "gesucht": "Stromstärke `I`",
+      "gesuchtSymbol": "I",
+      "loesung": 20,
+      "einheit": "mA",
+      "alternativEinheiten": {
+        "A": 1000
+      },
+      "rechenweg": [
+        "Formel: `I = \\frac{U}{R}`",
+        "Einsetzen: `I = \\frac{4,4 V}{220 Ω}`",
+        "Ergebnis: `I = 0,02 A = 20 mA`"
+      ],
+      "hinweis": "Stelle `R = U / I` nach `I` um. Achte bei der Antwort auf die gewählte Einheit.",
+      "erklaerung": "0,02 A sind 20 mA, denn 1 A = 1000 mA."
+    },
+    {
+      "id": "k9-oh-04",
+      "typ": "single",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz2",
+      "frage": "Die Spannung an einem ohmschen Widerstand wird verdoppelt. Was passiert mit der Stromstärke?",
+      "optionen": [
+        {
+          "text": "Sie verdoppelt sich.",
+          "richtig": true
+        },
+        {
+          "text": "Sie halbiert sich.",
+          "feedback": "Mehr Antrieb bei gleichem Widerstand führt zu **mehr** Strom, nicht zu weniger."
+        },
+        {
+          "text": "Sie bleibt gleich.",
+          "feedback": "Gleich bleibt der **Widerstand**, nicht die Stromstärke."
+        },
+        {
+          "text": "Sie vervierfacht sich.",
+          "feedback": "Vervierfachen würde sich die elektrische **Leistung** `P = U · I`, nicht die Stromstärke."
+        }
+      ],
+      "erklaerung": "Beim ohmschen Widerstand gilt `I ~ U`. Weil `R` konstant bleibt, führt die doppelte Spannung zur doppelten Stromstärke: `I = U / R`."
+    },
+    {
+      "id": "k9-oh-05",
+      "typ": "zahl",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz2",
+      "frage": "Der Heizdraht eines Föhns hat im Betrieb einen Widerstand von 46 Ω. Welche Stromstärke fließt an 230 V?",
+      "gegeben": "`R = 46 Ω`, `U = 230 V`",
+      "gesucht": "Stromstärke `I`",
+      "gesuchtSymbol": "I",
+      "loesung": 5,
+      "einheit": "A",
+      "alternativEinheiten": {
+        "mA": 0.001
+      },
+      "rechenweg": [
+        "Formel: `I = \\frac{U}{R}`",
+        "Einsetzen: `I = \\frac{230 V}{46 Ω}`",
+        "Ergebnis: `I = 5 A`"
+      ],
+      "erklaerung": "Durch den Heizdraht fließen 5 A. Das ist typisch für Geräte, die Wärme erzeugen."
+    },
+    {
+      "id": "k9-oh-06",
+      "typ": "single",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz3",
+      "frage": "Bei einer Messung an einem Draht erhältst du diese Werte:\n\n`U` in V: 2 · 4 · 6\n`I` in A: 0,1 · 0,2 · 0,3\n\nWie groß ist der Widerstand des Drahtes?",
+      "optionen": [
+        {
+          "text": "20 Ω",
+          "richtig": true
+        },
+        {
+          "text": "0,05 Ω",
+          "feedback": "Du hast `I / U` gerechnet. Der Widerstand ist aber `U / I`."
+        },
+        {
+          "text": "2 Ω",
+          "feedback": "Prüfe die Rechnung: 2 V geteilt durch 0,1 A."
+        },
+        {
+          "text": "Man kann ihn nicht bestimmen, weil er sich ändert.",
+          "feedback": "Bei jedem Messpaar ergibt `U / I` denselben Wert. Der Widerstand ist also konstant."
+        }
+      ],
+      "erklaerung": "Für jedes Messpaar gilt `U / I = 20 Ω` (z. B. 6 V / 0,3 A = 20 Ω). Weil der Quotient immer gleich ist, ist der Draht ein ohmscher Widerstand."
+    },
+    {
+      "id": "k9-oh-07",
+      "typ": "multi",
+      "schwierigkeit": "schwer",
+      "lernziel": "lz4",
+      "frage": "Welche Aussagen über eine Glühlampe sind richtig?",
+      "optionen": [
+        {
+          "text": "Ihr Widerstand steigt, wenn der Draht heißer wird.",
+          "richtig": true
+        },
+        {
+          "text": "Ihre Kennlinie (`I` gegen `U`) ist keine Gerade, sondern wird flacher.",
+          "richtig": true
+        },
+        {
+          "text": "Sie gehorcht im ganzen Spannungsbereich dem ohmschen Gesetz.",
+          "feedback": "Das ohmsche Gesetz gilt nur bei konstanter Temperatur. Der Glühdraht wird aber sehr heiß."
+        },
+        {
+          "text": "Im kalten Zustand hat sie einen kleineren Widerstand als im Betrieb.",
+          "richtig": true
+        }
+      ],
+      "erklaerung": "Der Glühdraht erhitzt sich auf über 2000 °C. Dadurch steigt sein Widerstand stark an. Doppelte Spannung ergibt deshalb **weniger** als die doppelte Stromstärke, und die Kennlinie krümmt sich."
+    },
+    {
+      "id": "k9-oh-08",
+      "typ": "text",
+      "schwierigkeit": "schwer",
+      "lernziel": "lz4",
+      "frage": "Erkläre mithilfe des Teilchenmodells, warum der Widerstand eines Metalldrahtes zunimmt, wenn der Draht heißer wird.",
+      "stichworte": [
+        {
+          "aspekt": "Atomrümpfe (Atome) schwingen bei höherer Temperatur stärker",
+          "woerter": [
+            "schwing",
+            "bewegen sich staerker",
+            "zitter",
+            "vibrier",
+            "bewegung der atome"
+          ]
+        },
+        {
+          "aspekt": "Elektronen stoßen häufiger mit ihnen zusammen und werden gebremst",
+          "woerter": [
+            "stoss",
+            "zusammen",
+            "behinder",
+            "bremst",
+            "gebremst",
+            "hindern"
+          ]
+        },
+        {
+          "aspekt": "Folge: bei gleicher Spannung kleinere Stromstärke, also größerer Widerstand",
+          "woerter": [
+            "weniger strom",
+            "kleinere strom",
+            "stromstaerke sinkt",
+            "geringere strom",
+            "widerstand steigt",
+            "groesserer widerstand",
+            "widerstand nimmt zu",
+            "kleinerer strom",
+            "weniger strom",
+            "ist also groesser",
+            "wird groesser",
+            "widerstand ist groesser"
+          ]
+        }
+      ],
+      "musterloesung": "In einem Metall bewegen sich die freien Elektronen zwischen den Atomrümpfen. Wird der Draht heißer, schwingen die Atomrümpfe stärker um ihre Plätze. Die Elektronen stoßen dadurch häufiger mit ihnen zusammen und werden stärker gebremst. Bei gleicher Spannung fließt deshalb ein kleinerer Strom, der Widerstand `R = U / I` ist also größer.",
+      "erklaerung": "Temperatur ist im Teilchenmodell die Bewegung der Teilchen. Mehr Bewegung der Atomrümpfe bedeutet mehr Hindernisse für die Elektronen."
+    },
+    {
+      "id": "k9-oh-09",
+      "typ": "zahl",
+      "schwierigkeit": "schwer",
+      "lernziel": "lz2",
+      "frage": "Durch einen ohmschen Widerstand fließen bei 6 V genau 0,15 A. Welche Stromstärke fließt, wenn man die Spannung auf 9 V erhöht?",
+      "gegeben": "`U_{1} = 6 V`, `I_{1} = 0,15 A`, `U_{2} = 9 V`",
+      "gesucht": "Stromstärke `I_{2}`",
+      "gesuchtSymbol": "I_{2}",
+      "loesung": 0.225,
+      "einheit": "A",
+      "alternativEinheiten": {
+        "mA": 0.001
+      },
+      "rechenweg": [
+        "Widerstand bestimmen: `R = \\frac{6 V}{0,15 A} = 40 Ω`",
+        "Der Widerstand bleibt gleich (ohmscher Widerstand).",
+        "Neue Stromstärke: `I_{2} = \\frac{9 V}{40 Ω} = 0,225 A`",
+        "Alternativ: Die Spannung steigt auf das 1,5-Fache, also auch die Stromstärke: `0,15 A · 1,5 = 0,225 A`"
+      ],
+      "hinweis": "Berechne zuerst den Widerstand. Er ändert sich nicht.",
+      "erklaerung": "Weil `I ~ U` gilt, wächst die Stromstärke im gleichen Verhältnis wie die Spannung."
+    },
+    {
+      "id": "k9-oh-10",
+      "typ": "reihenfolge",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz3",
+      "frage": "Bringe die Schritte zur experimentellen Bestimmung eines Widerstands in eine sinnvolle Reihenfolge.",
+      "elemente": [
+        "Schaltung aufbauen: Strommesser in Reihe, Spannungsmesser parallel zum Bauteil",
+        "Spannung einstellen und Stromstärke ablesen",
+        "Mehrere Messpaare aufnehmen und in eine Tabelle eintragen",
+        "Ein Diagramm (`I` gegen `U`) zeichnen",
+        "`R = U / I` für jedes Messpaar berechnen und den Mittelwert bilden"
+      ],
+      "erklaerung": "Mehrere Messpaare und ein Diagramm zeigen, ob das Bauteil überhaupt ohmsch ist (Ursprungsgerade). Der Mittelwert verringert den Einfluss zufälliger Messfehler."
+    }
+  ]
+}

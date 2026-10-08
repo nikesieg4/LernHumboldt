@@ -1,0 +1,29 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./data:/app/data          # Datenbank (Konten, Fortschritt, Schülerliste)
+      - ./lessons:/app/lessons    # Lerneinheiten – neue Ordner erscheinen ohne Neustart
+      - ./content:/app/content    # Physik-Inhalte (Themen, Lernziele, Übungen)
+
+  # Caddy holt automatisch ein HTTPS-Zertifikat für DOMAIN (Let's Encrypt)
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DOMAIN=${DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+
+volumes:
+  caddy_data:
+  caddy_config:

@@ -1,0 +1,126 @@
+{
+  "id": "k9-leistung-energie",
+  "titel": "Elektrische Leistung und Energie",
+  "kurz": "Watt, Kilowattstunden, die Stromrechnung und die Gefahren des elektrischen Stroms.",
+  "reihenfolge": 5,
+  "lernziele": [
+    { "id": "lz1", "niveau": "E", "text": "Die elektrische Leistung mit `P = U · I` berechnen" },
+    { "id": "lz2", "niveau": "F", "text": "Die elektrische Energie mit `E = P · t` berechnen, in kWh angeben und Kosten ermitteln" },
+    { "id": "lz3", "niveau": "G", "text": "Den Energiebedarf von Geräten vergleichen und bewerten" },
+    { "id": "lz4", "niveau": "E", "text": "Gefahren des elektrischen Stroms kennen und Schutzmaßnahmen erklären" }
+  ],
+  "verstehen": {
+    "einstieg": "Auf deinem Föhn steht „2000 W“, auf deiner Schreibtischlampe „5 W“. Was bedeutet diese Zahl, und was kostet es, beide eine Stunde laufen zu lassen?",
+    "abschnitte": [
+      {
+        "titel": "Elektrische Leistung",
+        "text": "Die **Leistung** `P` gibt an, wie viel Energie ein Gerät **pro Sekunde** umwandelt, z. B. in Licht, Wärme oder Bewegung. Die Einheit ist das **Watt** (W): 1 W = 1 J/s.\n\nFür elektrische Geräte gilt `P = U · I`. Bei gleicher Spannung von 230 V hat ein Gerät also umso mehr Leistung, je größer die Stromstärke ist.\n\nDie Leistung sagt nichts darüber, wie **gut** ein Gerät seine Aufgabe erfüllt. Ein Teil der Energie wird oft ungenutzt in Wärme umgewandelt."
+      },
+      {
+        "titel": "Elektrische Energie und Kosten",
+        "text": "Die umgewandelte **Energie** hängt von der Leistung und der Betriebsdauer ab: `E = P · t`.\n\nIn der Physik misst man Energie in Joule (J = W·s). Für den Haushalt ist das unpraktisch klein. Man verwendet die **Kilowattstunde** (kWh): Ein Gerät mit 1 kW Leistung wandelt in einer Stunde 1 kWh um. Es gilt 1 kWh = 1000 W · 3600 s = 3 600 000 J.\n\nDer Stromzähler misst die Energie in kWh. Die Kosten berechnest du so: Energie in kWh mal Preis pro kWh."
+      },
+      {
+        "titel": "Gefahren des elektrischen Stroms",
+        "text": "Fließt Strom durch den menschlichen Körper, können Muskeln verkrampfen und das Herz aus dem Takt geraten (Herzkammerflimmern). Schon Stromstärken ab etwa **50 mA** können **lebensgefährlich** sein. Wechselspannungen über 50 V gelten als gefährlich, die Netzspannung von 230 V ist es auf jeden Fall.\n\n**Schutzmaßnahmen:** Sicherungen schalten bei zu großen Strömen (Kurzschluss, Überlastung) ab. Der **FI-Schutzschalter** vergleicht den hin- und zurückfließenden Strom. Fließt Strom über einen Menschen zur Erde ab (spätestens bei 30 mA Unterschied), schaltet er in Sekundenbruchteilen ab.\n\n**Bahnanlagen:** Oberleitungen der Bahn führen 15 000 V. Hier kann schon bei **Annäherung** ein Lichtbogen überspringen, also nie auf Waggons klettern! Die Berliner S-Bahn wird über eine seitliche **Stromschiene** mit 750 V versorgt. Sie darf niemals betreten oder berührt werden."
+      }
+    ],
+    "formeln": [
+      { "formel": "P = U · I", "bedeutung": "Leistung `P` in W, Spannung `U` in V, Stromstärke `I` in A" },
+      { "formel": "E = P · t", "bedeutung": "Energie `E` in J (W·s) oder kWh, Leistung `P`, Zeit `t`" },
+      { "formel": "1 kWh = 3,6 · 10^{6} J", "bedeutung": "Umrechnung zwischen Kilowattstunde und Joule" }
+    ],
+    "merksatz": "**Leistung** = Energie pro Zeit: `P = U · I` (Watt).\n\n**Energie** = Leistung mal Zeit: `E = P · t` (Joule oder kWh).\n\nSchon kleine Ströme durch den Körper können tödlich sein. Sicherung und FI-Schutzschalter schützen.",
+    "alltag": "Viele Geräte verbrauchen auch im Standby Energie. 5 W rund um die Uhr ergeben im Jahr fast 44 kWh. Das sind bei 0,35 € pro kWh etwa 15 €, und zwar für jedes einzelne Gerät."
+  },
+  "interaktiv": [],
+  "uebungen": [
+    {
+      "id": "k9-le-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "In welcher Einheit wird die elektrische Leistung angegeben?",
+      "optionen": [
+        { "text": "Kilowattstunde (kWh)", "feedback": "Die Kilowattstunde ist eine Einheit der **Energie**, nicht der Leistung." },
+        { "text": "Watt (W)", "richtig": true },
+        { "text": "Volt (V)", "feedback": "Volt ist die Einheit der Spannung." },
+        { "text": "Ampere (A)", "feedback": "Ampere ist die Einheit der Stromstärke." }
+      ],
+      "erklaerung": "Leistung ist Energie pro Zeit. Ihre Einheit ist das Watt: 1 W = 1 J/s = 1 V · 1 A."
+    },
+    {
+      "id": "k9-le-02", "typ": "zahl", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Durch eine Glühlampe fließt an 230 V ein Strom von 0,26 A. Wie groß ist ihre Leistung?",
+      "gegeben": "`U = 230 V`, `I = 0,26 A`", "gesucht": "Leistung `P`", "gesuchtSymbol": "P",
+      "loesung": 59.8, "einheit": "W",
+      "rechenweg": ["Formel: `P = U · I`", "Einsetzen: `P = 230 V · 0,26 A`", "Ergebnis: `P = 59,8 W ≈ 60 W`"],
+      "erklaerung": "Das ist eine klassische 60-W-Glühlampe. Eine LED-Lampe mit gleicher Helligkeit braucht nur etwa 8 W."
+    },
+    {
+      "id": "k9-le-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Ein Wasserkocher hat eine Leistung von 2000 W und wird an 230 V betrieben. Welche Stromstärke fließt?",
+      "gegeben": "`P = 2000 W`, `U = 230 V`", "gesucht": "Stromstärke `I`", "gesuchtSymbol": "I",
+      "loesung": 8.6957, "einheit": "A", "alternativEinheiten": { "mA": 0.001 },
+      "rechenweg": ["Formel umstellen: `I = \\frac{P}{U}`", "Einsetzen: `I = \\frac{2000 W}{230 V}`", "Ergebnis: `I ≈ 8,7 A`"],
+      "hinweis": "Stelle `P = U · I` nach `I` um.",
+      "erklaerung": "Fast 9 A ist schon viel. Haushaltsstromkreise sind meist mit 16 A abgesichert. Zwei solche Geräte am selben Stromkreis sind also schon nahe an der Grenze."
+    },
+    {
+      "id": "k9-le-04", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Ein Fernseher mit 100 W Leistung läuft 30 Tage lang jeden Tag 3 Stunden. Wie viel Energie wandelt er um?",
+      "gegeben": "`P = 100 W`, `t = 30 · 3 h`", "gesucht": "Energie `E`", "gesuchtSymbol": "E",
+      "loesung": 9, "einheit": "kWh", "alternativEinheiten": { "Wh": 0.001 },
+      "rechenweg": ["Gesamtzeit: `t = 30 · 3 h = 90 h`", "Leistung in kW: `P = 100 W = 0,1 kW`", "Energie: `E = 0,1 kW · 90 h = 9 kWh`"],
+      "hinweis": "Rechne die Leistung in kW und die Zeit in Stunden um, dann erhältst du direkt kWh.",
+      "erklaerung": "kW mal Stunden ergibt kWh, die Einheit auf der Stromrechnung."
+    },
+    {
+      "id": "k9-le-05", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Was kosten die 9 kWh aus der vorigen Aufgabe bei einem Strompreis von 0,35 € pro kWh?",
+      "gegeben": "`E = 9 kWh`, Preis 0,35 €/kWh", "gesucht": "Kosten",
+      "loesung": 3.15, "einheit": "€", "alternativEinheiten": { "ct": 0.01 },
+      "rechenweg": ["Kosten = Energie · Preis", "`9 kWh · 0,35 €/kWh = 3,15 €`"],
+      "erklaerung": "Im Monat kostet das Fernsehen also gut 3 €."
+    },
+    {
+      "id": "k9-le-06", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Eine Spielkonsole braucht im Standby 5 W und ist das ganze Jahr eingesteckt (365 Tage, 24 Stunden). Wie viel Energie wird so in einem Jahr umgewandelt?",
+      "gegeben": "`P = 5 W`, `t = 365 · 24 h`", "gesucht": "Energie `E`", "gesuchtSymbol": "E",
+      "loesung": 43.8, "einheit": "kWh", "alternativEinheiten": { "Wh": 0.001 },
+      "rechenweg": ["Zeit: `t = 365 · 24 h = 8760 h`", "Leistung: `P = 5 W = 0,005 kW`", "Energie: `E = 0,005 kW · 8760 h = 43,8 kWh`", "Kosten bei 0,35 €/kWh: etwa 15,33 €"],
+      "hinweis": "Achte darauf, W in kW umzurechnen: 5 W = 0,005 kW.",
+      "erklaerung": "Kleine Leistungen summieren sich, wenn sie dauernd anliegen. Eine schaltbare Steckerleiste spart diese Energie."
+    },
+    {
+      "id": "k9-le-07", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Was bedeutet die Angabe „1 kWh“?",
+      "optionen": [
+        { "text": "Die Energie, die ein Gerät mit 1 kW Leistung in einer Stunde umwandelt", "richtig": true },
+        { "text": "Eine Leistung von 1000 W", "feedback": "1000 W = 1 kW ist eine **Leistung**. kWh ist eine **Energie**: Leistung **mal** Zeit." },
+        { "text": "1000 Watt pro Stunde", "feedback": "Ein häufiger Fehler: Es heißt Kilowatt **mal** Stunde, nicht pro Stunde." },
+        { "text": "Die Energie von 1000 J", "feedback": "1 kWh sind 3 600 000 J, denn 1000 W · 3600 s = 3,6 · 10^{6} J." }
+      ],
+      "erklaerung": "Aus `E = P · t` folgt: 1 kWh = 1 kW · 1 h. Ein 2-kW-Wasserkocher braucht diese Energie schon in einer halben Stunde."
+    },
+    {
+      "id": "k9-le-08", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Welche Aussagen zu den Gefahren des elektrischen Stroms sind richtig?",
+      "optionen": [
+        { "text": "Schon Stromstärken ab etwa 50 mA durch den Körper können lebensgefährlich sein.", "richtig": true },
+        { "text": "Der FI-Schutzschalter schaltet ab, wenn Strom über einen falschen Weg, z. B. durch einen Menschen, zur Erde fließt.", "richtig": true },
+        { "text": "Von einer Bahnoberleitung geht nur Gefahr aus, wenn man sie direkt berührt.", "feedback": "Bei 15 000 V kann schon bei Annäherung ein Lichtbogen überspringen. Ein Sicherheitsabstand von mindestens 1,5 m ist Pflicht." },
+        { "text": "Eine 1,5-V-Batterie ist für den Menschen lebensgefährlich.", "feedback": "1,5 V reichen nicht aus, um einen gefährlichen Strom durch die Haut zu treiben. Gefährlich wird es ab etwa 50 V Wechselspannung." }
+      ],
+      "erklaerung": "Entscheidend für die Gefahr ist die **Stromstärke** durch den Körper. Sie hängt nach `I = U / R` von der Spannung und vom Körperwiderstand ab. Bei hohen Spannungen wie im Haushalt (230 V) oder an der Bahn (750 V bzw. 15 000 V) besteht Lebensgefahr."
+    },
+    {
+      "id": "k9-le-09", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Ein Verkäufer sagt: „Dieser Staubsauger hat 2000 W, er saugt also mehr als doppelt so gut wie der mit 900 W.“ Bewerte diese Aussage.",
+      "stichworte": [
+        { "aspekt": "Die Leistung gibt die umgewandelte Energie pro Zeit an, nicht die Saugkraft", "woerter": ["energie pro", "pro sekunde", "pro zeit", "umgewandelt", "umsatz", "verbraucht", "aufgenommen", "nicht die saugkraft", "nicht wie gut"] },
+        { "aspekt": "Ein Teil der Energie wird ungenutzt in Wärme (und Schall) umgewandelt; die Bauweise entscheidet", "woerter": ["waerme", "verlust", "wirkungsgrad", "bauweise", "technik", "effizien", "laerm", "schall"] },
+        { "aspekt": "Mehr Leistung bedeutet höhere Energiekosten", "woerter": ["kosten", "teurer", "stromrechnung", "mehr strom", "mehr energie", "geld"] }
+      ],
+      "musterloesung": "Die Aussage ist so nicht richtig. Die Leistung von 2000 W gibt nur an, wie viel elektrische Energie der Staubsauger pro Sekunde **aufnimmt**. Wie gut er saugt, hängt davon ab, wie viel davon tatsächlich in Saugleistung umgesetzt wird. Ein großer Teil kann ungenutzt in Wärme und Schall umgewandelt werden. Ein gut gebauter Staubsauger mit 900 W kann deshalb genauso gut saugen. Er braucht dabei aber weniger als die Hälfte der Energie und verursacht geringere Kosten.",
+      "erklaerung": "Die Leistungsangabe beschreibt den **Energiebedarf**, nicht den Nutzen. Um Geräte fair zu vergleichen, braucht man Angaben zur Wirkung (z. B. Saugleistung) und zum Wirkungsgrad."
+    }
+  ]
+}

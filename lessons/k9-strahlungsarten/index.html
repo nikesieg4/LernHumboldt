@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strahlungs-Labor</title>
+<link rel="stylesheet" href="../../static/lesson-kit.css">
+<style>
+  .src { fill: #f2c94c; stroke: var(--line); stroke-width: 2; }
+  .tube { fill: var(--card); stroke: var(--line); stroke-width: 2; }
+  .p-alpha { fill: #d64545; } .p-beta { fill: #2a7bd1; } .p-gamma { fill: #8a4fd1; } .p-bg { fill: var(--muted); }
+  .flash { fill: var(--lamp); }
+  .ruler { stroke: var(--muted); stroke-width: 1; }
+  .big { font-size: 26px; font-weight: 750; font-variant-numeric: tabular-nums; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<h1>Strahlungs-Labor</h1>
+<p class="muted small">Wähle ein Präparat und eine Abschirmung und verändere den Abstand zum Zählrohr. Das ist eine Modellsimulation: Die Werte sind vereinfacht, aber die Zusammenhänge stimmen.</p>
+
+<div class="lk-grid">
+  <div>
+    <div class="lk-card">
+      <svg id="svg" viewBox="0 0 520 220" role="img" aria-label="Präparat, Abschirmung und Zählrohr">
+        <g id="ruler"></g>
+        <rect x="30" y="90" width="34" height="40" rx="4" class="src"/>
+        <text x="47" y="80" class="lbl" text-anchor="middle" id="srcLbl"></text>
+        <rect id="absorber" y="70" height="80" rx="2"/>
+        <text id="absLbl" y="62" class="val" text-anchor="middle"></text>
+        <g id="tubeG"><rect x="0" y="94" width="70" height="32" rx="16" class="tube"/><text x="35" y="114" class="val" text-anchor="middle">Zählrohr</text></g>
+        <g id="parts"></g>
+      </svg>
+      <div class="readouts">
+        <div class="readout"><span>Zählrate (gemessen)</span><b id="rate" class="big">–</b></div>
+        <div class="readout"><span>Messzeit</span><b id="mtime">0 s</b></div>
+        <div class="readout"><span>Impulse</span><b id="cnt">0</b></div>
+      </div>
+      <p class="small muted" style="margin-top:8px">Die Zählrate schwankt, weil der Zerfall zufällig ist. Je länger du misst, desto genauer wird sie. Bei jeder Änderung startet die Messung neu.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="lk-card">
+      <h2>Einstellungen</h2>
+      <label class="ctrl"><span>Präparat</span>
+        <select id="sSrc">
+          <option value="none">kein Präparat</option>
+          <option value="alpha">α-Strahler</option>
+          <option value="beta" selected>β-Strahler</option>
+          <option value="gamma">γ-Strahler</option>
+        </select></label>
+      <label class="ctrl"><span>Abschirmung</span>
+        <select id="sAbs">
+          <option value="none">keine</option>
+          <option value="paper">Blatt Papier</option>
+          <option value="alu">Aluminium, 3 mm</option>
+          <option value="lead">Blei, 2 cm</option>
+        </select></label>
+      <label class="ctrl"><span>Abstand Präparat – Zählrohr <output id="oD"></output></span>
+        <input type="range" id="sD" min="1" max="20" step="1" value="2"></label>
+      <div class="row"><button type="button" id="bSound" aria-pressed="false">Ton aus</button></div>
+    </div>
+
+    <div class="lk-card tasks">
+      <h2>Entdecke selbst <span class="small muted" data-task-count></span></h2>
+      <div class="task">
+        <p class="task-q">Wähle „kein Präparat“. Warum zählt das Zählrohr trotzdem einige Impulse pro Minute?</p>
+        <div class="choices">
+          <button data-ok data-fb="Richtig: Das ist der Nulleffekt durch natürliche Strahlung aus Boden, Luft, Baustoffen und Weltall.">Wegen der natürlichen Strahlung der Umgebung (Nulleffekt)</button>
+          <button data-fb="Das Zählrohr funktioniert richtig. Überlege, woher sonst noch Strahlung kommen kann.">Weil das Zählrohr defekt ist</button>
+          <button data-fb="Licht ist nicht ionisierend und löst im Zählrohr keine Impulse aus.">Wegen des Lichts im Raum</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Welche Strahlung wird schon von einem Blatt Papier vollständig aufgehalten?</p>
+        <div class="choices">
+          <button data-ok data-fb="Genau: Die Zählrate sinkt auf den Nulleffekt.">α-Strahlung</button>
+          <button data-fb="Teste β-Strahlung mit Papier und vergleiche mit dem Nulleffekt.">β-Strahlung</button>
+          <button data-fb="Teste γ-Strahlung mit Papier.">γ-Strahlung</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task" data-goal="combos"><p class="task-q">Teste jede Strahlungsart mit jeder Abschirmung (Papier, Aluminium, Blei). <span class="small muted" id="comboCount"></span></p></div>
+      <div class="task">
+        <p class="task-q">Welche Strahlung kann selbst 2 cm Blei nicht vollständig abschirmen?</p>
+        <div class="choices">
+          <button data-ok data-fb="Richtig: Blei schwächt γ-Strahlung stark ab, aber ein Teil kommt immer durch.">γ-Strahlung</button>
+          <button data-fb="Teste β-Strahlung mit Blei.">β-Strahlung</button>
+          <button data-fb="Teste α-Strahlung mit Blei.">α-Strahlung</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">β-Strahler ohne Abschirmung: Verdopple den Abstand von 4 cm auf 8 cm. Wie ändert sich die Zählrate (ohne Nulleffekt)?</p>
+        <div class="choices">
+          <button data-ok data-fb="Genau: Die Strahlung verteilt sich auf die vierfache Fläche. Abstand halten schützt.">Sie sinkt auf etwa ein Viertel.</button>
+          <button data-fb="Miss länger, damit die Werte genauer werden, und vergleiche dann.">Sie halbiert sich.</button>
+          <button data-fb="Probiere beide Abstände aus und vergleiche die Zählraten.">Sie bleibt gleich.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="all-done">Alles entdeckt! Weiter geht es mit den Übungen.</div>
+    </div>
+  </div>
+</div>
+
+<script src="../../static/lesson-kit.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var PX = 20, X0 = 64;                                     // 20 px pro cm, Präparat-Vorderkante
+  var S = { src: 'beta', abs: 'none', d: 2, sound: false };
+  var BG = 20 / 60;                                          // Nulleffekt: 20 Impulse pro Minute
+  var EMIT = 40;                                             // Teilchen pro Sekunde in Richtung Zählrohr (1 cm Abstand)
+  var TRANS = {                                              // Anteil, der die Abschirmung durchdringt
+    alpha: { none: 1, paper: 0, alu: 0, lead: 0 },
+    beta: { none: 1, paper: 0.9, alu: 0, lead: 0 },
+    gamma: { none: 1, paper: 1, alu: 0.95, lead: 0.1 }
+  };
+  var ABS = { none: { w: 0, c: 'none', t: '' }, paper: { w: 3, c: '#f4f1e8', t: 'Papier' }, alu: { w: 8, c: '#b9bec7', t: 'Aluminium' }, lead: { w: 22, c: '#6b7078', t: 'Blei' } };
+  var LBL = { none: 'leer', alpha: 'α', beta: 'β', gamma: 'γ' };
+  var tried = {};
+  var parts = [], counts = 0, tMeas = 0, audio = null;
+
+  function el(tag, a, p) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); (p || $('parts')).appendChild(e); return e; }
+  var tubeX = function () { return X0 + S.d * PX; };
+  var absX = function () { return X0 + S.d * PX / 2; };
+
+  function layout() {
+    $('tubeG').setAttribute('transform', 'translate(' + tubeX() + ' 0)');
+    var a = ABS[S.abs], r = $('absorber');
+    r.setAttribute('x', absX() - a.w / 2); r.setAttribute('width', a.w);
+    r.setAttribute('fill', a.c); r.setAttribute('stroke', a.w ? 'var(--line)' : 'none');
+    $('absLbl').setAttribute('x', absX()); $('absLbl').textContent = a.t;
+    $('srcLbl').textContent = LBL[S.src];
+    $('oD').textContent = S.d + ' cm';
+    var g = $('ruler'); g.innerHTML = '';
+    for (var c = 0; c <= 20; c += 2) {
+      el('line', { x1: X0 + c * PX, x2: X0 + c * PX, y1: 196, y2: c % 4 ? 200 : 204, class: 'ruler' }, g);
+      if (c % 4 === 0) el('text', { x: X0 + c * PX, y: 216, class: 'val', 'text-anchor': 'middle' }, g).textContent = c + ' cm';
+    }
+    el('line', { x1: X0, x2: X0 + 20 * PX, y1: 196, y2: 196, class: 'ruler' }, g);
+    counts = 0; tMeas = 0; parts.forEach(function (p) { p.e.remove(); }); parts = [];
+    if (S.src !== 'none' && S.abs !== 'none') {
+      tried[S.src + S.abs] = true;
+      var n = Object.keys(tried).length;
+      $('comboCount').textContent = '(' + n + ' von 9)';
+      if (n >= 9) LK.reach('combos');
+    }
+  }
+
+  function click() {
+    if (!S.sound) return;
+    try {
+      audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+      var o = audio.createOscillator(), g = audio.createGain();
+      o.type = 'square'; o.frequency.value = 1800; g.gain.value = 0.05;
+      o.connect(g); g.connect(audio.destination); o.start(); o.stop(audio.currentTime + 0.008);
+    } catch (e) {}
+  }
+
+  function emit() {
+    // Ob das Teilchen das Zählrohr treffen würde, hängt vom Abstand ab (Abstandsgesetz)
+    var hit = Math.random() < Math.min(1, Math.pow(1 / S.d, 2));
+    var through = Math.random() < TRANS[S.src][S.abs];
+    var range = S.src === 'alpha' ? X0 + 4 * PX : 9999;      // α: nur wenige cm Reichweite in Luft
+    var ang = hit ? (Math.random() - 0.5) * 0.04 : (Math.random() < 0.5 ? -1 : 1) * (0.25 + Math.random() * 0.6);
+    var speed = S.src === 'alpha' ? 140 : S.src === 'beta' ? 260 : 380;
+    parts.push({ x: X0, y: 110 + (Math.random() - 0.5) * 16, vx: speed * Math.cos(ang), vy: speed * Math.sin(ang), hit: hit, through: through, range: range,
+      e: el('circle', { r: S.src === 'alpha' ? 4 : S.src === 'beta' ? 2.5 : 2, class: 'p-' + S.src }) });
+  }
+
+  var last = performance.now(), acc = 0;
+  function frame(t) {
+    var dt = Math.min(0.05, (t - last) / 1000); last = t;
+    tMeas += dt;
+    if (S.src !== 'none') { acc += dt * EMIT; while (acc > 1) { acc -= 1; emit(); } }
+    if (Math.random() < BG * dt) { counts++; click(); }                 // Nulleffekt
+    var tx = tubeX(), ax = absX(), aw = ABS[S.abs].w;
+    parts = parts.filter(function (p) {
+      var nx = p.x + p.vx * dt; p.y += p.vy * dt;
+      if (aw && p.x < ax - aw / 2 && nx >= ax - aw / 2 && Math.abs(p.y - 110) < 40 && !p.through) { p.e.remove(); return false; }
+      if (nx > p.range) { p.e.remove(); return false; }
+      p.x = nx;
+      if (p.hit && p.x >= tx + 8) { counts++; click(); p.e.remove(); return false; }
+      if (p.x > 530 || p.y < -10 || p.y > 230) { p.e.remove(); return false; }
+      p.e.setAttribute('cx', p.x.toFixed(1)); p.e.setAttribute('cy', p.y.toFixed(1));
+      return true;
+    });
+    $('rate').textContent = tMeas > 1 ? LK.fmt(counts / tMeas * 60, 0) + ' /min' : '…';
+    $('mtime').textContent = LK.fmt(tMeas, 0) + ' s';
+    $('cnt').textContent = counts;
+    requestAnimationFrame(frame);
+  }
+
+  $('sSrc').onchange = function () { S.src = this.value; layout(); };
+  $('sAbs').onchange = function () { S.abs = this.value; layout(); };
+  $('sD').oninput = function () { S.d = Number(this.value); layout(); };
+  $('bSound').onclick = function () { S.sound = !S.sound; this.setAttribute('aria-pressed', S.sound); this.textContent = S.sound ? 'Ton an' : 'Ton aus'; };
+  layout(); requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

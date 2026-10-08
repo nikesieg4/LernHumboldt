@@ -1,0 +1,136 @@
+{
+  "id": "k9-induktion",
+  "titel": "Induktion und Generator",
+  "kurz": "Wie aus Bewegung und Magnetismus elektrische Spannung entsteht, vom Fahrraddynamo bis zum Kraftwerk.",
+  "reihenfolge": 3,
+  "lernziele": [
+    { "id": "lz1", "niveau": "E", "text": "Beschreiben, unter welchen Bedingungen in einer Spule eine Induktionsspannung entsteht" },
+    { "id": "lz2", "niveau": "F", "text": "Angeben, wovon die Größe der Induktionsspannung abhängt (Induktionsgesetz qualitativ)" },
+    { "id": "lz3", "niveau": "F", "text": "Erklären, wie ein Generator Wechselspannung erzeugt" },
+    { "id": "lz4", "niveau": "G", "text": "Regenerative und erschöpfbare Energiequellen unterscheiden und Möglichkeiten der Energiegewinnung vergleichen" }
+  ],
+  "verstehen": {
+    "einstieg": "Ein Fahrradlicht leuchtet ohne Batterie, solange du fährst. Bleibst du stehen, geht es aus (außer es hat einen Speicher). Woher kommt die Energie für das Licht?",
+    "abschnitte": [
+      {
+        "titel": "Der Grundversuch",
+        "text": "Eine Spule ist an ein empfindliches Spannungsmessgerät angeschlossen. Schiebt man einen Magneten in die Spule, schlägt das Messgerät aus. Zieht man ihn heraus, schlägt es in die **andere** Richtung aus. Ruht der Magnet, zeigt das Gerät **null**, auch wenn der Magnet mitten in der Spule liegt.\n\nDiese Erscheinung heißt **elektromagnetische Induktion**. Die entstehende Spannung nennt man **Induktionsspannung**."
+      },
+      {
+        "titel": "Das Induktionsgesetz (qualitativ)",
+        "text": "In einer Spule wird eine Spannung induziert, **solange sich das Magnetfeld in der Spule ändert**. Dabei ist egal, ob sich der Magnet bewegt, die Spule bewegt oder ein Elektromagnet ein- und ausgeschaltet wird.\n\nDie Induktionsspannung ist umso größer, je **schneller** sich das Magnetfeld ändert, je **mehr Windungen** die Spule hat und je **stärker** der Magnet ist. Ein Eisenkern in der Spule verstärkt die Wirkung."
+      },
+      {
+        "titel": "Der Generator",
+        "text": "In einem **Generator** dreht sich ein Magnet vor oder in einer Spule (oder eine Spule in einem Magnetfeld). Dadurch ändert sich das Magnetfeld in der Spule ständig: Es wird stärker, schwächer, kehrt sich um und so weiter.\n\nDie induzierte Spannung wechselt deshalb regelmäßig ihre Richtung. Es entsteht eine **Wechselspannung**. Ihre **Frequenz** gibt an, wie oft sich dieser Vorgang pro Sekunde wiederholt. Im deutschen Stromnetz sind es 50 Hz.\n\nEin Generator wandelt **Bewegungsenergie in elektrische Energie** um. Er ist die Umkehrung des Elektromotors."
+      },
+      {
+        "titel": "Energiequellen im Vergleich",
+        "text": "Fast alle Kraftwerke nutzen Generatoren. Was die Turbine antreibt, ist unterschiedlich:\n\n**Erschöpfbare (fossile und nukleare) Energieträger:** Kohle, Erdöl, Erdgas, Uran. Ihre Vorräte sind begrenzt. Beim Verbrennen fossiler Stoffe entsteht CO₂.\n\n**Regenerative Energiequellen:** Wind, Wasser, Sonne, Biomasse, Erdwärme. Sie stehen dauerhaft zur Verfügung, schwanken aber teils mit Wetter und Tageszeit. Solarzellen erzeugen Spannung übrigens ganz ohne Generator."
+      }
+    ],
+    "merksatz": "Ändert sich das Magnetfeld in einer Spule, wird eine Spannung induziert. Sie ist umso größer, je schneller die Änderung, je mehr Windungen und je stärker das Feld.\n\nEin **Generator** erzeugt durch Drehung eine **Wechselspannung** und wandelt Bewegungsenergie in elektrische Energie um.",
+    "alltag": "Induktion begegnet dir auch beim kabellosen Laden des Handys, beim Induktionsherd und an Ampeln: Die Induktionsschleife in der Straße bemerkt, wenn ein Auto darüber steht."
+  },
+  "interaktiv": ["k9-generator"],
+  "uebungen": [
+    {
+      "id": "k9-in-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ein Stabmagnet liegt ruhig mitten in einer Spule, die an ein Spannungsmessgerät angeschlossen ist. Was zeigt das Messgerät?",
+      "optionen": [
+        { "text": "Null", "richtig": true },
+        { "text": "Eine konstante Spannung", "feedback": "Ein ruhender Magnet erzeugt ein Magnetfeld, aber keine **Änderung** des Magnetfelds." },
+        { "text": "Eine Wechselspannung", "feedback": "Dafür müsste sich das Magnetfeld ständig ändern, z. B. durch Drehen." }
+      ],
+      "erklaerung": "Induktion braucht eine **Änderung** des Magnetfelds in der Spule. Ein ruhender Magnet erzeugt keine Spannung."
+    },
+    {
+      "id": "k9-in-02", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Wie kann man eine größere Induktionsspannung erzeugen?",
+      "optionen": [
+        { "text": "Den Magneten schneller bewegen", "richtig": true },
+        { "text": "Eine Spule mit mehr Windungen verwenden", "richtig": true },
+        { "text": "Einen stärkeren Magneten verwenden", "richtig": true },
+        { "text": "Den Magneten in der Spule ruhig halten", "feedback": "Dann ändert sich nichts, und die Spannung ist null." },
+        { "text": "Eine Spule aus dickerem Draht verwenden", "feedback": "Die Drahtdicke ändert den Widerstand der Spule, aber nicht die induzierte Spannung." }
+      ],
+      "erklaerung": "Die Induktionsspannung hängt davon ab, wie schnell und wie stark sich das Magnetfeld in der Spule ändert und wie viele Windungen es „spüren“."
+    },
+    {
+      "id": "k9-in-03", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Beim Hineinschieben eines Magneten schlägt der Zeiger des Messgeräts nach rechts aus. Was passiert beim Herausziehen?",
+      "optionen": [
+        { "text": "Der Zeiger schlägt nach links aus.", "richtig": true },
+        { "text": "Der Zeiger schlägt wieder nach rechts aus.", "feedback": "Beim Herausziehen wird das Feld schwächer statt stärker. Die Änderung hat also die umgekehrte Richtung." },
+        { "text": "Der Zeiger bleibt auf null.", "feedback": "Auch beim Herausziehen ändert sich das Magnetfeld in der Spule." }
+      ],
+      "erklaerung": "Hinein: Das Feld in der Spule wird stärker. Heraus: Es wird schwächer. Die entgegengesetzte Änderung erzeugt eine Spannung mit umgekehrtem Vorzeichen."
+    },
+    {
+      "id": "k9-in-04", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz3",
+      "frage": "Welche Energieumwandlung findet in einem Generator statt?",
+      "optionen": [
+        { "text": "Bewegungsenergie wird in elektrische Energie umgewandelt.", "richtig": true },
+        { "text": "Elektrische Energie wird in Bewegungsenergie umgewandelt.", "feedback": "Das macht der **Elektromotor**." },
+        { "text": "Chemische Energie wird in elektrische Energie umgewandelt.", "feedback": "Das passiert in einer **Batterie**." }
+      ],
+      "erklaerung": "Der Generator ist die Umkehrung des Motors: Man muss ihn antreiben, und er liefert elektrische Energie."
+    },
+    {
+      "id": "k9-in-05", "typ": "multi", "schwierigkeit": "leicht", "lernziel": "lz4",
+      "frage": "Welche dieser Energiequellen sind **regenerativ**?",
+      "optionen": [
+        { "text": "Wind", "richtig": true },
+        { "text": "Sonne", "richtig": true },
+        { "text": "Wasserkraft", "richtig": true },
+        { "text": "Erdgas", "feedback": "Erdgas ist ein fossiler Brennstoff. Seine Vorräte sind begrenzt." },
+        { "text": "Uran", "feedback": "Uran wird abgebaut und ist begrenzt verfügbar, also erschöpfbar." },
+        { "text": "Braunkohle", "feedback": "Braunkohle ist fossil und setzt beim Verbrennen viel CO₂ frei." }
+      ],
+      "erklaerung": "Regenerative Quellen erneuern sich ständig durch natürliche Vorgänge, vor allem durch die Sonnenstrahlung."
+    },
+    {
+      "id": "k9-in-06", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Der Magnet eines einfachen Generators (ein Nord- und ein Südpol) dreht sich 3000-mal pro Minute. Welche Frequenz hat die erzeugte Wechselspannung?",
+      "gegeben": "3000 Umdrehungen pro Minute, eine Periode pro Umdrehung", "gesucht": "Frequenz `f`", "gesuchtSymbol": "f",
+      "loesung": 50, "einheit": "Hz",
+      "rechenweg": ["Umdrehungen pro Sekunde: `\\frac{3000}{60 s} = 50 \\frac{1}{s}`", "Bei einem Polpaar entsteht pro Umdrehung eine volle Schwingung.", "Also `f = 50 Hz`"],
+      "hinweis": "Frequenz = Anzahl der Schwingungen pro **Sekunde**.",
+      "erklaerung": "Das ist genau die Netzfrequenz in Deutschland. Große Kraftwerksgeneratoren mit einem Polpaar drehen sich deshalb mit 3000 Umdrehungen pro Minute."
+    },
+    {
+      "id": "k9-in-07", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Erkläre, wie in einem Fahrraddynamo eine Spannung entsteht. Verwende die Fachbegriffe Magnetfeld, Spule und Induktion.",
+      "stichworte": [
+        { "aspekt": "Ein Magnet dreht sich (angetrieben vom Rad)", "woerter": ["magnet", "dreht", "rotier", "rad"] },
+        { "aspekt": "Das Magnetfeld in der Spule ändert sich ständig", "woerter": ["aendert", "aenderung", "wechselt", "veraendert"] },
+        { "aspekt": "Dadurch wird in der Spule eine Spannung induziert", "woerter": ["induk", "induziert", "spule"] },
+        { "aspekt": "Es entsteht eine Wechselspannung", "woerter": ["wechselspannung", "wechselstrom", "richtung wechselt", "wechselnde"] }
+      ],
+      "musterloesung": "Im Dynamo sitzt ein drehbarer Magnet, der über ein Reibrädchen vom Fahrradreifen angetrieben wird. Um den Magneten herum befindet sich eine Spule mit Eisenkern. Dreht sich der Magnet, ändert sich das Magnetfeld in der Spule ständig, und es wechselt dabei auch seine Richtung. Durch diese Änderung wird in der Spule eine Spannung induziert (Induktion). Weil sich das Feld periodisch umkehrt, entsteht eine Wechselspannung. Je schneller man fährt, desto schneller ändert sich das Feld und desto größer ist die Spannung.",
+      "erklaerung": "Nabendynamos funktionieren genauso. Bei ihnen ist der Generator in die Radnabe eingebaut."
+    },
+    {
+      "id": "k9-in-08", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Ein Generator wird von Hand gekurbelt. Sobald man eine Lampe anschließt, lässt er sich deutlich schwerer drehen. Warum?",
+      "optionen": [
+        { "text": "Weil nun elektrische Energie entnommen wird, die man als mechanische Arbeit hineinstecken muss", "richtig": true },
+        { "text": "Weil die Lampe den Magneten schwerer macht", "feedback": "Die Lampe verändert die Masse des Magneten nicht." },
+        { "text": "Weil im Kabel Reibung entsteht", "feedback": "Im Kabel gibt es keine mechanische Reibung, die man an der Kurbel spüren könnte." }
+      ],
+      "erklaerung": "Energie entsteht nicht aus dem Nichts (Energieerhaltung). Fließt Strom, wirkt auf die Spule eine Kraft, die der Drehung entgegenwirkt. Diese Kraft muss man überwinden. So wird die Kurbelarbeit zur elektrischen Energie für die Lampe."
+    },
+    {
+      "id": "k9-in-09", "typ": "reihenfolge", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Bringe die Energieumwandlungen in einem Kohlekraftwerk in die richtige Reihenfolge.",
+      "elemente": [
+        "Chemische Energie der Kohle",
+        "Thermische Energie (heißer Dampf)",
+        "Bewegungsenergie der Turbine",
+        "Elektrische Energie aus dem Generator",
+        "Übertragung über Leitungen zu den Haushalten"
+      ],
+      "erklaerung": "Bei jeder Umwandlung geht ein Teil der Energie als ungenutzte Wärme verloren. Ein Kohlekraftwerk nutzt nur etwa 40 % der chemischen Energie der Kohle als elektrische Energie."
+    }
+  ]
+}

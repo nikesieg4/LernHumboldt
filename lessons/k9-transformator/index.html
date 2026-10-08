@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transformator-Labor</title>
+<link rel="stylesheet" href="../../static/lesson-kit.css">
+<style>
+  .core { fill: none; stroke: #8b8f98; stroke-width: 26; stroke-linejoin: round; }
+  .coil { fill: none; stroke: #b87333; stroke-width: 3; }
+  .field { fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 8 8; opacity: .8; }
+  .trace1 { fill: none; stroke: var(--accent); stroke-width: 2; }
+  .trace2 { fill: none; stroke: var(--pos); stroke-width: 2; }
+  .zero { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+  .big { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .legend { display: flex; gap: 14px; font-size: .85rem; }
+  .legend i { display: inline-block; width: 14px; height: 3px; margin-right: 5px; vertical-align: middle; }
+</style>
+</head>
+<body>
+<h1>Transformator-Labor</h1>
+<p class="muted small">Verändere die Windungszahlen und die Eingangsspannung. Der Transformator ist unbelastet, an der Sekundärspule hängt nur ein Spannungsmesser.</p>
+
+<div class="lk-grid">
+  <div>
+    <div class="lk-card">
+      <svg id="svg" viewBox="0 0 520 280" role="img" aria-label="Transformator mit Eisenkern, Primär- und Sekundärspule">
+        <rect x="150" y="50" width="220" height="170" rx="6" class="core"/>
+        <rect id="fieldLoop" x="150" y="50" width="220" height="170" rx="6" class="field"/>
+        <g id="coil1"></g><g id="coil2"></g>
+        <path class="wire" d="M136 90 H60 V115 M136 180 H60 V155"/>
+        <circle cx="60" cy="135" r="20" fill="var(--card)" stroke="var(--line)" stroke-width="2"/>
+        <text id="srcSym" x="60" y="140" class="lbl" text-anchor="middle">~</text>
+        <path class="wire" d="M384 90 H460 V115 M384 180 H460 V155"/>
+        <circle cx="460" cy="135" r="20" fill="var(--card)" stroke="var(--line)" stroke-width="2"/>
+        <text x="460" y="140" class="lbl" text-anchor="middle">V</text>
+        <text x="60" y="34" class="lbl" text-anchor="middle">Eingang</text>
+        <text x="460" y="34" class="lbl" text-anchor="middle">Ausgang</text>
+        <text id="tU1" x="60" y="62" class="big" text-anchor="middle"></text>
+        <text id="tU2" x="460" y="62" class="big" text-anchor="middle" style="fill:var(--pos)"></text>
+        <text id="tN1" x="150" y="250" class="val" text-anchor="middle"></text>
+        <text id="tN2" x="370" y="250" class="val" text-anchor="middle"></text>
+        <text x="260" y="140" class="val" text-anchor="middle">Eisenkern</text>
+      </svg>
+    </div>
+    <div class="lk-card">
+      <h2>Spannungsverlauf (in V)</h2>
+      <svg id="chart" viewBox="0 0 520 150" aria-label="Eingangs- und Ausgangsspannung gegen die Zeit">
+        <line x1="40" y1="75" x2="510" y2="75" class="zero"/>
+        <polyline id="p1" class="trace1"/><polyline id="p2" class="trace2"/>
+        <text x="34" y="18" class="val" text-anchor="end" id="ymax"></text>
+        <text x="34" y="140" class="val" text-anchor="end" id="ymin"></text>
+      </svg>
+      <div class="legend"><span><i style="background:var(--accent)"></i>Eingang <span class="f">U<sub>1</sub></span></span><span><i style="background:var(--pos)"></i>Ausgang <span class="f">U<sub>2</sub></span></span></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="lk-card">
+      <h2>Einstellungen</h2>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Art der Eingangsspannung">
+          <button type="button" id="bAC" aria-pressed="true">Wechselspannung</button>
+          <button type="button" id="bDC" aria-pressed="false">Gleichspannung</button>
+        </div>
+      </div>
+      <label class="ctrl"><span>Eingangsspannung <span class="f">U<sub>1</sub></span></span>
+        <select id="sU1"><option value="6">6 V</option><option value="12">12 V</option><option value="230">230 V</option></select></label>
+      <label class="ctrl"><span>Windungen Primärspule <span class="f">N<sub>1</sub></span> <output id="oN1"></output></span>
+        <input type="range" id="sN1" min="50" max="2400" step="50" value="500"></label>
+      <label class="ctrl"><span>Windungen Sekundärspule <span class="f">N<sub>2</sub></span> <output id="oN2"></output></span>
+        <input type="range" id="sN2" min="10" max="2400" step="10" value="250"></label>
+      <div class="row" id="dcRow" hidden><button type="button" id="bOn">Ein-/Ausschalten</button></div>
+      <div class="readouts">
+        <div class="readout"><span>Übersetzung <span class="f">N<sub>2</sub> : N<sub>1</sub></span></span><b id="rRatio">–</b></div>
+        <div class="readout"><span>Ausgangsspannung</span><b id="rU2">–</b></div>
+      </div>
+      <p class="small muted" id="note" aria-live="polite"></p>
+    </div>
+
+    <div class="lk-card tasks">
+      <h2>Entdecke selbst <span class="small muted" data-task-count></span></h2>
+      <div class="task" data-goal="double"><p class="task-q">Stelle die Sekundärspule so ein, dass sie genau doppelt so viele Windungen hat wie die Primärspule.</p></div>
+      <div class="task">
+        <p class="task-q">Was gilt jetzt für die Ausgangsspannung?</p>
+        <div class="choices">
+          <button data-ok data-fb="Richtig: U₂ / U₁ = N₂ / N₁. Doppelte Windungszahl ergibt doppelte Spannung.">Sie ist doppelt so groß wie die Eingangsspannung.</button>
+          <button data-fb="Schau auf die Anzeige am Ausgang und vergleiche mit dem Eingang.">Sie ist halb so groß.</button>
+          <button data-fb="Schau auf die Anzeige am Ausgang und vergleiche mit dem Eingang.">Sie ist gleich groß.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Schalte auf Gleichspannung um. Was zeigt der Spannungsmesser am Ausgang?</p>
+        <div class="choices">
+          <button data-ok data-fb="Genau: Das Magnetfeld ist konstant. Nur beim Ein- und Ausschalten ändert es sich, und es entsteht ein kurzer Spannungsstoß.">Null, nur beim Ein- und Ausschalten gibt es einen kurzen Ausschlag.</button>
+          <button data-fb="Probiere es aus und beobachte das Diagramm.">Die gleiche Spannung wie bei Wechselspannung.</button>
+          <button data-fb="Probiere es aus und beobachte das Diagramm.">Eine konstante, kleinere Spannung.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task" data-goal="netzteil"><p class="task-q">Baue ein Netzteil: Mache aus 230 V eine Ausgangsspannung von 12 V (± 0,5 V).</p></div>
+      <div class="task" data-goal="hoch"><p class="task-q">Transformiere 12 V auf mehr als 100 V hoch.</p></div>
+      <div class="all-done">Alles entdeckt! Weiter geht es mit den Übungen.</div>
+    </div>
+  </div>
+</div>
+
+<script src="../../static/lesson-kit.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var S = { ac: true, U1: 6, N1: 500, N2: 250, on: true, spike: 0 };
+  function el(tag, a, p) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); p.appendChild(e); return e; }
+
+  function drawCoil(id, x, n) {
+    var g = $(id); g.innerHTML = '';
+    var loops = Math.max(3, Math.min(18, Math.round(n / 120)));
+    for (var i = 0; i < loops; i++) { var y = 75 + 120 * (i + 0.5) / loops; el('ellipse', { cx: x, cy: y, rx: 22, ry: 4, class: 'coil' }, g); }
+  }
+  var U2 = function () { return S.U1 * S.N2 / S.N1; };
+  var fmtU = function (u) { return LK.fmt(u, u >= 100 ? 0 : 1) + ' V'; };
+
+  function update() {
+    drawCoil('coil1', 150, S.N1); drawCoil('coil2', 370, S.N2);
+    var u2 = S.ac ? U2() : 0;
+    $('oN1').textContent = S.N1; $('oN2').textContent = S.N2;
+    $('tN1').textContent = 'N₁ = ' + S.N1; $('tN2').textContent = 'N₂ = ' + S.N2;
+    $('tU1').textContent = S.ac ? fmtU(S.U1) + ' ~' : (S.on ? fmtU(S.U1) + ' =' : 'aus');
+    $('tU2').textContent = fmtU(u2);
+    $('srcSym').textContent = S.ac ? '~' : '=';
+    $('rRatio').textContent = '1 : ' + LK.fmt(S.N2 / S.N1, 2);
+    $('rU2').textContent = fmtU(u2);
+    $('bAC').setAttribute('aria-pressed', S.ac); $('bDC').setAttribute('aria-pressed', !S.ac);
+    $('dcRow').hidden = S.ac;
+    $('note').textContent = S.ac ? (S.N2 > S.N1 ? 'Die Spannung wird hochtransformiert.' : S.N2 < S.N1 ? 'Die Spannung wird heruntertransformiert.' : 'Gleiche Windungszahlen: Die Spannung bleibt gleich.')
+      : 'Gleichspannung erzeugt ein konstantes Magnetfeld. Ohne Änderung wird keine Spannung induziert.';
+    if (S.N2 === 2 * S.N1) LK.reach('double');
+    if (S.ac && S.U1 === 230 && Math.abs(U2() - 12) <= 0.5) LK.reach('netzteil');
+    if (S.ac && S.U1 === 12 && U2() > 100) LK.reach('hoch');
+  }
+
+  // Diagramm: bei Wechselspannung zwei Perioden, bei Gleichspannung ein Verlauf der letzten Sekunden
+  var phase = 0, last = performance.now(), dcHist = [];
+  function frame(t) {
+    var dt = Math.min(0.05, (t - last) / 1000); last = t;
+    phase += dt * 1.2;
+    S.spike *= Math.pow(0.0005, dt);                       // Spannungsstoß klingt schnell ab
+    if (Math.abs(S.spike) < 0.003) S.spike = 0;
+    var ymax = Math.max(S.U1, U2()) * 1.1, p1 = [], p2 = [];
+    if (S.ac) {
+      for (var k = 0; k <= 235; k++) {
+        var x = 40 + 2 * k, th = 2 * Math.PI * (2 * k / 235) - phase * 2 * Math.PI;
+        p1.push(x + ',' + (75 - 62 * S.U1 * Math.sin(th) / ymax).toFixed(1));
+        p2.push(x + ',' + (75 - 62 * U2() * Math.sin(th) / ymax).toFixed(1));
+      }
+    } else {
+      dcHist.push([S.on ? S.U1 : 0, S.spike * U2()]);
+      if (dcHist.length > 236) dcHist.shift();
+      dcHist.forEach(function (h, k) {
+        var x = 510 - 2 * (dcHist.length - 1 - k);
+        p1.push(x + ',' + (75 - 62 * h[0] / ymax).toFixed(1));
+        p2.push(x + ',' + (75 - 62 * Math.max(-ymax, Math.min(ymax, h[1])) / ymax).toFixed(1));
+      });
+    }
+    $('p1').setAttribute('points', p1.join(' ')); $('p2').setAttribute('points', p2.join(' '));
+    $('ymax').textContent = '+' + LK.fmt(ymax, 0); $('ymin').textContent = '−' + LK.fmt(ymax, 0);
+    var fl = $('fieldLoop');
+    if (S.ac) { fl.style.opacity = 0.25 + 0.6 * Math.abs(Math.sin(phase * 2 * Math.PI)); fl.setAttribute('stroke-dashoffset', (Math.sin(phase * 2 * Math.PI) * 40).toFixed(1)); }
+    else { fl.style.opacity = S.on ? 0.8 : 0; fl.setAttribute('stroke-dashoffset', 0); }
+    if (!S.ac) $('tU2').textContent = fmtU(Math.abs(S.spike * U2()));
+    requestAnimationFrame(frame);
+  }
+
+  $('bAC').onclick = function () { S.ac = true; S.on = true; dcHist = []; update(); };
+  $('bDC').onclick = function () { S.ac = false; S.on = true; S.spike = 1; update(); };
+  $('bOn').onclick = function () { S.on = !S.on; S.spike = S.on ? 1 : -1; update(); };
+  $('sU1').onchange = function () { S.U1 = Number(this.value); update(); };
+  $('sN1').oninput = function () { S.N1 = Number(this.value); update(); };
+  $('sN2').oninput = function () { S.N2 = Number(this.value); update(); };
+  update(); requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

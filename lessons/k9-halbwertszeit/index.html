@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Würfelmodell zur Halbwertszeit</title>
+<link rel="stylesheet" href="../../static/lesson-kit.css">
+<style>
+  .grid-wrap { display: grid; grid-template-columns: repeat(25, 1fr); gap: 2px; }
+  .k { aspect-ratio: 1; border-radius: 2px; background: var(--accent); transition: background .25s; }
+  .k.new { background: var(--pos); }
+  .k.gone { background: var(--grid); }
+  .pt { fill: var(--accent); }
+  .theory { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 4; }
+  .half { stroke: var(--ok); stroke-width: 1; stroke-dasharray: 3 3; }
+  .bar { fill: var(--accent); opacity: .85; }
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: .82rem; margin-top: 6px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: middle; }
+</style>
+</head>
+<body>
+<h1>Würfelmodell zur Halbwertszeit</h1>
+<p class="muted small">Jedes Kästchen ist ein Würfel, also ein radioaktiver Atomkern. Bei jedem Wurf „zerfällt“ jeder Würfel, der eine Sechs zeigt, und scheidet aus.</p>
+
+<div class="lk-grid">
+  <div>
+    <div class="lk-card">
+      <div class="grid-wrap" id="grid" role="img" aria-label="400 Würfel, verbleibende sind blau"></div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>noch nicht zerfallen</span><span><i style="background:var(--pos)"></i>gerade zerfallen</span><span><i style="background:var(--grid)"></i>zerfallen</span></div>
+    </div>
+    <div class="lk-card">
+      <h2>Übrige Würfel nach jedem Wurf</h2>
+      <svg id="chart" viewBox="0 0 520 250" aria-label="Diagramm: Anzahl übriger Würfel gegen Anzahl der Würfe"></svg>
+      <p class="small muted">Gestrichelt: die Erwartung, wenn genau der erwartete Anteil zerfallen würde. Grüne Linien: Hälfte, Viertel, Achtel.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="lk-card">
+      <h2>Einstellungen</h2>
+      <label class="ctrl"><span>Zerfallswahrscheinlichkeit pro Wurf</span>
+        <select id="sP"><option value="6">Würfel: eine Sechs (1/6)</option><option value="2">Münze: Zahl (1/2)</option><option value="10">Zehnerwürfel: eine Null (1/10)</option></select></label>
+      <div class="row">
+        <button type="button" id="bRoll" class="primary">Einmal würfeln</button>
+        <button type="button" id="bAuto">Automatisch</button>
+        <button type="button" id="bReset">Neu starten</button>
+      </div>
+      <div class="readouts">
+        <div class="readout"><span>Wurf Nr.</span><b id="rN">0</b></div>
+        <div class="readout"><span>noch übrig</span><b id="rLeft">400</b></div>
+        <div class="readout"><span>zerfallen im letzten Wurf</span><b id="rLast">–</b></div>
+        <div class="readout"><span>Hälfte erreicht nach</span><b id="rHalf">–</b></div>
+      </div>
+    </div>
+
+    <div class="lk-card tasks">
+      <h2>Entdecke selbst <span class="small muted" data-task-count></span></h2>
+      <div class="task" data-goal="half"><p class="task-q">Würfle so lange, bis weniger als die Hälfte der Würfel übrig ist.</p></div>
+      <div class="task">
+        <p class="task-q">Nach wie vielen Würfen ist beim normalen Würfel ungefähr die Hälfte übrig?</p>
+        <div class="choices">
+          <button data-fb="Probiere es mehrmals aus und achte auf „Hälfte erreicht nach“.">nach etwa 2 Würfen</button>
+          <button data-ok data-fb="Richtig: Die Halbwertszeit des Würfelmodells beträgt knapp 4 Würfe (genauer 3,8).">nach etwa 4 Würfen</button>
+          <button data-fb="Probiere es mehrmals aus und achte auf „Hälfte erreicht nach“.">nach etwa 6 Würfen</button>
+          <button data-fb="Probiere es mehrmals aus und achte auf „Hälfte erreicht nach“.">nach etwa 10 Würfen</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Dauert es von 200 auf 100 Würfel etwa genauso lange wie von 400 auf 200?</p>
+        <div class="choices">
+          <button data-ok data-fb="Genau: Es zerfällt immer derselbe Anteil. Deshalb ist die Halbwertszeit immer gleich, egal wie viele Kerne noch da sind.">Ja, ungefähr gleich lang.</button>
+          <button data-fb="Schau dir die grünen Linien im Diagramm an: Wie viele Würfe liegen zwischen Hälfte, Viertel und Achtel?">Nein, es geht schneller.</button>
+          <button data-fb="Schau dir die grünen Linien im Diagramm an: Wie viele Würfe liegen zwischen Hälfte, Viertel und Achtel?">Nein, es dauert länger.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Kannst du vorhersagen, welches Kästchen beim nächsten Wurf zerfällt?</p>
+        <div class="choices">
+          <button data-ok data-fb="Richtig: Für einen einzelnen Kern ist der Zerfall Zufall. Vorhersagbar ist nur, wie viele von sehr vielen Kernen ungefähr zerfallen.">Nein, das ist reiner Zufall.</button>
+          <button data-fb="Beobachte mehrere Würfe: Gibt es ein Muster, welche Kästchen zerfallen?">Ja, die ältesten zerfallen zuerst.</button>
+          <button data-fb="Beobachte mehrere Würfe: Gibt es ein Muster, welche Kästchen zerfallen?">Ja, sie zerfallen der Reihe nach.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Stelle auf „Münze (1/2)“ um. Wie ändert sich die Halbwertszeit?</p>
+        <div class="choices">
+          <button data-ok data-fb="Genau: Bei einer Zerfallswahrscheinlichkeit von 1/2 ist schon nach einem Wurf etwa die Hälfte zerfallen. Größere Zerfallswahrscheinlichkeit bedeutet kürzere Halbwertszeit.">Sie wird kürzer (etwa 1 Wurf).</button>
+          <button data-fb="Probiere es aus und vergleiche „Hälfte erreicht nach“.">Sie wird länger.</button>
+          <button data-fb="Probiere es aus und vergleiche „Hälfte erreicht nach“.">Sie bleibt gleich.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="all-done">Alles entdeckt! Weiter geht es mit den Übungen.</div>
+    </div>
+  </div>
+</div>
+
+<script src="../../static/lesson-kit.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var N0 = 400, p = 1 / 6, alive, cells = [], hist, halfAt, timer = null;
+
+  var grid = $('grid');
+  for (var i = 0; i < N0; i++) { var c = document.createElement('div'); c.className = 'k'; grid.appendChild(c); cells.push(c); }
+
+  function reset() {
+    stop();
+    alive = new Array(N0).fill(true); hist = [N0]; halfAt = null;
+    cells.forEach(function (c) { c.className = 'k'; });
+    render();
+  }
+
+  function roll() {
+    var n = 0;
+    for (var i = 0; i < N0; i++) {
+      cells[i].classList.remove('new');
+      if (alive[i] && Math.random() < p) { alive[i] = false; cells[i].className = 'k new'; n++; }
+      else if (!alive[i]) cells[i].className = 'k gone';
+    }
+    var left = hist[hist.length - 1] - n;
+    hist.push(left);
+    if (halfAt === null && left <= N0 / 2) { halfAt = hist.length - 1; LK.reach('half'); }
+    $('rLast').textContent = n;
+    if (left === 0) stop();
+    render();
+  }
+
+  function render() {
+    var left = hist[hist.length - 1];
+    $('rN').textContent = hist.length - 1;
+    $('rLeft').textContent = left;
+    $('rHalf').textContent = halfAt === null ? '–' : halfAt + ' Würfen';
+    if (hist.length === 1) $('rLast').textContent = '–';
+    drawChart();
+  }
+
+  function drawChart() {
+    var svg = $('chart'); svg.innerHTML = '';
+    var X0 = 50, X1 = 505, Y0 = 215, Y1 = 30, n = Math.max(20, hist.length + 2);
+    var px = function (k) { return X0 + (X1 - X0) * k / n; }, py = function (v) { return Y0 - (Y0 - Y1) * v / N0; };
+    function el(tag, a) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); svg.appendChild(e); return e; }
+    [0, 100, 200, 300, 400].forEach(function (v) {
+      el('line', { x1: X0, x2: X1, y1: py(v), y2: py(v), class: 'gridline' });
+      el('text', { x: X0 - 6, y: py(v) + 4, class: 'val', 'text-anchor': 'end' }).textContent = v;
+    });
+    [1 / 2, 1 / 4, 1 / 8].forEach(function (f) { el('line', { x1: X0, x2: X1, y1: py(N0 * f), y2: py(N0 * f), class: 'half' }); });
+    for (var k = 0; k <= n; k += (n > 30 ? 5 : 2)) el('text', { x: px(k), y: Y0 + 16, class: 'val', 'text-anchor': 'middle' }).textContent = k;
+    el('line', { x1: X0, x2: X1, y1: Y0, y2: Y0, class: 'axis' });
+    el('line', { x1: X0, x2: X0, y1: Y0, y2: Y1, class: 'axis' });
+    el('text', { x: X1, y: Y0 + 32, class: 'lbl', 'text-anchor': 'end' }).textContent = 'Anzahl der Würfe';
+    el('text', { x: 4, y: 10, class: 'lbl' }).textContent = 'übrig';
+    var th = [];
+    for (var j = 0; j <= n; j++) th.push(px(j) + ',' + py(N0 * Math.pow(1 - p, j)).toFixed(1));
+    el('polyline', { points: th.join(' '), class: 'theory' });
+    var bw = Math.max(3, (X1 - X0) / n * 0.6);
+    hist.forEach(function (v, j) { el('rect', { x: px(j) - bw / 2, y: py(v), width: bw, height: Y0 - py(v), class: 'bar' }); });
+  }
+
+  function stop() { if (timer) { clearInterval(timer); timer = null; } $('bAuto').textContent = 'Automatisch'; }
+  $('bRoll').onclick = function () { stop(); roll(); };
+  $('bAuto').onclick = function () {
+    if (timer) { stop(); return; }
+    this.textContent = 'Anhalten';
+    timer = setInterval(function () { if (hist[hist.length - 1] > 0 && hist.length < 120) roll(); else stop(); }, 600);
+  };
+  $('bReset').onclick = reset;
+  $('sP').onchange = function () { p = 1 / Number(this.value); reset(); };
+  reset();
+})();
+</script>
+</body>
+</html>

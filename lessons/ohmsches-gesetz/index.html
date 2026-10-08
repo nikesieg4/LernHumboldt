@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vorlage</title>
+<style>
+  body { font: 16px/1.6 system-ui, sans-serif; max-width: 720px; margin: 0 auto; padding: 24px 16px; color: #1d1c1a; background: #fff; }
+  @media (prefers-color-scheme: dark) { body { color: #ecebe6; background: #191917; } }
+  .q { border: 1px solid #ccc8; border-radius: 12px; padding: 16px; margin: 16px 0; }
+  label { display: block; padding: 4px 0; cursor: pointer; }
+  button { font: inherit; padding: 8px 16px; border-radius: 9px; border: 0; background: #2563a8; color: #fff; cursor: pointer; }
+  .right { color: #2f8a4c; font-weight: 600; } .wrong { color: #c23a3a; font-weight: 600; }
+</style>
+</head>
+<body>
+  <!--
+    VORLAGE FÜR EINE LERNEINHEIT
+    1. Diesen Ordner kopieren und umbenennen (nur Kleinbuchstaben, Ziffern und "-",
+       z. B. "ohmsches-gesetz"). Ordner mit "_" am Anfang werden nicht angezeigt.
+    2. lesson.json anpassen (Titel, Fach, Beschreibung, ...).
+    3. Diese index.html durch eigenen Inhalt ersetzen. Bilder, Skripte usw. dürfen
+       als weitere Dateien im selben Ordner liegen und relativ eingebunden werden.
+    4. Wenn die Lerneinheit geschafft ist, das an die Lernseite melden:
+         window.parent.postMessage({ type: 'lernseite:erledigt' }, '*');
+       Ohne diese Meldung können Schüler/innen den Knopf "Als erledigt markieren" benutzen.
+  -->
+  <h1>Beispiel: Ohmsches Gesetz</h1>
+  <p>Ein Widerstand von 20 Ω liegt an 10 V. Wie groß ist die Stromstärke?</p>
+
+  <div class="q">
+    <label><input type="radio" name="a" value="200"> 200 A</label>
+    <label><input type="radio" name="a" value="0.5"> 0,5 A</label>
+    <label><input type="radio" name="a" value="2"> 2 A</label>
+    <p><button id="check">Prüfen</button> <span id="result"></span></p>
+  </div>
+
+  <script>
+    document.getElementById('check').addEventListener('click', function () {
+      var choice = document.querySelector('input[name=a]:checked');
+      var out = document.getElementById('result');
+      if (!choice) { out.textContent = 'Wähle zuerst eine Antwort.'; out.className = ''; return; }
+      if (choice.value === '0.5') {
+        out.textContent = 'Richtig! I = U / R = 10 V / 20 Ω = 0,5 A';
+        out.className = 'right';
+        window.parent.postMessage({ type: 'lernseite:erledigt' }, '*'); // ← Fortschritt speichern
+      } else {
+        out.textContent = 'Leider falsch. Tipp: I = U / R';
+        out.className = 'wrong';
+      }
+    });
+  </script>
+</body>
+</html>

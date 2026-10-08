@@ -1,0 +1,22 @@
+{
+  "name": "lernseite",
+  "version": "1.0.0",
+  "description": "Lernplattform für interaktive Lerneinheiten mit IServ-Anmeldung",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node scripts/check-content.mjs",
+    "test": "node --test",
+    "testseite": "node scripts/build-testseite.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "cookie-session": "^2.1.0",
+    "express": "^4.21.0"
+  }
+}

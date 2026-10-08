@@ -1,0 +1,12 @@
+{
+  "nummer": "3.8", "reihenfolge": 2,
+  "titel": "Kraft und Beschleunigung",
+  "beschreibung": "Die newtonschen Gesetze, Reibung und Kräfte an Fahrzeugen.",
+  "inhalte": [
+    "Trägheitsgesetz, Wechselwirkungsgesetz, Grundgesetz der Dynamik",
+    "Zerlegen und Addieren von Kräften bei einfachen Beispielen",
+    "Haftreibung, Gleitreibung und Rollreibung (qualitativ)",
+    "Radialkraft als Ursache einer Kreisbewegung (qualitativ)",
+    "Luftwiderstandskraft"
+  ]
+}

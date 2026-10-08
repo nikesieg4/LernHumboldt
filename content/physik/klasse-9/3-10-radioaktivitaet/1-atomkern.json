@@ -1,0 +1,120 @@
+{
+  "id": "k9-atomkern",
+  "titel": "Atomkern und Isotope",
+  "kurz": "Wie ein Atom aufgebaut ist, was Protonen und Neutronen sind und warum manche Kerne zerfallen.",
+  "reihenfolge": 1,
+  "lernziele": [
+    { "id": "lz1", "niveau": "F", "text": "Das Kern-Hülle-Modell des Atoms erläutern" },
+    { "id": "lz2", "niveau": "F", "text": "Den Aufbau des Atomkerns aus Protonen und Neutronen beschreiben und Kernbausteine bestimmen" },
+    { "id": "lz3", "niveau": "F", "text": "Isotope sowie stabile und instabile Atomkerne unterscheiden" },
+    { "id": "lz4", "niveau": "F", "text": "Radioaktivität als Eigenschaft bestimmter Atomkerne beschreiben" }
+  ],
+  "verstehen": {
+    "einstieg": "Kohlenstoff im Holz eines Baumes und Kohlenstoff in einem Diamanten sind chemisch dasselbe Element. Trotzdem ist ein kleiner Teil des Kohlenstoffs radioaktiv. Wie kann ein und dasselbe Element unterschiedliche Kerne haben?",
+    "abschnitte": [
+      {
+        "titel": "Das Kern-Hülle-Modell",
+        "text": "Um 1910 schoss Ernest Rutherford α-Teilchen auf eine hauchdünne Goldfolie. Fast alle flogen ungehindert hindurch, nur ganz wenige wurden stark abgelenkt oder prallten zurück.\n\nDaraus folgerte er: Ein Atom besteht fast nur aus leerem Raum. Fast die gesamte Masse und die positive Ladung sitzen in einem winzigen **Atomkern**. Darum herum befindet sich die **Atomhülle** mit den negativ geladenen Elektronen.\n\nDer Kern ist etwa 10 000- bis 100 000-mal kleiner als das ganze Atom. Wäre der Kern so groß wie eine Murmel (1 cm), hätte das Atom einen Durchmesser von etwa 100 m bis 1 km."
+      },
+      {
+        "titel": "Bausteine des Kerns",
+        "text": "Der Atomkern besteht aus **Protonen** (positiv geladen) und **Neutronen** (ungeladen). Protonen und Neutronen haben fast die gleiche Masse.\n\nDie Zahl der Protonen heißt **Ordnungszahl** `Z`. Sie legt fest, um welches **Element** es sich handelt: 6 Protonen bedeuten immer Kohlenstoff, 92 Protonen immer Uran. Im neutralen Atom gibt es genauso viele Elektronen wie Protonen.\n\nProtonen und Neutronen zusammen ergeben die **Massenzahl** `A`. Man schreibt sie hinter den Elementnamen: Uran-235 hat 235 Kernbausteine, davon 92 Protonen und 143 Neutronen."
+      },
+      {
+        "titel": "Isotope und Radioaktivität",
+        "text": "Atome desselben Elements können unterschiedlich viele Neutronen haben. Solche Atomsorten heißen **Isotope**. Kohlenstoff-12 hat 6 Neutronen, Kohlenstoff-14 hat 8 Neutronen. Chemisch verhalten sich beide gleich.\n\nViele Kerne sind **stabil**. Hat ein Kern aber ein ungünstiges Verhältnis von Protonen zu Neutronen (oder ist er sehr groß), ist er **instabil**: Er wandelt sich irgendwann von selbst um und sendet dabei Strahlung aus. Diese Eigenschaft heißt **Radioaktivität**.\n\nRadioaktivität ist eine Eigenschaft des **Kerns**. Sie lässt sich nicht durch Erhitzen, Druck oder chemische Reaktionen beeinflussen."
+      }
+    ],
+    "formeln": [
+      { "formel": "A = Z + N", "bedeutung": "Massenzahl `A` = Protonenzahl `Z` + Neutronenzahl `N`" }
+    ],
+    "merksatz": "Ein Atom besteht aus einem winzigen Kern (Protonen und Neutronen) und der Hülle (Elektronen). Die Protonenzahl bestimmt das Element.\n\n**Isotope** haben gleich viele Protonen, aber unterschiedlich viele Neutronen. Instabile Kerne sind **radioaktiv**.",
+    "alltag": "Das radioaktive Isotop Kohlenstoff-14 entsteht ständig in der Atmosphäre. Lebewesen nehmen es auf. Nach ihrem Tod nimmt sein Anteil langsam ab. Daran lässt sich bestimmen, wie alt z. B. ein Knochen oder ein Holzstück ist (Radiokarbonmethode)."
+  },
+  "interaktiv": [],
+  "uebungen": [
+    {
+      "id": "k9-ak-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Woraus besteht ein Atomkern?",
+      "optionen": [
+        { "text": "Aus Protonen und Neutronen", "richtig": true },
+        { "text": "Aus Protonen und Elektronen", "feedback": "Die Elektronen befinden sich in der **Hülle**, nicht im Kern." },
+        { "text": "Nur aus Elektronen", "feedback": "Elektronen bilden die Atomhülle." },
+        { "text": "Aus Neutronen und Elektronen", "feedback": "Im Kern sitzen Protonen und Neutronen." }
+      ],
+      "erklaerung": "Kernbausteine (Nukleonen) sind Protonen und Neutronen. Die Elektronen bilden die Hülle."
+    },
+    {
+      "id": "k9-ak-02", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Ordne jedem Teilchen seine Ladung und seinen Ort im Atom zu.",
+      "paare": [
+        { "links": "Proton", "rechts": "positiv geladen, im Kern" },
+        { "links": "Neutron", "rechts": "ungeladen, im Kern" },
+        { "links": "Elektron", "rechts": "negativ geladen, in der Hülle" }
+      ],
+      "extraRechts": ["positiv geladen, in der Hülle"],
+      "erklaerung": "Im Kern sitzen positive Protonen und neutrale Neutronen. Die negativen Elektronen bewegen sich in der Hülle."
+    },
+    {
+      "id": "k9-ak-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Uran-235 hat 92 Protonen. Wie viele Neutronen hat sein Kern?",
+      "gegeben": "Massenzahl `A = 235`, Protonenzahl `Z = 92`", "gesucht": "Neutronenzahl `N`", "gesuchtSymbol": "N",
+      "loesung": 143, "einheit": "", "toleranz": 0,
+      "rechenweg": ["`A = Z + N`, also `N = A − Z`", "`N = 235 − 92 = 143`"],
+      "hinweis": "Die Massenzahl ist die Summe aus Protonen und Neutronen.",
+      "erklaerung": "Uran-238, das häufigste Uranisotop, hat bei gleichen 92 Protonen 146 Neutronen."
+    },
+    {
+      "id": "k9-ak-04", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Was haben Kohlenstoff-12 und Kohlenstoff-14 gemeinsam?",
+      "optionen": [
+        { "text": "Die gleiche Anzahl Protonen", "richtig": true },
+        { "text": "Die gleiche Anzahl Neutronen", "feedback": "Genau darin unterscheiden sie sich: 6 bzw. 8 Neutronen." },
+        { "text": "Die gleiche Massenzahl", "feedback": "Die Massenzahlen sind 12 und 14." },
+        { "text": "Beide sind radioaktiv.", "feedback": "Kohlenstoff-12 ist stabil, nur Kohlenstoff-14 ist radioaktiv." }
+      ],
+      "erklaerung": "Beide haben 6 Protonen, sind also Kohlenstoff. Sie unterscheiden sich in der Neutronenzahl, sind also **Isotope** desselben Elements."
+    },
+    {
+      "id": "k9-ak-05", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Welche Aussagen sind richtig?",
+      "optionen": [
+        { "text": "Die Protonenzahl bestimmt, um welches Element es sich handelt.", "richtig": true },
+        { "text": "Isotope eines Elements haben unterschiedlich viele Neutronen.", "richtig": true },
+        { "text": "Instabile Kerne wandeln sich von selbst um und senden dabei Strahlung aus.", "richtig": true },
+        { "text": "Radioaktivität lässt sich durch starkes Erhitzen abschalten.", "feedback": "Radioaktivität ist eine Eigenschaft des Kerns. Temperatur, Druck und chemische Bindungen beeinflussen sie nicht." }
+      ],
+      "erklaerung": "Chemische Eigenschaften hängen von der Hülle ab, Radioaktivität vom Kern. Deshalb kann man radioaktive Stoffe nicht chemisch „unschädlich“ machen."
+    },
+    {
+      "id": "k9-ak-06", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz1",
+      "frage": "Beim Streuversuch von Rutherford flogen fast alle α-Teilchen ungehindert durch die Goldfolie. Was folgt daraus?",
+      "optionen": [
+        { "text": "Das Atom besteht fast nur aus leerem Raum, die Masse ist in einem winzigen Kern konzentriert.", "richtig": true },
+        { "text": "Gold ist durchsichtig für alle Arten von Strahlung.", "feedback": "Einige α-Teilchen wurden stark abgelenkt. Es gibt also etwas sehr Kleines und Massereiches im Atom." },
+        { "text": "Die positive Ladung ist gleichmäßig im ganzen Atom verteilt.", "feedback": "Das war das ältere Modell von Thomson. Es konnte die seltenen starken Ablenkungen nicht erklären." }
+      ],
+      "erklaerung": "Dass die meisten Teilchen ungehindert durchflogen, zeigt den leeren Raum. Dass einzelne stark abgelenkt wurden, zeigt einen kleinen, positiv geladenen, massereichen Kern."
+    },
+    {
+      "id": "k9-ak-07", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz1",
+      "frage": "Ein Atomkern hat einen Durchmesser von etwa 10^{-14} m, ein Atom etwa 10^{-10} m. Stell dir den Kern so groß wie eine Murmel (1 cm) vor. Wie groß wäre dann das Atom?",
+      "gegeben": "`d_{Kern} = 10^{-14} m`, `d_{Atom} = 10^{-10} m`, Modell-Kern 1 cm", "gesucht": "Modell-Atom",
+      "loesung": 100, "einheit": "m", "alternativEinheiten": { "km": 1000, "cm": 0.01 },
+      "rechenweg": ["Verhältnis: `\\frac{10^{-10} m}{10^{-14} m} = 10^{4} = 10 000`", "Das Atom ist 10 000-mal größer als der Kern.", "Modell: `1 cm · 10 000 = 10 000 cm = 100 m`"],
+      "hinweis": "Bestimme zuerst, wie viel Mal größer das Atom als der Kern ist.",
+      "erklaerung": "Eine Murmel in der Mitte eines Fußballfeldes: So leer ist ein Atom. Trotzdem steckt in der Murmel fast die gesamte Masse."
+    },
+    {
+      "id": "k9-ak-08", "typ": "text", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Erkläre mit eigenen Worten, was Isotope sind. Nenne ein Beispiel.",
+      "stichworte": [
+        { "aspekt": "Gleiche Anzahl an Protonen (gleiches Element)", "woerter": ["gleiche protonen", "gleich viele protonen", "gleiche anzahl protonen", "gleiche anzahl an protonen", "gleiche ordnungszahl", "gleiches element", "selbe element", "dasselbe element", "selben anzahl protonen"] },
+        { "aspekt": "Unterschiedliche Anzahl an Neutronen", "woerter": ["neutronen"] },
+        { "aspekt": "Ein Beispiel (z. B. Kohlenstoff-12 und -14, Uran-235 und -238)", "woerter": ["kohlenstoff", "uran", "c 12", "c 14", "c12", "c14", "wasserstoff", "deuterium", "kalium", "jod", "iod", "caesium", "cs 137"] }
+      ],
+      "musterloesung": "Isotope sind Atome desselben Elements, die zwar gleich viele Protonen im Kern haben, aber unterschiedlich viele Neutronen. Sie haben deshalb verschiedene Massenzahlen, verhalten sich chemisch aber gleich. Beispiel: Kohlenstoff-12 (6 Protonen, 6 Neutronen) und Kohlenstoff-14 (6 Protonen, 8 Neutronen).",
+      "erklaerung": "Isotope können sich in ihrer Stabilität unterscheiden: Kohlenstoff-12 ist stabil, Kohlenstoff-14 ist radioaktiv."
+    }
+  ]
+}

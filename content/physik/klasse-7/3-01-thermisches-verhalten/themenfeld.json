@@ -1,0 +1,13 @@
+{
+  "nummer": "3.1", "reihenfolge": 1,
+  "titel": "Thermisches Verhalten von Körpern",
+  "beschreibung": "Wie sich Körper beim Erwärmen ausdehnen und wie das Teilchenmodell das erklärt.",
+  "inhalte": [
+    "Längenänderung fester Körper bei Temperaturänderung (qualitativ)",
+    "Volumenänderung von Flüssigkeiten und Gasen bei Temperaturänderung (qualitativ)",
+    "Zusammenhang zwischen Masse und Volumen eines Körpers, Dichte als physikalische Größe",
+    "Zusammenhang zwischen Druck und Temperatur eines Gases bei konstantem Volumen",
+    "Deutung des Drucks in Gasen mithilfe einfacher Teilchenvorstellungen",
+    "Beschreibung der Aggregatzustände im Teilchenmodell"
+  ]
+}

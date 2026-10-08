@@ -1,0 +1,13 @@
+{
+  "nummer": "3.9", "reihenfolge": 2,
+  "titel": "Magnetfelder und elektromagnetische Induktion",
+  "beschreibung": "Vom Dauermagneten über den Elektromotor bis zu Generator und Transformator.",
+  "inhalte": [
+    "Dauer- und Elektromagnete, Modell Elementarmagnet, magnetische Feldlinien",
+    "Vergleich elektrisches und magnetisches Feld",
+    "Kräfte auf stromführende Leiter im Magnetfeld, Elektromotor",
+    "Induktionsgesetz (qualitativ), Wechselspannung mit einem Generator",
+    "Aufbau, Funktion und Spannungsübersetzung eines unbelasteten Transformators"
+  ],
+  "erweiterung": "Projektarbeit am Motor: das Entstehen einer Induktionsspannung qualitativ erläutern"
+}

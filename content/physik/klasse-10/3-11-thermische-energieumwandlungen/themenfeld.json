@@ -1,0 +1,12 @@
+{
+  "nummer": "3.11", "reihenfolge": 3,
+  "titel": "Thermische Energieumwandlungen",
+  "beschreibung": "Wärme berechnen, Wirkungsgrade bestimmen und Energieflüsse darstellen.",
+  "inhalte": [
+    "Energieumwandlungen und Energieübertragungen",
+    "Thermische Leistung einer Wärmequelle",
+    "Berechnung von Wärmen, spezifische Wärmekapazität",
+    "Wirkungsgrad und Energieflussschemen",
+    "Problemlösungen durch quantitative Energiebetrachtungen"
+  ]
+}

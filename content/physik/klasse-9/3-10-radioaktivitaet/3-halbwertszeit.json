@@ -1,0 +1,123 @@
+{
+  "id": "k9-halbwertszeit",
+  "titel": "Aktivität und Halbwertszeit",
+  "kurz": "Warum radioaktiver Zerfall zufällig ist und man trotzdem genau vorhersagen kann, wie viel nach einer Zeit übrig ist.",
+  "reihenfolge": 3,
+  "lernziele": [
+    { "id": "lz1", "niveau": "F", "text": "Die Aktivität als Zahl der Zerfälle pro Sekunde (Becquerel) beschreiben" },
+    { "id": "lz2", "niveau": "G", "text": "Den radioaktiven Zerfall als zufälligen Vorgang beschreiben und mit Modellen (Würfelwurf) vorhersagen" },
+    { "id": "lz3", "niveau": "G", "text": "Die Halbwertszeit erklären und damit Restmengen berechnen" },
+    { "id": "lz4", "niveau": "G", "text": "Zerfallsdiagramme auswerten" }
+  ],
+  "verstehen": {
+    "einstieg": "Du hast einen Haufen Würfel. Bei jedem Wurf scheiden alle Würfel aus, die eine Sechs zeigen. Kannst du vorhersagen, welcher Würfel als nächster ausscheidet? Und wie viele nach zehn Würfen noch übrig sind?",
+    "abschnitte": [
+      {
+        "titel": "Aktivität",
+        "text": "Die **Aktivität** `A` einer radioaktiven Probe gibt an, wie viele Kerne pro Sekunde zerfallen. Ihre Einheit ist das **Becquerel** (Bq): 1 Bq = 1 Zerfall pro Sekunde.\n\nZum Vergleich: Der menschliche Körper hat durch natürliches Kalium-40 und Kohlenstoff-14 eine Aktivität von einigen Tausend Becquerel."
+      },
+      {
+        "titel": "Zerfall ist Zufall",
+        "text": "Für einen einzelnen instabilen Kern lässt sich **nicht vorhersagen**, wann er zerfällt. Es kann in der nächsten Sekunde passieren oder erst in tausend Jahren. Jeder Kern zerfällt mit einer bestimmten **Wahrscheinlichkeit**.\n\nBei sehr vielen Kernen gleicht sich der Zufall aber aus, und es entsteht ein klares Gesetz. Das kann man mit Würfeln nachspielen: Jeder Würfel ist ein Kern, jede Sechs ein Zerfall. Bei jedem Wurf scheidet im Mittel ein Sechstel der übrigen Würfel aus."
+      },
+      {
+        "titel": "Die Halbwertszeit",
+        "text": "Die **Halbwertszeit** `T_{1/2}` ist die Zeit, nach der **die Hälfte** der ursprünglich vorhandenen Kerne zerfallen ist. Nach einer weiteren Halbwertszeit ist von dieser Hälfte wieder die Hälfte zerfallen, und so weiter:\n\nnach 1 Halbwertszeit: 1/2 übrig\nnach 2 Halbwertszeiten: 1/4 übrig\nnach 3 Halbwertszeiten: 1/8 übrig\n\nDie Aktivität nimmt im gleichen Maß ab. Im Diagramm ergibt sich eine Kurve, die anfangs steil fällt und immer flacher wird, aber nie genau null erreicht.\n\nHalbwertszeiten sind sehr verschieden: Radon-222 3,8 Tage · Iod-131 8 Tage · Cäsium-137 30 Jahre · Kohlenstoff-14 5730 Jahre · Uran-238 4,5 Milliarden Jahre."
+      }
+    ],
+    "formeln": [
+      { "formel": "N = N_{0} · (\\frac{1}{2})^{n}", "bedeutung": "`N_{0}` Anfangszahl der Kerne, `n` Anzahl der vergangenen Halbwertszeiten (`n = t / T_{1/2}`)" }
+    ],
+    "merksatz": "Wann ein einzelner Kern zerfällt, ist **zufällig**. Bei vielen Kernen gilt aber: Nach jeder **Halbwertszeit** ist nur noch die Hälfte der Kerne übrig, und die Aktivität hat sich halbiert.",
+    "alltag": "Mit der bekannten Halbwertszeit von Kohlenstoff-14 lässt sich das Alter von Holz, Knochen oder Stoffen bis etwa 50 000 Jahre bestimmen."
+  },
+  "interaktiv": ["k9-halbwertszeit"],
+  "uebungen": [
+    {
+      "id": "k9-hw-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz3",
+      "frage": "Was versteht man unter der Halbwertszeit?",
+      "optionen": [
+        { "text": "Die Zeit, nach der die Hälfte der vorhandenen radioaktiven Kerne zerfallen ist", "richtig": true },
+        { "text": "Die Zeit, nach der alle Kerne zerfallen sind, geteilt durch zwei", "feedback": "Es gibt keinen festen Zeitpunkt, zu dem alle Kerne zerfallen sind. Die Zahl wird immer kleiner, aber nie genau null." },
+        { "text": "Die halbe Lebensdauer eines einzelnen Kerns", "feedback": "Wann ein einzelner Kern zerfällt, ist zufällig. Die Halbwertszeit beschreibt das Verhalten vieler Kerne." }
+      ],
+      "erklaerung": "Die Halbwertszeit ist eine statistische Größe: Nach ihr ist von sehr vielen Kernen etwa die Hälfte zerfallen."
+    },
+    {
+      "id": "k9-hw-02", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "In welcher Einheit wird die Aktivität einer radioaktiven Probe angegeben?",
+      "optionen": [
+        { "text": "Becquerel (Bq)", "richtig": true },
+        { "text": "Sievert (Sv)", "feedback": "In Sievert gibt man an, wie stark Strahlung auf den Menschen wirkt (Dosis), nicht die Aktivität einer Probe." },
+        { "text": "Hertz (Hz)", "feedback": "Hertz ist die Einheit der Frequenz." }
+      ],
+      "erklaerung": "1 Becquerel bedeutet: Pro Sekunde zerfällt im Mittel ein Atomkern."
+    },
+    {
+      "id": "k9-hw-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Eine Probe enthält 800 radioaktive Kerne. Die Halbwertszeit beträgt 2 Stunden. Wie viele dieser Kerne sind nach 6 Stunden (im Mittel) noch vorhanden?",
+      "gegeben": "`N_{0} = 800`, `T_{1/2} = 2 h`, `t = 6 h`", "gesucht": "Restanzahl `N`", "gesuchtSymbol": "N",
+      "loesung": 100, "einheit": "",
+      "rechenweg": ["Anzahl Halbwertszeiten: `n = \\frac{6 h}{2 h} = 3`", "Nach jeder Halbwertszeit halbieren: 800 → 400 → 200 → 100", "Also `N = 100`"],
+      "hinweis": "Wie viele Halbwertszeiten sind in 6 Stunden enthalten?",
+      "erklaerung": "Nach 3 Halbwertszeiten ist noch `(1/2)^{3} = 1/8` übrig: 800 / 8 = 100."
+    },
+    {
+      "id": "k9-hw-04", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Iod-131 hat eine Halbwertszeit von 8 Tagen. Eine Probe hat eine Aktivität von 4000 Bq. Wie groß ist die Aktivität nach 24 Tagen?",
+      "gegeben": "`A_{0} = 4000 Bq`, `T_{1/2} = 8 d`, `t = 24 d`", "gesucht": "Aktivität `A`", "gesuchtSymbol": "A",
+      "loesung": 500, "einheit": "Bq",
+      "rechenweg": ["`n = \\frac{24 d}{8 d} = 3` Halbwertszeiten", "4000 Bq → 2000 Bq → 1000 Bq → 500 Bq"],
+      "erklaerung": "Die Aktivität halbiert sich wie die Zahl der Kerne, denn weniger Kerne bedeuten weniger Zerfälle pro Sekunde."
+    },
+    {
+      "id": "k9-hw-05", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Eine Probe hat nach 15 Jahren nur noch ein Achtel ihrer ursprünglichen Aktivität. Wie groß ist die Halbwertszeit?",
+      "gegeben": "`t = 15 a`, `A = A_{0} / 8`", "gesucht": "Halbwertszeit `T_{1/2}`", "gesuchtSymbol": "T_{1/2}",
+      "loesung": 5, "einheit": "a", "alternativEinheiten": { "d": 0.0027378507871321013 },
+      "rechenweg": ["`\\frac{1}{8} = (\\frac{1}{2})^{3}`, also sind 3 Halbwertszeiten vergangen.", "`T_{1/2} = \\frac{15 a}{3} = 5 a` (5 Jahre)"],
+      "hinweis": "Wie oft muss man halbieren, um auf ein Achtel zu kommen?",
+      "erklaerung": "1 → 1/2 → 1/4 → 1/8: Das sind 3 Halbierungen in 15 Jahren, also 5 Jahre pro Halbierung. (a steht für Jahr, lateinisch annus.)"
+    },
+    {
+      "id": "k9-hw-06", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Kann man vorhersagen, wann ein bestimmter radioaktiver Atomkern zerfällt?",
+      "optionen": [
+        { "text": "Nein. Der Zerfall ist zufällig, nur für sehr viele Kerne lassen sich Vorhersagen treffen.", "richtig": true },
+        { "text": "Ja, genau nach einer Halbwertszeit.", "feedback": "Nach einer Halbwertszeit ist die **Hälfte** der Kerne zerfallen, nicht jeder einzelne." },
+        { "text": "Ja, wenn man die Temperatur des Stoffes kennt.", "feedback": "Die Temperatur hat keinen Einfluss auf den Kernzerfall." }
+      ],
+      "erklaerung": "Genau wie beim Würfeln: Wann ein bestimmter Würfel eine Sechs zeigt, weiß man nicht. Bei 600 Würfeln kann man aber sicher sagen, dass es pro Wurf ungefähr 100 Sechsen gibt."
+    },
+    {
+      "id": "k9-hw-07", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Würfelmodell: Du hast 600 Würfel. Bei jedem Wurf werden alle Würfel entfernt, die eine Sechs zeigen. Wie viele Würfel erwartest du nach dem ersten Wurf noch?",
+      "gegeben": "600 Würfel, Wahrscheinlichkeit für eine Sechs: 1/6", "gesucht": "erwartete Restanzahl",
+      "loesung": 500, "einheit": "", "toleranz": 0.01,
+      "rechenweg": ["Erwartete Sechsen: `600 · \\frac{1}{6} = 100`", "Übrig: `600 − 100 = 500`"],
+      "erklaerung": "In Wirklichkeit werden es nicht genau 500 sein, sondern z. B. 493 oder 509. Je mehr Würfel, desto genauer stimmt die Vorhersage."
+    },
+    {
+      "id": "k9-hw-08", "typ": "multi", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Welche Aussagen über die Zerfallskurve (Anzahl der Kerne gegen die Zeit) sind richtig?",
+      "optionen": [
+        { "text": "Nach jeder Halbwertszeit hat sich der Wert halbiert.", "richtig": true },
+        { "text": "Die Kurve fällt am Anfang am steilsten.", "richtig": true },
+        { "text": "Nach zwei Halbwertszeiten erreicht die Kurve null.", "feedback": "Nach zwei Halbwertszeiten ist noch ein Viertel übrig. Die Kurve nähert sich null nur immer weiter an." },
+        { "text": "Die Kurve ist eine fallende Gerade.", "feedback": "Pro Zeitabschnitt zerfällt immer derselbe **Anteil**, nicht dieselbe Anzahl. Deshalb wird die Kurve immer flacher." }
+      ],
+      "erklaerung": "Am Anfang gibt es viele Kerne, also auch viele Zerfälle pro Zeit. Je weniger Kerne übrig sind, desto weniger zerfallen, und die Kurve wird flacher."
+    },
+    {
+      "id": "k9-hw-09", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Nach dem Reaktorunfall von Tschernobyl 1986 wurden in Deutschland Iod-131 und Cäsium-137 freigesetzt. Heute lässt sich Cäsium-137 im Waldboden noch nachweisen, Iod-131 nicht mehr. Erkläre das.",
+      "stichworte": [
+        { "aspekt": "Iod-131 hat eine kurze Halbwertszeit (8 Tage), es ist seit Langem praktisch vollständig zerfallen", "woerter": ["8 tage", "acht tage", "kurze halbwertszeit", "kurz", "schnell zerfall", "zerfallen"] },
+        { "aspekt": "Cäsium-137 hat eine lange Halbwertszeit (30 Jahre)", "woerter": ["30 jahre", "dreissig jahre", "lange halbwertszeit", "lang"] },
+        { "aspekt": "Seit 1986 sind erst gut eine Halbwertszeit vergangen, ein großer Teil ist noch vorhanden", "woerter": ["haelfte", "eine halbwertszeit", "noch vorhanden", "40 jahre", "vierzig", "ein teil", "noch da", "uebrig"] }
+      ],
+      "musterloesung": "Iod-131 hat eine Halbwertszeit von nur 8 Tagen. Seit 1986 sind rund 40 Jahre vergangen, das sind über 1800 Halbwertszeiten. Davon ist praktisch nichts mehr übrig. Cäsium-137 hat dagegen eine Halbwertszeit von etwa 30 Jahren. In rund 40 Jahren ist es also erst gut eine Halbwertszeit lang zerfallen, und etwa 40 % des damaligen Cäsiums sind noch vorhanden. Deshalb ist es z. B. in Pilzen und Wildschweinen in manchen Gegenden noch messbar.",
+      "erklaerung": "Stoffe mit kurzer Halbwertszeit strahlen anfangs stark, sind aber schnell „verschwunden“. Stoffe mit langer Halbwertszeit belasten die Umwelt über Jahrzehnte."
+    }
+  ]
+}

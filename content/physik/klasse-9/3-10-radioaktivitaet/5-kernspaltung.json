@@ -1,0 +1,272 @@
+{
+  "id": "k9-kernspaltung",
+  "titel": "Kernspaltung und Kernenergie",
+  "kurz": "Wie Uran-Kerne gespalten werden, was eine Kettenreaktion ist und wie man Kernenergie bewerten kann.",
+  "reihenfolge": 5,
+  "lernziele": [
+    {
+      "id": "lz1",
+      "niveau": "F",
+      "text": "Die Spaltung eines Uran-235-Kerns durch ein Neutron beschreiben"
+    },
+    {
+      "id": "lz2",
+      "niveau": "G",
+      "text": "Gesteuerte und ungesteuerte Kettenreaktion unterscheiden"
+    },
+    {
+      "id": "lz3",
+      "niveau": "G",
+      "text": "Den Aufbau eines Kernkraftwerks in Grundzügen erklären"
+    },
+    {
+      "id": "lz4",
+      "niveau": "G",
+      "text": "Kernenergie und regenerative Energien anhand von Kriterien vergleichen und bewerten"
+    }
+  ],
+  "verstehen": {
+    "einstieg": "Aus 1 kg Uran-235 lässt sich etwa so viel Energie gewinnen wie aus rund 2 700 Tonnen Steinkohle. Woher kommt diese enorme Energie?",
+    "abschnitte": [
+      {
+        "titel": "Die Kernspaltung",
+        "text": "Trifft ein langsames **Neutron** auf einen Uran-235-Kern, wird der Kern instabil und **spaltet sich** in zwei mittelschwere Kerne (z. B. Barium und Krypton). Dabei werden **2 bis 3 neue Neutronen** und sehr viel **Energie** frei. Die Spaltprodukte fliegen mit großer Geschwindigkeit auseinander und erhitzen ihre Umgebung.\n\nDie Spaltprodukte sind selbst meist radioaktiv. Daraus entsteht der radioaktive Abfall."
+      },
+      {
+        "titel": "Die Kettenreaktion",
+        "text": "Die frei werdenden Neutronen können weitere Kerne spalten, die wiederum Neutronen freisetzen, und so weiter. Das ist eine **Kettenreaktion**.\n\n**Ungesteuert:** Löst jede Spaltung im Mittel mehr als eine weitere aus, wächst die Zahl der Spaltungen lawinenartig an. So funktioniert eine Atombombe.\n\n**Gesteuert:** Im Kernkraftwerk sorgt man dafür, dass jede Spaltung im Mittel **genau eine** weitere auslöst. Dann wird gleichmäßig Energie frei."
+      },
+      {
+        "titel": "Das Kernkraftwerk",
+        "text": "Im **Reaktorkern** befinden sich die Brennstäbe mit Uran. Ein **Moderator** (meist Wasser) bremst die schnellen Neutronen ab, damit sie Uran-235 besser spalten. **Steuerstäbe** (z. B. aus Bor oder Cadmium) fangen Neutronen ein. Schiebt man sie tiefer hinein, wird die Kettenreaktion gebremst oder ganz gestoppt.\n\nDie Wärme erzeugt Wasserdampf. Der Dampf treibt eine **Turbine**, und diese dreht einen **Generator**. Ab da funktioniert ein Kernkraftwerk wie ein Kohlekraftwerk."
+      },
+      {
+        "titel": "Kernenergie bewerten",
+        "text": "Für eine Bewertung braucht man Kriterien, z. B.:\n\n**Klima:** Im Betrieb entsteht kaum CO₂.\n**Abfall:** Hochradioaktiver Abfall muss für sehr lange Zeit (in Deutschland wird mit rund einer Million Jahren geplant) sicher von der Umwelt abgeschirmt werden. Ein Endlager gibt es in Deutschland noch nicht.\n**Sicherheit:** Unfälle wie in Tschernobyl (1986) und Fukushima (2011) haben große Gebiete unbewohnbar gemacht.\n**Ressourcen:** Uran ist ein erschöpfbarer Rohstoff.\n\nDeutschland hat seine letzten Kernkraftwerke im April 2023 abgeschaltet. Andere Länder setzen weiter auf Kernenergie. Je nachdem, welche Kriterien man wie stark gewichtet, kommt man zu unterschiedlichen Urteilen."
+      }
+    ],
+    "merksatz": "Ein Neutron spaltet einen Uran-235-Kern in zwei mittelschwere Kerne. Dabei werden Energie und 2 bis 3 Neutronen frei. Diese können eine **Kettenreaktion** auslösen.\n\nIm Kernkraftwerk wird sie mit **Steuerstäben** geregelt. Die Wärme treibt über Turbine und Generator die Stromerzeugung an.",
+    "alltag": "Auch die Sonne gewinnt ihre Energie aus dem Atomkern, aber durch **Kernfusion**: Leichte Wasserstoffkerne verschmelzen zu Helium."
+  },
+  "interaktiv": [],
+  "uebungen": [
+    {
+      "id": "k9-ks-01",
+      "typ": "single",
+      "schwierigkeit": "leicht",
+      "lernziel": "lz1",
+      "frage": "Was löst die Spaltung eines Uran-235-Kerns im Reaktor aus?",
+      "optionen": [
+        {
+          "text": "Ein (langsames) Neutron, das auf den Kern trifft",
+          "richtig": true
+        },
+        {
+          "text": "Ein Elektron aus der Atomhülle",
+          "feedback": "Die Elektronen der Hülle haben mit der Kernspaltung nichts zu tun."
+        },
+        {
+          "text": "Starkes Erhitzen des Urans",
+          "feedback": "Temperatur beeinflusst Atomkerne nicht. Nötig ist ein Neutron, das vom Kern eingefangen wird."
+        }
+      ],
+      "erklaerung": "Neutronen sind ungeladen und werden deshalb vom positiv geladenen Kern nicht abgestoßen. So können sie in den Kern eindringen und ihn instabil machen."
+    },
+    {
+      "id": "k9-ks-02",
+      "typ": "reihenfolge",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz2",
+      "frage": "Bringe die Vorgänge einer Kettenreaktion in die richtige Reihenfolge.",
+      "elemente": [
+        "Ein Neutron trifft auf einen Uran-235-Kern.",
+        "Der Kern wird instabil und spaltet sich in zwei mittelschwere Kerne.",
+        "Dabei werden Energie und 2 bis 3 neue Neutronen frei.",
+        "Die neuen Neutronen treffen auf weitere Uran-235-Kerne und spalten sie."
+      ],
+      "erklaerung": "Weil jede Spaltung neue Neutronen liefert, kann sich der Vorgang selbst fortsetzen."
+    },
+    {
+      "id": "k9-ks-03",
+      "typ": "single",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz3",
+      "frage": "Welche Aufgabe haben die Steuerstäbe in einem Kernreaktor?",
+      "optionen": [
+        {
+          "text": "Sie fangen Neutronen ein und regeln so die Kettenreaktion.",
+          "richtig": true
+        },
+        {
+          "text": "Sie liefern den Brennstoff Uran.",
+          "feedback": "Das Uran befindet sich in den **Brennstäben**."
+        },
+        {
+          "text": "Sie bremsen die Neutronen ab, damit sie besser spalten.",
+          "feedback": "Das ist die Aufgabe des **Moderators** (meist Wasser)."
+        }
+      ],
+      "erklaerung": "Je tiefer die Steuerstäbe im Reaktorkern stecken, desto mehr Neutronen fangen sie ein und desto weniger Spaltungen finden statt. Ganz eingefahren stoppen sie die Kettenreaktion."
+    },
+    {
+      "id": "k9-ks-04",
+      "typ": "zuordnung",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz3",
+      "frage": "Ordne jedem Teil eines Kernkraftwerks seine Aufgabe zu.",
+      "paare": [
+        {
+          "links": "Brennstäbe",
+          "rechts": "enthalten das Uran, in dem die Kernspaltungen stattfinden"
+        },
+        {
+          "links": "Steuerstäbe",
+          "rechts": "fangen Neutronen ein und regeln die Leistung"
+        },
+        {
+          "links": "Moderator (Wasser)",
+          "rechts": "bremst schnelle Neutronen ab"
+        },
+        {
+          "links": "Turbine und Generator",
+          "rechts": "wandeln die Energie des Dampfes in elektrische Energie um"
+        }
+      ],
+      "erklaerung": "Ein Kernkraftwerk ist ein Wärmekraftwerk. Nur die Wärmequelle ist anders als bei einem Kohlekraftwerk."
+    },
+    {
+      "id": "k9-ks-05",
+      "typ": "single",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz1",
+      "frage": "Worin unterscheiden sich Kernspaltung und Kernfusion?",
+      "optionen": [
+        {
+          "text": "Bei der Spaltung zerfallen schwere Kerne, bei der Fusion verschmelzen leichte Kerne.",
+          "richtig": true
+        },
+        {
+          "text": "Spaltung findet in der Sonne statt, Fusion im Kernkraftwerk.",
+          "feedback": "Genau umgekehrt: In der Sonne verschmelzen Wasserstoffkerne (Fusion), Kernkraftwerke nutzen die Spaltung."
+        },
+        {
+          "text": "Bei der Fusion wird keine Energie frei.",
+          "feedback": "Auch bei der Fusion wird sehr viel Energie frei. Davon leuchtet die Sonne."
+        }
+      ],
+      "erklaerung": "Sowohl das Spalten sehr schwerer als auch das Verschmelzen sehr leichter Kerne setzt Energie frei."
+    },
+    {
+      "id": "k9-ks-06",
+      "typ": "multi",
+      "schwierigkeit": "schwer",
+      "lernziel": "lz4",
+      "frage": "Welche Aussagen über Kernenergie sind sachlich richtig?",
+      "optionen": [
+        {
+          "text": "Im Betrieb stoßen Kernkraftwerke kaum CO₂ aus.",
+          "richtig": true
+        },
+        {
+          "text": "Hochradioaktiver Abfall muss über sehr lange Zeiträume sicher gelagert werden.",
+          "richtig": true
+        },
+        {
+          "text": "Uran ist eine regenerative Energiequelle.",
+          "feedback": "Uran wird abgebaut und ist nur begrenzt verfügbar, also erschöpfbar."
+        },
+        {
+          "text": "Windkraftanlagen erzeugen ebenfalls hochradioaktiven Abfall.",
+          "feedback": "Windkraftanlagen erzeugen keinen radioaktiven Abfall."
+        }
+      ],
+      "erklaerung": "Sachlich richtige Fakten sind die Grundlage jeder Bewertung. Ob die Vorteile die Nachteile überwiegen, hängt dann davon ab, wie man die Kriterien gewichtet."
+    },
+    {
+      "id": "k9-ks-07",
+      "typ": "text",
+      "schwierigkeit": "schwer",
+      "lernziel": "lz4",
+      "frage": "Vergleiche Kernenergie und Windenergie anhand von mindestens **zwei** Kriterien (z. B. Klima, Abfall, Sicherheit, Verfügbarkeit, Ressourcen). Komme zu einem begründeten Urteil.",
+      "stichworte": [
+        {
+          "aspekt": "Klima: beide verursachen im Betrieb kaum CO₂",
+          "woerter": [
+            "co2",
+            "klima",
+            "treibhaus",
+            "kohlenstoffdioxid",
+            "co₂"
+          ]
+        },
+        {
+          "aspekt": "Abfall: Kernenergie erzeugt langlebigen radioaktiven Abfall, Endlagerfrage",
+          "woerter": [
+            "abfall",
+            "endlager",
+            "muell"
+          ]
+        },
+        {
+          "aspekt": "Sicherheit: Unfallrisiko bei Kernkraftwerken",
+          "woerter": [
+            "unfall",
+            "sicherheit",
+            "gau",
+            "katastrophe",
+            "tschernobyl",
+            "fukushima",
+            "risiko"
+          ]
+        },
+        {
+          "aspekt": "Verfügbarkeit: Wind schwankt mit dem Wetter, Speicher nötig",
+          "woerter": [
+            "wetter",
+            "schwank",
+            "grundlast",
+            "verfuegbar",
+            "speicher",
+            "kein wind",
+            "windstill",
+            "dauerhaft"
+          ]
+        },
+        {
+          "aspekt": "Ressourcen: Uran ist erschöpfbar, Wind regenerativ",
+          "woerter": [
+            "erschoepf",
+            "regenerativ",
+            "begrenzt",
+            "vorrat",
+            "erneuerbar"
+          ]
+        }
+      ],
+      "musterloesung": "**Klima:** Beide Kraftwerksarten verursachen im Betrieb kaum CO₂. Hier gibt es keinen großen Unterschied.\n\n**Abfall:** Kernkraftwerke erzeugen hochradioaktiven Abfall, der sehr lange sicher gelagert werden muss. Ein Endlager gibt es in Deutschland noch nicht. Windkraftanlagen erzeugen keinen radioaktiven Abfall.\n\n**Verfügbarkeit:** Kernkraftwerke liefern gleichmäßig Energie. Windenergie schwankt mit dem Wetter, deshalb braucht man Speicher oder andere Kraftwerke als Ausgleich.\n\n**Ressourcen:** Uran ist ein erschöpfbarer Rohstoff. Wind ist eine regenerative Energiequelle und steht dauerhaft zur Verfügung.\n\n**Urteil (Beispiel):** Wer die Abfall- und Sicherheitsfrage stark gewichtet, wird die Windenergie bevorzugen. Wer die gleichmäßige Versorgung höher gewichtet, sieht Vorteile bei der Kernenergie. Wichtig ist, dass das Urteil mit Kriterien begründet ist.",
+      "erklaerung": "Bei Bewertungsaufgaben gibt es nicht die eine richtige Antwort. Entscheidend ist, dass du **Kriterien nennst**, **Fakten richtig darstellst** und dein Urteil **begründest**."
+    },
+    {
+      "id": "k9-ks-08",
+      "typ": "single",
+      "schwierigkeit": "leicht",
+      "lernziel": "lz4",
+      "frage": "In welchem Jahr wurden die letzten Kernkraftwerke in Deutschland abgeschaltet?",
+      "optionen": [
+        {
+          "text": "2011",
+          "feedback": "2011 wurde nach dem Unfall in Fukushima der Ausstieg beschlossen, und acht Kraftwerke gingen sofort vom Netz. Die letzten liefen aber noch länger."
+        },
+        {
+          "text": "2023",
+          "richtig": true
+        },
+        {
+          "text": "Sie sind bis heute in Betrieb.",
+          "feedback": "Seit April 2023 erzeugt kein deutsches Kernkraftwerk mehr Strom."
+        }
+      ],
+      "erklaerung": "Am 15. April 2023 gingen die letzten drei Kernkraftwerke (Isar 2, Emsland, Neckarwestheim 2) vom Netz."
+    }
+  ]
+}

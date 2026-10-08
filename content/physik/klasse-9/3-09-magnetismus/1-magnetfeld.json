@@ -1,0 +1,301 @@
+{
+  "id": "k9-magnetfeld",
+  "titel": "Magnete und Magnetfelder",
+  "kurz": "Dauermagnete, Elektromagnete, das Modell der Elementarmagnete und Feldlinien.",
+  "reihenfolge": 1,
+  "lernziele": [
+    {
+      "id": "lz1",
+      "niveau": "D",
+      "text": "Eigenschaften von Dauer- und Elektromagneten beschreiben"
+    },
+    {
+      "id": "lz2",
+      "niveau": "E",
+      "text": "Magnetische Vorgänge mit dem Modell der Elementarmagnete erklären"
+    },
+    {
+      "id": "lz3",
+      "niveau": "E",
+      "text": "Magnetfelder mithilfe von Feldlinien beschreiben und darstellen"
+    },
+    {
+      "id": "lz4",
+      "niveau": "F",
+      "text": "Elektrisches und magnetisches Feld vergleichen"
+    }
+  ],
+  "verstehen": {
+    "einstieg": "Bricht man einen Stabmagneten in der Mitte durch, erhält man nicht einen Nordpol und einen Südpol, sondern zwei vollständige Magnete. Wie kann das sein?",
+    "abschnitte": [
+      {
+        "titel": "Dauermagnete",
+        "text": "Jeder Magnet hat einen **Nordpol** und einen **Südpol**. Gleichnamige Pole stoßen sich ab, ungleichnamige ziehen sich an.\n\nMagnete ziehen nur **ferromagnetische** Stoffe an: Eisen, Nickel und Cobalt (und Legierungen daraus). Aluminium, Kupfer oder Holz werden nicht angezogen.\n\nAuch die Erde ist ein großer Magnet. Der Nordpol einer Kompassnadel zeigt nach Norden. Dort liegt also ein **magnetischer Südpol**."
+      },
+      {
+        "titel": "Das Modell der Elementarmagnete",
+        "text": "Man stellt sich vor, dass ein Stück Eisen aus vielen winzigen **Elementarmagneten** besteht.\n\nIm unmagnetischen Eisen zeigen sie **ungeordnet** in alle Richtungen, und ihre Wirkungen heben sich auf. Streicht man mit einem Magneten darüber, **richten sie sich aus**, und das Eisen wird selbst magnetisch.\n\nDas Modell erklärt viel: Zerbricht man einen Magneten, ist jedes Teil wieder ein vollständiger Magnet. Durch starkes Erhitzen oder Schläge geraten die Elementarmagnete wieder durcheinander, und der Magnet verliert seine Wirkung."
+      },
+      {
+        "titel": "Magnetfeld und Feldlinien",
+        "text": "Den Raum um einen Magneten, in dem magnetische Kräfte wirken, nennt man **Magnetfeld**. Man stellt es mit **Feldlinien** dar. Eisenfeilspäne oder kleine Kompassnadeln machen sie sichtbar.\n\nRegeln: Außerhalb des Magneten verlaufen die Feldlinien **vom Nord- zum Südpol**. Wo die Linien **dicht** liegen, ist das Feld **stark**. Feldlinien schneiden sich nie, und sie sind **geschlossen**: Innen laufen sie vom Süd- zum Nordpol zurück."
+      },
+      {
+        "titel": "Elektromagnete",
+        "text": "Jeder stromdurchflossene Leiter ist von einem Magnetfeld umgeben (Ørsted 1820). Um einen geraden Draht verlaufen die Feldlinien in Kreisen.\n\nWickelt man den Draht zu einer **Spule**, entsteht ein Feld wie bei einem Stabmagneten. Ein **Eisenkern** verstärkt es stark, denn seine Elementarmagnete richten sich aus.\n\nVorteile gegenüber Dauermagneten: Ein Elektromagnet lässt sich **ein- und ausschalten**, seine Stärke lässt sich über Stromstärke und Windungszahl **regeln**, und durch Umpolen lassen sich Nord- und Südpol **tauschen**."
+      },
+      {
+        "titel": "Elektrisches und magnetisches Feld im Vergleich",
+        "text": "Beide Felder üben Kräfte aus, ohne dass sich Körper berühren, und beide lassen sich mit Feldlinien darstellen.\n\n**Unterschied:** Elektrische Feldlinien beginnen an positiven und enden an negativen Ladungen. Es gibt einzelne Ladungen. Magnetische Feldlinien sind dagegen **geschlossen**, und es gibt **keine einzelnen Pole**: Zu jedem Nordpol gehört ein Südpol."
+      }
+    ],
+    "merksatz": "Gleichnamige Pole stoßen sich ab, ungleichnamige ziehen sich an. Magnetische Feldlinien verlaufen außen vom Nord- zum Südpol und sind geschlossen.\n\nEin stromdurchflossener Leiter erzeugt ein Magnetfeld. Eine Spule mit Eisenkern ist ein starker, schaltbarer **Elektromagnet**.",
+    "alltag": "Elektromagnete findest du in Türöffnern, Relais, Lautsprechern, Schrottkränen und in jedem Elektromotor."
+  },
+  "interaktiv": [],
+  "uebungen": [
+    {
+      "id": "k9-mf-01",
+      "typ": "single",
+      "schwierigkeit": "leicht",
+      "lernziel": "lz1",
+      "frage": "Du hältst die Nordpole zweier Stabmagnete aneinander. Was passiert?",
+      "optionen": [
+        {
+          "text": "Sie stoßen sich ab.",
+          "richtig": true
+        },
+        {
+          "text": "Sie ziehen sich an.",
+          "feedback": "Anziehen tun sich nur **ungleichnamige** Pole, also Nord und Süd."
+        },
+        {
+          "text": "Es passiert nichts.",
+          "feedback": "Zwischen zwei Magneten wirken immer Kräfte."
+        }
+      ],
+      "erklaerung": "Gleichnamige Pole (Nord–Nord, Süd–Süd) stoßen sich ab, ungleichnamige ziehen sich an."
+    },
+    {
+      "id": "k9-mf-02",
+      "typ": "multi",
+      "schwierigkeit": "leicht",
+      "lernziel": "lz1",
+      "frage": "Welche Stoffe werden von einem Magneten angezogen?",
+      "optionen": [
+        {
+          "text": "Eisen",
+          "richtig": true
+        },
+        {
+          "text": "Nickel",
+          "richtig": true
+        },
+        {
+          "text": "Cobalt",
+          "richtig": true
+        },
+        {
+          "text": "Aluminium",
+          "feedback": "Aluminium ist ein Metall, aber nicht ferromagnetisch. Getränkedosen aus Aluminium bleiben nicht am Magneten hängen."
+        },
+        {
+          "text": "Kupfer",
+          "feedback": "Kupfer ist nicht ferromagnetisch."
+        }
+      ],
+      "erklaerung": "Nur **ferromagnetische** Stoffe werden angezogen: Eisen, Nickel und Cobalt. „Metall“ allein reicht nicht."
+    },
+    {
+      "id": "k9-mf-03",
+      "typ": "single",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz2",
+      "frage": "Ein Stabmagnet wird in der Mitte durchgebrochen. Was erhält man?",
+      "optionen": [
+        {
+          "text": "Zwei vollständige Magnete mit je einem Nord- und Südpol",
+          "richtig": true
+        },
+        {
+          "text": "Einen einzelnen Nordpol und einen einzelnen Südpol",
+          "feedback": "Magnetische Einzelpole gibt es nicht. Jedes Bruchstück enthält ausgerichtete Elementarmagnete, also beide Pole."
+        },
+        {
+          "text": "Zwei unmagnetische Eisenstücke",
+          "feedback": "Die Elementarmagnete bleiben beim Brechen ausgerichtet."
+        }
+      ],
+      "erklaerung": "Nach dem Modell der Elementarmagnete besteht der Magnet aus vielen kleinen, ausgerichteten Magneten. Jedes Bruchstück ist wieder eine Reihe ausgerichteter Elementarmagnete, also ein vollständiger Magnet."
+    },
+    {
+      "id": "k9-mf-04",
+      "typ": "single",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz3",
+      "frage": "Wie verlaufen die magnetischen Feldlinien **außerhalb** eines Stabmagneten?",
+      "optionen": [
+        {
+          "text": "Vom Nordpol zum Südpol",
+          "richtig": true
+        },
+        {
+          "text": "Vom Südpol zum Nordpol",
+          "feedback": "So verlaufen sie **innerhalb** des Magneten. Dadurch sind die Linien geschlossen."
+        },
+        {
+          "text": "Geradlinig vom Magneten weg ins Unendliche",
+          "feedback": "Magnetische Feldlinien sind immer geschlossene Linien."
+        }
+      ],
+      "erklaerung": "Außerhalb laufen die Feldlinien vom Nord- zum Südpol, innerhalb zurück. Die Richtung ist so festgelegt, wie der Nordpol einer Kompassnadel zeigt."
+    },
+    {
+      "id": "k9-mf-05",
+      "typ": "multi",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz1",
+      "frage": "Welche Vorteile hat ein Elektromagnet gegenüber einem Dauermagneten?",
+      "optionen": [
+        {
+          "text": "Er lässt sich ein- und ausschalten.",
+          "richtig": true
+        },
+        {
+          "text": "Seine Stärke lässt sich über die Stromstärke einstellen.",
+          "richtig": true
+        },
+        {
+          "text": "Durch Umpolen des Stroms lassen sich die Pole vertauschen.",
+          "richtig": true
+        },
+        {
+          "text": "Er wirkt auch ohne Strom.",
+          "feedback": "Ohne Strom gibt es kein Magnetfeld der Spule. Genau das ist der Unterschied zum Dauermagneten."
+        }
+      ],
+      "erklaerung": "Das Magnetfeld entsteht durch den Strom. Deshalb lässt es sich mit dem Strom steuern. So kann z. B. ein Schrottkran Eisen aufheben und wieder fallen lassen."
+    },
+    {
+      "id": "k9-mf-06",
+      "typ": "text",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz2",
+      "frage": "Erkläre mit dem Modell der Elementarmagnete, warum ein Eisennagel magnetisch wird, wenn man mehrmals in gleicher Richtung mit einem Magneten darüber streicht.",
+      "stichworte": [
+        {
+          "aspekt": "Im Eisen gibt es Elementarmagnete",
+          "woerter": [
+            "elementarmagnet"
+          ]
+        },
+        {
+          "aspekt": "Vorher sind sie ungeordnet, ihre Wirkungen heben sich auf",
+          "woerter": [
+            "ungeordnet",
+            "durcheinander",
+            "zufaellig",
+            "verschiedene richtungen",
+            "alle richtungen",
+            "heben sich auf",
+            "alle moeglichen",
+            "verschiedenen richtungen",
+            "heben sich",
+            "kreuz und quer"
+          ]
+        },
+        {
+          "aspekt": "Durch das Streichen richten sie sich in eine Richtung aus",
+          "woerter": [
+            "ausgerichtet",
+            "ausrichten",
+            "richten sich",
+            "gleiche richtung",
+            "geordnet",
+            "ordnen sich",
+            "eine richtung"
+          ]
+        }
+      ],
+      "musterloesung": "Im Eisennagel gibt es viele winzige Elementarmagnete. Im unmagnetischen Nagel zeigen sie in alle möglichen Richtungen, deshalb heben sich ihre Wirkungen auf. Streicht man mit dem Magneten mehrmals in derselben Richtung darüber, werden die Elementarmagnete gedreht und richten sich in eine gemeinsame Richtung aus. Ihre Wirkungen addieren sich, und der Nagel ist jetzt selbst ein Magnet.",
+      "erklaerung": "Das Modell erklärt auch das Gegenteil: Durch Erhitzen oder Schläge geraten die Elementarmagnete wieder durcheinander."
+    },
+    {
+      "id": "k9-mf-07",
+      "typ": "zuordnung",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz3",
+      "frage": "Ordne jedem Begriff die passende Beschreibung zu.",
+      "paare": [
+        {
+          "links": "Feldliniendichte",
+          "rechts": "zeigt, wie stark das Magnetfeld an einer Stelle ist"
+        },
+        {
+          "links": "ferromagnetisch",
+          "rechts": "wird von Magneten angezogen (Eisen, Nickel, Cobalt)"
+        },
+        {
+          "links": "Elektromagnet",
+          "rechts": "Spule mit Eisenkern, durch die Strom fließt"
+        },
+        {
+          "links": "Kompassnadel",
+          "rechts": "kleiner, drehbarer Dauermagnet"
+        }
+      ],
+      "extraRechts": [
+        "einzelner magnetischer Nordpol"
+      ],
+      "erklaerung": "Einzelne magnetische Pole gibt es nicht. Zu jedem Nordpol gehört immer ein Südpol."
+    },
+    {
+      "id": "k9-mf-08",
+      "typ": "single",
+      "schwierigkeit": "schwer",
+      "lernziel": "lz1",
+      "frage": "Der Nordpol einer Kompassnadel zeigt nach Norden. Was befindet sich demnach in der Nähe des geografischen Nordpols der Erde?",
+      "optionen": [
+        {
+          "text": "Ein magnetischer Südpol",
+          "richtig": true
+        },
+        {
+          "text": "Ein magnetischer Nordpol",
+          "feedback": "Ein Nordpol würde den Nordpol der Nadel **abstoßen**."
+        },
+        {
+          "text": "Gar kein Pol, die Nadel richtet sich nach dem Sonnenstand",
+          "feedback": "Die Kompassnadel richtet sich nach dem Magnetfeld der Erde."
+        }
+      ],
+      "erklaerung": "Ungleichnamige Pole ziehen sich an. Damit der Nordpol der Nadel nach Norden gezogen wird, muss dort ein magnetischer **Südpol** liegen."
+    },
+    {
+      "id": "k9-mf-09",
+      "typ": "multi",
+      "schwierigkeit": "schwer",
+      "lernziel": "lz4",
+      "frage": "Welche Aussagen zum Vergleich von elektrischem und magnetischem Feld sind richtig?",
+      "optionen": [
+        {
+          "text": "Magnetische Feldlinien sind geschlossene Linien.",
+          "richtig": true
+        },
+        {
+          "text": "Elektrische Feldlinien beginnen an positiven und enden an negativen Ladungen.",
+          "richtig": true
+        },
+        {
+          "text": "Beide Felder üben Kräfte aus, ohne dass sich die Körper berühren.",
+          "richtig": true
+        },
+        {
+          "text": "Wie es einzelne Ladungen gibt, gibt es auch einzelne Magnetpole.",
+          "feedback": "Einzelne Magnetpole wurden nie gefunden. Jeder Magnet hat Nord- **und** Südpol."
+        }
+      ],
+      "erklaerung": "Felder sind ein Modell für Fernwirkungen. Der wichtigste Unterschied: Elektrische Feldlinien haben Anfang und Ende (an Ladungen), magnetische sind geschlossen."
+    }
+  ]
+}

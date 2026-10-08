@@ -1,0 +1,12 @@
+{
+  "nummer": "3.10", "reihenfolge": 3,
+  "titel": "Radioaktivität und Kernphysik",
+  "beschreibung": "Atomkerne, Strahlungsarten, Halbwertszeit, Strahlenschutz und Kernenergie.",
+  "inhalte": [
+    "Arten der natürlichen radioaktiven Strahlung, Absorptions- und Ionisierungsvermögen",
+    "Radioaktive Strahlung aus dem Atomkern",
+    "Aktivität als physikalische Größe, Halbwertszeit",
+    "Radioaktive Strahlung in unserer Umwelt, biologische Wirkungen (qualitativ)",
+    "Kernspaltung"
+  ]
+}

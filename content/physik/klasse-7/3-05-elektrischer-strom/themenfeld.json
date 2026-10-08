@@ -1,0 +1,13 @@
+{
+  "nummer": "3.5", "reihenfolge": 3,
+  "titel": "Elektrischer Strom und elektrische Ladung",
+  "beschreibung": "Einfache Stromkreise, Ladungen, Felder und die Wirkungen des elektrischen Stroms.",
+  "inhalte": [
+    "Einfacher Stromkreis als Reihenschaltung von Energiequelle, Schalter und Energiewandler",
+    "Anziehung und Abstoßung zwischen elektrisch geladenen Körpern",
+    "Modell elektrische Feldlinie",
+    "Modell für elektrische Leitungsvorgänge in Metallen",
+    "Elektrischer Strom als bewegte elektrische Ladung, Wirkungen des elektrischen Stroms",
+    "Schaltpläne mit Schaltsymbolen, Reihen- und Parallelschaltung"
+  ]
+}

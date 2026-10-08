@@ -1,0 +1,135 @@
+{
+  "id": "k9-reihe-parallel",
+  "titel": "Reihen- und Parallelschaltung",
+  "kurz": "Wie sich Stromstärke und Spannung in verzweigten und unverzweigten Stromkreisen verteilen.",
+  "reihenfolge": 4,
+  "lernziele": [
+    { "id": "lz1", "niveau": "E", "text": "Die Gesetze für Stromstärke und Spannung in der Reihenschaltung anwenden" },
+    { "id": "lz2", "niveau": "E", "text": "Die Gesetze für Stromstärke und Spannung in der Parallelschaltung anwenden" },
+    { "id": "lz3", "niveau": "F", "text": "Den Gesamtwiderstand von Reihen- und Parallelschaltungen berechnen" },
+    { "id": "lz4", "niveau": "G", "text": "Den Einfluss von Bauteilen auf eine Schaltung beurteilen und Schaltungen im Alltag erklären" }
+  ],
+  "verstehen": {
+    "einstieg": "In deinem Zimmer kannst du die Deckenlampe ausschalten, und der Computer läuft trotzdem weiter. Wie müssen die Geräte dafür geschaltet sein?",
+    "abschnitte": [
+      {
+        "titel": "Reihenschaltung: ein einziger Weg",
+        "text": "Bei der **Reihenschaltung** liegen alle Bauteile hintereinander. Es gibt nur einen Weg für den Strom.\n\n**Stromstärke:** Sie ist an jeder Stelle **gleich groß**. Es geht keine Ladung verloren, und es kommt keine hinzu.\n\n**Spannung:** Die Gesamtspannung **teilt sich** auf die Bauteile auf. Am größeren Widerstand liegt die größere Teilspannung.\n\n**Widerstand:** Die Einzelwiderstände addieren sich. Jedes zusätzliche Bauteil macht den Gesamtwiderstand größer.\n\nUnterbricht man den Stromkreis an einer Stelle, fließt überall kein Strom mehr."
+      },
+      {
+        "titel": "Parallelschaltung: mehrere Wege",
+        "text": "Bei der **Parallelschaltung** verzweigt sich der Stromkreis. Jedes Bauteil hat seinen eigenen Zweig.\n\n**Spannung:** An jedem Zweig liegt **dieselbe Spannung**, nämlich die volle Spannung der Quelle.\n\n**Stromstärke:** Der Gesamtstrom **teilt sich** auf die Zweige auf. Durch den kleineren Widerstand fließt der größere Strom. Die Teilströme addieren sich zum Gesamtstrom (Knotenregel).\n\n**Widerstand:** Jeder zusätzliche Zweig ist ein weiterer Weg für den Strom. Der Gesamtwiderstand wird deshalb **kleiner als der kleinste Einzelwiderstand**.\n\nFällt ein Zweig aus, funktionieren die anderen weiter."
+      }
+    ],
+    "formeln": [
+      { "formel": "I = I_{1} = I_{2}", "bedeutung": "Reihenschaltung: überall dieselbe Stromstärke" },
+      { "formel": "U = U_{1} + U_{2}", "bedeutung": "Reihenschaltung: Teilspannungen addieren sich" },
+      { "formel": "R_{ges} = R_{1} + R_{2}", "bedeutung": "Reihenschaltung: Gesamtwiderstand" },
+      { "formel": "U = U_{1} = U_{2}", "bedeutung": "Parallelschaltung: überall dieselbe Spannung" },
+      { "formel": "I = I_{1} + I_{2}", "bedeutung": "Parallelschaltung: Teilströme addieren sich" },
+      { "formel": "\\frac{1}{R_{ges}} = \\frac{1}{R_{1}} + \\frac{1}{R_{2}}", "bedeutung": "Parallelschaltung: Gesamtwiderstand (Kehrwerte addieren)" }
+    ],
+    "merksatz": "**Reihe:** gleiche Stromstärke, Spannung teilt sich, `R_{ges} = R_{1} + R_{2}`.\n\n**Parallel:** gleiche Spannung, Stromstärke teilt sich, `R_{ges}` ist kleiner als jeder Einzelwiderstand.",
+    "alltag": "Im Haushalt sind alle Geräte **parallel** geschaltet. So liegt an jedem Gerät die volle Netzspannung von 230 V, und man kann jedes Gerät einzeln ein- und ausschalten. Jedes weitere Gerät erhöht aber den Gesamtstrom in der Zuleitung. Deshalb gibt es Sicherungen."
+  },
+  "interaktiv": ["k9-reihe-parallel"],
+  "vertiefung": ["dioden-schaltung"],
+  "uebungen": [
+    {
+      "id": "k9-rp-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz4",
+      "frage": "Wie sind die Steckdosen und Lampen in einer Wohnung geschaltet?",
+      "optionen": [
+        { "text": "Parallel", "richtig": true },
+        { "text": "In Reihe", "feedback": "In Reihe müsste man alle Geräte gleichzeitig einschalten, und jedes bekäme nur einen Teil der 230 V." },
+        { "text": "Teils in Reihe, teils parallel, je nach Raum", "feedback": "Die Geräte selbst sind immer parallel an die Netzspannung angeschlossen." }
+      ],
+      "erklaerung": "Nur bei der Parallelschaltung liegt an jedem Gerät die volle Spannung von 230 V, und jedes Gerät lässt sich unabhängig schalten."
+    },
+    {
+      "id": "k9-rp-02", "typ": "multi", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Welche Aussagen gelten für eine Reihenschaltung aus zwei Lampen?",
+      "optionen": [
+        { "text": "Die Stromstärke ist an jeder Stelle gleich.", "richtig": true },
+        { "text": "Die Teilspannungen ergeben zusammen die Gesamtspannung.", "richtig": true },
+        { "text": "Wird eine Lampe herausgedreht, geht auch die andere aus.", "richtig": true },
+        { "text": "An jeder Lampe liegt die volle Spannung der Quelle.", "feedback": "Das gilt für die **Parallelschaltung**. In der Reihe teilt sich die Spannung auf." }
+      ],
+      "erklaerung": "In der Reihenschaltung gibt es nur einen Stromweg. Deshalb ist die Stromstärke überall gleich und jede Unterbrechung betrifft alle Bauteile. Die Spannung teilt sich auf."
+    },
+    {
+      "id": "k9-rp-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Zwei Widerstände `R_{1}` = 20 Ω und `R_{2}` = 30 Ω sind in Reihe an eine Spannung von 10 V angeschlossen. Wie groß ist die Stromstärke?",
+      "gegeben": "`R_{1} = 20 Ω`, `R_{2} = 30 Ω`, `U = 10 V`", "gesucht": "Stromstärke `I`", "gesuchtSymbol": "I",
+      "loesung": 0.2, "einheit": "A", "alternativEinheiten": { "mA": 0.001 },
+      "rechenweg": ["Gesamtwiderstand: `R_{ges} = 20 Ω + 30 Ω = 50 Ω`", "Stromstärke: `I = \\frac{U}{R_{ges}} = \\frac{10 V}{50 Ω}`", "Ergebnis: `I = 0,2 A`"],
+      "hinweis": "Berechne zuerst den Gesamtwiderstand der Reihenschaltung.",
+      "erklaerung": "Durch beide Widerstände fließen dieselben 0,2 A, weil es nur einen Stromweg gibt."
+    },
+    {
+      "id": "k9-rp-04", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "In derselben Schaltung (20 Ω und 30 Ω in Reihe an 10 V, `I` = 0,2 A): Welche Spannung liegt an `R_{1}` = 20 Ω?",
+      "gegeben": "`R_{1} = 20 Ω`, `I = 0,2 A`", "gesucht": "Teilspannung `U_{1}`", "gesuchtSymbol": "U_{1}",
+      "loesung": 4, "einheit": "V",
+      "rechenweg": ["Formel: `U_{1} = R_{1} · I`", "Einsetzen: `U_{1} = 20 Ω · 0,2 A`", "Ergebnis: `U_{1} = 4 V`", "Kontrolle: An `R_{2}` liegen `30 Ω · 0,2 A = 6 V`, zusammen 10 V."],
+      "erklaerung": "Die Spannung teilt sich im Verhältnis der Widerstände auf: 20 : 30 entspricht 4 V : 6 V."
+    },
+    {
+      "id": "k9-rp-05", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Die Widerstände 20 Ω und 30 Ω werden nun **parallel** an 12 V angeschlossen. Wie groß ist die Gesamtstromstärke?",
+      "gegeben": "`R_{1} = 20 Ω`, `R_{2} = 30 Ω`, `U = 12 V`", "gesucht": "Gesamtstromstärke `I`", "gesuchtSymbol": "I",
+      "loesung": 1, "einheit": "A", "alternativEinheiten": { "mA": 0.001 },
+      "rechenweg": ["An beiden Widerständen liegen 12 V.", "`I_{1} = \\frac{12 V}{20 Ω} = 0,6 A`", "`I_{2} = \\frac{12 V}{30 Ω} = 0,4 A`", "Gesamt: `I = 0,6 A + 0,4 A = 1 A`"],
+      "hinweis": "Berechne die Stromstärke in jedem Zweig einzeln und addiere sie.",
+      "erklaerung": "Durch den kleineren Widerstand fließt der größere Teilstrom. Zusammen ergeben die Teilströme den Gesamtstrom."
+    },
+    {
+      "id": "k9-rp-06", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Berechne den Gesamtwiderstand der Parallelschaltung aus 20 Ω und 30 Ω.",
+      "gegeben": "`R_{1} = 20 Ω`, `R_{2} = 30 Ω` (parallel)", "gesucht": "`R_{ges}`", "gesuchtSymbol": "R_{ges}",
+      "loesung": 12, "einheit": "Ω",
+      "rechenweg": ["`\\frac{1}{R_{ges}} = \\frac{1}{20 Ω} + \\frac{1}{30 Ω} = \\frac{3}{60 Ω} + \\frac{2}{60 Ω} = \\frac{5}{60 Ω}`", "Kehrwert: `R_{ges} = \\frac{60}{5} Ω = 12 Ω`", "Kontrolle: `\\frac{12 V}{1 A} = 12 Ω` (siehe vorherige Aufgabe)"],
+      "hinweis": "Addiere die Kehrwerte und bilde am Ende wieder den Kehrwert.",
+      "erklaerung": "Der Gesamtwiderstand (12 Ω) ist kleiner als der kleinste Einzelwiderstand (20 Ω), denn der Strom hat zwei Wege."
+    },
+    {
+      "id": "k9-rp-07", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "An einer Quelle mit fester Spannung leuchtet eine Lampe. Nun wird eine zweite, gleiche Lampe **parallel** dazugeschaltet. Was passiert?",
+      "optionen": [
+        { "text": "Beide leuchten so hell wie vorher die einzelne Lampe. Der Gesamtstrom verdoppelt sich.", "richtig": true },
+        { "text": "Beide leuchten nur halb so hell, weil sie sich die Spannung teilen.", "feedback": "Die Spannung teilt sich nur in der **Reihenschaltung**. Parallel liegt an jeder Lampe die volle Spannung." },
+        { "text": "Der Gesamtstrom bleibt gleich und teilt sich auf beide Lampen auf.", "feedback": "Jede Lampe bekommt die volle Spannung und zieht deshalb ihren eigenen, vollen Strom. Der Gesamtstrom wird größer." }
+      ],
+      "erklaerung": "Jeder Zweig bekommt die volle Spannung. Deshalb fließt durch jede Lampe derselbe Strom wie vorher, und die Quelle muss insgesamt doppelt so viel Strom liefern."
+    },
+    {
+      "id": "k9-rp-08", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Ein Widerstand von 100 Ω wird parallel zu einem Widerstand von 10 Ω geschaltet. Was gilt für den Gesamtwiderstand?",
+      "optionen": [
+        { "text": "Er ist kleiner als 10 Ω.", "richtig": true },
+        { "text": "Er liegt zwischen 10 Ω und 100 Ω.", "feedback": "Jeder zusätzliche Zweig ist ein weiterer Weg für den Strom. Das macht den Gesamtwiderstand kleiner als jeden einzelnen." },
+        { "text": "Er beträgt 110 Ω.", "feedback": "Addieren darf man die Widerstände nur in der **Reihenschaltung**." }
+      ],
+      "erklaerung": "`1 / R_{ges} = 1 / 10 Ω + 1 / 100 Ω = 11 / 100 Ω`, also `R_{ges} ≈ 9,1 Ω`. Bei der Parallelschaltung ist der Gesamtwiderstand immer kleiner als der kleinste Einzelwiderstand."
+    },
+    {
+      "id": "k9-rp-09", "typ": "text", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Nenne mindestens zwei Gründe, warum die Lampen und Geräte in einer Wohnung parallel geschaltet werden.",
+      "stichworte": [
+        { "aspekt": "Jedes Gerät bekommt die volle Spannung von 230 V", "woerter": ["230", "volle spannung", "gleiche spannung", "ganze spannung", "dieselbe spannung"] },
+        { "aspekt": "Geräte lassen sich unabhängig voneinander ein- und ausschalten", "woerter": ["unabhaengig", "einzeln", "getrennt", "eigenen schalter", "separat"] },
+        { "aspekt": "Fällt ein Gerät aus, funktionieren die anderen weiter", "woerter": ["kaputt", "ausfall", "faellt aus", "defekt", "weiter", "durchbrennt"] }
+      ],
+      "musterloesung": "1. Bei der Parallelschaltung liegt an jedem Gerät die volle Netzspannung von 230 V. Dafür sind die Geräte gebaut.\n\n2. Jedes Gerät liegt in einem eigenen Zweig und lässt sich deshalb unabhängig von den anderen ein- und ausschalten.\n\n3. Geht ein Gerät kaputt, wird nur sein Zweig unterbrochen, und die anderen Geräte funktionieren weiter.",
+      "erklaerung": "In einer Reihenschaltung müsste immer alles gleichzeitig eingeschaltet sein, und die 230 V würden sich auf alle Geräte aufteilen."
+    },
+    {
+      "id": "k9-rp-10", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz1",
+      "frage": "Zwei Widerstände `R_{1}` = 1 kΩ und `R_{2}` = 2 kΩ sind in Reihe an eine 9-V-Batterie angeschlossen (Spannungsteiler). Welche Spannung liegt an `R_{2}`?",
+      "gegeben": "`R_{1} = 1 kΩ`, `R_{2} = 2 kΩ`, `U = 9 V`", "gesucht": "`U_{2}`", "gesuchtSymbol": "U_{2}",
+      "loesung": 6, "einheit": "V",
+      "rechenweg": ["Gesamtwiderstand: `R_{ges} = 3 kΩ`", "Stromstärke: `I = \\frac{9 V}{3000 Ω} = 0,003 A = 3 mA`", "Teilspannung: `U_{2} = 2000 Ω · 0,003 A = 6 V`", "Kürzer: `R_{2}` hat 2/3 des Gesamtwiderstands, also liegen dort 2/3 von 9 V."],
+      "hinweis": "In der Reihenschaltung teilt sich die Spannung im Verhältnis der Widerstände auf.",
+      "erklaerung": "Die Spannungen verhalten sich wie die Widerstände: `U_{1} : U_{2} = R_{1} : R_{2} = 1 : 2`. Von 9 V entfallen also 3 V auf `R_{1}` und 6 V auf `R_{2}`."
+    }
+  ]
+}

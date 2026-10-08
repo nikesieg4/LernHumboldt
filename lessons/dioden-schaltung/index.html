@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zwei Lampen, zwei Schalter, vier Dioden</title>
+<style>
+:root{
+  --bg:#f7f6f2; --card:#ffffff; --text:#1f1e1b; --muted:#6b6a64; --line:#2b2a27; --border:#e2e0d8;
+  --pos:#e0641f; --neg:#2a7bd1;
+  --ok:#2f8a4c; --block:#c23a3a; --lamp:#ffc83d; --hl:rgba(224,100,31,.14);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1a1a18; --card:#242422; --text:#ecebe6; --muted:#a3a19a; --line:#d8d6ce; --border:#3a3936;
+    --pos:#ff8a45; --neg:#5aa4f0; --ok:#5cc47c; --block:#ef6b6b; --hl:rgba(255,138,69,.16);
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}
+.wrap{max-width:1200px;margin:0 auto;padding:24px 16px 40px}
+h1{font-size:1.5rem;font-weight:600;margin:0 0 4px}
+.lead{color:var(--muted);margin:0 0 20px}
+.grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:920px){.grid{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr)}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
+.card h2{font-size:1rem;font-weight:600;margin:0 0 10px}
+svg text{font-family:inherit}
+.wire{fill:none;stroke:var(--line);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dot{fill:var(--line)}
+.lbl{fill:var(--text);font-size:15px;font-weight:600}
+.val{fill:var(--muted);font-size:11.5px;font-variant-numeric:tabular-nums}
+.sw{cursor:pointer}
+.sw:hover .hit{fill:var(--hl)}
+.hit{fill:transparent;transition:fill .2s}
+.diode polygon{fill:var(--line)} .diode line{stroke:var(--line);stroke-width:2}
+.diode.ok polygon{fill:var(--ok)} .diode.ok line{stroke:var(--ok)}
+.diode.block polygon{fill:var(--block)} .diode.block line{stroke:var(--block)}
+.dtag{font-size:11px;font-weight:600;font-variant-numeric:tabular-nums}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;align-items:center}
+button,select{font:inherit;font-size:.92rem;padding:8px 12px;border-radius:9px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer}
+button:hover{border-color:var(--muted)}
+button.on{background:var(--text);color:var(--card);border-color:var(--text)}
+.swbtn{min-width:110px}
+.swbtn.on{background:var(--ok);border-color:var(--ok);color:#fff}
+label.row{display:flex;align-items:center;gap:10px;font-size:.92rem;color:var(--muted)}
+input[type=range]{flex:1}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:.9rem}
+th,td{padding:5px 6px;border-bottom:1px solid var(--border);text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{font-weight:600;color:var(--muted);font-size:.82rem}
+tr.hl td{background:var(--hl);font-weight:600}
+.status{border-radius:10px;padding:10px 12px;font-size:.92rem;background:var(--bg);min-height:96px}
+.status p{margin:.25em 0}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.85rem;color:var(--muted);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sq{width:12px;height:12px;border-radius:3px;display:inline-block}
+.explain p{margin:.45em 0}
+.f{font-family:ui-monospace,Menlo,Consolas,monospace;background:var(--bg);padding:1px 6px;border-radius:5px;white-space:nowrap}
+.small{font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Zwei Lampen, zwei Schalter, vier Dioden</h1>
+  <p class="lead">Echte Simulation: In jedem Moment wird der Stromkreis mit Ohmschem Gesetz, Kirchhoffschen Regeln und der Diodenkennlinie (Shockley-Gleichung) berechnet. Alle Ströme und Spannungen im Bild sind berechnete Werte.</p>
+
+  <div class="grid">
+    <div class="card">
+      <svg id="circuit" viewBox="0 0 680 410" width="100%" role="img" aria-label="Schaltplan mit berechnetem Stromfluss">
+        <g id="glows"></g>
+
+        <polyline class="wire" points="70,173 70,90 195,90"/>
+        <polyline class="wire" points="245,90 415,90"/>
+        <polyline class="wire" points="465,90 610,90 610,300 484,300"/>
+        <polyline class="wire" points="150,90 150,40 210,40"/>
+        <polyline class="wire" points="230,40 290,40 290,90"/>
+        <polyline class="wire" points="370,90 370,40 430,40"/>
+        <polyline class="wire" points="450,40 510,40 510,90"/>
+        <polyline class="wire" points="456,300 224,300"/>
+        <polyline class="wire" points="196,300 70,300 70,217"/>
+        <polyline class="wire" points="540,300 540,350 480,350"/>
+        <polyline class="wire" points="460,350 400,350 400,300"/>
+        <polyline class="wire" points="280,300 280,350 220,350"/>
+        <polyline class="wire" points="200,350 140,350 140,300"/>
+
+        <circle cx="70" cy="195" r="22" class="wire" style="fill:var(--card)"/>
+        <path d="M58 195 Q64 185 70 195 T82 195" class="wire"/>
+        <text x="100" y="186" class="lbl">U~</text>
+        <text id="polarity" x="100" y="203" class="dtag"></text>
+        <text id="vU" x="100" y="219" class="val"></text>
+        <text id="vI" x="80" y="250" class="val"></text>
+
+        <g class="sw" onclick="toggle(1)">
+          <rect class="hit" x="185" y="62" width="70" height="40" rx="8"/>
+          <line id="blade1" x1="198" y1="90" x2="240" y2="74" class="wire"/>
+          <circle cx="195" cy="90" r="3.5" class="dot"/><circle cx="245" cy="90" r="3.5" class="dot"/>
+        </g>
+        <text x="220" y="122" class="lbl" text-anchor="middle">S1</text>
+        <text id="vS1" x="220" y="139" class="val" text-anchor="middle"></text>
+        <g class="sw" onclick="toggle(2)">
+          <rect class="hit" x="405" y="62" width="70" height="40" rx="8"/>
+          <line id="blade2" x1="418" y1="90" x2="460" y2="74" class="wire"/>
+          <circle cx="415" cy="90" r="3.5" class="dot"/><circle cx="465" cy="90" r="3.5" class="dot"/>
+        </g>
+        <text x="440" y="122" class="lbl" text-anchor="middle">S2</text>
+        <text id="vS2" x="440" y="139" class="val" text-anchor="middle"></text>
+
+        <g class="diode" id="D1"><polygon points="230,30 230,50 210,40"/><line x1="210" y1="30" x2="210" y2="50"/></g>
+        <text x="220" y="20" class="lbl" text-anchor="middle">D1</text>
+        <text id="tD1" x="250" y="22" class="dtag"></text>
+        <g class="diode" id="D2"><polygon points="430,30 430,50 450,40"/><line x1="450" y1="30" x2="450" y2="50"/></g>
+        <text x="440" y="20" class="lbl" text-anchor="middle">D2</text>
+        <text id="tD2" x="470" y="22" class="dtag"></text>
+        <g class="diode" id="D3"><polygon points="460,340 460,360 480,350"/><line x1="480" y1="340" x2="480" y2="360"/></g>
+        <text x="470" y="384" class="lbl" text-anchor="middle">D3</text>
+        <text id="tD3" x="470" y="401" class="dtag" text-anchor="middle"></text>
+        <g class="diode" id="D4"><polygon points="220,340 220,360 200,350"/><line x1="200" y1="340" x2="200" y2="360"/></g>
+        <text x="210" y="384" class="lbl" text-anchor="middle">D4</text>
+        <text id="tD4" x="210" y="401" class="dtag" text-anchor="middle"></text>
+
+        <circle id="halo1" cx="470" cy="300" r="30" fill="var(--lamp)" opacity="0"/>
+        <circle id="bulb1" cx="470" cy="300" r="14" class="wire" style="fill:var(--card)"/>
+        <line x1="460" y1="290" x2="480" y2="310" class="wire"/><line x1="480" y1="290" x2="460" y2="310" class="wire"/>
+        <text x="470" y="266" class="lbl" text-anchor="middle">L1</text>
+        <text id="vL1a" x="470" y="230" class="val" text-anchor="middle"></text>
+        <text id="vL1b" x="470" y="246" class="val" text-anchor="middle"></text>
+        <circle id="halo2" cx="210" cy="300" r="30" fill="var(--lamp)" opacity="0"/>
+        <circle id="bulb2" cx="210" cy="300" r="14" class="wire" style="fill:var(--card)"/>
+        <line x1="200" y1="290" x2="220" y2="310" class="wire"/><line x1="220" y1="290" x2="200" y2="310" class="wire"/>
+        <text x="210" y="266" class="lbl" text-anchor="middle">L2</text>
+        <text id="vL2a" x="215" y="230" class="val" text-anchor="middle"></text>
+        <text id="vL2b" x="215" y="246" class="val" text-anchor="middle"></text>
+
+        <g class="dot">
+          <circle cx="150" cy="90" r="3"/><circle cx="290" cy="90" r="3"/><circle cx="370" cy="90" r="3"/><circle cx="510" cy="90" r="3"/>
+          <circle cx="540" cy="300" r="3"/><circle cx="400" cy="300" r="3"/><circle cx="280" cy="300" r="3"/><circle cx="140" cy="300" r="3"/>
+        </g>
+        <g id="arrows"></g>
+      </svg>
+      <div class="legend">
+        <span><i class="sq" style="background:var(--pos)"></i>Strom im Uhrzeigersinn (+ Halbwelle)</span>
+        <span><i class="sq" style="background:var(--neg)"></i>Strom gegen den Uhrzeigersinn (− Halbwelle)</span>
+        <span><i class="sq" style="background:var(--ok)"></i>Diode leitet</span>
+        <span><i class="sq" style="background:var(--block)"></i>Diode sperrt</span>
+      </div>
+      <p class="small" style="margin:8px 0 0">Pfeilgröße, Tempo und Leuchtspur sind proportional zur berechneten Stromstärke im jeweiligen Zweig. Auch sehr kleine Ströme (z. B. der Rest durch eine überbrückte Lampe) werden als schwache Pfeile gezeigt.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <h2>Steuerung</h2>
+        <div class="btns">
+          <button class="swbtn" id="b1" onclick="toggle(1)">S1: aus</button>
+          <button class="swbtn" id="b2" onclick="toggle(2)">S2: aus</button>
+          <select id="supply" onchange="changeSupply()">
+            <option value="12" selected>12 V~ · Lampen 12 V / 5 W</option>
+            <option value="230">230 V~ · Lampen 230 V / 60 W</option>
+          </select>
+        </div>
+        <div class="btns">
+          <button id="m-anim" class="on" onclick="setMode('anim')">Wechselspannung</button>
+          <button id="m-pos" onclick="setMode('pos')">Nur + Scheitel</button>
+          <button id="m-neg" onclick="setMode('neg')">Nur − Scheitel</button>
+        </div>
+        <div class="btns">
+          <button onclick="step(-1)" title="Pfeil links">◀ Schritt</button>
+          <button id="b-play" onclick="togglePause()" title="Leertaste" style="min-width:104px">⏸ Pause</button>
+          <button onclick="step(1)" title="Pfeil rechts">Schritt ▶</button>
+          <label class="row">Ticks
+            <select id="ticks" onchange="snap()"><option>8</option><option selected>16</option><option>24</option><option>36</option></select>
+          </label>
+        </div>
+        <div id="tickinfo" class="small" style="margin:-4px 0 8px"></div>
+        <label class="row">Tempo <input type="range" id="speed" min="0.05" max="1" step="0.05" value="0.25"></label>
+        <label class="row" style="margin-top:8px;cursor:pointer"><input type="checkbox" id="eye" checked> Lampenhelligkeit als Mittelwert über eine Periode (so sieht es das Auge bei 50 Hz)</label>
+        <svg viewBox="0 0 300 90" width="100%" style="margin-top:10px">
+          <line x1="0" y1="45" x2="300" y2="45" stroke="var(--border)"/>
+          <path id="wavePos" fill="none" stroke="var(--pos)" stroke-width="2.5"/>
+          <path id="waveNeg" fill="none" stroke="var(--neg)" stroke-width="2.5"/>
+          <line id="waveCursor" x1="0" y1="5" x2="0" y2="85" stroke="var(--text)" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle id="waveDot" r="5" fill="var(--text)"/>
+        </svg>
+        <div class="status" id="status"></div>
+      </div>
+
+      <div class="card">
+        <h2>Messwerte (berechnet)</h2>
+        <table>
+          <thead><tr><th>Bauteil</th><th>U</th><th>I</th><th>P</th></tr></thead>
+          <tbody id="meas"></tbody>
+        </table>
+        <p class="small" style="margin:8px 0 0">Vorzeichen: + heißt Strom im Uhrzeigersinn. P̄ = mittlere Leistung über eine ganze Periode.</p>
+      </div>
+
+      <div class="card">
+        <h2>Schalttabelle</h2>
+        <table>
+          <tr><th style="text-align:center">S1</th><th style="text-align:center">S2</th><th style="text-align:center">L1</th><th style="text-align:center">L2</th></tr>
+          <tr data-k="11"><td style="text-align:center">1</td><td style="text-align:center">1</td><td style="text-align:center">1</td><td style="text-align:center">1</td></tr>
+          <tr data-k="10"><td style="text-align:center">1</td><td style="text-align:center">0</td><td style="text-align:center">1</td><td style="text-align:center">0</td></tr>
+          <tr data-k="01"><td style="text-align:center">0</td><td style="text-align:center">1</td><td style="text-align:center">0</td><td style="text-align:center">1</td></tr>
+          <tr data-k="00"><td style="text-align:center">0</td><td style="text-align:center">0</td><td style="text-align:center">0</td><td style="text-align:center">0</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card explain" style="margin-top:16px">
+    <h2>Die Physik dahinter</h2>
+    <p><b>Maschenregel (Kirchhoff 2):</b> Alles liegt in einer Masche. Die Summe der Teilspannungen ist in jedem Moment gleich der Quellenspannung: <span class="f">u(t) = U<sub>S1</sub> + U<sub>S2</sub> + U<sub>L1</sub> + U<sub>L2</sub></span> mit <span class="f">u(t) = Û · sin(ωt)</span>, <span class="f">Û = U<sub>eff</sub> · √2</span>.</p>
+    <p><b>Knotenregel (Kirchhoff 1):</b> An jedem Bauteil-Paar teilt sich der Strom auf: <span class="f">I = I<sub>Lampe</sub> + I<sub>Diode</sub></span> bzw. <span class="f">I = I<sub>Schalter</sub> + I<sub>Diode</sub></span>.</p>
+    <p><b>Ohmsches Gesetz:</b> <span class="f">I<sub>Lampe</sub> = U / R</span> mit <span class="f">R = U<sub>N</sub>² / P<sub>N</sub></span> (12 V / 5 W → 28,8 Ω; 230 V / 60 W → 882 Ω). Geschlossener Schalter: 0,01 Ω, offener Schalter: 1 GΩ.</p>
+    <p><b>Diode (Shockley-Gleichung):</b> <span class="f">I<sub>D</sub> = I<sub>S</sub> · (e<sup>U/(n·U<sub>T</sub>)</sup> − 1)</span> mit I<sub>S</sub> = 7 nA, n = 1,8, U<sub>T</sub> = 25,85 mV (ähnlich 1N4007). In Durchlassrichtung bleibt die Spannung bei etwa 0,7–0,9 V, in Sperrrichtung fließen nur wenige Nanoampere.</p>
+    <p><b>Leistung:</b> <span class="f">P = U · I = U² / R</span>. Die Helligkeit einer Lampe hängt von ihrer Leistung ab.</p>
+    <p><b>Warum wird eine Lampe „übersprungen“?</b> Leitet die Diode parallel zur Lampe, hält sie die Spannung an diesem Paar auf etwa 0,8 V fest. Nach Ohm fließt durch die Lampe dann nur <span class="f">0,8 V / 28,8 Ω ≈ 28 mA</span>. Der restliche Strom (mehrere Hundert mA) nimmt den Weg durch die Diode. Sperrt die Diode, gibt es keinen anderen Weg, und der volle Strom muss durch die Lampe.</p>
+    <p><b>Warum macht S2 nicht L1 an?</b> S2 überbrückt D2. D2 sperrt nur in der negativen Halbwelle, also entscheidet S2 nur darüber, ob in der negativen Halbwelle Strom fließt. In der negativen Halbwelle sperrt D4 und D3 leitet, also landet dieser Strom in L2. So gehört S2 zu L2 und S1 zu L1.</p>
+  </div>
+</div>
+
+<script>
+const NS='http://www.w3.org/2000/svg', TAU=2*Math.PI, $=id=>document.getElementById(id);
+const IS=7e-9, NVT=1.8*0.02585, RON=0.01, ROFF=1e9;
+const SUP={'12':{U:12,Pn:5},'230':{U:230,Pn:60}};
+const S={s1:false,s2:false,mode:'anim',phase:0,paused:false};
+let cfg, RL, UH, IN, AVG={p1:0,p2:0};
+
+function diodeI(v){ return IS*(Math.exp(Math.min(v/NVT,80))-1); }
+function blockV(I,R){ let lo=-1e12, hi=3; for(let k=0;k<96;k++){ const m=(lo+hi)/2; if(m/R+diodeI(m)>I) hi=m; else lo=m; } return (lo+hi)/2; }
+function blocks(){ return [{R:S.s1?RON:ROFF,rev:true},{R:S.s2?RON:ROFF,rev:false},{R:RL,rev:true},{R:RL,rev:false}]; }
+function vOf(b,I){ return b.rev ? -blockV(-I,b.R) : blockV(I,b.R); }
+function solve(u){
+  const bs=blocks();
+  let lo=-100, hi=100;
+  for(let k=0;k<70;k++){ const m=(lo+hi)/2; let s=0; for(const b of bs) s+=vOf(b,m); if(s>u) hi=m; else lo=m; }
+  const I=(lo+hi)/2;
+  const out=bs.map(b=>{ const V=vOf(b,I), Ir=V/b.R; return {V,Ir,Id:I-Ir,rev:b.rev}; });
+  return {u,I,b:out};
+}
+function computeAvg(){
+  let p1=0,p2=0; const N=72;
+  for(let k=0;k<N;k++){ const r=solve(UH*Math.sin((k+0.5)/N*TAU)); p1+=r.b[2].V**2/RL; p2+=r.b[3].V**2/RL; }
+  AVG={p1:p1/N,p2:p2/N};
+}
+function changeSupply(){
+  cfg=SUP[$('supply').value]; RL=cfg.U*cfg.U/cfg.Pn; UH=cfg.U*Math.SQRT2; IN=cfg.Pn/cfg.U; computeAvg();
+}
+
+function fmtA(i){ const a=Math.abs(i), s=i<0?'−':''; if(a<1e-6) return '0 A'; if(a<1e-3) return s+(a*1e6).toFixed(a<1e-5?1:0)+' µA'; if(a<1) return s+(a*1e3).toFixed(a<0.01?1:0)+' mA'; return s+a.toFixed(2).replace('.',',')+' A'; }
+function fmtV(v){ const a=Math.abs(v), s=v<0?'−':''; return s+(a>=100?a.toFixed(0):a>=10?a.toFixed(1):a.toFixed(2)).replace('.',',')+' V'; }
+function fmtW(p){ return (p>=10?p.toFixed(1):p>=0.1?p.toFixed(2):(p*1000).toFixed(1)+' m').replace('.',',')+(p>=0.1?' W':'W'); }
+
+function toggle(n){
+  S['s'+n]=!S['s'+n]; const on=S['s'+n];
+  $('blade'+n).setAttribute('y2',on?90:74); $('blade'+n).setAttribute('x2',on?(n===1?242:462):(n===1?240:460));
+  $('b'+n).classList.toggle('on',on); $('b'+n).textContent='S'+n+': '+(on?'ein':'aus');
+  document.querySelectorAll('tr[data-k]').forEach(r=>r.classList.toggle('hl',r.dataset.k===(S.s1?'1':'0')+(S.s2?'1':'0')));
+  computeAvg();
+  // Lernseite: Lektion gilt als erledigt, wenn alle vier Schalterstellungen ausprobiert wurden
+  SEEN.add((S.s1?'1':'0')+(S.s2?'1':'0'));
+  if(SEEN.size===4 && !SENT && window.parent!==window){ SENT=true; window.parent.postMessage({type:'lernseite:erledigt'},'*'); }
+}
+const SEEN=new Set(); let SENT=false;
+function setMode(m){ S.mode=m; if(S.paused) setPaused(false); ['anim','pos','neg'].forEach(k=>$('m-'+k).classList.toggle('on',k===m)); }
+const nTicks=()=>parseInt($('ticks').value);
+function setPaused(p){ S.paused=p; $('b-play').textContent=p?'▶ Weiter':'⏸ Pause'; $('b-play').classList.toggle('on',p); }
+function togglePause(){ if(S.mode!=='anim') setMode('anim'); setPaused(!S.paused); if(S.paused) snap(); }
+function snap(){ const n=nTicks(); S.phase=(Math.round(S.phase/TAU*n)%n)*TAU/n; }
+function step(d){ if(S.mode!=='anim') setMode('anim'); setPaused(true); const n=nTicks(); let k=Math.round(S.phase/TAU*n)+d; k=((k%n)+n)%n; S.phase=k*TAU/n; }
+document.addEventListener('keydown',e=>{
+  if(['SELECT','INPUT'].includes(e.target.tagName)) return;
+  if(e.code==='Space'){e.preventDefault();togglePause();}
+  else if(e.key==='ArrowRight'){e.preventDefault();step(1);}
+  else if(e.key==='ArrowLeft'){e.preventDefault();step(-1);}
+  else if(e.key==='1') toggle(1); else if(e.key==='2') toggle(2);
+});
+
+(function(){ let p='',n=''; for(let i=0;i<=300;i++){ const y=45-35*Math.sin(i/300*TAU); if(i<=150) p+=(i?'L':'M')+i+','+y.toFixed(1); if(i>=150) n+=(i===150?'M':'L')+i+','+y.toFixed(1);} $('wavePos').setAttribute('d',p); $('waveNeg').setAttribute('d',n); })();
+
+// Zweige in Uhrzeigersinn-Richtung; get(r) liefert den Zweigstrom (+ = Uhrzeigersinn)
+const SEGS=[
+  {pts:[[70,173],[70,90],[150,90]],get:r=>r.I},
+  {pts:[[150,90],[195,90]],get:r=>r.b[0].Ir},{pts:[[245,90],[290,90]],get:r=>r.b[0].Ir},
+  {pts:[[150,90],[150,40],[290,40],[290,90]],get:r=>r.b[0].Id},
+  {pts:[[290,90],[370,90]],get:r=>r.I},
+  {pts:[[370,90],[415,90]],get:r=>r.b[1].Ir},{pts:[[465,90],[510,90]],get:r=>r.b[1].Ir},
+  {pts:[[370,90],[370,40],[510,40],[510,90]],get:r=>r.b[1].Id},
+  {pts:[[510,90],[610,90],[610,300],[540,300]],get:r=>r.I},
+  {pts:[[540,300],[400,300]],get:r=>r.b[2].Ir},
+  {pts:[[540,300],[540,350],[400,350],[400,300]],get:r=>r.b[2].Id},
+  {pts:[[400,300],[280,300]],get:r=>r.I},
+  {pts:[[280,300],[140,300]],get:r=>r.b[3].Ir},
+  {pts:[[280,300],[280,350],[140,350],[140,300]],get:r=>r.b[3].Id},
+  {pts:[[140,300],[70,300],[70,217]],get:r=>r.I},
+];
+SEGS.forEach(s=>{
+  s.len=0; s.cum=[0];
+  for(let i=1;i<s.pts.length;i++){ s.len+=Math.hypot(s.pts[i][0]-s.pts[i-1][0],s.pts[i][1]-s.pts[i-1][1]); s.cum.push(s.len); }
+  s.off=0; s.arrows=[];
+  const g=document.createElementNS(NS,'polyline'); g.setAttribute('points',s.pts.map(p=>p.join(',')).join(' '));
+  g.setAttribute('fill','none'); g.setAttribute('stroke-linecap','round'); g.setAttribute('stroke-linejoin','round'); g.setAttribute('opacity',0);
+  $('glows').appendChild(g); s.glow=g;
+  const n=Math.max(1,Math.round(s.len/32));
+  for(let i=0;i<n;i++){ const a=document.createElementNS(NS,'polygon'); a.setAttribute('points','-6,-5 7,0 -6,5'); a.setAttribute('opacity',0); $('arrows').appendChild(a); s.arrows.push(a); }
+});
+function pointAt(s,d){
+  for(let i=1;i<s.pts.length;i++){ if(d<=s.cum[i]||i===s.pts.length-1){ const t=(d-s.cum[i-1])/(s.cum[i]-s.cum[i-1]); const [x0,y0]=s.pts[i-1],[x1,y1]=s.pts[i]; return [x0+(x1-x0)*t,y0+(y1-y0)*t,Math.atan2(y1-y0,x1-x0)*180/Math.PI]; } }
+}
+
+function setDiode(k,b){
+  const vf=b.rev?-b.V:b.V, id=Math.abs(b.Id), g=$('D'+k), t=$('tD'+k);
+  let st='';
+  if(vf>0.3 && id>1e-4) st='ok'; else if(vf<-0.5) st='block';
+  g.classList.toggle('ok',st==='ok'); g.classList.toggle('block',st==='block');
+  t.textContent = st==='ok' ? 'leitet '+fmtA(id) : st==='block' ? 'sperrt ('+fmtV(vf)+')' : '';
+  t.style.fill = st==='ok' ? 'var(--ok)' : 'var(--block)';
+  return st;
+}
+
+const MEAS=['Quelle u','S1','D1','S2','D2','L1','D3','L2','D4'];
+$('meas').innerHTML=MEAS.map((n,i)=>`<tr><td>${n}</td><td id="mU${i}"></td><td id="mI${i}"></td><td id="mP${i}"></td></tr>`).join('');
+
+let last=performance.now(), lastTable=0;
+function frame(now){
+  const dt=Math.min(0.05,(now-last)/1000); last=now;
+  if(S.mode==='anim'){ if(!S.paused) S.phase=(S.phase+dt*parseFloat($('speed').value)*TAU)%TAU; }
+  else S.phase = S.mode==='pos'?Math.PI/2:3*Math.PI/2;
+  const u=UH*Math.sin(S.phase), r=solve(u), b=r.b;
+
+  // Ströme in den Zweigen
+  const thr=IN*0.004;
+  SEGS.forEach(s=>{
+    const i=s.get(r), a=Math.abs(i), rel=Math.min(1,a/IN), col=i>=0?'var(--pos)':'var(--neg)';
+    if(a<thr){ s.glow.setAttribute('opacity',0); s.arrows.forEach(x=>x.setAttribute('opacity',0)); return; }
+    s.glow.setAttribute('stroke',col); s.glow.setAttribute('stroke-width',2+10*rel); s.glow.setAttribute('opacity',0.08+0.17*rel);
+    const gap=s.len/s.arrows.length;
+    if(!S.paused) s.off=((s.off+Math.sign(i)*dt*(20+150*rel))%gap+gap)%gap;
+    const sc=0.55+0.75*Math.sqrt(rel);
+    s.arrows.forEach((x,k)=>{
+      const [px,py,ang]=pointAt(s,(k*gap+s.off)%s.len);
+      x.setAttribute('transform',`translate(${px},${py}) rotate(${i>=0?ang:ang+180}) scale(${sc})`);
+      x.setAttribute('fill',col); x.setAttribute('opacity',0.3+0.7*Math.sqrt(rel));
+    });
+  });
+
+  // Lampen
+  const p1=b[2].V**2/RL, p2=b[3].V**2/RL, eye=$('eye').checked;
+  const br1=Math.min(1,(eye?AVG.p1*1.8:p1)/cfg.Pn), br2=Math.min(1,(eye?AVG.p2*1.8:p2)/cfg.Pn);
+  [[1,br1],[2,br2]].forEach(([k,v])=>{ $('halo'+k).setAttribute('opacity',0.6*v); $('bulb'+k).style.fill=v>0.03?`rgba(255,200,61,${0.25+0.75*v})`:'var(--card)'; });
+
+  const st=[1,2,3,4].map(k=>setDiode(k,b[k-1]));
+  const pol=u>0.01*UH?'pos':u<-0.01*UH?'neg':null;
+  $('polarity').textContent=pol==='pos'?'+ Halbwelle':pol==='neg'?'− Halbwelle':'Nulldurchgang';
+  $('polarity').style.fill=pol==='pos'?'var(--pos)':pol==='neg'?'var(--neg)':'var(--muted)';
+  $('vU').textContent='u = '+(u>=0?'+':'')+fmtV(u);
+  $('vI').textContent='I = '+fmtA(r.I);
+  $('vS1').textContent=S.s1?fmtA(b[0].Ir):'U = '+fmtV(b[0].V);
+  $('vS2').textContent=S.s2?fmtA(b[1].Ir):'U = '+fmtV(b[1].V);
+  $('vL1a').textContent='U = '+fmtV(b[2].V)+' · I = '+fmtA(b[2].Ir);
+  $('vL1b').textContent='P = '+fmtW(p1)+' · P̄ = '+fmtW(AVG.p1);
+  $('vL2a').textContent='U = '+fmtV(b[3].V)+' · I = '+fmtA(b[3].Ir);
+  $('vL2b').textContent='P = '+fmtW(p2)+' · P̄ = '+fmtW(AVG.p2);
+
+  const x=S.phase/TAU*300;
+  $('waveCursor').setAttribute('x1',x); $('waveCursor').setAttribute('x2',x);
+  $('waveDot').setAttribute('cx',x); $('waveDot').setAttribute('cy',45-35*Math.sin(S.phase));
+  const n=nTicks();
+  $('tickinfo').textContent=`Tick ${S.mode==='anim'?(S.paused?Math.round(S.phase/TAU*n)%n:Math.floor(S.phase/TAU*n)):'–'} / ${n} · Phase ${Math.round(S.phase/TAU*360)%360}° · ${S.paused&&S.mode==='anim'?'pausiert':'läuft'}`;
+
+  if(now-lastTable>120 || S.paused){
+    lastTable=now;
+    const rows=[[u,r.I,null],[b[0].V,b[0].Ir,null],[b[0].V,b[0].Id,null],[b[1].V,b[1].Ir,null],[b[1].V,b[1].Id,null],[b[2].V,b[2].Ir,p1],[b[2].V,b[2].Id,null],[b[3].V,b[3].Ir,p2],[b[3].V,b[3].Id,null]];
+    rows.forEach(([U,I,P],i)=>{ $('mU'+i).textContent=fmtV(U); $('mI'+i).textContent=fmtA(I); $('mP'+i).textContent=P==null?'':fmtW(P)+' (P̄ '+fmtW(i===5?AVG.p1:AVG.p2)+')'; });
+    status(r,pol,st,p1,p2);
+  }
+  requestAnimationFrame(frame);
+}
+
+function lampText(name,blk,dName,dSt,p){
+  if(dSt==='ok') return `<b>${name}:</b> ${dName} leitet und hält die Spannung bei ${fmtV(Math.abs(blk.V))}. Nach Ohm fließen durch ${name} nur ${fmtV(Math.abs(blk.V))} / ${RL.toFixed(1).replace('.',',')} Ω = ${fmtA(Math.abs(blk.Ir))}, der Rest (${fmtA(Math.abs(blk.Id))}) nimmt den Weg durch ${dName}. ${name} ist überbrückt (P = ${fmtW(p)}).`;
+  return `<b>${name}:</b> ${dName} sperrt, der Strom muss durch ${name}: U = ${fmtV(Math.abs(blk.V))}, I = ${fmtA(Math.abs(blk.Ir))}, P = ${fmtW(p)}.`;
+}
+function status(r,pol,st,p1,p2){
+  let h;
+  if(!pol) h='<p>Nulldurchgang: u ≈ 0 V, also fließt kein Strom.</p>';
+  else {
+    const sw = pol==='pos' ? {s:S.s1,n:'S1',d:'D1',b:r.b[0]} : {s:S.s2,n:'S2',d:'D2',b:r.b[1]};
+    if(!sw.s){
+      h=`<p><b>${pol==='pos'?'+':'−'} Halbwelle, u = ${fmtV(r.u)}:</b> ${sw.n} ist offen und ${sw.d} sperrt. Fast die ganze Spannung (${fmtV(Math.abs(sw.b.V))}) liegt an ${sw.n}, im Kreis fließen nur ${fmtA(Math.abs(r.I))}. Keine Lampe bekommt Leistung.</p>`;
+    } else {
+      h=`<p><b>${pol==='pos'?'+':'−'} Halbwelle, u = ${fmtV(r.u)}:</b> ${sw.n} ist zu, im Kreis fließen I = ${fmtA(Math.abs(r.I))}.</p>`;
+      h+= pol==='pos' ? `<p>${lampText('L1',r.b[2],'D3',st[2],p1)}</p><p>${lampText('L2',r.b[3],'D4',st[3],p2)}</p>`
+                      : `<p>${lampText('L2',r.b[3],'D4',st[3],p2)}</p><p>${lampText('L1',r.b[2],'D3',st[2],p1)}</p>`;
+    }
+  }
+  if($('eye').checked && (S.s1||S.s2)) h+=`<p class="small">Mittelwert über eine Periode: L1 P̄ = ${fmtW(AVG.p1)}, L2 P̄ = ${fmtW(AVG.p2)}. Bei 50 Hz sieht man deshalb ${S.s1&&S.s2?'beide Lampen':S.s1?'L1':'L2'} dauerhaft leuchten.</p>`;
+  if($('status').dataset.t!==h){ $('status').innerHTML=h; $('status').dataset.t=h; }
+}
+
+changeSupply(); toggle(1); toggle(1); SEEN.clear(); SEEN.add("00");
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
