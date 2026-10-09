@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kräfte-Labor: Kraftpfeile und resultierende Kraft</title>
+<link rel="stylesheet" href="../../static/lesson-kit.css">
+<style>
+  .alab { font-size: 16px; font-weight: 700; paint-order: stroke; stroke: var(--card); stroke-width: 4px; stroke-linejoin: round; }
+  .alab tspan.sub { font-size: 11px; }
+  .readout span { hyphens: auto; -webkit-hyphens: auto; }
+  .box { fill: var(--card); stroke: var(--line); stroke-width: 2; }
+  .boxline { stroke: var(--muted); stroke-width: 1; opacity: .6; }
+  .constr { fill: none; stroke: var(--muted); stroke-width: 1.4; stroke-dasharray: 6 5; }
+  .ramp { fill: var(--grid); stroke: var(--line); stroke-width: 2; }
+  .force { border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px 0; margin: 0 0 10px; }
+  .fhead { display: flex; align-items: center; gap: 6px; font-weight: 650; font-size: .92rem; margin-bottom: 4px; }
+  .fhead i { display: inline-block; width: 14px; height: 4px; border-radius: 2px; }
+  .fhead button { margin-left: auto; font-size: .8rem; padding: 3px 8px; }
+  .status { margin: 10px 0 0; padding: 8px 10px; border-radius: 10px; background: var(--bg); font-size: .9rem; }
+  .status.eq { background: var(--ok-soft); color: var(--ok); font-weight: 600; }
+  .note { margin-top: 8px; }
+  .readouts.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+</style>
+</head>
+<body>
+<h1>Kräfte-Labor: Kraftpfeile und resultierende Kraft</h1>
+<p class="muted small">Stelle Betrag und Richtung der Kräfte ein, die an der Kiste angreifen. Die grüne Kraft ist die resultierende Kraft. Im Modus „Kraft zerlegen“ steht die Kiste auf einer geneigten Ebene.</p>
+
+<div class="lk-grid">
+  <div>
+    <div class="lk-card">
+      <svg id="scene" viewBox="0 0 520 400" role="img" aria-labelledby="sc-title">
+        <title id="sc-title">Kiste mit Kraftpfeilen</title>
+        <g id="layer"></g>
+      </svg>
+      <p class="small muted" id="scaleTxt" style="margin:6px 0 0"></p>
+      <p class="small muted" id="dirTxt" style="margin:2px 0 0">Richtung als Winkel: 0° zeigt nach rechts, 90° nach oben, 180° nach links, 270° nach unten.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="lk-card">
+      <h2>Einstellungen</h2>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Modus wählen">
+          <button type="button" id="mAdd" aria-pressed="true">Kräfte addieren</button>
+          <button type="button" id="mSplit" aria-pressed="false">Kraft zerlegen</button>
+        </div>
+      </div>
+
+      <div id="addPanel">
+        <div class="force">
+          <div class="fhead"><i style="background:var(--accent)"></i>Kraft <span class="f">F<sub>1</sub></span></div>
+          <label class="ctrl"><span>Betrag <output id="o0a"></output></span><input type="range" id="s0a" min="0" max="10" step="0.5"></label>
+          <label class="ctrl"><span>Richtung <output id="o0w"></output></span><input type="range" id="s0w" min="0" max="355" step="5"></label>
+        </div>
+        <div class="force">
+          <div class="fhead"><i style="background:var(--pos)"></i>Kraft <span class="f">F<sub>2</sub></span></div>
+          <label class="ctrl"><span>Betrag <output id="o1a"></output></span><input type="range" id="s1a" min="0" max="10" step="0.5"></label>
+          <label class="ctrl"><span>Richtung <output id="o1w"></output></span><input type="range" id="s1w" min="0" max="355" step="5"></label>
+        </div>
+        <div class="force" id="f3box">
+          <div class="fhead"><i style="background:var(--c3)"></i>Kraft <span class="f">F<sub>3</sub></span>
+            <button type="button" id="bF3" aria-pressed="false">hinzufügen</button></div>
+          <div id="f3ctrl" hidden>
+            <label class="ctrl"><span>Betrag <output id="o2a"></output></span><input type="range" id="s2a" min="0" max="10" step="0.5"></label>
+            <label class="ctrl"><span>Richtung <output id="o2w"></output></span><input type="range" id="s2w" min="0" max="355" step="5"></label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="seg" role="group" aria-label="Konstruktion der resultierenden Kraft">
+            <button type="button" id="vPara" aria-pressed="true">Parallelogramm</button>
+            <button type="button" id="vChain" aria-pressed="false">Pfeile aneinanderhängen</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="splitPanel" hidden>
+        <label class="ctrl"><span>Neigungswinkel <span class="f">α</span> <output id="oAl"></output></span>
+          <input type="range" id="sAl" min="0" max="60" step="1" value="20"></label>
+      </div>
+
+      <label class="ctrl"><span>Masse der Kiste <span class="f">m</span> <output id="oM"></output></span>
+        <input type="range" id="sM" min="0.5" max="5" step="0.5" value="1"></label>
+
+      <div class="readouts" id="roAdd">
+        <div class="readout"><span>resultierende Kraft <span class="f">F<sub>res</sub></span></span><b id="rR">–</b></div>
+        <div class="readout"><span>Richtung von <span class="f">F<sub>res</sub></span></span><b id="rW">–</b></div>
+        <div class="readout"><span>Beschleunigung <span class="f">a = F<sub>res</sub> / m</span></span><b id="rA">–</b></div>
+      </div>
+      <div class="readouts two" id="roSplit" hidden>
+        <div class="readout"><span>Gewichtskraft <span class="f">F<sub>G</sub> = m · g</span></span><b id="rG">–</b></div>
+        <div class="readout"><span>Hangabtriebskraft <span class="f">F<sub>H</sub></span></span><b id="rH">–</b></div>
+        <div class="readout"><span>Normalkraft <span class="f">F<sub>N</sub></span></span><b id="rN">–</b></div>
+        <div class="readout"><span><span class="f">F<sub>H</sub> / F<sub>G</sub> = h / l</span></span><b id="rQ">–</b></div>
+      </div>
+      <p class="status" id="status" aria-live="polite"></p>
+      <p class="small muted note" id="noteAdd">Für zwei Kräfte im rechten Winkel gilt <span class="f">F<sub>res</sub> = √(F<sub>1</sub>² + F<sub>2</sub>²)</span>. Alle Kräfte greifen hier im selben Punkt an, Reibung gibt es nicht.</p>
+      <p class="small muted note" id="noteSplit" hidden><span class="f">F<sub>H</sub> = F<sub>G</sub> · sin α = F<sub>G</sub> · h / l</span> und <span class="f">F<sub>N</sub> = F<sub>G</sub> · cos α</span> (Höhe <span class="f">h</span>, Länge <span class="f">l</span> der Ebene). Vereinfachung: Reibung wird nicht berücksichtigt, <span class="f">g</span> = 9,81 N/kg.</p>
+    </div>
+
+    <div class="lk-card tasks">
+      <h2>Entdecke selbst <span class="small muted" data-task-count></span></h2>
+      <div class="task" data-goal="gleich"><p class="task-q">Stelle mit mindestens zwei Kräften ein Kräftegleichgewicht her: Die resultierende Kraft soll null sein.</p></div>
+      <div class="task" data-goal="pyth"><p class="task-q">Lass nur zwei Kräfte von 3 N und 4 N im rechten Winkel zueinander wirken. Wie groß ist <span class="f">F<sub>res</sub></span>? Vergleiche mit 3 N + 4 N.</p></div>
+      <div class="task">
+        <p class="task-q">Eine Kraft von 5 N zieht nach rechts, eine Kraft von 3 N nach links. Welche resultierende Kraft ergibt sich?</p>
+        <div class="choices">
+          <button type="button" data-ok data-fb="Richtig: Entgegengesetzte Kräfte subtrahiert man. Die resultierende Kraft zeigt in Richtung der größeren Kraft.">2 N nach rechts</button>
+          <button type="button" data-fb="Addieren darf man nur Kräfte in dieselbe Richtung. Stelle 5 N bei 0° und 3 N bei 180° ein.">8 N nach rechts</button>
+          <button type="button" data-fb="Die resultierende Kraft zeigt in Richtung der größeren Kraft. Probiere es aus.">2 N nach links</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Stelle im Modus „Kraft zerlegen“ den Winkel <span class="f">α</span> = 30° ein. Wie groß ist die Hangabtriebskraft <span class="f">F<sub>H</sub></span>?</p>
+        <div class="choices">
+          <button type="button" data-ok data-fb="Genau: sin 30° = 0,5. Bei 30° ist die Hangabtriebskraft halb so groß wie die Gewichtskraft.">halb so groß wie <span class="f">F<sub>G</sub></span></button>
+          <button type="button" data-fb="So groß wäre sie nur bei einer senkrechten Wand (90°). Lies beide Kräfte in der Anzeige ab.">genauso groß wie <span class="f">F<sub>G</sub></span></button>
+          <button type="button" data-fb="Lies das Verhältnis der beiden Kräfte in der Anzeige ab.">ein Drittel von <span class="f">F<sub>G</sub></span></button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task" data-goal="a2"><p class="task-q">Stelle Kräfte und Masse so ein, dass die Kiste mit <span class="f">a</span> = 2 m/s² beschleunigt wird.</p></div>
+      <div class="task">
+        <p class="task-q">Eine Kiste gleitet auf glattem Eis. Die Kräfte an ihr sind im Gleichgewicht. Was passiert?</p>
+        <div class="choices">
+          <button type="button" data-fb="Zum Abbremsen bräuchte man eine resultierende Kraft entgegen der Bewegung.">Sie wird langsamer und bleibt stehen.</button>
+          <button type="button" data-ok data-fb="Richtig: Ohne resultierende Kraft ändert sich die Bewegung nicht (Trägheitsgesetz).">Sie gleitet gleichförmig geradeaus weiter.</button>
+          <button type="button" data-fb="Schneller wird sie nur, wenn eine resultierende Kraft in Bewegungsrichtung wirkt.">Sie wird immer schneller.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="all-done">Alles entdeckt! Weiter geht es mit den Übungen.</div>
+    </div>
+  </div>
+</div>
+
+<script src="../../static/lesson-kit.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var G = 9.81, TOL = 0.15, CX = 260, CY = 200, BOX = 20;
+  var COL = ['var(--accent)', 'var(--pos)', 'var(--c3)'], RES = 'var(--ok)';
+  var S = {
+    mode: 'add', view: 'para', m: 1, alpha: 20,
+    F: [{ a: 4, w: 0, on: true }, { a: 2, w: 120, on: true }, { a: 3, w: 240, on: false }]
+  };
+  var layer = $('layer');
+
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    (parent || layer).appendChild(e);
+    return e;
+  }
+  // Beschriftung mit tiefgestelltem Index, z. B. F_res = 5 N
+  function label(x, y, main, sub, rest, color, anchor) {
+    var t = el('text', { x: x, y: y, class: 'alab', 'text-anchor': anchor || 'middle', 'dominant-baseline': 'central' });
+    t.style.fill = color;
+    var a = el('tspan', {}, t); a.textContent = main;
+    if (sub) { var b = el('tspan', { class: 'sub', dy: 4 }, t); b.textContent = sub; }
+    var c = el('tspan', sub ? { dy: -4 } : {}, t); c.textContent = rest || '';
+    return t;
+  }
+  function arrow(x1, y1, x2, y2, color, w, extra) {
+    var dx = x2 - x1, dy = y2 - y1, len = Math.sqrt(dx * dx + dy * dy);
+    if (len < 1) return;
+    var ux = dx / len, uy = dy / len, head = Math.min(14 + w, len * 0.6), hw = head * 0.42;
+    var bx = x2 - ux * head, by = y2 - uy * head;
+    var g = el('g', extra || {});
+    el('line', { x1: x1, y1: y1, x2: bx, y2: by, stroke: color, 'stroke-width': w, 'stroke-linecap': 'round' }, g);
+    el('polygon', { points: x2 + ',' + y2 + ' ' + (bx - uy * hw) + ',' + (by + ux * hw) + ' ' + (bx + uy * hw) + ',' + (by - ux * hw), fill: color }, g);
+    return g;
+  }
+  // Beschriftung hinter der Pfeilspitze
+  function tipLabel(x1, y1, x2, y2, main, sub, rest, color) {
+    var dx = x2 - x1, dy = y2 - y1, len = Math.sqrt(dx * dx + dy * dy) || 1;
+    var ux = dx / len, uy = dy / len;
+    var anchor = ux > 0.35 ? 'start' : (ux < -0.35 ? 'end' : 'middle');
+    var lx = x2 + ux * 10, ly = y2 + uy * 14;
+    lx = Math.max(anchor === 'end' ? 120 : (anchor === 'start' ? 4 : 62), Math.min(anchor === 'start' ? 400 : (anchor === 'end' ? 516 : 458), lx));
+    ly = Math.max(12, Math.min(388, ly));
+    return label(lx, ly, main, sub, rest, color, anchor);
+  }
+  // Beschriftung verschieben, bis sie keine andere überdeckt
+  function avoid(t, placed, midY) {
+    var y = Number(t.getAttribute('y'));
+    for (var n = 0; n < 8; n++) {
+      var b = t.getBBox(), hit = placed.some(function (q) {
+        return b.x < q.x + q.width && q.x < b.x + b.width && b.y < q.y + q.height && q.y < b.y + b.height;
+      });
+      if (!hit) break;
+      y += (y > midY ? 20 : -20); t.setAttribute('y', y);
+    }
+    placed.push(t.getBBox());
+  }
+  function nfmt(x) { return LK.fmt(x, Math.abs(x - Math.round(x)) < 0.005 ? 0 : (Math.abs(x * 10 - Math.round(x * 10)) < 0.05 ? 1 : 2)); }
+  function deg(r) { return r * 180 / Math.PI; }
+  function rad(d) { return d * Math.PI / 180; }
+
+  // ---------------------------------------------- Physik
+  function vecs() {
+    return S.F.map(function (f) {
+      return f.on && f.a > 0 ? { x: f.a * Math.cos(rad(f.w)), y: f.a * Math.sin(rad(f.w)), a: f.a, w: f.w } : null;
+    });
+  }
+  function resultant() {
+    var x = 0, y = 0;
+    vecs().forEach(function (v) { if (v) { x += v.x; y += v.y; } });
+    var r = Math.sqrt(x * x + y * y);
+    var w = deg(Math.atan2(y, x)); if (w < 0) w += 360; if (w > 359.95) w = 0;
+    return { x: x, y: y, r: r, w: w };
+  }
+  function pickUnit(maxN, room) {
+    var units = [0.5, 1, 2, 5, 10];
+    for (var i = 0; i < units.length; i++) if (maxN * BOX / units[i] <= room) return units[i];
+    return 10;
+  }
+
+  // ---------------------------------------------- Kräfte addieren
+  function drawAdd() {
+    var V = vecs(), R = resultant();
+    var pts = [], sx = 0, sy = 0;
+    V.forEach(function (v) { if (v) { pts.push(v); sx += v.x; sy += v.y; pts.push({ x: sx, y: sy }); } });
+    var mx = 0.5, my = 0.5;
+    pts.forEach(function (p) { mx = Math.max(mx, Math.abs(p.x)); my = Math.max(my, Math.abs(p.y)); });
+    var U = Math.max(pickUnit(mx, 200), pickUnit(my, 160));
+    var k = BOX / U;
+    var X = function (n) { return CX + n * k; }, Y = function (n) { return CY - n * k; };
+
+    for (var gx = CX % BOX; gx <= 520; gx += BOX) el('line', { x1: gx, x2: gx, y1: 0, y2: 400, class: 'gridline' });
+    for (var gy = CY % BOX; gy <= 400; gy += BOX) el('line', { x1: 0, x2: 520, y1: gy, y2: gy, class: 'gridline' });
+    // Kiste
+    el('rect', { x: CX - 30, y: CY - 30, width: 60, height: 60, rx: 4, class: 'box' });
+    el('path', { d: 'M' + (CX - 30) + ' ' + (CY - 30) + ' L' + (CX + 30) + ' ' + (CY + 30) + ' M' + (CX + 30) + ' ' + (CY - 30) + ' L' + (CX - 30) + ' ' + (CY + 30), class: 'boxline' });
+
+    var act = [];
+    V.forEach(function (v, i) { if (v) act.push({ v: v, i: i }); });
+    var labels = [];
+    if (act.length >= 2) {
+      if (S.view === 'para') {
+        var a = act[0].v, b = act[1].v;
+        var ab = { x: a.x + b.x, y: a.y + b.y };
+        el('path', { d: 'M' + X(a.x) + ' ' + Y(a.y) + ' L' + X(ab.x) + ' ' + Y(ab.y) + ' M' + X(b.x) + ' ' + Y(b.y) + ' L' + X(ab.x) + ' ' + Y(ab.y), class: 'constr' });
+        if (act.length === 3) {
+          var c = act[2].v, abc = { x: ab.x + c.x, y: ab.y + c.y };
+          var g12 = arrow(X(0), Y(0), X(ab.x), Y(ab.y), 'var(--muted)', 2, { opacity: 0.8 });
+          if (g12) labels.push([X(0), Y(0), X(ab.x), Y(ab.y), 'F', '12', '', 'var(--muted)']);
+          el('path', { d: 'M' + X(ab.x) + ' ' + Y(ab.y) + ' L' + X(abc.x) + ' ' + Y(abc.y) + ' M' + X(c.x) + ' ' + Y(c.y) + ' L' + X(abc.x) + ' ' + Y(abc.y), class: 'constr' });
+        }
+      } else {
+        var px = act[0].v.x, py = act[0].v.y;
+        for (var j = 1; j < act.length; j++) {
+          var v = act[j].v;
+          arrow(X(px), Y(py), X(px + v.x), Y(py + v.y), COL[act[j].i], 3, { opacity: 0.55 });
+          px += v.x; py += v.y;
+        }
+      }
+    }
+    act.forEach(function (o) {
+      arrow(X(0), Y(0), X(o.v.x), Y(o.v.y), COL[o.i], 3.5);
+      labels.push([X(0), Y(0), X(o.v.x), Y(o.v.y), 'F', String(o.i + 1), ' = ' + nfmt(o.v.a) + ' N', COL[o.i]]);
+    });
+    if (act.length >= 1) {
+      if (R.r >= TOL) {
+        arrow(X(0), Y(0), X(R.x), Y(R.y), RES, 5);
+        labels.push([X(0), Y(0), X(R.x), Y(R.y), 'F', 'res', ' = ' + LK.fmt(R.r, 2) + ' N', RES]);
+      }
+    }
+    el('circle', { cx: CX, cy: CY, r: 4, fill: 'var(--line)' });
+    if (R.r < TOL && act.length >= 1) label(CX, CY + 48, 'F', 'res', ' ≈ 0 N', RES, 'middle');
+    // Beschriftungen nicht übereinander setzen
+    var placed = [];
+    labels.forEach(function (l) { avoid(tipLabel.apply(null, l), placed, CY); });
+    $('scaleTxt').textContent = 'Maßstab: 1 Kästchen ≙ ' + LK.fmt(U, U < 1 ? 1 : 0) + ' N. Angriffspunkt ist der Mittelpunkt der Kiste.';
+    $('sc-title').textContent = 'Kiste mit ' + act.length + ' Kraftpfeilen, resultierende Kraft ' + LK.fmt(R.r, 2) + ' N';
+  }
+
+  // ---------------------------------------------- Kraft zerlegen
+  function drawSplit() {
+    var al = rad(S.alpha), FG = S.m * G, FH = FG * Math.sin(al), FN = FG * Math.cos(al);
+    var U = pickUnit(FG, 170), k = BOX / U;
+    var Px = 300, Py = 200, Yb = 380, Xr = 520;
+    var dx = Math.cos(al), dy = -Math.sin(al);           // hangaufwärts (Bildschirm)
+    var leftX = S.alpha > 0 ? Px - (Yb - Py) / Math.tan(al) : -2000;
+    var rightY = Py + (Xr - Px) * dy / dx;
+    el('polygon', { points: leftX + ',' + Yb + ' ' + Xr + ',' + rightY + ' ' + Xr + ',' + Yb, class: 'ramp' });
+    el('line', { x1: 0, x2: 520, y1: Yb, y2: Yb, stroke: 'var(--line)', 'stroke-width': 2 });
+    var placed = [];
+    if (S.alpha > 0 && leftX > 6) {
+      var r = 40;
+      el('path', { d: 'M' + (leftX + r) + ' ' + Yb + ' A' + r + ' ' + r + ' 0 0 0 ' + (leftX + r * dx) + ' ' + (Yb + r * dy), fill: 'none', stroke: 'var(--line)', 'stroke-width': 1.5 });
+      placed.push(label(leftX + (r + 14) * Math.cos(al / 2), Yb - (r + 14) * Math.sin(al / 2), 'α', '', '', 'var(--text)', 'middle').getBBox());
+    }
+    // Kiste auf der Ebene
+    var nx = -Math.sin(al), ny = -Math.cos(al), h = 22;
+    var Cx = Px + nx * h, Cy = Py + ny * h;
+    var c = [[-h, -h], [h, -h], [h, h], [-h, h]].map(function (p) {
+      return (Cx + p[0] * dx - p[1] * nx) + ',' + (Cy + p[0] * dy - p[1] * ny);
+    });
+    el('polygon', { points: c.join(' '), class: 'box' });
+    // Kraftpfeile
+    var gX = Cx, gY = Cy + FG * k;
+    var hX = Cx - dx * FH * k, hY = Cy - dy * FH * k;
+    var nX = Cx - nx * FN * k, nY = Cy - ny * FN * k;
+    el('path', { d: 'M' + hX + ' ' + hY + ' L' + gX + ' ' + gY + ' M' + nX + ' ' + nY + ' L' + gX + ' ' + gY, class: 'constr' });
+    arrow(Cx, Cy, hX, hY, 'var(--pos)', 3.5);
+    arrow(Cx, Cy, nX, nY, 'var(--c3)', 3.5);
+    arrow(Cx, Cy, gX, gY, 'var(--accent)', 4.5);
+    el('circle', { cx: Cx, cy: Cy, r: 4, fill: 'var(--line)' });
+    avoid(label(gX + 10, gY - 6, 'F', 'G', ' = ' + LK.fmt(FG, 2) + ' N', 'var(--accent)', 'start'), placed, 0);
+    if (FH * k > 3) avoid(tipLabel(Cx, Cy, hX, hY, 'F', 'H', ' = ' + LK.fmt(FH, 2) + ' N', 'var(--pos)'), placed, 400);
+    if (FN * k > 3) avoid(tipLabel(Cx, Cy, nX, nY, 'F', 'N', ' = ' + LK.fmt(FN, 2) + ' N', 'var(--c3)'), placed, 0);
+    // Maßstabsbalken oben links
+    el('rect', { x: 8, y: 8, width: 120, height: 34, rx: 6, fill: 'var(--card)', stroke: 'var(--border)' });
+    el('path', { d: 'M18 30 H58 M18 25 V35 M58 25 V35 M38 27 V33', stroke: 'var(--line)', 'stroke-width': 2, fill: 'none' });
+    label(66, 30, '≙ ' + (2 * U) + ' N', '', '', 'var(--text)', 'start');
+    $('scaleTxt').textContent = 'Maßstab: Der Balken oben links entspricht ' + (2 * U) + ' N. Alle drei Pfeile sind im selben Maßstab gezeichnet.';
+    $('sc-title').textContent = 'Kiste auf geneigter Ebene mit ' + S.alpha + ' Grad Neigung, Gewichtskraft zerlegt in Hangabtriebskraft und Normalkraft';
+  }
+
+  // ---------------------------------------------- Anzeige
+  var lastStatus = '';
+  function setStatus(text, eq) {
+    var st = $('status');
+    st.classList.toggle('eq', !!eq);
+    if (text !== lastStatus) { st.innerHTML = text; lastStatus = text; }
+  }
+  function checkGoals() {
+    if (S.mode !== 'add') return;
+    var V = vecs(), R = resultant(), act = V.filter(function (v) { return v; });
+    if (act.length >= 2 && R.r < TOL) LK.reach('gleich');
+    if (act.length === 2) {
+      var mags = [Math.min(act[0].a, act[1].a), Math.max(act[0].a, act[1].a)];
+      var diff = Math.abs(act[0].w - act[1].w) % 360;
+      if (mags[0] === 3 && mags[1] === 4 && (diff === 90 || diff === 270)) LK.reach('pyth');
+    }
+    if (R.r >= TOL && Math.abs(R.r / S.m - 2) < 0.01) LK.reach('a2');
+  }
+
+  function update() {
+    for (var i = 0; i < 3; i++) {
+      $('s' + i + 'a').value = S.F[i].a; $('s' + i + 'w').value = S.F[i].w;
+      $('o' + i + 'a').textContent = LK.fmt(S.F[i].a, 1) + ' N';
+      $('o' + i + 'w').textContent = S.F[i].w + '°';
+    }
+    $('oM').textContent = LK.fmt(S.m, 1) + ' kg';
+    $('oAl').textContent = S.alpha + '°';
+    var add = S.mode === 'add';
+    $('addPanel').hidden = !add; $('roAdd').hidden = !add; $('noteAdd').hidden = !add; $('dirTxt').hidden = !add;
+    $('splitPanel').hidden = add; $('roSplit').hidden = add; $('noteSplit').hidden = add;
+    $('f3ctrl').hidden = !S.F[2].on;
+    $('bF3').textContent = S.F[2].on ? 'entfernen' : 'hinzufügen';
+    $('bF3').setAttribute('aria-pressed', S.F[2].on);
+    layer.innerHTML = '';
+    if (add) {
+      drawAdd();
+      var R = resultant(), eq = R.r < TOL;
+      $('rR').textContent = eq ? '≈ 0 N' : LK.fmt(R.r, 2) + ' N';
+      $('rW').textContent = eq ? '–' : LK.fmt(R.w, 0) + '°';
+      $('rA').textContent = eq ? '0 m/s²' : LK.fmt(R.r / S.m, 2) + ' m/s²';
+      if (eq) setStatus('Kräftegleichgewicht: Die Kräfte heben sich auf. Die Kiste bleibt in Ruhe oder bewegt sich gleichförmig geradeaus weiter.', true);
+      else setStatus('Die resultierende Kraft ist nicht null. Die Kiste wird in Richtung der grünen Kraft beschleunigt: <span class="f">a = F<sub>res</sub> / m</span>.', false);
+    } else {
+      drawSplit();
+      var al = rad(S.alpha), FG = S.m * G;
+      $('rG').textContent = LK.fmt(FG, 2) + ' N';
+      $('rH').textContent = LK.fmt(FG * Math.sin(al), 2) + ' N';
+      $('rN').textContent = LK.fmt(FG * Math.cos(al), 2) + ' N';
+      $('rQ').textContent = LK.fmt(Math.sin(al), 2);
+      if (S.alpha === 0) setStatus('Die Ebene ist waagerecht: Die Gewichtskraft drückt die Kiste nur auf die Unterlage, es gibt keine Hangabtriebskraft.', false);
+      else setStatus('Ohne Reibung rutscht die Kiste mit <span class="f">a = F<sub>H</sub> / m</span> = ' + LK.fmt(G * Math.sin(al), 2) + ' m/s² den Hang hinunter.', false);
+    }
+    checkGoals();
+  }
+
+  // ---------------------------------------------- Bedienung
+  [0, 1, 2].forEach(function (i) {
+    $('s' + i + 'a').oninput = function () { S.F[i].a = Number(this.value); update(); };
+    $('s' + i + 'w').oninput = function () { S.F[i].w = Number(this.value); update(); };
+  });
+  $('bF3').onclick = function () { S.F[2].on = !S.F[2].on; update(); };
+  $('sM').oninput = function () { S.m = Number(this.value); update(); };
+  $('sAl').oninput = function () { S.alpha = Number(this.value); update(); };
+  function setMode(m) {
+    S.mode = m;
+    $('mAdd').setAttribute('aria-pressed', m === 'add');
+    $('mSplit').setAttribute('aria-pressed', m === 'split');
+    update();
+  }
+  $('mAdd').onclick = function () { setMode('add'); };
+  $('mSplit').onclick = function () { setMode('split'); };
+  function setView(v) {
+    S.view = v;
+    $('vPara').setAttribute('aria-pressed', v === 'para');
+    $('vChain').setAttribute('aria-pressed', v === 'chain');
+    update();
+  }
+  $('vPara').onclick = function () { setView('para'); };
+  $('vChain').onclick = function () { setView('chain'); };
+
+  update();
+})();
+</script>
+</body>
+</html>

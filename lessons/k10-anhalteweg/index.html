@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anhalteweg-Rechner</title>
+<link rel="stylesheet" href="../../static/lesson-kit.css">
+<style>
+  .asphalt { fill: var(--border); }
+  .walk { fill: var(--grid); stroke: var(--border); }
+  .lane { stroke: var(--card); stroke-width: 2; stroke-dasharray: 12 10; }
+  .secR { fill: var(--lamp); }
+  .secB { fill: var(--warn); }
+  .car-body { fill: var(--accent); }
+  .car-win { fill: var(--card); opacity: .8; }
+  .kid { fill: var(--c3); }
+  .ball { fill: var(--pos); stroke: var(--card); stroke-width: 1.5; }
+  .obst-line { stroke: var(--c3); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  .brk { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+  .alert { font-size: 13px; font-weight: 700; fill: var(--warn) !important; }
+  .formula { font-size: .9rem; background: var(--bg); border-radius: 10px; padding: 8px 10px; margin-top: 10px; font-variant-numeric: tabular-nums; }
+  .formula div + div { margin-top: 3px; }
+  .result { margin-top: 10px; padding: 9px 12px; border-radius: 10px; font-weight: 650; }
+  .result.ok { background: var(--ok-soft); color: var(--ok); }
+  .result.bad { background: var(--warn-soft); color: var(--warn); }
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: .82rem; margin-top: 6px; }
+  .legend i { display: inline-block; width: 14px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: middle; opacity: .7; }
+  .rule { font-size: .88rem; margin-top: 10px; border-top: 1px solid var(--border); padding-top: 8px; }
+  .lk-grid > div { min-width: 0; }
+  @media (max-width: 520px) { svg .val { font-size: 15px; } svg .lbl { font-size: 16px; } .alert { font-size: 16px; } }
+  .tablewrap { overflow-x: auto; margin-top: 6px; }
+  table { border-collapse: collapse; width: 100%; font-size: .84rem; font-variant-numeric: tabular-nums; }
+  td, th { padding: 3px 6px; border-bottom: 1px solid var(--border); text-align: right; white-space: nowrap; }
+  th:last-child, td:last-child { text-align: left; }
+  td.ok { color: var(--ok); font-weight: 650; } td.bad { color: var(--warn); font-weight: 650; }
+  .presets button { font-size: .85rem; padding: 6px 10px; }
+  label.check { display: flex; gap: 8px; align-items: center; font-size: .9rem; margin: 0 0 4px; cursor: pointer; }
+  label.check input { width: 18px; height: 18px; accent-color: var(--accent); }
+</style>
+</head>
+<body>
+<h1>Reaktionsweg, Bremsweg und Anhalteweg</h1>
+<p class="muted small">Ein Kind läuft einem Ball hinterher auf die Straße. Stelle Geschwindigkeit, Reaktionszeit, Straßenzustand und Abstand zum Hindernis ein. Mit „Losfahren“ siehst du, ob das Auto rechtzeitig steht.</p>
+
+<div class="lk-grid">
+  <div>
+    <div class="lk-card">
+      <svg id="road" viewBox="0 0 560 210" role="img" aria-labelledby="rd-title">
+        <title id="rd-title">Straße von oben: gelb der Reaktionsweg, rot der Bremsweg, violett das Hindernis</title>
+      </svg>
+      <div class="legend"><span><i style="background:var(--lamp)"></i>Reaktionsweg (ungebremst)</span><span><i style="background:var(--warn)"></i>Bremsweg</span><span><i style="background:var(--c3)"></i>Hindernis</span></div>
+      <div id="result" class="result" aria-live="polite"></div>
+      <div class="formula" id="formula"></div>
+    </div>
+
+    <div class="lk-card">
+      <h2>Protokoll deiner Fahrten</h2>
+      <p class="small muted" style="margin-top:0">Nach jedem „Losfahren“ erscheint hier eine Zeile. So kannst du Fahrten vergleichen.</p>
+      <div class="tablewrap"><table>
+        <thead><tr><th><span class="f">v</span></th><th><span class="f">t<sub>R</sub></span></th><th>Straße</th><th>Hindernis</th><th><span class="f">s<sub>R</sub></span></th><th><span class="f">s<sub>B</sub></span></th><th><span class="f">s<sub>A</sub></span></th><th>Ergebnis</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="lk-card">
+      <h2>Einstellungen</h2>
+      <label class="ctrl"><span>Geschwindigkeit <span class="f">v</span> <output id="oV"></output></span>
+        <input type="range" id="sV" min="10" max="130" step="5" value="50"></label>
+      <label class="ctrl" style="margin-bottom:6px"><span>Reaktionszeit <span class="f">t<sub>R</sub></span> <output id="oT"></output></span>
+        <input type="range" id="sT" min="0.5" max="2" step="0.1" value="1"></label>
+      <div class="row presets" role="group" aria-label="Reaktionszeit-Voreinstellungen">
+        <button type="button" id="pT1" aria-pressed="true">aufmerksam: 1 s</button>
+        <button type="button" id="pT2" aria-pressed="false">abgelenkt (Handy): 2 s</button>
+      </div>
+      <div class="ctrl"><span>Straßenzustand <output id="oA"></output></span></div>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Straßenzustand wählen" id="roads">
+          <button type="button" data-road="dry" aria-pressed="true">trocken</button>
+          <button type="button" data-road="wet" aria-pressed="false">nass</button>
+          <button type="button" data-road="snow" aria-pressed="false">Schnee</button>
+          <button type="button" data-road="ice" aria-pressed="false">Eis</button>
+        </div>
+      </div>
+      <label class="ctrl"><span>Abstand zum Hindernis <span class="f">d</span> <output id="oD"></output></span>
+        <input type="range" id="sD" min="5" max="150" step="1" value="20"></label>
+      <div class="row">
+        <button type="button" id="bGo" class="primary">Losfahren</button>
+        <button type="button" id="bReset">Zurücksetzen</button>
+      </div>
+      <div class="readouts">
+        <div class="readout"><span>Reaktionsweg <span class="f">s<sub>R</sub></span></span><b id="rR">–</b></div>
+        <div class="readout"><span>Bremsweg <span class="f">s<sub>B</sub></span></span><b id="rB">–</b></div>
+        <div class="readout"><span>Anhalteweg <span class="f">s<sub>A</sub></span></span><b id="rA">–</b></div>
+      </div>
+      <div class="rule">
+        <label class="check"><input type="checkbox" id="cRule"> Fahrschul-Faustregeln zum Vergleich</label>
+        <div id="ruleBox" hidden></div>
+      </div>
+      <p class="small muted">Vereinfachungen: Das Hindernis bleibt stehen. Die Bremsverzögerung ist während des ganzen Bremsens gleich groß (Vollbremsung mit ABS). Die Zeit, bis die Bremse greift, steckt in der Reaktionszeit.</p>
+    </div>
+
+    <div class="lk-card tasks">
+      <h2>Entdecke selbst <span class="small muted" data-task-count></span></h2>
+      <div class="task" data-goal="quad"><p class="task-q">Fahre auf derselben Straße einmal mit 40 km/h und einmal mit 80 km/h los. Vergleiche die Bremswege im Protokoll.</p></div>
+      <div class="task">
+        <p class="task-q">Wie ändert sich der Bremsweg, wenn die Geschwindigkeit doppelt so groß ist?</p>
+        <div class="choices">
+          <button data-fb="Das gilt für den Reaktionsweg. Vergleiche im Protokoll die Spalte s_B.">Er wird doppelt so lang.</button>
+          <button data-ok data-fb="Richtig: s_B = v² / (2a). Doppelte Geschwindigkeit ergibt (2v)² = 4v², also vierfachen Bremsweg. Trocken: 7,7 m bei 40 km/h, 30,9 m bei 80 km/h.">Er wird viermal so lang.</button>
+          <button data-fb="Teile die beiden Bremswege im Protokoll durcheinander.">Er wird dreimal so lang.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task" data-goal="school"><p class="task-q">Vor der Schule läuft ein Kind 20 m vor dem Auto auf die Straße (trocken, aufmerksam 1 s). Fahre einmal mit 30 km/h und einmal mit 50 km/h los.</p></div>
+      <div class="task">
+        <p class="task-q">Mit welcher Geschwindigkeit trifft das Auto mit 50 km/h auf das Kind in 20 m?</p>
+        <div class="choices">
+          <button data-fb="Bei 50 km/h reicht der Platz nicht. Schau dir das Ergebnis der Fahrt an.">gar nicht, es steht rechtzeitig</button>
+          <button data-ok data-fb="Richtig: Nach 13,9 m Reaktionsweg bleiben nur 6,1 m zum Bremsen. Das Auto ist dann noch etwa 35 km/h schnell. Das ist wie ein Sturz aus fast 5 m Höhe.">mit etwa 35 km/h</button>
+          <button data-fb="Ein Teil der Geschwindigkeit wird noch abgebremst. Schau dir das Ergebnis der Fahrt an.">mit vollen 50 km/h</button>
+          <button data-fb="Schau dir das Ergebnis der Fahrt an.">mit etwa 10 km/h</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task" data-goal="handy"><p class="task-q">Gleiche Situation mit 30 km/h, aber der Fahrer schaut aufs Handy (2 s). Fahre los. Reicht Tempo 30 noch?</p></div>
+      <div class="task">
+        <p class="task-q">Die Straße ist nass statt trocken (5 statt 8 m/s²). Was ändert sich?</p>
+        <div class="choices">
+          <button data-fb="Die Reaktionszeit hängt vom Fahrer ab, nicht von der Straße. Vergleiche s_R und s_B.">Reaktionsweg und Bremsweg werden länger.</button>
+          <button data-ok data-fb="Genau: Der Reaktionsweg bleibt gleich. Der Bremsweg wird 8/5 = 1,6-mal so lang, weil die Bremsverzögerung kleiner ist.">Nur der Bremsweg wird länger, und zwar 1,6-mal so lang.</button>
+          <button data-fb="Stelle „nass“ ein und vergleiche s_B mit dem Wert bei „trocken“.">Nur der Bremsweg wird länger, und zwar doppelt so lang.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="all-done">Alles entdeckt! Weiter geht es mit den Übungen.</div>
+    </div>
+  </div>
+</div>
+
+<script src="../../static/lesson-kit.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var G = 9.81;
+  var ROADS = {
+    dry: { a: 8, name: 'trocken' }, wet: { a: 5, name: 'nass' },
+    snow: { a: 2.5, name: 'Schnee' }, ice: { a: 1, name: 'Eis' }
+  };
+  var S = { v: 50, tR: 1, road: 'dry', d: 20, rule: false };
+  var anim = null; // { t, speed, R }
+  var log = [];
+
+  function el(tag, a, parent) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); parent.appendChild(e); return e; }
+  function txt(parent, x, y, s, cls, anchor) { var t = el('text', { x: x, y: y, class: cls || 'val', 'text-anchor': anchor || 'start' }, parent); t.textContent = s; return t; }
+  var m = function (x) { return LK.fmt(x, 1) + ' m'; };
+  var kmh = function (v) { return LK.fmt(v * 3.6, 0) + ' km/h'; };
+
+  // ---------------------------------------------- Physik
+  function calc() {
+    var a = ROADS[S.road].a, v = S.v / 3.6;
+    var sR = v * S.tR, sB = v * v / (2 * a), sA = sR + sB;
+    var R = { a: a, v: v, sR: sR, sB: sB, sA: sA, d: S.d, ok: S.d >= sA };
+    if (!R.ok) {
+      R.rest = Math.max(0, S.d - sR);              // Bremsstrecke bis zum Hindernis
+      R.vImp = Math.sqrt(Math.max(0, v * v - 2 * a * R.rest));
+      R.h = R.vImp * R.vImp / (2 * G);
+    } else R.gap = S.d - sA;
+    R.tStop = S.tR + v / a;
+    R.tEnd = R.ok ? R.tStop : (S.d <= sR ? S.d / v : S.tR + (v - R.vImp) / a);
+    return R;
+  }
+  function posAt(R, t) {
+    if (t <= S.tR) return R.v * t;
+    var tb = Math.min(t - S.tR, R.v / R.a);
+    return R.sR + R.v * tb - 0.5 * R.a * tb * tb;
+  }
+  function velAt(R, t) { return t <= S.tR ? R.v : Math.max(0, R.v - R.a * (t - S.tR)); }
+
+  // ---------------------------------------------- Zeichnung
+  var road = $('road');
+  var X0 = 74, X1 = 540;
+  function niceStep(L) {
+    var steps = [1, 2, 5, 10, 20, 25, 50, 100, 200];
+    for (var i = 0; i < steps.length; i++) if (L / steps[i] <= 7) return steps[i];
+    return 200;
+  }
+  function draw(R) {
+    road.innerHTML = '';
+    var L = Math.max(R.sA, S.d) * 1.08;
+    var step = niceStep(L); L = Math.ceil(L / step) * step;
+    var x = function (s) { return X0 + (X1 - X0) * s / L; };
+    var pxm = (X1 - X0) / L;
+    // Straße
+    el('rect', { x: 0, y: 52, width: 560, height: 96, class: 'asphalt' }, road);
+    el('rect', { x: 0, y: 148, width: 560, height: 16, class: 'walk' }, road);
+    el('rect', { x: 0, y: 38, width: 560, height: 14, class: 'walk' }, road);
+    el('line', { x1: 0, x2: 560, y1: 100, y2: 100, class: 'lane' }, road);
+    // Abschnitte (eigene Spur, y 104..144)
+    var stopS = R.ok ? R.sA : S.d, sRvis = Math.min(R.sR, stopS);
+    var cur = anim ? posAt(R, anim.t) : null;
+    function sec(s0, s1, cls) {
+      if (s1 <= s0) return;
+      el('rect', { x: x(s0), y: 106, width: x(s1) - x(s0), height: 36, class: cls, opacity: .28 }, road);
+      if (cur !== null && cur > s0) el('rect', { x: x(s0), y: 106, width: x(Math.min(cur, s1)) - x(s0), height: 36, class: cls, opacity: .75 }, road);
+    }
+    sec(0, sRvis, 'secR');
+    sec(R.sR, stopS, 'secB');
+    // Klammern mit Beschriftung oben
+    function bracket(s0, s1, y, label) {
+      if (s1 - s0 <= 0) return;
+      el('path', { d: 'M' + x(s0) + ' ' + (y + 6) + ' v-6 H' + x(s1) + ' v6', class: 'brk' }, road);
+      var mid = (x(s0) + x(s1)) / 2;
+      txt(road, Math.max(30, Math.min(530, mid)), y - 4, label, 'val', 'middle');
+    }
+    var wR = x(R.sR) - x(0);
+    bracket(0, R.sR, 18, wR > 90 ? 'Reaktionsweg ' + m(R.sR) : m(R.sR));
+    bracket(R.sR, R.sA, wR > 0 && x(R.sA) - x(R.sR) < 90 ? 34 : 18, x(R.sA) - x(R.sR) > 90 ? 'Bremsweg ' + m(R.sB) : m(R.sB));
+    // Skala
+    for (var s = 0; s <= L + 1e-9; s += step) {
+      el('line', { x1: x(s), x2: x(s), y1: 164, y2: 170, class: 'axis' }, road);
+      txt(road, x(s), 184, s === 0 ? '0' : String(s), 'val', 'middle');
+    }
+    txt(road, X1, 202, 's in m', 'lbl', 'end');
+    // Hindernis: Ball auf der Fahrspur, Kind am Rand
+    var xd = x(S.d);
+    el('line', { x1: xd, x2: xd, y1: 52, y2: 164, class: 'obst-line' }, road);
+    el('circle', { cx: xd, cy: 124, r: 7, class: 'ball' }, road);
+    el('ellipse', { cx: xd + 2, cy: 154, rx: 8, ry: 5, class: 'kid' }, road);
+    el('circle', { cx: xd + 2, cy: 154, r: 4, fill: 'var(--card)', opacity: .7 }, road);
+    txt(road, xd > 470 ? xd - 6 : xd + 6, 49, 'Hindernis ' + S.d + ' m', 'val', xd > 470 ? 'end' : 'start');
+    // Auto (von oben), Vorderkante bei s
+    var len = Math.max(26, Math.min(64, 4.5 * pxm)), wid = 22;
+    var sCar = cur === null ? 0 : cur;
+    var g = el('g', { transform: 'translate(' + x(sCar).toFixed(1) + ' 124)' }, road);
+    el('rect', { x: -len, y: -wid / 2, width: len, height: wid, rx: 5, class: 'car-body' }, g);
+    el('rect', { x: -len * 0.42, y: -wid / 2 + 3, width: len * 0.16, height: wid - 6, rx: 2, class: 'car-win' }, g);
+    el('rect', { x: -len * 0.9, y: -wid / 2 + 3, width: len * 0.12, height: wid - 6, rx: 2, class: 'car-win' }, g);
+    if (anim) {
+      var msg = anim.t < S.tR ? 'Gefahr erkannt …' : (velAt(R, anim.t) > 0 && !anim.done ? 'Bremsen!' : '');
+      if (anim.done) msg = R.ok ? 'steht' : 'Aufprall!';
+      if (msg) txt(road, Math.min(Math.max(x(sCar) - len / 2, 60), 500), 96, msg, 'alert', 'middle');
+      if (anim.speed > 1) txt(road, 556, 64, 'Zeitraffer ' + LK.fmt(anim.speed, 0) + '×', 'val', 'end');
+      txt(road, 6, 64, 't = ' + LK.fmt(anim.t, 1) + ' s   v = ' + kmh(velAt(R, anim.done && !R.ok ? R.tEnd : anim.t)), 'val');
+    }
+  }
+
+  function render() {
+    var R = calc();
+    $('oV').textContent = S.v + ' km/h = ' + LK.fmt(R.v, 1) + ' m/s';
+    $('oT').textContent = LK.fmt(S.tR, 1) + ' s';
+    $('oA').textContent = 'a = ' + LK.fmt(R.a, 1) + ' m/s²';
+    $('oD').textContent = S.d + ' m';
+    $('pT1').setAttribute('aria-pressed', S.tR === 1);
+    $('pT2').setAttribute('aria-pressed', S.tR === 2);
+    document.querySelectorAll('#roads button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.road === S.road); });
+    $('rR').textContent = m(R.sR); $('rB').textContent = m(R.sB); $('rA').textContent = m(R.sA);
+    var f = '<div><span class="f">s<sub>R</sub> = v · t<sub>R</sub></span> = ' + LK.fmt(R.v, 1) + ' m/s · ' + LK.fmt(S.tR, 1) + ' s = <b>' + m(R.sR) + '</b></div>' +
+      '<div><span class="f">s<sub>B</sub> = v² / (2a)</span> = (' + LK.fmt(R.v, 1) + ' m/s)² / (2 · ' + LK.fmt(R.a, 1) + ' m/s²) = <b>' + m(R.sB) + '</b></div>' +
+      '<div><span class="f">s<sub>A</sub> = s<sub>R</sub> + s<sub>B</sub></span> = ' + m(R.sR) + ' + ' + m(R.sB) + ' = <b>' + m(R.sA) + '</b></div>';
+    if (!R.ok) {
+      f += R.rest > 0
+        ? '<div>Aufprall: Bremsstrecke bis zum Hindernis <span class="f">s</span> = ' + S.d + ' m − ' + m(R.sR) + ' = ' + m(R.rest) + '. <span class="f">v² = v<sub>0</sub>² − 2 · a · s</span> ergibt <b>' + LK.fmt(R.vImp, 1) + ' m/s = ' + kmh(R.vImp) + '</b></div>'
+        : '<div>Aufprall: Das Hindernis liegt noch im Reaktionsweg. Das Auto trifft es ungebremst mit <b>' + kmh(R.vImp) + '</b>.</div>';
+    }
+    $('formula').innerHTML = f;
+    var res = $('result');
+    var show = !anim || anim.done;
+    res.className = 'result ' + (R.ok ? 'ok' : 'bad');
+    res.textContent = !show ? 'Fahrt läuft …' : R.ok
+      ? 'Rechtzeitig angehalten: Das Auto steht ' + m(R.gap) + ' vor dem Hindernis.'
+      : 'Nicht rechtzeitig: Aufprall mit ' + kmh(R.vImp) + '. Das ist so heftig wie ein Sturz aus ' + LK.fmt(R.h, 1) + ' m Höhe.';
+    if (S.rule) {
+      var k = S.v / 10, rr = k * 3, rb = k * k;
+      $('ruleBox').innerHTML = '<p class="small" style="margin:4px 0">Reaktionsweg ≈ (v/10) · 3 = ' + m(rr) + '<br>Bremsweg ≈ (v/10)² = ' + m(rb) + '<br>Anhalteweg ≈ <b>' + m(rr + rb) + '</b> (Formel: ' + m(R.sA) + ')<br>Gefahrbremsung ≈ (v/10)² / 2 = ' + m(rb / 2) + '</p>' +
+        '<p class="small muted" style="margin:0">Die Faustregel für den Bremsweg gilt für normales Bremsen (etwa 3,9 m/s²). Für eine Gefahrbremsung halbiert man ihn, das passt zu etwa 8 m/s² auf trockener Straße. Den Straßenzustand berücksichtigen die Faustregeln nicht.</p>';
+    }
+    $('ruleBox').hidden = !S.rule;
+    $('bGo').textContent = anim && !anim.done ? 'Fährt …' : 'Losfahren';
+    $('bGo').disabled = !!(anim && !anim.done);
+    draw(R);
+    return R;
+  }
+
+  // ---------------------------------------------- Protokoll und Ziele
+  function addLog(R) {
+    log.unshift({ v: S.v, tR: S.tR, road: S.road, d: S.d, sR: R.sR, sB: R.sB, sA: R.sA, ok: R.ok, vImp: R.vImp });
+    if (log.length > 10) log.pop();
+    $('rows').innerHTML = log.map(function (e) {
+      return '<tr><td>' + e.v + ' km/h</td><td>' + LK.fmt(e.tR, 1) + ' s</td><td>' + ROADS[e.road].name + '</td><td>' + e.d + ' m</td><td>' + m(e.sR) + '</td><td>' + m(e.sB) + '</td><td>' + m(e.sA) + '</td>' +
+        '<td class="' + (e.ok ? 'ok' : 'bad') + '">' + (e.ok ? 'steht' : 'Aufprall ' + kmh(e.vImp)) + '</td></tr>';
+    }).join('');
+    var has = function (fn) { return log.some(fn); };
+    if (has(function (a) { return has(function (b) { return a.road === b.road && b.v === 2 * a.v; }); })) LK.reach('quad');
+    var school = function (v, ok) { return has(function (e) { return e.v === v && e.tR === 1 && e.road === 'dry' && e.d === 20 && e.ok === ok; }); };
+    if (school(30, true) && school(50, false)) LK.reach('school');
+    if (has(function (e) { return e.v === 30 && e.tR === 2 && e.road === 'dry' && e.d === 20; })) LK.reach('handy');
+  }
+  $('rows').innerHTML = '<tr><td colspan="8" class="muted" style="text-align:left">Noch keine Fahrten.</td></tr>';
+
+  // ---------------------------------------------- Animation
+  var last = performance.now();
+  function loop(t) {
+    var dt = Math.min(0.05, (t - last) / 1000); last = t;
+    if (anim && !anim.done) {
+      anim.t = Math.min(anim.R.tEnd, anim.t + dt * anim.speed);
+      if (anim.t >= anim.R.tEnd - 1e-9) { anim.done = true; render(); addLog(anim.R); }
+      else render();
+    }
+    requestAnimationFrame(loop);
+  }
+  function stopAnim() { anim = null; }
+  $('bGo').onclick = function () {
+    var R = calc();
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    anim = { t: 0, R: R, done: false, speed: Math.max(1, R.tEnd / 6) };
+    if (reduce) { anim.t = R.tEnd; anim.done = true; render(); addLog(R); return; }
+    last = performance.now();
+    render();
+  };
+  $('bReset').onclick = function () { stopAnim(); render(); };
+  $('sV').oninput = function () { S.v = Number(this.value); stopAnim(); render(); };
+  $('sT').oninput = function () { S.tR = Math.round(Number(this.value) * 10) / 10; stopAnim(); render(); };
+  $('sD').oninput = function () { S.d = Number(this.value); stopAnim(); render(); };
+  function setT(v) { S.tR = v; $('sT').value = v; stopAnim(); render(); }
+  $('pT1').onclick = function () { setT(1); };
+  $('pT2').onclick = function () { setT(2); };
+  document.querySelectorAll('#roads button').forEach(function (b) {
+    b.onclick = function () { S.road = b.dataset.road; stopAnim(); render(); };
+  });
+  $('cRule').onchange = function () { S.rule = this.checked; render(); };
+
+  render();
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

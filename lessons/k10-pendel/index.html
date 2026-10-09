@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fadenpendel: Schwingung, Dämpfung und Resonanz</title>
+<link rel="stylesheet" href="../../static/lesson-kit.css">
+<style>
+  .ceiling { fill: var(--grid); stroke: var(--line); stroke-width: 1.5; }
+  .thread { stroke: var(--line); stroke-width: 1.6; }
+  .bob { fill: var(--accent); stroke: var(--line); stroke-width: 1.5; }
+  .ghost { fill: none; stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 4 3; }
+  .rest { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; }
+  .arc { fill: none; stroke: var(--pos); stroke-width: 1.6; }
+  .ruler { stroke: var(--muted); stroke-width: 1.2; }
+  .lenmark { stroke: var(--accent); stroke-width: 3; stroke-linecap: round; }
+  .motor { fill: var(--card); stroke: var(--line); stroke-width: 1.5; }
+  .curve { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+  .zero { stroke: var(--muted); stroke-width: 1; }
+  .ebars { display: grid; gap: 6px; margin-top: 10px; }
+  .ebar { display: grid; grid-template-columns: 9.4em minmax(40px, 1fr) 5.2em; align-items: center; gap: 8px; font-size: .84rem; }
+  .ebar .track { height: 14px; background: var(--grid); border-radius: 7px; overflow: hidden; }
+  .ebar .fill { height: 100%; width: 0; border-radius: 7px; }
+  .ebar output { text-align: right; font-variant-numeric: tabular-nums; }
+  .fill.pot { background: var(--accent); } .fill.kin { background: var(--pos); } .fill.heat { background: var(--warn); }
+  table { border-collapse: collapse; width: 100%; font-size: .82rem; font-variant-numeric: tabular-nums; margin-top: 8px; }
+  td, th { padding: 3px 5px; border-bottom: 1px solid var(--border); text-align: right; }
+  th:first-child, td:first-child { text-align: left; }
+  .sub { margin: 14px 0 6px; font-size: .95rem; }
+  .note { margin-top: 10px; }
+  @media (max-width: 500px) { #chart .val { font-size: 16px; } #chart .lbl { font-size: 17px; } #pend .val { font-size: 14px; } }
+</style>
+</head>
+<body>
+<h1>Fadenpendel: Schwingung, Dämpfung und Resonanz</h1>
+<p class="muted small">Stelle Länge, Masse und Startauslenkung ein. Das Pendel wird jedes Mal neu losgelassen. Miss mit der Stoppuhr die Zeit für 10 Schwingungen und vergleiche mit der Formel.</p>
+
+<div class="lk-grid">
+  <div>
+    <div class="lk-card">
+      <svg id="pend" viewBox="0 0 400 300" role="img" aria-labelledby="p-title">
+        <title id="p-title">Fadenpendel mit Lineal für die Pendellänge</title>
+        <rect class="ceiling" x="90" y="8" width="180" height="12" rx="2"/>
+        <g id="motor" hidden>
+          <circle class="motor" cx="60" cy="14" r="11"/>
+          <line id="crank" x1="60" y1="14" x2="69" y2="14" class="thread"/>
+          <line id="rod" x1="69" y1="14" x2="180" y2="22" class="thread" stroke-dasharray="2 2"/>
+          <text x="60" y="42" class="val" text-anchor="middle">Antrieb</text>
+        </g>
+        <line id="restLine" class="rest" x1="180" y1="22" x2="180" y2="290"/>
+        <path id="arc" class="arc" d=""/>
+        <text id="arcTxt" class="val" x="0" y="0"></text>
+        <circle id="ghost" class="ghost" cx="0" cy="0" r="10"/>
+        <line id="thread" class="thread" x1="180" y1="22" x2="180" y2="142"/>
+        <rect id="pivot" x="174" y="18" width="12" height="6" rx="1.5" fill="var(--line)"/>
+        <circle id="bob" class="bob" cx="180" cy="142" r="10"/>
+        <!-- Lineal -->
+        <line class="ruler" x1="372" y1="22" x2="372" y2="262"/>
+        <g id="ticks"></g>
+        <line id="lenmark" class="lenmark" x1="372" y1="22" x2="372" y2="142"/>
+        <text x="380" y="16" class="val">m</text>
+      </svg>
+      <div class="ebars" role="group" aria-label="Energie des Pendels">
+        <div class="ebar"><span>Lageenergie <span class="f">E<sub>pot</sub></span></span><div class="track"><div class="fill pot" id="bPot"></div></div><output id="vPot">–</output></div>
+        <div class="ebar"><span>Bewegungsenergie <span class="f">E<sub>kin</sub></span></span><div class="track"><div class="fill kin" id="bKin"></div></div><output id="vKin">–</output></div>
+        <div class="ebar"><span>Wärme durch Reibung</span><div class="track"><div class="fill heat" id="bHeat"></div></div><output id="vHeat">–</output></div>
+      </div>
+    </div>
+
+    <div class="lk-card">
+      <h2>Elongation <span class="f">y</span> gegen Zeit <span class="f">t</span></h2>
+      <svg id="chart" viewBox="0 0 520 220" role="img" aria-label="y-t-Diagramm der letzten 10 Sekunden: Auslenkung der Kugel aus der Ruhelage"></svg>
+      <p class="small muted">Elongation <span class="f">y</span>: waagerechter Abstand der Kugel von der Ruhelage. Das Diagramm zeigt die letzten 10 s.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="lk-card">
+      <h2>Einstellungen</h2>
+      <label class="ctrl"><span>Pendellänge <span class="f">l</span> <output id="oL"></output></span>
+        <input type="range" id="sL" min="0.1" max="2" step="0.01" value="1"></label>
+      <label class="ctrl"><span>Masse <span class="f">m</span> <output id="oM"></output></span>
+        <input type="range" id="sM" min="50" max="500" step="10" value="200"></label>
+      <label class="ctrl"><span>Startauslenkung <output id="oP"></output></span>
+        <input type="range" id="sP" min="2" max="20" step="1" value="10"></label>
+      <p class="small" style="margin:0 0 4px;font-weight:600">Dämpfung</p>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Dämpfung wählen">
+          <button type="button" data-damp="aus" aria-pressed="true">aus</button>
+          <button type="button" data-damp="schwach" aria-pressed="false">schwach</button>
+          <button type="button" data-damp="stark" aria-pressed="false">stark</button>
+        </div>
+      </div>
+      <p class="small" style="margin:0 0 4px;font-weight:600">Tempo</p>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Tempo der Animation">
+          <button type="button" data-speed="slow" aria-pressed="false">Zeitlupe</button>
+          <button type="button" data-speed="normal" aria-pressed="true">normal</button>
+          <button type="button" data-speed="fast" aria-pressed="false">3× schneller</button>
+        </div>
+      </div>
+      <div class="row">
+        <button type="button" id="bRun" class="primary">Pause</button>
+        <button type="button" id="bRelease">Neu loslassen</button>
+      </div>
+      <div class="readouts">
+        <div class="readout"><span><span class="f">T = 2π·√(l / g)</span></span><b id="rT">–</b></div>
+        <div class="readout"><span>Eigenfrequenz <span class="f">f<sub>0</sub> = 1/T</span></span><b id="rF">–</b></div>
+        <div class="readout"><span>Elongation <span class="f">y</span></span><b id="rY">–</b></div>
+      </div>
+
+      <h3 class="sub">Stoppuhr</h3>
+      <div class="row">
+        <button type="button" id="bSw">10 Schwingungen stoppen</button>
+      </div>
+      <div class="readouts">
+        <div class="readout"><span>Zeit</span><b id="rSw">0,00 s</b></div>
+        <div class="readout"><span>Schwingungen</span><b id="rCnt">0</b></div>
+      </div>
+      <p id="status" class="small muted" aria-live="polite"></p>
+      <table>
+        <thead><tr><th><span class="f">l</span></th><th><span class="f">m</span></th><th>Start</th><th>10 <span class="f">T</span></th><th><span class="f">T</span></th></tr></thead>
+        <tbody id="rows"><tr><td colspan="5" class="muted">Noch keine Messung.</td></tr></tbody>
+      </table>
+
+      <h3 class="sub">Resonanz</h3>
+      <div class="row">
+        <button type="button" id="bDrive" aria-pressed="false">Antrieb einschalten</button>
+      </div>
+      <label class="ctrl"><span>Antriebsfrequenz <span class="f">f<sub>A</sub></span> <output id="oA"></output></span>
+        <input type="range" id="sA" min="0.2" max="2" step="0.01" value="0.8"></label>
+      <p class="small muted" style="margin:0">Der Antrieb bewegt den Aufhängepunkt periodisch ein kleines Stück hin und her. Das Pendel startet dabei aus der Ruhe.</p>
+    </div>
+
+    <div class="lk-card tasks">
+      <h2>Entdecke selbst <span class="small muted" data-task-count></span></h2>
+      <div class="task" data-goal="t2"><p class="task-q">Stelle ein Pendel mit <span class="f">T</span> = 2 s ein und bestätige es mit der Stoppuhr (10 Schwingungen, ohne Antrieb).</p></div>
+      <div class="task">
+        <p class="task-q">Verdopple die Masse (z. B. von 100 g auf 200 g) und miss erneut. Was passiert mit der Periodendauer?</p>
+        <div class="choices">
+          <button type="button" data-ok data-fb="Richtig: Die Periodendauer des Fadenpendels hängt nicht von der Masse ab. Eine schwerere Kugel wird stärker angezogen, ist aber auch träger.">Sie bleibt gleich.</button>
+          <button type="button" data-fb="Vergleiche zwei Messungen mit gleicher Länge und verschiedener Masse in der Tabelle.">Sie verdoppelt sich.</button>
+          <button type="button" data-fb="Vergleiche zwei Messungen mit gleicher Länge und verschiedener Masse in der Tabelle.">Sie halbiert sich.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task" data-goal="l4"><p class="task-q">Miss <span class="f">T</span> für zwei Pendel, von denen eines viermal so lang ist wie das andere (z. B. 0,25 m und 1,00 m).</p></div>
+      <div class="task">
+        <p class="task-q">Was bewirkt die vierfache Pendellänge?</p>
+        <div class="choices">
+          <button type="button" data-fb="Schau in die Tabelle: Wie viel größer ist T beim langen Pendel?">Die Periodendauer wird viermal so groß.</button>
+          <button type="button" data-ok data-fb="Genau: T ist proportional zu √l. √4 = 2, also verdoppelt sich die Periodendauer.">Die Periodendauer verdoppelt sich.</button>
+          <button type="button" data-fb="Schau in die Tabelle: Die beiden Werte für T unterscheiden sich deutlich.">Die Periodendauer bleibt gleich.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Beobachte die Energiebalken ohne Dämpfung. Wie sieht es im Umkehrpunkt aus?</p>
+        <div class="choices">
+          <button type="button" data-ok data-fb="Richtig: Im Umkehrpunkt ist die Kugel kurz in Ruhe (E_kin = 0) und am höchsten Punkt (E_pot am größten).">Die Lageenergie ist am größten, die Bewegungsenergie ist null.</button>
+          <button type="button" data-fb="Im Umkehrpunkt kehrt die Kugel um. Wie schnell ist sie dort?">Die Bewegungsenergie ist am größten.</button>
+          <button type="button" data-fb="Schalte auf Zeitlupe und beobachte die Balken genau im Umkehrpunkt.">Beide Energien sind gleich groß.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task" data-goal="res"><p class="task-q">Schalte den Antrieb ein (Dämpfung schwach) und bringe das Pendel durch Resonanz auf mehr als 15° Auslenkung.</p></div>
+      <div class="all-done">Alles entdeckt! Weiter geht es mit den Übungen.</div>
+    </div>
+  </div>
+</div>
+<div class="lk-card note">
+  <p class="small muted" style="margin:0">Vereinfachungen: Der Faden hat keine Masse und die Kugel wird als Punkt betrachtet. Die Reibung ist proportional zur Geschwindigkeit. Die Formel <span class="f">T = 2π·√(l / g)</span> gilt für kleine Auslenkungen. Bei 20° ist die wirkliche Periodendauer etwa 0,8 % größer. Gerechnet wird mit <span class="f">g</span> = 9,81 m/s².</p>
+</div>
+
+<script src="../../static/lesson-kit.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var G = 9.81, K = 120, PX0 = 180, PY = 22, DEG = Math.PI / 180;
+  var DAMP = { aus: 0, schwach: 0.02, stark: 0.15 };          // Abklingrate als Anteil von ω0
+  var DNAME = { aus: 'keine', schwach: 'schwach', stark: 'stark' };
+  var SPEED = { slow: 0.25, normal: 1, fast: 3 };
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var S = { l: 1, m: 0.2, phi0: 10, damp: 'aus', speed: 'normal', running: !reduce, drive: false, fA: 0.8 };
+  var st = { t: 0, phi: 0, w: 0, heat: 0, eScale: 1e-9 };
+  var samples = [], meas = [], sw = null, driveMax = 0;
+
+  function el(tag, a, parent) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); parent.appendChild(e); return e; }
+  function w0() { return Math.sqrt(G / S.l); }
+  function Tf() { return 2 * Math.PI * Math.sqrt(S.l / G); }
+  function gam() { return DAMP[S.damp] * w0(); }
+  function X() { return 0.02 * S.l; }                            // Weg des Aufhängepunkts beim Antrieb
+  function ePot() { return S.m * G * S.l * (1 - Math.cos(st.phi)); }
+  function eKin() { return 0.5 * S.m * S.l * S.l * st.w * st.w; }
+  function mJ(e) { var v = e * 1000; return LK.fmt(v, v < 10 ? 2 : (v < 100 ? 1 : 0)) + ' mJ'; }
+
+  // ---------------------------------------------- Physik (Runge-Kutta 4, Schrittweite ≤ 2 ms)
+  function acc(t, phi, w, g) {
+    var a = -G / S.l * Math.sin(phi) - 2 * g * w;
+    if (S.drive) { var wd = 2 * Math.PI * S.fA; a += X() * wd * wd * Math.sin(wd * t) / S.l * Math.cos(phi); }
+    return a;
+  }
+  function step(h) {
+    var g = gam(), t = st.t, p = st.phi, w = st.w;
+    var k1p = w, k1w = acc(t, p, w, g);
+    var k2p = w + h / 2 * k1w, k2w = acc(t + h / 2, p + h / 2 * k1p, w + h / 2 * k1w, g);
+    var k3p = w + h / 2 * k2w, k3w = acc(t + h / 2, p + h / 2 * k2p, w + h / 2 * k2w, g);
+    var k4p = w + h * k3w, k4w = acc(t + h, p + h * k3p, w + h * k3w, g);
+    var np = p + h / 6 * (k1p + 2 * k2p + 2 * k3p + k4p);
+    var nw = w + h / 6 * (k1w + 2 * k2w + 2 * k3w + k4w);
+    var wm = (w + nw) / 2;
+    st.heat += 2 * g * S.m * S.l * S.l * wm * wm * h;           // Reibungsleistung
+    if (p < 0 && np >= 0) crossing(t + h * (-p) / (np - p));
+    if (sw && sw.phase !== 'done') sw.amp = Math.max(sw.amp, Math.abs(np));
+    st.phi = np; st.w = nw; st.t = t + h;
+    if (S.drive) driveMax = Math.max(driveMax, Math.abs(np));
+  }
+  function advance(T) {
+    var n = Math.ceil(T / 0.002), h = T / n;
+    for (var i = 0; i < n; i++) step(h);
+    samples.push([st.t, S.l * Math.sin(st.phi) * 100]);
+    while (samples.length && samples[0][0] < st.t - 10.2) samples.shift();
+    st.eScale = Math.max(st.eScale, ePot() + eKin());
+    if (S.drive && driveMax > 15 * DEG && Math.abs(S.fA * Tf() - 1) <= 0.05) LK.reach('res');
+  }
+
+  // ---------------------------------------------- Stoppuhr
+  function say(s) { $('status').textContent = s; }
+  function crossing(tc) {
+    if (!sw || sw.phase === 'done') return;
+    if (sw.phase === 'wait') { sw.phase = 'run'; sw.t0 = tc; sw.n = 0; sw.amp = 0; say('Die Stoppuhr läuft. Sie zählt jeden Durchgang durch die Ruhelage nach rechts.'); return; }
+    if (sw.amp < 0.3 * DEG) { sw = null; say('Messung abgebrochen: Das Pendel ist fast zur Ruhe gekommen. Wähle eine schwächere Dämpfung.'); return; }
+    sw.n++; sw.amp = 0;
+    if (sw.n === 10) {
+      sw.phase = 'done'; sw.t1 = tc;
+      var T = (tc - sw.t0) / 10;
+      meas.unshift({ l: S.l, m: S.m, start: S.drive ? 'Antrieb' : S.phi0 + '°', drive: S.drive, T10: tc - sw.t0, T: T });
+      if (meas.length > 8) meas.pop();
+      say('10 Schwingungen dauern ' + LK.fmt(tc - sw.t0, 2) + ' s. Also ist T = ' + LK.fmt(T, 3) + ' s.');
+      renderTable(); checkMeas();
+    }
+  }
+  function renderTable() {
+    $('rows').innerHTML = meas.map(function (r) {
+      return '<tr><td>' + LK.fmt(r.l, 2) + ' m</td><td>' + LK.fmt(r.m * 1000, 0) + ' g</td><td>' + r.start + '</td><td>' + LK.fmt(r.T10, 2) + ' s</td><td>' + LK.fmt(r.T, 3) + ' s</td></tr>';
+    }).join('') || '<tr><td colspan="5" class="muted">Noch keine Messung.</td></tr>';
+  }
+  function checkMeas() {
+    var free = meas.filter(function (r) { return !r.drive; });
+    free.forEach(function (a) {
+      if (Math.abs(a.T - 2) <= 0.03) LK.reach('t2');
+      free.forEach(function (b) { if (Math.abs(a.l - 4 * b.l) <= 0.021) LK.reach('l4'); });
+    });
+  }
+  $('bSw').onclick = function () {
+    if (!S.running) setRun(true);
+    sw = { phase: 'wait', n: 0, amp: 0, t0: 0 };
+    say('Warte, bis das Pendel durch die Ruhelage schwingt …');
+  };
+
+  // ---------------------------------------------- Zeichnen
+  var ticks = $('ticks');
+  [0, 0.5, 1, 1.5, 2].forEach(function (v) {
+    el('line', { x1: 366, x2: 372, y1: PY + v * K, y2: PY + v * K, class: 'ruler' }, ticks);
+    el('text', { x: 377, y: PY + v * K + 4, class: 'val' }, ticks).textContent = LK.fmt(v, v % 1 ? 1 : 0);
+  });
+
+  function draw() {
+    var px = PX0 + (S.drive ? X() * Math.sin(2 * Math.PI * S.fA * st.t) * K : 0);
+    var L = S.l * K, bx = px + L * Math.sin(st.phi), by = PY + L * Math.cos(st.phi);
+    var r = 5 + 9 * Math.cbrt(S.m / 0.5);
+    $('thread').setAttribute('x1', px); $('thread').setAttribute('x2', bx); $('thread').setAttribute('y2', by);
+    $('bob').setAttribute('cx', bx); $('bob').setAttribute('cy', by); $('bob').setAttribute('r', r);
+    $('pivot').setAttribute('x', px - 6);
+    $('restLine').setAttribute('x1', px); $('restLine').setAttribute('x2', px); $('restLine').setAttribute('y2', Math.min(292, PY + L + r + 8));
+    var g0 = S.drive ? 0 : S.phi0 * DEG;
+    $('ghost').setAttribute('cx', PX0 + L * Math.sin(g0)); $('ghost').setAttribute('cy', PY + L * Math.cos(g0)); $('ghost').setAttribute('r', r);
+    $('ghost').toggleAttribute('hidden', S.drive);
+    var ar = Math.min(60, L * 0.6), a = st.phi, showArc = Math.abs(a) > 1.5 * DEG && ar > 18;
+    $('arc').toggleAttribute('hidden', !showArc); $('arcTxt').toggleAttribute('hidden', !showArc);
+    if (showArc) {
+      $('arc').setAttribute('d', 'M' + px + ' ' + (PY + ar) + ' A' + ar + ' ' + ar + ' 0 0 ' + (a > 0 ? 0 : 1) + ' ' + (px + ar * Math.sin(a)) + ' ' + (PY + ar * Math.cos(a)));
+      var ta = $('arcTxt');
+      ta.setAttribute('x', px + (a > 0 ? -8 : 8)); ta.setAttribute('y', PY + ar + 14);
+      ta.setAttribute('text-anchor', a > 0 ? 'end' : 'start');
+      ta.textContent = LK.fmt(Math.abs(a) / DEG, 0) + '°';
+    }
+    $('lenmark').setAttribute('y2', PY + L);
+    $('motor').toggleAttribute('hidden', !S.drive);
+    if (S.drive) {
+      var ang = 2 * Math.PI * S.fA * st.t;
+      $('crank').setAttribute('x2', 60 + 9 * Math.sin(ang)); $('crank').setAttribute('y2', 14 - 9 * Math.cos(ang));
+      $('rod').setAttribute('x1', 60 + 9 * Math.sin(ang)); $('rod').setAttribute('y1', 14 - 9 * Math.cos(ang)); $('rod').setAttribute('x2', px - 6);
+    }
+    // Energie
+    var ep = ePot(), ek = eKin(), sc = st.eScale;
+    $('bPot').style.width = Math.min(100, ep / sc * 100) + '%';
+    $('bKin').style.width = Math.min(100, ek / sc * 100) + '%';
+    $('bHeat').style.width = Math.min(100, st.heat / sc * 100) + '%';
+    $('vPot').textContent = mJ(ep); $('vKin').textContent = mJ(ek); $('vHeat').textContent = mJ(st.heat);
+    $('rY').textContent = LK.fmt(S.l * Math.sin(st.phi) * 100, 1) + ' cm';
+    // Stoppuhr
+    var tsw = !sw ? 0 : sw.phase === 'run' ? st.t - sw.t0 : sw.phase === 'done' ? sw.t1 - sw.t0 : 0;
+    $('rSw').textContent = LK.fmt(tsw, 2) + ' s';
+    $('rCnt').textContent = sw ? sw.n + ' / 10' : '0';
+    drawChart();
+  }
+
+  // y-t-Diagramm
+  var chart = $('chart'), CX0 = 56, CX1 = 505, CY = 105, CH = 80, range = 0;
+  var cGrid = el('g', {}, chart), cTicks = el('g', {}, chart);
+  var curve = el('polyline', { class: 'curve', points: '' }, chart);
+  var tickPool = [];
+  for (var i = 0; i < 12; i++) tickPool.push({ l: el('line', { class: 'gridline', y1: CY - CH, y2: CY + CH }, cTicks), t: el('text', { class: 'val', 'text-anchor': 'middle', y: CY + CH + 17 }, cTicks) });
+  el('line', { class: 'axis', x1: CX0, x2: CX0, y1: CY - CH - 4, y2: CY + CH }, chart);
+  el('line', { class: 'zero', x1: CX0, x2: CX1, y1: CY, y2: CY }, chart);
+  el('text', { class: 'lbl', x: 4, y: 14 }, chart).textContent = 'y in cm';
+  el('text', { class: 'lbl', x: CX1, y: CY + CH + 33, 'text-anchor': 'end' }, chart).textContent = 't in s';
+  function niceRange() {
+    var need = S.l * 100 * 0.42, opts = [2, 5, 10, 20, 25, 50, 100];
+    for (var i = 0; i < opts.length; i++) if (opts[i] >= need) return opts[i];
+    return 100;
+  }
+  function drawChart() {
+    var R = niceRange();
+    if (R !== range) {
+      range = R; cGrid.innerHTML = '';
+      [-1, -0.5, 0.5, 1].forEach(function (f) {
+        el('line', { class: 'gridline', x1: CX0, x2: CX1, y1: CY - f * CH, y2: CY - f * CH }, cGrid);
+        el('text', { class: 'val', x: CX0 - 6, y: CY - f * CH + 4, 'text-anchor': 'end' }, cGrid).textContent = LK.fmt(f * R, R * Math.abs(f) % 1 ? 1 : 0);
+      });
+      el('text', { class: 'val', x: CX0 - 6, y: CY + 4, 'text-anchor': 'end' }, cGrid).textContent = '0';
+    }
+    var tEnd = Math.max(10, st.t), tStart = tEnd - 10;
+    var px = function (t) { return CX0 + (CX1 - CX0) * (t - tStart) / 10; };
+    var k = Math.ceil(tStart - 1e-9);
+    tickPool.forEach(function (p) {
+      var on = k <= tEnd + 1e-9;
+      p.l.toggleAttribute('hidden', !on); p.t.toggleAttribute('hidden', !on);
+      if (on) { var x = px(k); p.l.setAttribute('x1', x); p.l.setAttribute('x2', x); p.t.setAttribute('x', x); p.t.textContent = k; }
+      k++;
+    });
+    var pts = [];
+    for (var j = 0; j < samples.length; j++) {
+      if (samples[j][0] < tStart) continue;
+      var y = Math.max(-R, Math.min(R, samples[j][1]));
+      pts.push(px(samples[j][0]).toFixed(1) + ',' + (CY - y / R * CH).toFixed(1));
+    }
+    curve.setAttribute('points', pts.join(' '));
+  }
+
+  // ---------------------------------------------- Bedienung
+  function release(msg) {
+    st.t = 0; st.phi = S.drive ? 0 : S.phi0 * DEG; st.w = 0; st.heat = 0;
+    st.eScale = Math.max(1e-9, ePot());
+    samples = [[0, S.l * Math.sin(st.phi) * 100]]; driveMax = 0;
+    if (sw && sw.phase !== 'done' && msg !== false) say('Die Messung wurde abgebrochen, weil das Pendel neu losgelassen wurde.');
+    sw = null;
+    update();
+  }
+  function update() {
+    $('oL').textContent = LK.fmt(S.l, 2) + ' m';
+    $('oM').textContent = LK.fmt(S.m * 1000, 0) + ' g';
+    $('oP').textContent = S.phi0 + '°';
+    $('oA').textContent = LK.fmt(S.fA, 2) + ' Hz';
+    $('rT').textContent = LK.fmt(Tf(), 2) + ' s';
+    $('rF').textContent = LK.fmt(1 / Tf(), 2) + ' Hz';
+    $('bDrive').textContent = S.drive ? 'Antrieb ausschalten' : 'Antrieb einschalten';
+    $('bDrive').setAttribute('aria-pressed', S.drive);
+    draw();
+  }
+  function setRun(on) { S.running = on; $('bRun').textContent = on ? 'Pause' : 'Start'; }
+  setRun(S.running);
+
+  $('sL').oninput = function () { S.l = Number(this.value); release(); };
+  $('sM').oninput = function () { S.m = Number(this.value) / 1000; release(); };
+  $('sP').oninput = function () { S.phi0 = Number(this.value); release(); };
+  $('sA').oninput = function () { S.fA = Number(this.value); update(); };
+  document.querySelectorAll('[data-damp]').forEach(function (b) {
+    b.onclick = function () {
+      S.damp = b.dataset.damp;
+      document.querySelectorAll('[data-damp]').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+      release();
+    };
+  });
+  document.querySelectorAll('[data-speed]').forEach(function (b) {
+    b.onclick = function () {
+      S.speed = b.dataset.speed;
+      document.querySelectorAll('[data-speed]').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+    };
+  });
+  $('bRun').onclick = function () { setRun(!S.running); };
+  $('bRelease').onclick = function () { release(); setRun(true); };
+  $('bDrive').onclick = function () {
+    S.drive = !S.drive;
+    release(false);
+    say(S.drive ? 'Antrieb eingeschaltet. Das Pendel startet aus der Ruhe. Eigenfrequenz f₀ = ' + LK.fmt(1 / Tf(), 2) + ' Hz.' : 'Antrieb ausgeschaltet. Das Pendel wird wieder mit der Startauslenkung losgelassen.');
+    setRun(true);
+  };
+
+  var last = performance.now();
+  function frame(now) {
+    var dt = Math.min(0.05, (now - last) / 1000); last = now;
+    if (S.running && dt > 0) advance(dt * SPEED[S.speed]);
+    draw();
+    requestAnimationFrame(frame);
+  }
+  release(false);
+  if (reduce) say('Die Animation ist pausiert. Starte sie mit „Start“.');
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

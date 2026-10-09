@@ -1,0 +1,101 @@
+{
+  "id": "k8-kraft",
+  "titel": "Kraft, Kraftpfeil und Wechselwirkung",
+  "kurz": "Woran man Kräfte erkennt, wie man sie zeichnet und warum es nie nur eine Kraft gibt.",
+  "reihenfolge": 1,
+  "lernziele": [
+    { "id": "lz1", "niveau": "E", "text": "Verformungen und Bewegungsänderungen als Wirkungen von Kräften erläutern" },
+    { "id": "lz2", "niveau": "E", "text": "Kräfte mit dem Modell Kraftpfeil darstellen (Angriffspunkt, Richtung, Betrag)" },
+    { "id": "lz3", "niveau": "F", "text": "Kraft als Wechselwirkung zweier Körper beschreiben" },
+    { "id": "lz4", "niveau": "F", "text": "Kräftegleichgewicht und resultierende Kraft erläutern" }
+  ],
+  "verstehen": {
+    "einstieg": "Du stehst auf einem Skateboard und drückst dich von einer Wand ab. Wer schiebt eigentlich wen?",
+    "abschnitte": [
+      {
+        "titel": "Woran man Kräfte erkennt",
+        "text": "Kräfte kann man nicht sehen, nur ihre **Wirkungen**:\n\n**Verformung:** Ein Körper ändert seine Form. Geht er danach wieder in seine alte Form zurück (Feder, Gummiband, Ball), ist die Verformung **elastisch**. Bleibt sie (Knetmasse, verbeultes Auto), ist sie **plastisch**.\n\n**Bewegungsänderung:** Ein Körper wird schneller, langsamer oder ändert seine Richtung.\n\nDie Einheit der Kraft ist das **Newton** (N). Etwa 1 N braucht man, um eine 100-g-Tafel Schokolade zu halten."
+      },
+      {
+        "titel": "Das Modell Kraftpfeil",
+        "text": "Eine Kraft hat einen **Betrag** (wie groß) und eine **Richtung**. Man stellt sie deshalb als **Pfeil** dar:\n\n- Der Pfeil beginnt im **Angriffspunkt**, wo die Kraft am Körper angreift.\n- Er zeigt in die **Richtung** der Kraft.\n- Seine **Länge** gibt den Betrag an, z. B. 1 cm für 10 N.\n\nDieselbe Kraft kann ganz unterschiedlich wirken, je nachdem, wo und in welche Richtung sie angreift."
+      },
+      {
+        "titel": "Kraft ist Wechselwirkung",
+        "text": "Kräfte treten **immer paarweise** auf. Übt Körper A eine Kraft auf Körper B aus, übt B gleichzeitig eine gleich große, **entgegengesetzte** Kraft auf A aus. Das ist das **Wechselwirkungsprinzip**.\n\nDu drückst gegen die Wand, die Wand drückt gegen dich, deshalb rollst du weg. Die beiden Kräfte wirken auf **verschiedene** Körper, deshalb heben sie sich nicht auf."
+      },
+      {
+        "titel": "Kräftegleichgewicht",
+        "text": "Wirken auf **einen** Körper mehrere Kräfte, kann man sie zu einer **resultierenden Kraft** zusammenfassen. Kräfte in die gleiche Richtung addieren sich, entgegengesetzte ziehen sich voneinander ab.\n\nSind zwei Kräfte gleich groß und entgegengesetzt, ist die resultierende Kraft null. Das nennt man **Kräftegleichgewicht**. Der Körper ändert dann seine Bewegung nicht: Er bleibt in Ruhe oder bewegt sich gleichförmig weiter. Beim Tauziehen zweier gleich starker Mannschaften bewegt sich das Seil nicht."
+      }
+    ],
+    "merksatz": "Kräfte erkennt man an Verformungen und Bewegungsänderungen. Man zeichnet sie als Pfeil mit Angriffspunkt, Richtung und Länge (Betrag). Einheit: Newton (N).\n\nKräfte treten immer paarweise auf (Wechselwirkung). Heben sich die Kräfte an einem Körper auf, herrscht Kräftegleichgewicht.",
+    "alltag": "Eine Rakete stößt Gase mit großer Kraft nach hinten aus. Die Gase drücken mit gleich großer Kraft die Rakete nach vorne. So fliegt sie auch im luftleeren Weltraum."
+  },
+  "interaktiv": ["k8-kraefte"],
+  "uebungen": [
+    { "id": "k8-kr-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "In welcher Einheit wird die Kraft angegeben?",
+      "optionen": [
+        { "text": "Newton (N)", "richtig": true },
+        { "text": "Kilogramm (kg)", "feedback": "Kilogramm ist die Einheit der Masse." },
+        { "text": "Joule (J)", "feedback": "Joule ist die Einheit der Energie und der Arbeit." }
+      ],
+      "erklaerung": "Die Einheit der Kraft ist nach Isaac Newton benannt." },
+    { "id": "k8-kr-02", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ordne jedem Beispiel die Wirkung der Kraft zu.",
+      "paare": [
+        { "links": "Ein Gummiband wird gedehnt und schnellt zurück.", "rechts": "elastische Verformung" },
+        { "links": "Knetmasse wird zu einer Kugel geformt.", "rechts": "plastische Verformung" },
+        { "links": "Ein Torwart fängt den Ball.", "rechts": "Bewegungsänderung" }
+      ],
+      "extraRechts": ["keine Wirkung"],
+      "erklaerung": "Auch das Abbremsen und Richtungsändern sind Bewegungsänderungen." },
+    { "id": "k8-kr-03", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Was gehört zur vollständigen Darstellung einer Kraft als Kraftpfeil?",
+      "optionen": [
+        { "text": "Der Angriffspunkt", "richtig": true },
+        { "text": "Die Richtung", "richtig": true },
+        { "text": "Der Betrag (über die Pfeillänge)", "richtig": true },
+        { "text": "Die Farbe des Körpers", "feedback": "Die Farbe hat mit der Kraft nichts zu tun." }
+      ],
+      "erklaerung": "Eine Kraft ist durch Angriffspunkt, Richtung und Betrag festgelegt. Genau das zeigt der Pfeil." },
+    { "id": "k8-kr-04", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Im Maßstab 1 cm ≙ 20 N wird ein Kraftpfeil 3,5 cm lang gezeichnet. Wie groß ist die Kraft?",
+      "gegeben": "Maßstab 1 cm ≙ 20 N, Länge 3,5 cm", "gesucht": "Kraft `F`", "gesuchtSymbol": "F",
+      "loesung": 70, "einheit": "N",
+      "rechenweg": ["`F = 3,5 · 20 N = 70 N`"],
+      "erklaerung": "Der Maßstab sagt, wie viel Newton jeder Zentimeter Pfeillänge bedeutet." },
+    { "id": "k8-kr-05", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Du stehst auf Inlinern und drückst mit 50 N gegen eine Wand. Welche Kraft übt die Wand auf dich aus?",
+      "optionen": [
+        { "text": "50 N, entgegengesetzt gerichtet", "richtig": true },
+        { "text": "0 N, eine Wand kann keine Kraft ausüben", "feedback": "Doch: Sonst würdest du nicht von der Wand wegrollen." },
+        { "text": "Weniger als 50 N, weil die Wand sich nicht bewegt", "feedback": "Kraft und Gegenkraft sind immer genau gleich groß." }
+      ],
+      "erklaerung": "Wechselwirkungsprinzip: Kraft und Gegenkraft sind gleich groß, entgegengesetzt und wirken auf verschiedene Körper." },
+    { "id": "k8-kr-06", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Beim Tauziehen zieht Mannschaft A mit 900 N nach links, Mannschaft B mit 750 N nach rechts. Wie groß ist die resultierende Kraft auf das Seil?",
+      "gegeben": "`F_{A} = 900 N` (links), `F_{B} = 750 N` (rechts)", "gesucht": "resultierende Kraft `F_{res}`", "gesuchtSymbol": "F_{res}",
+      "loesung": 150, "einheit": "N",
+      "rechenweg": ["Entgegengesetzte Kräfte werden voneinander abgezogen.", "`F_{res} = 900 N − 750 N = 150 N` (nach links)"],
+      "erklaerung": "Das Seil wird mit 150 N nach links beschleunigt. Mannschaft A gewinnt." },
+    { "id": "k8-kr-07", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Ein Buch liegt auf dem Tisch. Lena sagt: „Gewichtskraft des Buches und die Kraft des Tisches auf das Buch sind ein Kraft-Gegenkraft-Paar.“ Hat sie recht? Begründe.",
+      "stichworte": [
+        { "aspekt": "Nein: Beide Kräfte wirken auf denselben Körper (das Buch)", "woerter": ["selben koerper", "denselben koerper", "beide auf das buch", "am buch", "gleichen koerper"] },
+        { "aspekt": "Das ist ein Kräftegleichgewicht", "woerter": ["gleichgewicht"] },
+        { "aspekt": "Die echte Gegenkraft wirkt auf einen anderen Körper (Buch drückt auf den Tisch bzw. zieht an der Erde)", "woerter": ["auf den tisch", "auf die erde", "anderen koerper", "verschiedene koerper", "drueckt auf"] }
+      ],
+      "musterloesung": "Lena hat nicht recht. Gewichtskraft und Auflagekraft wirken beide auf **denselben** Körper, nämlich das Buch. Sie sind gleich groß und entgegengesetzt, deshalb herrscht am Buch ein **Kräftegleichgewicht**. Ein Kraft-Gegenkraft-Paar wirkt dagegen immer auf **zwei verschiedene** Körper: Zur Kraft des Tisches auf das Buch gehört die Kraft, mit der das Buch auf den Tisch drückt. Zur Gewichtskraft (die Erde zieht am Buch) gehört die Kraft, mit der das Buch an der Erde zieht.",
+      "erklaerung": "Merkhilfe: Gleichgewicht = zwei Kräfte an **einem** Körper. Wechselwirkung = je eine Kraft an **zwei** Körpern." },
+    { "id": "k8-kr-08", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Ein Auto fährt mit konstanter Geschwindigkeit geradeaus. Die Antriebskraft beträgt 600 N. Wie groß sind Reibung und Luftwiderstand zusammen?",
+      "optionen": [
+        { "text": "600 N", "richtig": true },
+        { "text": "0 N, sonst würde das Auto langsamer", "feedback": "Ohne Gegenkräfte würde das Auto mit 600 N immer schneller werden." },
+        { "text": "Weniger als 600 N, sonst würde es nicht fahren", "feedback": "Für **konstante** Geschwindigkeit braucht man keine überschüssige Kraft." }
+      ],
+      "erklaerung": "Konstante Geschwindigkeit bedeutet keine Bewegungsänderung, also Kräftegleichgewicht. Antriebskraft und Widerstandskräfte sind gleich groß." }
+  ]
+}

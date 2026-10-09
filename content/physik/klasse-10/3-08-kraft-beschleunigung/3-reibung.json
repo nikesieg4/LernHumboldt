@@ -1,0 +1,93 @@
+{
+  "id": "k10-reibung",
+  "titel": "Reibung und Luftwiderstand",
+  "kurz": "Haft-, Gleit- und Rollreibung, warum Reibung manchmal nervt und manchmal lebenswichtig ist.",
+  "reihenfolge": 3,
+  "lernziele": [
+    { "id": "lz1", "niveau": "G", "text": "Haftreibung, Gleitreibung und Rollreibung qualitativ unterscheiden und vergleichen" },
+    { "id": "lz2", "niveau": "G", "text": "Faktoren nennen, von denen die Reibungskraft abhängt" },
+    { "id": "lz3", "niveau": "G", "text": "Die Luftwiderstandskraft und ihre Abhängigkeiten beschreiben" },
+    { "id": "lz4", "niveau": "H", "text": "Reibung bei Fahrzeugen bewerten (Bremsen, ABS, Reifen)" }
+  ],
+  "verstehen": {
+    "einstieg": "Einen schweren Schrank in Bewegung zu bringen ist schwerer, als ihn weiterzuschieben. Warum?",
+    "abschnitte": [
+      {
+        "titel": "Arten der Reibung",
+        "text": "**Haftreibung:** Hält einen ruhenden Körper fest. Erst wenn die Zugkraft die maximale Haftreibungskraft übersteigt, setzt er sich in Bewegung.\n**Gleitreibung:** Wirkt, wenn ein Körper über eine Fläche rutscht.\n**Rollreibung:** Wirkt, wenn ein Körper rollt.\n\nFür dieselben Stoffe gilt: **Haftreibung > Gleitreibung > Rollreibung**. Deshalb muss man beim Anschieben stärker drücken als beim Weiterschieben, und deshalb hat man das Rad erfunden."
+      },
+      {
+        "titel": "Wovon die Reibung abhängt",
+        "text": "Die Reibungskraft ist umso größer, je stärker die Körper aufeinandergepresst werden (**Normalkraft**, z. B. die Gewichtskraft) und je rauer die Oberflächen sind (**Materialpaarung**).\n\nErstaunlich: Die **Größe der Berührungsfläche** spielt kaum eine Rolle.\n\nIm Teilchenbild verhaken sich die winzigen Unebenheiten der Oberflächen. Reibung wandelt Bewegungsenergie in **thermische Energie** um."
+      },
+      {
+        "titel": "Luftwiderstand",
+        "text": "Bewegt sich ein Körper durch Luft, muss er die Luft verdrängen. Die **Luftwiderstandskraft** hängt ab von:\n\n**Geschwindigkeit:** Sie wächst etwa mit dem **Quadrat** der Geschwindigkeit. Doppelt so schnell bedeutet etwa viermal so viel Luftwiderstand.\n**Querschnittsfläche:** Je größer die Fläche gegen den Wind, desto größer.\n**Form:** Stromlinienförmige Körper haben einen kleinen Widerstandsbeiwert (cw-Wert).\n\nBei Autobahngeschwindigkeit ist der Luftwiderstand der größte Widerstand. Deshalb steigt der Verbrauch bei hohen Geschwindigkeiten stark an."
+      },
+      {
+        "titel": "Reibung bei Fahrzeugen",
+        "text": "Ein Auto kann nur bremsen, lenken und beschleunigen, weil zwischen Reifen und Straße **Haftreibung** wirkt. Blockieren die Räder, rutscht das Auto mit der kleineren **Gleitreibung** weiter und lässt sich nicht mehr lenken. Das **ABS** (Antiblockiersystem) verhindert das Blockieren, damit die Reifen haften. Nasse oder vereiste Straßen und abgefahrene Reifen verringern die Haftreibung stark."
+      }
+    ],
+    "merksatz": "Haftreibung > Gleitreibung > Rollreibung. Die Reibung hängt von Normalkraft und Materialpaarung ab, kaum von der Fläche. Der Luftwiderstand wächst etwa mit dem Quadrat der Geschwindigkeit.",
+    "alltag": "Ohne Reibung könntest du nicht gehen: Deine Schuhe würden auf dem Boden wegrutschen wie auf Glatteis."
+  },
+  "interaktiv": [],
+  "uebungen": [
+    { "id": "k10-rb-01", "typ": "reihenfolge", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ordne die Reibungsarten nach ihrer Größe (gleiche Körper und Unterlage), beginnend mit der **kleinsten**.",
+      "elemente": ["Rollreibung", "Gleitreibung", "Haftreibung"],
+      "erklaerung": "Deshalb transportiert man schwere Lasten auf Rädern oder Rollen." },
+    { "id": "k10-rb-02", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Warum muss man einen schweren Schrank zum Losschieben stärker drücken als zum Weiterschieben?",
+      "optionen": [
+        { "text": "Die Haftreibung ist größer als die Gleitreibung.", "richtig": true },
+        { "text": "Der Schrank wird beim Schieben leichter.", "feedback": "Die Masse des Schranks ändert sich nicht." },
+        { "text": "Beim Weiterschieben hilft der Luftwiderstand.", "feedback": "Der Luftwiderstand bremst, er hilft nie." }
+      ],
+      "erklaerung": "In Ruhe greifen die Unebenheiten tiefer ineinander. Ist der Körper erst einmal in Bewegung, rutscht er leichter." },
+    { "id": "k10-rb-03", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Wodurch wird die Gleitreibungskraft eines Holzklotzes auf einem Tisch größer?",
+      "optionen": [
+        { "text": "Durch ein zusätzliches Gewicht auf dem Klotz", "richtig": true },
+        { "text": "Durch eine rauere Unterlage (z. B. Schmirgelpapier)", "richtig": true },
+        { "text": "Indem man den Klotz auf die größere Seitenfläche legt", "feedback": "Die Größe der Auflagefläche hat kaum Einfluss auf die Reibungskraft." },
+        { "text": "Indem man die Tischplatte einseift", "feedback": "Seife wirkt als Schmiermittel und verringert die Reibung." }
+      ],
+      "erklaerung": "Entscheidend sind die Normalkraft und die Beschaffenheit der Oberflächen." },
+    { "id": "k10-rb-04", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Ein Radfahrer fährt doppelt so schnell. Wie ändert sich ungefähr der Luftwiderstand?",
+      "optionen": [
+        { "text": "Er wird etwa viermal so groß.", "richtig": true },
+        { "text": "Er wird doppelt so groß.", "feedback": "Der Luftwiderstand wächst stärker als die Geschwindigkeit, etwa mit ihrem Quadrat." },
+        { "text": "Er bleibt gleich.", "feedback": "Schnellere Bewegung bedeutet mehr verdrängte Luft pro Sekunde mit größerer Wucht." }
+      ],
+      "erklaerung": "`F_{L} ~ v²`. Deshalb ducken sich Radrennfahrer und tragen enge Kleidung." },
+    { "id": "k10-rb-05", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Erkläre, warum ein Auto mit ABS bei einer Vollbremsung lenkbar bleibt, ein Auto mit blockierenden Rädern aber nicht.",
+      "stichworte": [
+        { "aspekt": "Blockierende Räder rutschen (Gleitreibung)", "woerter": ["gleitreibung", "rutsch", "gleiten", "schleudern"] },
+        { "aspekt": "Rollende Räder haften auf der Straße (Haftreibung)", "woerter": ["haftreibung", "haften", "haftung", "grip"] },
+        { "aspekt": "Nur mit Haftreibung lassen sich Seitenkräfte zum Lenken übertragen; ABS verhindert das Blockieren", "woerter": ["lenk", "seitenkraft", "richtung", "verhindert", "loest die bremse", "blockieren"] }
+      ],
+      "musterloesung": "Blockieren die Räder, rutschen die Reifen über die Straße. Dann wirkt nur noch die kleinere Gleitreibung, und die Reifen können keine Seitenkräfte mehr übertragen. Das Auto rutscht geradeaus weiter, egal wie man lenkt. Das ABS löst die Bremse immer wieder ganz kurz, sodass sich die Räder weiterdrehen und auf der Straße haften. Mit der Haftreibung können die Reifen Kräfte in jede Richtung übertragen. So bleibt das Auto lenkbar, und der Bremsweg ist meist sogar kürzer.",
+      "erklaerung": "Die maximale Haftreibung ist größer als die Gleitreibung. Haftende Reifen bremsen deshalb auch besser." },
+    { "id": "k10-rb-06", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Wie kann man den Luftwiderstand eines Autos verringern?",
+      "optionen": [
+        { "text": "Eine stromlinienförmige Karosserie", "richtig": true },
+        { "text": "Langsamer fahren", "richtig": true },
+        { "text": "Dachbox abmontieren, wenn sie nicht gebraucht wird", "richtig": true },
+        { "text": "Breitere Reifen montieren", "feedback": "Breite Reifen vergrößern eher die Stirnfläche und die Rollreibung." }
+      ],
+      "erklaerung": "Form, Stirnfläche und Geschwindigkeit bestimmen den Luftwiderstand." },
+    { "id": "k10-rb-07", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz2",
+      "frage": "Ein Ziegelstein wird einmal flach liegend und einmal hochkant über denselben Tisch gezogen. Was gilt für die Gleitreibungskraft?",
+      "optionen": [
+        { "text": "Sie ist in beiden Fällen etwa gleich groß.", "richtig": true },
+        { "text": "Flach liegend ist sie größer, weil die Fläche größer ist.", "feedback": "Bei größerer Fläche verteilt sich die Gewichtskraft. Der Druck pro Fläche wird kleiner, die Gesamtreibung bleibt etwa gleich." },
+        { "text": "Hochkant ist sie größer, weil der Stein tiefer einsinkt.", "feedback": "Auf einem harten Tisch sinkt er nicht ein. Die Reibung bleibt etwa gleich." }
+      ],
+      "erklaerung": "Die Reibungskraft hängt von der Normalkraft und den Materialien ab, kaum von der Auflagefläche. Das überrascht viele und lässt sich leicht im Experiment überprüfen." }
+  ]
+}

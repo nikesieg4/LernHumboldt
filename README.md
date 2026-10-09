@@ -11,7 +11,8 @@ Lerneinheiten sie erledigt haben, und Lehrkräfte sehen den Fortschritt ihrer Kl
 - **Fortschritt:** pro Schüler/in und Lerneinheit, Übersicht als Tabelle pro Klasse.
 - **Physik nach dem Schulcurriculum (SchiC):** Klassenstufe wählen → Themenfeld → Thema mit
   **Verstehen** (Erklärung, Formeln, interaktive Simulation) und **Üben** (Aufgaben mit Feedback,
-  Lösungsweg und Fortschritt). Klasse 9 ist komplett, 7, 8 und 10 sind als Gerüst angelegt.
+  Lösungsweg und Fortschritt). Klassen 7 bis 10 sind komplett: 12 Themenfelder laut SchiC, 45 Themen,
+  343 Übungen und 17 interaktive Erklärungen.
 
 > **Schnellstart:** Wie du das Projekt auf GitHub hochlädst und ohne IServ-Login testest,
 > steht in [ANLEITUNG-GITHUB.md](ANLEITUNG-GITHUB.md).
@@ -218,6 +219,8 @@ Eine Klassenstufe erscheint automatisch, sobald es für sie einen Ordner mit min
 Themenfeld gibt (deshalb sind 5 und 6 ausgeblendet). Ein Themenfeld ohne Themen wird als
 „In Vorbereitung“ mit den SchiC-Inhalten angezeigt.
 
+In Erklärtexten kannst du Aufzählungen mit Zeilen schreiben, die mit `- ` beginnen.
+
 **Ein Thema** (`<name>.json`) enthält:
 
 | Feld | Bedeutung |
@@ -252,7 +255,7 @@ Eine Übung zählt als gelöst, wenn sie richtig beantwortet wurde, bevor die L�
 `validate`, `render`, `check` und `solution` ergänzen. Formularfelder werden vom Browser
 automatisch eingesammelt (`public/uebung.js`).
 
-**Interaktive Erklärungen** sind normale Lerneinheiten in `lessons/` (z. B. `k9-ohmsches-gesetz`).
+**Interaktive Erklärungen** sind normale Lerneinheiten in `lessons/` (z. B. `k9-ohmsches-gesetz`, `k7-stromkreis`, `k10-pendel`).
 Mit `public/lesson-kit.css` und `public/lesson-kit.js` bekommen sie das gemeinsame Aussehen,
 „Entdecke selbst“-Aufgaben und passen ihre Höhe automatisch an.
 

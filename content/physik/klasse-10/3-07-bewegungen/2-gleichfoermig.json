@@ -1,0 +1,88 @@
+{
+  "id": "k10-gleichfoermig",
+  "titel": "Gleichförmige Bewegung und Diagramme",
+  "kurz": "s(t)- und v(t)-Diagramme lesen und zeichnen: Was die Steigung und die Fläche verraten.",
+  "reihenfolge": 2,
+  "lernziele": [
+    { "id": "lz1", "niveau": "G", "text": "Das Bewegungsgesetz der gleichförmigen Bewegung `s = v · t` anwenden" },
+    { "id": "lz2", "niveau": "H", "text": "s(t)- und v(t)-Diagramme erstellen und erläutern" },
+    { "id": "lz3", "niveau": "H", "text": "Bewegungen mithilfe von Diagrammen deuten und vergleichen" }
+  ],
+  "verstehen": {
+    "einstieg": "Zwei Läufer starten gleichzeitig. Im s(t)-Diagramm ist die Linie des einen steiler. Was bedeutet das?",
+    "abschnitte": [
+      {
+        "titel": "Das Bewegungsgesetz",
+        "text": "Bei einer **gleichförmigen** Bewegung legt ein Körper in gleichen Zeiten gleiche Wege zurück. Die Geschwindigkeit ist konstant, und es gilt:\n\n`s = v · t` (wenn der Körper zur Zeit t = 0 bei s = 0 startet)."
+      },
+      {
+        "titel": "Das s(t)-Diagramm",
+        "text": "Trägt man den Weg `s` (nach oben) gegen die Zeit `t` (nach rechts) auf, ergibt sich bei gleichförmiger Bewegung eine **Gerade**.\n\nDie **Steigung** der Geraden ist die Geschwindigkeit: `v = Δs / Δt`. Je steiler, desto schneller. Eine **waagerechte** Linie bedeutet Stillstand. Eine fallende Linie bedeutet, dass sich der Körper zurückbewegt (auf den Startpunkt zu)."
+      },
+      {
+        "titel": "Das v(t)-Diagramm",
+        "text": "Trägt man die Geschwindigkeit `v` gegen die Zeit auf, ergibt die gleichförmige Bewegung eine **waagerechte Linie**.\n\nDie **Fläche** unter der Linie (ein Rechteck mit den Seiten `v` und `t`) ist der zurückgelegte **Weg**. Das gilt auch für alle anderen Bewegungen: Die Fläche unter der v(t)-Kurve ist immer der Weg."
+      }
+    ],
+    "formeln": [
+      { "formel": "s = v · t", "bedeutung": "gleichförmige Bewegung, Start bei s = 0" },
+      { "formel": "v = \\frac{Δs}{Δt}", "bedeutung": "Steigung im s(t)-Diagramm" }
+    ],
+    "merksatz": "Gleichförmige Bewegung: s(t)-Diagramm = Gerade (Steigung = Geschwindigkeit), v(t)-Diagramm = waagerechte Linie (Fläche darunter = Weg).",
+    "alltag": "Navigations-Apps berechnen aus Strecke und typischer Geschwindigkeit die Ankunftszeit: `t = s / v`."
+  },
+  "interaktiv": ["k10-bewegung"],
+  "uebungen": [
+    { "id": "k10-gf-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Wie sieht das s(t)-Diagramm einer gleichförmigen Bewegung aus?",
+      "optionen": [
+        { "text": "Eine Gerade", "richtig": true },
+        { "text": "Eine waagerechte Linie", "feedback": "Eine waagerechte Linie im s(t)-Diagramm bedeutet Stillstand. Im v(t)-Diagramm ist die gleichförmige Bewegung waagerecht." },
+        { "text": "Eine Parabel", "feedback": "Eine Parabel ergibt sich bei der gleichmäßig beschleunigten Bewegung." }
+      ],
+      "erklaerung": "In gleichen Zeiten werden gleiche Wege zurückgelegt. Deshalb wächst `s` gleichmäßig mit `t`." },
+    { "id": "k10-gf-02", "typ": "zahl", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ein Zug fährt gleichförmig mit 40 m/s. Welchen Weg legt er in 30 s zurück?",
+      "gegeben": "`v = 40 m/s`, `t = 30 s`", "gesucht": "Weg `s`", "gesuchtSymbol": "s",
+      "loesung": 1200, "einheit": "m", "alternativEinheiten": { "km": 1000 },
+      "rechenweg": ["`s = v · t = 40 m/s · 30 s = 1200 m`"],
+      "erklaerung": "40 m/s sind 144 km/h. In einer halben Minute schafft der Zug 1,2 km." },
+    { "id": "k10-gf-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Im s(t)-Diagramm eines Radfahrers verläuft eine Gerade durch die Punkte (0 s | 0 m) und (20 s | 100 m). Wie groß ist seine Geschwindigkeit?",
+      "gegeben": "Punkte (0 s | 0 m) und (20 s | 100 m)", "gesucht": "`v`", "gesuchtSymbol": "v",
+      "loesung": 5, "einheit": "m/s", "alternativEinheiten": { "km/h": 0.2777777777777778 },
+      "rechenweg": ["Steigung: `v = \\frac{Δs}{Δt} = \\frac{100 m}{20 s} = 5 m/s`", "= 18 km/h"],
+      "erklaerung": "Die Steigung im s(t)-Diagramm ist die Geschwindigkeit." },
+    { "id": "k10-gf-04", "typ": "zuordnung", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Ordne jedem Verlauf im **s(t)-Diagramm** die passende Bewegung zu.",
+      "paare": [
+        { "links": "steigende Gerade", "rechts": "gleichförmige Bewegung vom Start weg" },
+        { "links": "waagerechte Linie", "rechts": "Stillstand" },
+        { "links": "fallende Gerade", "rechts": "gleichförmige Bewegung zurück zum Start" },
+        { "links": "immer steiler werdende Kurve", "rechts": "der Körper wird schneller" }
+      ],
+      "erklaerung": "Im s(t)-Diagramm steckt die Geschwindigkeit in der Steigung." },
+    { "id": "k10-gf-05", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Im v(t)-Diagramm eines Autos ist eine waagerechte Linie bei 25 m/s von t = 0 s bis t = 8 s zu sehen. Welchen Weg legt das Auto in dieser Zeit zurück?",
+      "gegeben": "`v = 25 m/s` konstant, `t = 8 s`", "gesucht": "Weg `s`", "gesuchtSymbol": "s",
+      "loesung": 200, "einheit": "m",
+      "rechenweg": ["Fläche unter der v(t)-Linie: Rechteck", "`s = 25 m/s · 8 s = 200 m`"],
+      "erklaerung": "Die Fläche unter dem v(t)-Graphen ist immer der zurückgelegte Weg." },
+    { "id": "k10-gf-06", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Ein Bus fährt um 10:00 Uhr in A mit 60 km/h los Richtung B. Um 10:30 Uhr startet ein Auto in A mit 100 km/h auf derselben Strecke. Wie viele Minuten nach dem Start des Autos holt es den Bus ein?",
+      "gegeben": "Bus: 60 km/h ab 10:00, Auto: 100 km/h ab 10:30", "gesucht": "Zeit bis zum Einholen",
+      "loesung": 45, "einheit": "min", "alternativEinheiten": { "h": 60 }, "toleranz": 0.02,
+      "rechenweg": ["Vorsprung des Busses um 10:30: `60 km/h · 0,5 h = 30 km`", "Das Auto ist pro Stunde 40 km schneller.", "`t = \\frac{30 km}{40 km/h} = 0,75 h = 45 min`", "Treffpunkt um 11:15 Uhr, 75 km von A entfernt."],
+      "hinweis": "Berechne den Vorsprung des Busses und überlege, wie schnell das Auto ihn verringert.",
+      "erklaerung": "Im s(t)-Diagramm ist der Treffpunkt der Schnittpunkt der beiden Geraden." },
+    { "id": "k10-gf-07", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Im s(t)-Diagramm zweier Läufer ist die Gerade von Läufer A steiler als die von Läufer B. Beide beginnen im Ursprung. Beschreibe, was das bedeutet und wie die zugehörigen v(t)-Diagramme aussehen.",
+      "stichworte": [
+        { "aspekt": "A ist schneller als B (größere Steigung)", "woerter": ["schneller", "groessere geschwindigkeit", "hoehere geschwindigkeit", "steigung"] },
+        { "aspekt": "Beide bewegen sich gleichförmig", "woerter": ["gleichfoermig", "konstant", "gleichbleibend"] },
+        { "aspekt": "v(t): zwei waagerechte Linien, die von A liegt höher", "woerter": ["waagerecht", "horizontal", "hoeher", "parallel zur zeitachse", "parallel zur t achse"] }
+      ],
+      "musterloesung": "Die Steigung im s(t)-Diagramm ist die Geschwindigkeit. Weil die Gerade von A steiler ist, legt A in derselben Zeit einen längeren Weg zurück, A ist also schneller als B. Weil beide Graphen Geraden sind, bewegen sich beide gleichförmig. Im v(t)-Diagramm ergeben sich deshalb zwei waagerechte Linien, die von A liegt höher als die von B.",
+      "erklaerung": "Übung: Zeichne beide Diagramme untereinander mit gleicher Zeitachse." }
+  ]
+}

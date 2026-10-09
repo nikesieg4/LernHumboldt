@@ -1,0 +1,95 @@
+{
+  "id": "k8-hooke",
+  "titel": "Hookesches Gesetz und Kraftmessung",
+  "kurz": "Wie eine Feder Kräfte messen kann und wo ihre Grenzen liegen.",
+  "reihenfolge": 3,
+  "lernziele": [
+    { "id": "lz1", "niveau": "F", "text": "Das hookesche Gesetz `F = D · s` beschreiben und anwenden" },
+    { "id": "lz2", "niveau": "F", "text": "Experimente zum Zusammenhang zwischen Kraft und Längenänderung planen und auswerten" },
+    { "id": "lz3", "niveau": "F", "text": "Die Ausdehnung einer Feder grafisch darstellen und den Gültigkeitsbereich angeben" },
+    { "id": "lz4", "niveau": "E", "text": "Den Aufbau und die Funktion eines Federkraftmessers erklären" }
+  ],
+  "verstehen": {
+    "einstieg": "Hängst du an eine Feder doppelt so viel Gewicht, wird sie doppelt so lang? Oder doppelt so weit gedehnt?",
+    "abschnitte": [
+      {
+        "titel": "Das hookesche Gesetz",
+        "text": "Hängt man an eine Schraubenfeder nacheinander verschiedene Massestücke, misst man, wie weit sie sich **dehnt** (Längenänderung `s`, nicht die Gesamtlänge!).\n\nErgebnis: Die Dehnung ist **proportional** zur Kraft. Doppelte Kraft, doppelte Dehnung. Das ist das **hookesche Gesetz** (nach Robert Hooke):\n\n`F = D · s`\n\nDie **Federkonstante** `D` gibt an, wie hart die Feder ist: wie viel Kraft man für 1 cm (oder 1 m) Dehnung braucht. Eine harte Feder hat ein großes `D`."
+      },
+      {
+        "titel": "Diagramm und Grenzen",
+        "text": "Trägt man die Kraft `F` gegen die Dehnung `s` auf, ergibt sich eine **Ursprungsgerade**. Je steiler sie ist, desto härter die Feder.\n\nDas Gesetz gilt nur im **elastischen Bereich**. Wird die Feder überdehnt, verformt sie sich plastisch, geht nicht mehr in ihre Form zurück, und die Gerade knickt ab. Für Gummibänder gilt das hookesche Gesetz übrigens nur sehr ungenau."
+      },
+      {
+        "titel": "Der Federkraftmesser",
+        "text": "Ein **Federkraftmesser** (Newtonmeter) nutzt das hookesche Gesetz: Eine Feder in einer Hülse wird durch die Kraft gedehnt, und an der gleichmäßig eingeteilten Skala liest man die Kraft direkt in Newton ab.\n\nKraftmesser gibt es für verschiedene Messbereiche (z. B. 1 N, 10 N, 100 N). Man wählt einen passenden, um ihn nicht zu überdehnen, und stellt vor dem Messen den Nullpunkt ein."
+      }
+    ],
+    "formeln": [
+      { "formel": "F = D · s", "bedeutung": "Kraft `F` in N, Federkonstante `D` in N/cm (oder N/m), Dehnung `s` in cm (oder m)" },
+      { "formel": "D = \\frac{F}{s}", "bedeutung": "Federkonstante aus einem Messpaar bestimmen" }
+    ],
+    "merksatz": "**Hookesches Gesetz:** Im elastischen Bereich ist die Dehnung einer Feder proportional zur Kraft: `F = D · s`. Federkraftmesser nutzen diesen Zusammenhang.",
+    "alltag": "Auch Stoßdämpfer im Auto, Matratzen und Trampoline enthalten Federn. Ihre Federkonstante bestimmt, wie hart oder weich sie sich anfühlen."
+  },
+  "interaktiv": ["k8-feder"],
+  "uebungen": [
+    { "id": "k8-ho-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Eine Feder dehnt sich bei 2 N um 4 cm. Wie weit dehnt sie sich bei 4 N (im elastischen Bereich)?",
+      "optionen": [
+        { "text": "8 cm", "richtig": true },
+        { "text": "4 cm", "feedback": "Bei doppelter Kraft dehnt sich die Feder doppelt so weit." },
+        { "text": "16 cm", "feedback": "Die Dehnung ist proportional zur Kraft, nicht zum Quadrat." }
+      ],
+      "erklaerung": "Hookesches Gesetz: Dehnung und Kraft sind proportional. Doppelte Kraft, doppelte Dehnung." },
+    { "id": "k8-ho-02", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Eine Feder dehnt sich bei einer Kraft von 3 N um 6 cm. Berechne die Federkonstante.",
+      "gegeben": "`F = 3 N`, `s = 6 cm`", "gesucht": "Federkonstante `D`", "gesuchtSymbol": "D",
+      "loesung": 0.5, "einheit": "N/cm", "alternativEinheiten": { "N/m": 0.01 },
+      "rechenweg": ["`D = \\frac{F}{s}`", "`D = \\frac{3 N}{6 cm} = 0,5 N/cm` (= 50 N/m)"],
+      "erklaerung": "Für jeden Zentimeter Dehnung braucht man 0,5 N." },
+    { "id": "k8-ho-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Eine Feder mit D = 0,5 N/cm wird mit 2,5 N gezogen. Wie weit dehnt sie sich?",
+      "gegeben": "`D = 0,5 N/cm`, `F = 2,5 N`", "gesucht": "Dehnung `s`", "gesuchtSymbol": "s",
+      "loesung": 5, "einheit": "cm", "alternativEinheiten": { "m": 100, "mm": 0.1 },
+      "rechenweg": ["`s = \\frac{F}{D}`", "`s = \\frac{2,5 N}{0,5 N/cm} = 5 cm`"],
+      "hinweis": "Stelle `F = D · s` nach `s` um.",
+      "erklaerung": "Kennt man die Federkonstante, kann man aus der Dehnung die Kraft bestimmen und umgekehrt. So funktioniert der Kraftmesser." },
+    { "id": "k8-ho-04", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Eine Feder ist ohne Belastung 10 cm lang. Mit einem Massestück ist sie 14 cm lang. Welchen Wert trägst du als Dehnung `s` ein?",
+      "optionen": [
+        { "text": "4 cm", "richtig": true },
+        { "text": "14 cm", "feedback": "Das ist die Gesamtlänge. Für das hookesche Gesetz brauchst du die **Längenänderung**." },
+        { "text": "24 cm", "feedback": "Die Längen werden nicht addiert. Gesucht ist, um wie viel die Feder länger geworden ist." }
+      ],
+      "erklaerung": "Die Dehnung ist der Unterschied zwischen belasteter und unbelasteter Länge: 14 cm − 10 cm = 4 cm. Ein häufiger Fehler ist, die Gesamtlänge einzutragen. Dann ergibt sich keine Ursprungsgerade." },
+    { "id": "k8-ho-05", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Welche Aussagen zum F-s-Diagramm einer Feder sind richtig?",
+      "optionen": [
+        { "text": "Im elastischen Bereich ergibt sich eine Ursprungsgerade.", "richtig": true },
+        { "text": "Eine härtere Feder hat eine steilere Gerade (F nach oben, s nach rechts).", "richtig": true },
+        { "text": "Bei Überdehnung knickt die Kurve ab.", "richtig": true },
+        { "text": "Die Gerade gilt für beliebig große Kräfte.", "feedback": "Das hookesche Gesetz gilt nur bis zur Elastizitätsgrenze." }
+      ],
+      "erklaerung": "Die Steigung der Geraden ist die Federkonstante D = F / s." },
+    { "id": "k8-ho-06", "typ": "reihenfolge", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Bringe die Schritte des Experiments zum hookeschen Gesetz in eine sinnvolle Reihenfolge.",
+      "elemente": [
+        "Feder aufhängen und die Länge ohne Belastung messen",
+        "Ein Massestück anhängen und die neue Länge messen",
+        "Weitere Massestücke einzeln dazuhängen und jeweils messen",
+        "Gewichtskraft und Dehnung in eine Tabelle eintragen",
+        "Ein F-s-Diagramm zeichnen und die Federkonstante bestimmen"
+      ],
+      "erklaerung": "Wichtig ist, immer von derselben unbelasteten Ausgangslänge aus zu rechnen." },
+    { "id": "k8-ho-07", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Warum darf man einen Federkraftmesser mit Messbereich 1 N nicht benutzen, um eine Kraft von 5 N zu messen?",
+      "stichworte": [
+        { "aspekt": "Die Feder wird überdehnt (über den elastischen Bereich hinaus)", "woerter": ["ueberdehnt", "ueberdehn", "elastisch", "zu weit", "ausgeleiert", "plastisch"] },
+        { "aspekt": "Sie geht nicht mehr in ihre Ausgangsform zurück", "woerter": ["nicht mehr zurueck", "ausgangsform", "verformt", "bleibend", "dauerhaft", "kaputt", "beschaedigt"] },
+        { "aspekt": "Danach misst der Kraftmesser falsch", "woerter": ["falsch", "ungenau", "nicht mehr richtig", "nicht mehr stimmt"] }
+      ],
+      "musterloesung": "Bei 5 N würde die Feder eines 1-N-Kraftmessers weit über ihren elastischen Bereich hinaus gedehnt. Sie würde sich plastisch verformen und nicht mehr in ihre Ausgangsform zurückgehen. Das hookesche Gesetz gilt dann nicht mehr, und der Kraftmesser würde danach falsche Werte anzeigen. Außerdem reicht seine Skala gar nicht bis 5 N.",
+      "erklaerung": "Wähle immer einen Kraftmesser, dessen Messbereich etwas größer ist als die erwartete Kraft." }
+  ]
+}

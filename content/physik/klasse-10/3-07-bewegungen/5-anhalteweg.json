@@ -1,0 +1,96 @@
+{
+  "id": "k10-anhalteweg",
+  "titel": "Reaktionsweg, Bremsweg und Anhalteweg",
+  "kurz": "Wie lange ein Auto braucht, bis es steht, und warum doppelte Geschwindigkeit nicht doppelten Bremsweg bedeutet.",
+  "reihenfolge": 5,
+  "lernziele": [
+    { "id": "lz1", "niveau": "G", "text": "Reaktionsweg, Bremsweg und Anhalteweg unterscheiden und berechnen" },
+    { "id": "lz2", "niveau": "H", "text": "Den Einfluss von Geschwindigkeit, Reaktionszeit und Straßenzustand beurteilen" },
+    { "id": "lz3", "niveau": "H", "text": "Zufällige und systematische Fehler bei Messungen unterscheiden" },
+    { "id": "lz4", "niveau": "H", "text": "Folgen des eigenen Handelns im Straßenverkehr beurteilen" }
+  ],
+  "verstehen": {
+    "einstieg": "Vor einer Schule ist Tempo 30 vorgeschrieben statt 50. Bringen die 20 km/h Unterschied wirklich so viel?",
+    "abschnitte": [
+      {
+        "titel": "Reaktionsweg",
+        "text": "Vom Erkennen einer Gefahr bis zum Treten der Bremse vergeht die **Reaktionszeit** `t_{R}`, meist etwa **1 s**. In dieser Zeit fährt das Auto ungebremst weiter. Der **Reaktionsweg** ist also:\n\n`s_{R} = v · t_{R}`\n\nMüdigkeit, Alkohol, Ablenkung durch das Handy verlängern die Reaktionszeit stark."
+      },
+      {
+        "titel": "Bremsweg",
+        "text": "Beim Bremsen wird das Auto mit der Bremsverzögerung `a` langsamer. Der **Bremsweg** ist:\n\n`s_{B} = \\frac{v^{2}}{2a}`\n\nDer Bremsweg wächst mit dem **Quadrat** der Geschwindigkeit: Doppelte Geschwindigkeit bedeutet **vierfachen** Bremsweg. Auf trockener Straße schafft ein Auto etwa 8 m/s², auf nasser etwa 5 m/s², auf Eis nur 1 bis 2 m/s²."
+      },
+      {
+        "titel": "Anhalteweg und Fahrschul-Faustregeln",
+        "text": "**Anhalteweg = Reaktionsweg + Bremsweg.**\n\nFahrschul-Faustregeln (v in km/h, Ergebnis in m):\nReaktionsweg ≈ (v / 10) · 3\nBremsweg (normal) ≈ (v / 10) · (v / 10)\n\nBei 50 km/h: 15 m + 25 m = 40 m. Bei 30 km/h: 9 m + 9 m = 18 m. Wo ein Auto mit 30 km/h schon steht, hat ein Auto mit 50 km/h gerade erst angefangen zu bremsen und ist noch fast so schnell wie vorher.\n\nDie Faustregel für den Bremsweg rechnet mit einer normalen Bremsung (etwa 4 m/s²). Bei einer Vollbremsung auf trockener Straße (8 m/s²) ist der Bremsweg nur etwa halb so lang. Die Simulation rechnet mit diesen physikalischen Werten."
+      },
+      {
+        "titel": "Messfehler",
+        "text": "Bei Messungen (z. B. der Reaktionszeit mit einem fallenden Lineal) gibt es zwei Arten von Fehlern:\n\n**Zufällige Fehler** streuen mal nach oben, mal nach unten (z. B. schwankende Aufmerksamkeit). Man verringert sie durch **viele Messungen und Mittelwertbildung**.\n**Systematische Fehler** verfälschen alle Messungen in dieselbe Richtung (z. B. eine falsch eingestellte Waage, ein Lineal, das schon vorher angestoßen wird). Sie lassen sich durch Mitteln nicht beseitigen, nur durch ein besseres Messverfahren."
+      }
+    ],
+    "formeln": [
+      { "formel": "s_{R} = v · t_{R}", "bedeutung": "Reaktionsweg, `t_{R}` ≈ 1 s" },
+      { "formel": "s_{B} = \\frac{v^{2}}{2a}", "bedeutung": "Bremsweg mit der Bremsverzögerung `a`" },
+      { "formel": "s_{A} = s_{R} + s_{B}", "bedeutung": "Anhalteweg" }
+    ],
+    "merksatz": "Anhalteweg = Reaktionsweg + Bremsweg. Der Reaktionsweg wächst proportional zur Geschwindigkeit, der Bremsweg mit ihrem Quadrat.",
+    "alltag": "Bei einem Aufprall mit 50 km/h wirkt auf einen Menschen etwa so viel wie bei einem Sturz aus 10 m Höhe. Bei 30 km/h entspricht es etwa 3,5 m."
+  },
+  "interaktiv": ["k10-anhalteweg"],
+  "uebungen": [
+    { "id": "k10-aw-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Woraus setzt sich der Anhalteweg zusammen?",
+      "optionen": [
+        { "text": "Reaktionsweg + Bremsweg", "richtig": true },
+        { "text": "Nur aus dem Bremsweg", "feedback": "Vor dem Bremsen vergeht noch die Reaktionszeit, in der das Auto ungebremst weiterfährt." },
+        { "text": "Bremsweg − Reaktionsweg", "feedback": "Beide Wege werden addiert." }
+      ],
+      "erklaerung": "Erst reagiert man (Auto fährt weiter), dann bremst man (Auto wird langsamer)." },
+    { "id": "k10-aw-02", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Ein Auto fährt mit 50 km/h. Die Reaktionszeit beträgt 1 s. Wie lang ist der Reaktionsweg (physikalisch berechnet)?",
+      "gegeben": "`v = 50 km/h`, `t_{R} = 1 s`", "gesucht": "`s_{R}`", "gesuchtSymbol": "s_{R}",
+      "loesung": 13.889, "einheit": "m", "toleranz": 0.02,
+      "rechenweg": ["`v = 50 : 3,6 ≈ 13,9 m/s`", "`s_{R} = v · t_{R} = 13,9 m/s · 1 s ≈ 13,9 m`"],
+      "hinweis": "Rechne zuerst km/h in m/s um.",
+      "erklaerung": "Die Faustregel (50/10 · 3 = 15 m) rechnet etwas großzügiger, um auf der sicheren Seite zu sein." },
+    { "id": "k10-aw-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Ein Auto fährt mit 20 m/s und bremst mit a = 8 m/s². Wie lang ist der Bremsweg?",
+      "gegeben": "`v = 20 m/s`, `a = 8 m/s²`", "gesucht": "`s_{B}`", "gesuchtSymbol": "s_{B}",
+      "loesung": 25, "einheit": "m",
+      "rechenweg": ["`s_{B} = \\frac{v^{2}}{2a}`", "`s_{B} = \\frac{(20 m/s)^{2}}{2 · 8 m/s²} = \\frac{400}{16} m = 25 m`"],
+      "erklaerung": "20 m/s sind 72 km/h." },
+    { "id": "k10-aw-04", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Wie ändert sich der Bremsweg, wenn ein Auto doppelt so schnell fährt (gleiche Bremsverzögerung)?",
+      "optionen": [
+        { "text": "Er wird viermal so lang.", "richtig": true },
+        { "text": "Er wird doppelt so lang.", "feedback": "Das gilt für den Reaktionsweg. Der Bremsweg hängt vom Quadrat der Geschwindigkeit ab." },
+        { "text": "Er bleibt gleich.", "feedback": "Ein schnelleres Auto braucht immer länger zum Bremsen." }
+      ],
+      "erklaerung": "`s_{B} ~ v²`: (2v)² = 4v²." },
+    { "id": "k10-aw-05", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Berechne mit den Fahrschul-Faustregeln den Anhalteweg bei 100 km/h.",
+      "gegeben": "`v = 100 km/h`", "gesucht": "Anhalteweg",
+      "loesung": 130, "einheit": "m",
+      "rechenweg": ["Reaktionsweg: `(100/10) · 3 = 30 m`", "Bremsweg: `(100/10) · (100/10) = 100 m`", "Anhalteweg: `30 m + 100 m = 130 m`"],
+      "erklaerung": "Bei 100 km/h braucht ein Auto mehr als die Länge eines Fußballfeldes, um zu stehen." },
+    { "id": "k10-aw-06", "typ": "zuordnung", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Ordne jede Fehlerquelle bei der Messung der Reaktionszeit zu.",
+      "paare": [
+        { "links": "Die Aufmerksamkeit schwankt von Versuch zu Versuch.", "rechts": "zufälliger Fehler" },
+        { "links": "Die Stoppuhr geht immer 0,1 s nach.", "rechts": "systematischer Fehler" },
+        { "links": "Viele Messungen und Mittelwert bilden", "rechts": "verringert zufällige Fehler" }
+      ],
+      "extraRechts": ["beseitigt systematische Fehler"],
+      "erklaerung": "Mitteln hilft nur gegen zufällige Fehler. Systematische Fehler verschieben alle Werte gleich und bleiben im Mittelwert erhalten." },
+    { "id": "k10-aw-07", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Begründe physikalisch, warum vor Schulen Tempo 30 statt 50 gilt. Verwende Reaktionsweg und Bremsweg.",
+      "stichworte": [
+        { "aspekt": "Der Reaktionsweg wird kürzer (proportional zu v)", "woerter": ["reaktionsweg"] },
+        { "aspekt": "Der Bremsweg wird viel kürzer (quadratisch mit v)", "woerter": ["bremsweg", "quadrat"] },
+        { "aspekt": "Anhalteweg etwa 18 m statt 40 m; das Auto steht, bevor es ein Kind erreicht / Aufprall ist weniger heftig", "woerter": ["18", "40", "halb", "steht", "kind", "aufprall", "weniger gefaehrlich", "sicherer"] }
+      ],
+      "musterloesung": "Bei 30 km/h ist der Reaktionsweg nur etwa 9 m statt 15 m, weil er proportional zur Geschwindigkeit ist. Der Bremsweg sinkt sogar von etwa 25 m auf 9 m, weil er mit dem Quadrat der Geschwindigkeit wächst. Der Anhalteweg beträgt damit etwa 18 m statt 40 m, also weniger als die Hälfte. Läuft ein Kind 20 m vor dem Auto auf die Straße, kann ein Auto mit 30 km/h noch anhalten. Ein Auto mit 50 km/h hat nach 20 m erst 5 m gebremst und trifft das Kind noch mit etwa 45 km/h (nach den Faustregeln gerechnet).",
+      "erklaerung": "Weil der Bremsweg quadratisch wächst, bewirken schon kleine Geschwindigkeitsunterschiede große Unterschiede." }
+  ]
+}

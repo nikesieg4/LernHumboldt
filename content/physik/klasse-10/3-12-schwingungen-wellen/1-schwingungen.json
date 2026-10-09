@@ -1,0 +1,98 @@
+{
+  "id": "k10-schwingungen",
+  "titel": "Schwingungen, Dämpfung und Resonanz",
+  "kurz": "Pendel, Federschwinger und Kenngrößen einer Schwingung, und warum Brücken einstürzen können, wenn man im Gleichschritt marschiert.",
+  "reihenfolge": 1,
+  "lernziele": [
+    { "id": "lz1", "niveau": "G", "text": "Kenngrößen einer Schwingung (Elongation, Amplitude, Periodendauer, Frequenz) beschreiben" },
+    { "id": "lz2", "niveau": "H", "text": "Die Abhängigkeiten der Periodendauer von Fadenpendel und Federschwinger untersuchen" },
+    { "id": "lz3", "niveau": "G", "text": "Energieumwandlungen und Dämpfung bei Schwingungen beschreiben" },
+    { "id": "lz4", "niveau": "G", "text": "Das Phänomen der Resonanz erklären und Beispiele bewerten" }
+  ],
+  "verstehen": {
+    "einstieg": "Eine alte Standuhr geht nach. Wie kann man sie mit einem einzigen Handgriff am Pendel richtig stellen?",
+    "abschnitte": [
+      {
+        "titel": "Kenngrößen",
+        "text": "Eine **Schwingung** ist eine sich regelmäßig wiederholende Bewegung um eine **Ruhelage**.\n\n**Elongation** `y`: die momentane Auslenkung aus der Ruhelage.\n**Amplitude** `ŷ`: die größte Auslenkung.\n**Periodendauer** `T`: die Zeit für eine vollständige Hin- und Herbewegung.\n**Frequenz** `f`: die Anzahl der Schwingungen pro Sekunde, `f = 1 / T`, Einheit Hertz (Hz).\n\nIm y(t)-Diagramm ergibt eine **harmonische** Schwingung eine Sinuskurve."
+      },
+      {
+        "titel": "Fadenpendel und Federschwinger",
+        "text": "**Fadenpendel:** Die Periodendauer hängt nur von der **Pendellänge** `l` ab (und vom Ortsfaktor g), **nicht** von der Masse und, bei kleinen Auslenkungen, nicht von der Amplitude: `T = 2π · √(l / g)`. Vierfache Länge ergibt doppelte Periodendauer. Eine zu langsame Standuhr stellt man also richtig, indem man das Pendel **kürzer** macht.\n\n**Federschwinger:** Die Periodendauer wird größer mit der **Masse** und kleiner mit der **Federkonstante**: `T = 2π · √(m / D)`."
+      },
+      {
+        "titel": "Energie und Dämpfung",
+        "text": "Beim Pendel wandelt sich ständig potenzielle in kinetische Energie um und zurück: Im Umkehrpunkt ist die Lageenergie am größten und die Geschwindigkeit null, in der Ruhelage ist die Bewegungsenergie am größten.\n\nDurch Reibung wird bei jeder Schwingung ein Teil der Energie in Wärme umgewandelt, die Amplitude nimmt ab. Das ist eine **gedämpfte Schwingung**. Stoßdämpfer im Auto dämpfen absichtlich stark."
+      },
+      {
+        "titel": "Resonanz",
+        "text": "Jedes schwingungsfähige System hat eine **Eigenfrequenz**. Wird es von außen periodisch angestoßen, und stimmt die Anregungsfrequenz mit der Eigenfrequenz überein, schaukelt sich die Schwingung auf. Das ist **Resonanz**.\n\nNützlich: Beim Schaukeln muss man im richtigen Takt Schwung holen, Musikinstrumente nutzen Resonanzkörper. Gefährlich: Brücken, Gebäude oder Maschinen können durch Resonanz zerstört werden. Deshalb sollen Soldaten Brücken nicht im Gleichschritt überqueren."
+      }
+    ],
+    "formeln": [
+      { "formel": "f = \\frac{1}{T}", "bedeutung": "Frequenz in Hz, Periodendauer in s" },
+      { "formel": "T = 2π · \\sqrt{\\frac{l}{g}}", "bedeutung": "Fadenpendel (kleine Auslenkung), Länge `l`, `g = 9,81 m/s²`" },
+      { "formel": "T = 2π · \\sqrt{\\frac{m}{D}}", "bedeutung": "Federschwinger, Masse `m`, Federkonstante `D`" }
+    ],
+    "merksatz": "Kenngrößen: Elongation, Amplitude, Periodendauer `T`, Frequenz `f = 1/T`. Die Periodendauer eines Fadenpendels hängt nur von seiner Länge ab. Stimmt die Anregung mit der Eigenfrequenz überein, tritt Resonanz auf.",
+    "alltag": "Die Millennium Bridge in London begann 2000 bei der Eröffnung zu schwanken, weil sich die Fußgänger unbewusst im Takt der Brückenschwingung bewegten. Sie wurde danach mit Dämpfern nachgerüstet."
+  },
+  "interaktiv": ["k10-pendel"],
+  "uebungen": [
+    { "id": "k10-sc-01", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ordne jeder Kenngröße ihre Bedeutung zu.",
+      "paare": [
+        { "links": "Amplitude", "rechts": "größte Auslenkung aus der Ruhelage" },
+        { "links": "Periodendauer", "rechts": "Zeit für eine vollständige Schwingung" },
+        { "links": "Frequenz", "rechts": "Anzahl der Schwingungen pro Sekunde" },
+        { "links": "Elongation", "rechts": "momentane Auslenkung" }
+      ],
+      "erklaerung": "Periodendauer und Frequenz sind Kehrwerte voneinander: `f = 1/T`." },
+    { "id": "k10-sc-02", "typ": "zahl", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ein Pendel braucht für eine vollständige Schwingung 0,5 s. Wie groß ist seine Frequenz?",
+      "gegeben": "`T = 0,5 s`", "gesucht": "`f`", "gesuchtSymbol": "f",
+      "loesung": 2, "einheit": "Hz",
+      "rechenweg": ["`f = \\frac{1}{T} = \\frac{1}{0,5 s} = 2 Hz`"],
+      "erklaerung": "Zwei Schwingungen pro Sekunde." },
+    { "id": "k10-sc-03", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Man hängt an ein Fadenpendel eine doppelt so schwere Kugel (gleiche Fadenlänge). Wie ändert sich die Periodendauer?",
+      "optionen": [
+        { "text": "Gar nicht", "richtig": true },
+        { "text": "Sie wird doppelt so groß.", "feedback": "Die Masse hat beim Fadenpendel keinen Einfluss. Beim Federschwinger wäre das anders." },
+        { "text": "Sie wird halb so groß.", "feedback": "Probiere es in der Pendel-Simulation aus." }
+      ],
+      "erklaerung": "Eine schwerere Kugel wird stärker angezogen, ist aber auch träger. Beide Effekte heben sich auf, genau wie beim freien Fall." },
+    { "id": "k10-sc-04", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Berechne die Periodendauer eines 1 m langen Fadenpendels. (g = 9,81 m/s²)",
+      "gegeben": "`l = 1 m`, `g = 9,81 m/s²`", "gesucht": "`T`", "gesuchtSymbol": "T",
+      "loesung": 2.006, "einheit": "s", "toleranz": 0.02,
+      "rechenweg": ["`T = 2π · √(l / g)`", "`T = 2π · √(1 m / 9,81 m/s²) = 2π · 0,319 s ≈ 2,0 s`"],
+      "erklaerung": "Ein etwa 1 m langes Pendel „schlägt“ jede Sekunde einmal hin und einmal her. Deshalb haben Standuhren oft etwa so lange Pendel." },
+    { "id": "k10-sc-05", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Eine Pendeluhr geht nach (sie ist zu langsam). Was muss man tun?",
+      "optionen": [
+        { "text": "Das Pendel kürzer machen", "richtig": true },
+        { "text": "Das Pendel länger machen", "feedback": "Ein längeres Pendel schwingt langsamer. Die Uhr würde noch mehr nachgehen." },
+        { "text": "Ein schwereres Pendelgewicht anbringen", "feedback": "Die Masse hat keinen Einfluss auf die Periodendauer." }
+      ],
+      "erklaerung": "Ein kürzeres Pendel hat eine kleinere Periodendauer und schwingt schneller." },
+    { "id": "k10-sc-06", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Welche Aussagen zur Energie eines schwingenden Fadenpendels (ohne Reibung) sind richtig?",
+      "optionen": [
+        { "text": "Im Umkehrpunkt ist die potenzielle Energie am größten.", "richtig": true },
+        { "text": "In der Ruhelage ist die kinetische Energie am größten.", "richtig": true },
+        { "text": "Die Summe aus potenzieller und kinetischer Energie bleibt gleich.", "richtig": true },
+        { "text": "Im Umkehrpunkt ist die Geschwindigkeit am größten.", "feedback": "Im Umkehrpunkt kehrt das Pendel um, seine Geschwindigkeit ist dort null." }
+      ],
+      "erklaerung": "Ohne Reibung pendelt die Energie verlustfrei zwischen Lage- und Bewegungsenergie hin und her. Mit Reibung nimmt die Gesamtenergie ab: gedämpfte Schwingung." },
+    { "id": "k10-sc-07", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Erkläre, was Resonanz ist und warum Soldaten eine Brücke nicht im Gleichschritt überqueren sollen.",
+      "stichworte": [
+        { "aspekt": "Jedes schwingfähige System (die Brücke) hat eine Eigenfrequenz", "woerter": ["eigenfrequenz", "eigenschwingung"] },
+        { "aspekt": "Periodische Anregung mit dieser Frequenz schaukelt die Schwingung auf", "woerter": ["aufschaukeln", "schaukelt", "immer groesser", "amplitude waechst", "verstaerkt", "gleiche frequenz", "im takt"] },
+        { "aspekt": "Der Gleichschritt ist eine solche periodische Anregung; die Brücke kann beschädigt werden oder einstürzen", "woerter": ["gleichschritt", "einstuerz", "beschaedig", "zerstoer", "bricht", "kaputt"] }
+      ],
+      "musterloesung": "Jedes System, das schwingen kann, hat eine Eigenfrequenz, mit der es von selbst am liebsten schwingt. Wird es von außen immer wieder im Takt dieser Eigenfrequenz angestoßen, wird jedes Mal Energie hinzugefügt, und die Schwingung schaukelt sich immer weiter auf. Das nennt man Resonanz. Marschieren Soldaten im Gleichschritt, stoßen sie die Brücke periodisch an. Liegt ihr Schritttakt nahe der Eigenfrequenz der Brücke, können die Schwingungen so groß werden, dass die Brücke beschädigt wird oder sogar einstürzt.",
+      "erklaerung": "1850 stürzte in Angers (Frankreich) eine Hängebrücke ein, als Soldaten sie bei Sturm überquerten. Seitdem gibt es die Regel, Brücken nicht im Gleichschritt zu überqueren." }
+  ]
+}

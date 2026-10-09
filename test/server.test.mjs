@@ -80,7 +80,8 @@ test('Schülerliste, Klassenstufe, Übungen, Fortschritt und Lehrer-Übersicht',
   const k9 = await (await max.req('/physik/9')).text();
   assert.match(k9, /3\.6/); assert.match(k9, /Widerstand und ohmsches Gesetz/);
   const k10 = await (await max.req('/physik/10')).text();
-  assert.match(k10, /In Vorbereitung/);
+  assert.match(k10, /3\.7/); assert.match(k10, /Gleichmäßig beschleunigte Bewegung/);
+  for (const g of [7, 8]) assert.doesNotMatch(await (await max.req(`/physik/${g}`)).text(), /In Vorbereitung/);
 
   const verstehen = await (await max.req('/physik/9/k9-ohmsches-gesetz')).text();
   assert.match(verstehen, /Das lernst du hier/);

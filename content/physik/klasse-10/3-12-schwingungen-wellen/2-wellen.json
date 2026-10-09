@@ -1,0 +1,90 @@
+{
+  "id": "k10-wellen",
+  "titel": "Mechanische Wellen",
+  "kurz": "Wie sich Schwingungen im Raum ausbreiten: Längs- und Querwellen, Wellenlänge und Ausbreitungsgeschwindigkeit.",
+  "reihenfolge": 2,
+  "lernziele": [
+    { "id": "lz1", "niveau": "G", "text": "Eine mechanische Welle als Ausbreitung einer Schwingung beschreiben" },
+    { "id": "lz2", "niveau": "G", "text": "Längswellen und Querwellen unterscheiden" },
+    { "id": "lz3", "niveau": "H", "text": "Kenngrößen einer Welle angeben und `c = λ · f` anwenden" },
+    { "id": "lz4", "niveau": "H", "text": "Wellen in y(s)- und y(t)-Diagrammen darstellen und deuten" }
+  ],
+  "verstehen": {
+    "einstieg": "Bei einer La-Ola-Welle im Stadion läuft die Welle einmal ganz herum. Wie weit ist dabei ein einzelner Zuschauer gelaufen?",
+    "abschnitte": [
+      {
+        "titel": "Was ist eine Welle?",
+        "text": "Eine **mechanische Welle** entsteht, wenn sich eine Schwingung von einem Teilchen auf die benachbarten **gekoppelten** Teilchen überträgt und sich so im Raum ausbreitet.\n\nDie einzelnen Teilchen schwingen nur um ihre Ruhelage. Sie wandern **nicht** mit der Welle mit. Eine Welle transportiert **Energie, aber keine Materie**. Der Zuschauer bei der La-Ola-Welle steht nur kurz auf und setzt sich wieder."
+      },
+      {
+        "titel": "Querwelle und Längswelle",
+        "text": "**Querwelle (Transversalwelle):** Die Teilchen schwingen **senkrecht** zur Ausbreitungsrichtung. Beispiele: Seilwelle, Wasserwelle (näherungsweise), La-Ola-Welle.\n\n**Längswelle (Longitudinalwelle):** Die Teilchen schwingen **in** Ausbreitungsrichtung hin und her. Es entstehen Verdichtungen und Verdünnungen. Beispiel: **Schall** in Luft, eine angestoßene Schraubenfeder."
+      },
+      {
+        "titel": "Kenngrößen",
+        "text": "**Wellenlänge** `λ` (lambda): Abstand zweier benachbarter Teilchen, die gleich schwingen, z. B. von Wellenberg zu Wellenberg.\n**Frequenz** `f` und **Periodendauer** `T`: wie bei der Schwingung jedes einzelnen Teilchens.\n**Ausbreitungsgeschwindigkeit** `c`: In einer Periodendauer läuft die Welle genau eine Wellenlänge weiter, also `c = λ / T = λ · f`.\n\nSchall breitet sich in Luft mit etwa 343 m/s aus (bei 20 °C), in Wasser mit etwa 1480 m/s.\n\nEin **y(s)-Diagramm** ist wie ein Foto der Welle zu einem Zeitpunkt: Man liest die Wellenlänge ab. Ein **y(t)-Diagramm** zeigt die Bewegung eines einzelnen Teilchens: Man liest die Periodendauer ab."
+      }
+    ],
+    "formeln": [
+      { "formel": "c = λ · f", "bedeutung": "Ausbreitungsgeschwindigkeit `c` in m/s, Wellenlänge `λ` in m, Frequenz `f` in Hz" }
+    ],
+    "merksatz": "Eine Welle ist eine sich ausbreitende Schwingung. Sie transportiert Energie, aber keine Materie. Querwelle: Schwingung senkrecht zur Ausbreitung, Längswelle: in Ausbreitungsrichtung. `c = λ · f`.",
+    "alltag": "Bei einem Erdbeben kommen zuerst die schnelleren Längswellen (P-Wellen) an, danach die langsameren Querwellen (S-Wellen). Aus dem Zeitabstand kann man die Entfernung des Bebens berechnen."
+  },
+  "interaktiv": ["k10-wellen"],
+  "uebungen": [
+    { "id": "k10-we-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Was transportiert eine mechanische Welle?",
+      "optionen": [
+        { "text": "Energie, aber keine Materie", "richtig": true },
+        { "text": "Materie, aber keine Energie", "feedback": "Die Teilchen schwingen nur um ihre Ruhelage und wandern nicht mit." },
+        { "text": "Energie und Materie", "feedback": "Ein Korken auf dem Wasser hüpft auf und ab, wandert aber nicht mit der Welle." }
+      ],
+      "erklaerung": "Eine Wasserwelle kann ein Boot heben (Energie), ohne das Wasser selbst über den See zu tragen." },
+    { "id": "k10-we-02", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Ordne zu, ob es sich um eine Längs- oder Querwelle handelt.",
+      "paare": [
+        { "links": "Schall in Luft", "rechts": "Längswelle" },
+        { "links": "Welle auf einem geschüttelten Seil", "rechts": "Querwelle" }
+      ],
+      "erklaerung": "Schall besteht aus Verdichtungen und Verdünnungen der Luft. Beim Seil schwingen die Teile senkrecht zur Ausbreitungsrichtung." },
+    { "id": "k10-we-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Der Kammerton a hat eine Frequenz von 440 Hz. Wie groß ist seine Wellenlänge in Luft? (c = 343 m/s)",
+      "gegeben": "`f = 440 Hz`, `c = 343 m/s`", "gesucht": "`λ`", "gesuchtSymbol": "λ",
+      "loesung": 0.7795, "einheit": "m", "alternativEinheiten": { "cm": 0.01 }, "toleranz": 0.02,
+      "rechenweg": ["`λ = \\frac{c}{f}`", "`λ = \\frac{343 m/s}{440 Hz} ≈ 0,78 m`"],
+      "hinweis": "Stelle `c = λ · f` nach `λ` um. 1 Hz = 1/s.",
+      "erklaerung": "Tiefe Töne haben lange Wellenlängen (mehrere Meter), hohe Töne kurze (wenige Zentimeter)." },
+    { "id": "k10-we-04", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Eine Wasserwelle hat eine Wellenlänge von 2 m. Alle 4 s kommt ein Wellenberg am Steg an. Wie schnell breitet sich die Welle aus?",
+      "gegeben": "`λ = 2 m`, `T = 4 s`", "gesucht": "`c`", "gesuchtSymbol": "c",
+      "loesung": 0.5, "einheit": "m/s",
+      "rechenweg": ["`c = \\frac{λ}{T} = \\frac{2 m}{4 s} = 0,5 m/s`"],
+      "erklaerung": "In einer Periodendauer läuft die Welle genau eine Wellenlänge weit." },
+    { "id": "k10-we-05", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Welche Größe kann man an einem y(s)-Diagramm (Momentaufnahme der Welle) direkt ablesen?",
+      "optionen": [
+        { "text": "Die Wellenlänge", "richtig": true },
+        { "text": "Die Periodendauer", "feedback": "Die Periodendauer liest man an einem y(t)-Diagramm ab." },
+        { "text": "Die Frequenz", "feedback": "Dafür braucht man eine Zeitachse, also ein y(t)-Diagramm." }
+      ],
+      "erklaerung": "Im y(s)-Diagramm ist die Ortsachse waagerecht. Der Abstand von Berg zu Berg ist die Wellenlänge." },
+    { "id": "k10-we-06", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Ein Ton geht von Luft in Wasser über. Die Frequenz bleibt gleich, die Schallgeschwindigkeit steigt von 343 m/s auf etwa 1480 m/s. Was passiert mit der Wellenlänge?",
+      "optionen": [
+        { "text": "Sie wird etwa 4,3-mal so groß.", "richtig": true },
+        { "text": "Sie bleibt gleich.", "feedback": "Bei gleicher Frequenz ist `λ = c / f` proportional zur Geschwindigkeit." },
+        { "text": "Sie wird kleiner.", "feedback": "Höhere Geschwindigkeit bei gleicher Frequenz bedeutet größere Wellenlänge." }
+      ],
+      "erklaerung": "`λ = c / f`: 1480 / 343 ≈ 4,3. Die Frequenz bestimmt die Schallquelle, die Geschwindigkeit das Medium." },
+    { "id": "k10-we-07", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz1",
+      "frage": "Bei einer La-Ola-Welle läuft die Welle in 20 s einmal ums ganze Stadion. Beschreibe, was ein einzelner Zuschauer dabei tut, und erkläre daran den Unterschied zwischen der Bewegung der Teilchen und der Ausbreitung der Welle.",
+      "stichworte": [
+        { "aspekt": "Der Zuschauer steht auf und setzt sich wieder an seinem Platz (schwingt um die Ruhelage)", "woerter": ["aufstehen", "steht auf", "setzt sich", "bleibt", "platz", "ruhelage"] },
+        { "aspekt": "Er reagiert auf seinen Nachbarn (Kopplung)", "woerter": ["nachbar", "neben", "gekoppelt", "kopplung", "reagiert"] },
+        { "aspekt": "Nur die Bewegung (Energie) wandert weiter, nicht die Zuschauer", "woerter": ["nicht mit", "wandert nicht", "nur die bewegung", "keine materie", "energie", "ausbreit"] }
+      ],
+      "musterloesung": "Jeder Zuschauer steht kurz auf, hebt die Arme und setzt sich wieder an seinen Platz. Er schwingt also nur um seine Ruhelage, eine Querbewegung senkrecht zur Ausbreitungsrichtung. Er beginnt damit, sobald sein Nachbar aufsteht, die Zuschauer sind also gekoppelt. Die Welle selbst läuft in 20 s ums ganze Stadion, die Zuschauer bleiben aber an ihren Plätzen. Es breitet sich nur die Bewegung aus, nicht die Zuschauer. So transportiert eine Welle Energie, aber keine Materie.",
+      "erklaerung": "Die La-Ola-Welle ist ein gutes Modell für eine Querwelle." }
+  ]
+}

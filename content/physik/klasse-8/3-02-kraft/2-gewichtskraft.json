@@ -1,0 +1,85 @@
+{
+  "id": "k8-gewichtskraft",
+  "titel": "Masse und Gewichtskraft",
+  "kurz": "Warum du auf dem Mond leichter bist, deine Masse aber gleich bleibt.",
+  "reihenfolge": 2,
+  "lernziele": [
+    { "id": "lz1", "niveau": "E", "text": "Masse und Gewichtskraft unterscheiden und die Fachbegriffe erklären" },
+    { "id": "lz2", "niveau": "E", "text": "Die Gewichtskraft mit `F_{G} = m · g` berechnen" },
+    { "id": "lz3", "niveau": "F", "text": "Die Ortsabhängigkeit der Gewichtskraft beschreiben" }
+  ],
+  "verstehen": {
+    "einstieg": "Ein Astronaut wiegt auf der Erde 80 kg. Auf dem Mond hüpft er mühelos herum. Hat er dort weniger Masse?",
+    "abschnitte": [
+      {
+        "titel": "Masse und Gewichtskraft",
+        "text": "Die **Masse** `m` gibt an, wie viel Stoff ein Körper hat und wie träge er ist. Sie wird in Kilogramm (kg) gemessen und ist **überall gleich**, auf der Erde, auf dem Mond und im Weltall.\n\nDie **Gewichtskraft** `F_{G}` ist die Kraft, mit der ein Himmelskörper einen Körper anzieht. Sie wird in Newton (N) gemessen und hängt davon ab, **wo** sich der Körper befindet.\n\nIm Alltag sagt man „Ich wiege 50 kg“ und meint die Masse. Physikalisch korrekt: „Meine Masse beträgt 50 kg, meine Gewichtskraft auf der Erde etwa 490 N.“"
+      },
+      {
+        "titel": "Der Ortsfaktor",
+        "text": "Die Gewichtskraft ist proportional zur Masse: `F_{G} = m · g`. Der **Ortsfaktor** `g` gibt an, wie stark ein Himmelskörper an jedem Kilogramm zieht.\n\nErde: g ≈ 9,81 N/kg (oft gerundet 10 N/kg)\nMond: g ≈ 1,62 N/kg (etwa ein Sechstel)\nMars: g ≈ 3,71 N/kg\nJupiter: g ≈ 24,8 N/kg\n\nAuch auf der Erde schwankt g ein wenig: Am Äquator ist er etwas kleiner als an den Polen."
+      }
+    ],
+    "formeln": [
+      { "formel": "F_{G} = m · g", "bedeutung": "Gewichtskraft `F_{G}` in N, Masse `m` in kg, Ortsfaktor `g` in N/kg" }
+    ],
+    "merksatz": "Die **Masse** (kg) ist überall gleich. Die **Gewichtskraft** (N) hängt vom Ort ab: `F_{G} = m · g`, auf der Erde mit g ≈ 9,81 N/kg.",
+    "alltag": "Eine Waage misst eigentlich die Gewichtskraft und rechnet sie in Kilogramm um. Auf dem Mond würde eine Personenwaage deshalb nur ein Sechstel anzeigen, eine Balkenwaage (die Massen vergleicht) dagegen das Richtige."
+  },
+  "interaktiv": ["k8-feder"],
+  "uebungen": [
+    { "id": "k8-gk-01", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ordne zu.",
+      "paare": [
+        { "links": "Masse", "rechts": "Kilogramm, überall gleich" },
+        { "links": "Gewichtskraft", "rechts": "Newton, abhängig vom Ort" },
+        { "links": "Ortsfaktor auf der Erde", "rechts": "etwa 9,81 N/kg" }
+      ],
+      "extraRechts": ["etwa 1,62 N/kg auf der Erde"],
+      "erklaerung": "1,62 N/kg ist der Ortsfaktor auf dem Mond." },
+    { "id": "k8-gk-02", "typ": "zahl", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Welche Gewichtskraft hat ein Körper der Masse 5 kg auf der Erde? (g = 9,81 N/kg)",
+      "gegeben": "`m = 5 kg`, `g = 9,81 N/kg`", "gesucht": "`F_{G}`", "gesuchtSymbol": "F_{G}",
+      "loesung": 49.05, "einheit": "N",
+      "rechenweg": ["`F_{G} = m · g`", "`F_{G} = 5 kg · 9,81 N/kg = 49,05 N ≈ 49 N`"],
+      "erklaerung": "Mit dem gerundeten Wert g = 10 N/kg erhält man 50 N, das ist für viele Abschätzungen genau genug." },
+    { "id": "k8-gk-03", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz3",
+      "frage": "Ein Astronaut hat auf der Erde eine Masse von 80 kg. Wie groß ist seine Masse auf dem Mond?",
+      "optionen": [
+        { "text": "80 kg", "richtig": true },
+        { "text": "etwa 13 kg", "feedback": "Auf ein Sechstel sinkt die **Gewichtskraft**, nicht die Masse." },
+        { "text": "0 kg", "feedback": "Auch im Weltall hat ein Körper seine Masse." }
+      ],
+      "erklaerung": "Die Masse ist überall gleich. Nur die Gewichtskraft ist auf dem Mond kleiner." },
+    { "id": "k8-gk-04", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Wie groß ist die Gewichtskraft des 80-kg-Astronauten auf dem Mond? (g = 1,62 N/kg)",
+      "gegeben": "`m = 80 kg`, `g_{Mond} = 1,62 N/kg`", "gesucht": "`F_{G}`", "gesuchtSymbol": "F_{G}",
+      "loesung": 129.6, "einheit": "N",
+      "rechenweg": ["`F_{G} = 80 kg · 1,62 N/kg = 129,6 N`", "Auf der Erde wären es etwa 785 N."],
+      "erklaerung": "Auf dem Mond zieht nur etwa ein Sechstel der Erdkraft an ihm. Deshalb kann er dort so hoch springen." },
+    { "id": "k8-gk-05", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Ein Kraftmesser zeigt beim Anhängen eines Körpers 2,45 N an (auf der Erde, g = 9,81 N/kg). Welche Masse hat der Körper?",
+      "gegeben": "`F_{G} = 2,45 N`, `g = 9,81 N/kg`", "gesucht": "Masse `m`", "gesuchtSymbol": "m",
+      "loesung": 0.24975, "einheit": "kg", "alternativEinheiten": { "g": 0.001 }, "toleranz": 0.02,
+      "rechenweg": ["`m = \\frac{F_{G}}{g}`", "`m = \\frac{2,45 N}{9,81 N/kg} ≈ 0,25 kg = 250 g`"],
+      "hinweis": "Stelle `F_{G} = m · g` nach `m` um.",
+      "erklaerung": "Ein Kraftmesser misst Kräfte. Mit dem Ortsfaktor kann man daraus die Masse berechnen." },
+    { "id": "k8-gk-06", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Welcher Satz ist physikalisch korrekt?",
+      "optionen": [
+        { "text": "„Die Masse des Koffers beträgt 20 kg.“", "richtig": true },
+        { "text": "„Der Koffer hat eine Gewichtskraft von 20 kg.“", "feedback": "Kräfte werden in Newton angegeben, nicht in Kilogramm." },
+        { "text": "„Der Koffer wiegt auf dem Mond weniger Kilogramm.“", "feedback": "Die Masse in Kilogramm ändert sich auf dem Mond nicht." }
+      ],
+      "erklaerung": "Kilogramm ist die Einheit der Masse, Newton die Einheit der Kraft." },
+    { "id": "k8-gk-07", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Eine Personenwaage zeigt auf der Erde 60 kg an. Auf dem Mond zeigt sie nur 10 kg an. Erkläre, was die Waage eigentlich misst und warum die Anzeige auf dem Mond falsch ist.",
+      "stichworte": [
+        { "aspekt": "Die Waage misst die Gewichtskraft (wie stark sie zusammengedrückt wird)", "woerter": ["gewichtskraft", "kraft", "drueckt"] },
+        { "aspekt": "Auf dem Mond ist die Gewichtskraft nur etwa ein Sechstel so groß", "woerter": ["sechstel", "kleiner", "geringer", "weniger stark", "1,62"] },
+        { "aspekt": "Die Masse bleibt 60 kg, die Waage rechnet mit dem Ortsfaktor der Erde", "woerter": ["masse bleibt", "masse ist gleich", "60 kg", "ortsfaktor", "erde geeicht", "fuer die erde"] }
+      ],
+      "musterloesung": "Die Personenwaage misst eigentlich die Gewichtskraft, also wie stark sie zusammengedrückt wird. Sie rechnet diese Kraft mit dem Ortsfaktor der Erde (9,81 N/kg) in Kilogramm um. Auf dem Mond ist die Gewichtskraft nur etwa ein Sechstel so groß. Die Waage zeigt deshalb nur 10 kg an, obwohl die Masse der Person weiterhin 60 kg beträgt.",
+      "erklaerung": "Eine Balkenwaage vergleicht zwei Massen, die beide gleich stark angezogen werden. Sie zeigt deshalb überall dasselbe an." }
+  ]
+}

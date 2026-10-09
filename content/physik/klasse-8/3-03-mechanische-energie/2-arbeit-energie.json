@@ -1,0 +1,88 @@
+{
+  "id": "k8-arbeit-energie",
+  "titel": "Mechanische Arbeit und potenzielle Energie",
+  "kurz": "Wann man in der Physik von Arbeit spricht und wie viel Energie in einem hochgehobenen Körper steckt.",
+  "reihenfolge": 2,
+  "lernziele": [
+    { "id": "lz1", "niveau": "E", "text": "Die mechanische Arbeit als Produkt aus Kraft und Weg beschreiben und berechnen" },
+    { "id": "lz2", "niveau": "E", "text": "Arten der mechanischen Arbeit unterscheiden" },
+    { "id": "lz3", "niveau": "F", "text": "Die potenzielle Energie mit `E_{pot} = m · g · h` berechnen" },
+    { "id": "lz4", "niveau": "F", "text": "Den Zusammenhang zwischen mechanischer Arbeit und Energie erläutern" }
+  ],
+  "verstehen": {
+    "einstieg": "Du hältst eine schwere Tasche eine halbe Stunde lang ruhig in der Hand und bist danach erschöpft. Hast du im physikalischen Sinn Arbeit verrichtet?",
+    "abschnitte": [
+      {
+        "titel": "Mechanische Arbeit",
+        "text": "In der Physik wird **mechanische Arbeit** `W` verrichtet, wenn ein Körper durch eine Kraft **entlang eines Weges** bewegt oder verformt wird. Zeigen Kraft und Weg in die gleiche Richtung, gilt:\n\n`W = F · s`\n\nDie Einheit ist das **Joule** (J): 1 J = 1 N · 1 m. Ein Joule Arbeit verrichtet man, wenn man eine Tafel Schokolade (100 g) einen Meter hochhebt.\n\nHält man eine Tasche nur still, bewegt sie sich nicht (s = 0). Physikalisch wird dann **keine Arbeit** an der Tasche verrichtet, auch wenn die Muskeln ermüden."
+      },
+      {
+        "titel": "Arten der Arbeit",
+        "text": "**Hubarbeit:** Ein Körper wird gegen die Gewichtskraft angehoben: `W = F_{G} · h = m · g · h`.\n**Reibungsarbeit:** Ein Körper wird gegen die Reibung bewegt, z. B. ein Schrank über den Boden geschoben.\n**Verformungsarbeit:** Ein Körper wird verformt, z. B. eine Feder gespannt.\n**Beschleunigungsarbeit:** Ein Körper wird schneller gemacht."
+      },
+      {
+        "titel": "Arbeit verändert Energie",
+        "text": "Wer Arbeit verrichtet, überträgt Energie. Beim Hochheben eines Körpers steckt die Hubarbeit danach als **potenzielle Energie** im Körper:\n\n`E_{pot} = m · g · h`\n\nLässt man den Körper fallen, wird diese potenzielle Energie in kinetische Energie umgewandelt. Arbeit ist also die Energie, die durch eine Kraft übertragen wird. Deshalb haben beide dieselbe Einheit, das Joule.\n\nDie Höhe `h` misst man immer von einem gewählten **Nullniveau** aus, z. B. dem Fußboden."
+      }
+    ],
+    "formeln": [
+      { "formel": "W = F · s", "bedeutung": "Arbeit `W` in J, Kraft `F` in N, Weg `s` in m (Kraft in Wegrichtung)" },
+      { "formel": "E_{pot} = m · g · h", "bedeutung": "potenzielle Energie in J, Masse `m` in kg, `g` = 9,81 N/kg, Höhe `h` in m" }
+    ],
+    "merksatz": "Mechanische Arbeit: `W = F · s` (Joule). Ohne Weg keine Arbeit.\n\nBeim Heben wird Hubarbeit verrichtet, sie ist danach als potenzielle Energie `E_{pot} = m · g · h` gespeichert.",
+    "alltag": "In einem Pumpspeicherkraftwerk wird nachts Wasser nach oben gepumpt (Hubarbeit). Tagsüber, wenn viel Strom gebraucht wird, fließt es wieder hinunter und treibt Turbinen an."
+  },
+  "interaktiv": ["k8-flaschenzug"],
+  "uebungen": [
+    { "id": "k8-ar-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "In welchem Fall wird physikalisch Arbeit verrichtet?",
+      "optionen": [
+        { "text": "Ein Kasten wird vom Boden auf einen Tisch gehoben.", "richtig": true },
+        { "text": "Eine Tasche wird ruhig in der Hand gehalten.", "feedback": "Die Tasche bewegt sich nicht, der Weg ist null. Physikalisch wird keine Arbeit an ihr verrichtet." },
+        { "text": "Jemand denkt angestrengt über eine Matheaufgabe nach.", "feedback": "Geistige Anstrengung ist keine mechanische Arbeit." }
+      ],
+      "erklaerung": "Mechanische Arbeit braucht eine Kraft **und** einen Weg in Richtung der Kraft." },
+    { "id": "k8-ar-02", "typ": "zahl", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ein Schrank wird mit einer Kraft von 200 N 3 m weit über den Boden geschoben. Wie groß ist die verrichtete Arbeit?",
+      "gegeben": "`F = 200 N`, `s = 3 m`", "gesucht": "Arbeit `W`", "gesuchtSymbol": "W",
+      "loesung": 600, "einheit": "J", "alternativEinheiten": { "kJ": 1000 },
+      "rechenweg": ["`W = F · s`", "`W = 200 N · 3 m = 600 J`"],
+      "erklaerung": "Das ist Reibungsarbeit. Die Energie wird dabei in thermische Energie umgewandelt." },
+    { "id": "k8-ar-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Ein Eimer Wasser (10 kg) wird 2 m hochgehoben. Wie viel potenzielle Energie hat er danach gewonnen? (g = 9,81 N/kg)",
+      "gegeben": "`m = 10 kg`, `h = 2 m`, `g = 9,81 N/kg`", "gesucht": "`E_{pot}`", "gesuchtSymbol": "E_{pot}",
+      "loesung": 196.2, "einheit": "J", "alternativEinheiten": { "kJ": 1000 },
+      "rechenweg": ["`E_{pot} = m · g · h`", "`E_{pot} = 10 kg · 9,81 N/kg · 2 m = 196,2 J`"],
+      "erklaerung": "Genau so viel Hubarbeit muss man beim Hochheben verrichten." },
+    { "id": "k8-ar-04", "typ": "zuordnung", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Ordne jedem Beispiel die Art der Arbeit zu.",
+      "paare": [
+        { "links": "Ein Kran hebt einen Betonträger.", "rechts": "Hubarbeit" },
+        { "links": "Ein Bogen wird gespannt.", "rechts": "Verformungsarbeit" },
+        { "links": "Ein Schlitten wird über Asphalt gezogen.", "rechts": "Reibungsarbeit" },
+        { "links": "Ein Sprinter startet aus dem Stand.", "rechts": "Beschleunigungsarbeit" }
+      ],
+      "erklaerung": "Die Art der Arbeit sagt, gegen welche Kraft gearbeitet wird bzw. welche Energieform zunimmt." },
+    { "id": "k8-ar-05", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Eine Schülerin (50 kg) steigt eine Treppe 4 m hoch. Welche Hubarbeit verrichtet sie? (g = 9,81 N/kg)",
+      "gegeben": "`m = 50 kg`, `h = 4 m`", "gesucht": "Hubarbeit `W`", "gesuchtSymbol": "W",
+      "loesung": 1962, "einheit": "J", "alternativEinheiten": { "kJ": 1000 },
+      "rechenweg": ["`W = m · g · h`", "`W = 50 kg · 9,81 N/kg · 4 m = 1962 J ≈ 2 kJ`"],
+      "erklaerung": "Für die Hubarbeit zählt nur der Höhenunterschied, nicht die Länge der Treppe." },
+    { "id": "k8-ar-06", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Ein Stein hat in 5 m Höhe eine potenzielle Energie von 98,1 J. Welche Masse hat er? (g = 9,81 N/kg)",
+      "gegeben": "`E_{pot} = 98,1 J`, `h = 5 m`", "gesucht": "Masse `m`", "gesuchtSymbol": "m",
+      "loesung": 2, "einheit": "kg", "alternativEinheiten": { "g": 0.001 },
+      "rechenweg": ["`m = \\frac{E_{pot}}{g · h}`", "`m = \\frac{98,1 J}{9,81 N/kg · 5 m} = 2 kg`"],
+      "hinweis": "Stelle `E_{pot} = m · g · h` nach `m` um.",
+      "erklaerung": "1 J = 1 N · m, und N/kg · kg = N. Die Einheiten passen also zusammen." },
+    { "id": "k8-ar-07", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Ein Koffer wird einmal direkt 1 m hochgehoben und einmal über eine 3 m lange Rampe auf dieselbe Höhe geschoben (ohne Reibung). Wie verhalten sich die verrichteten Arbeiten?",
+      "optionen": [
+        { "text": "Sie sind gleich groß.", "richtig": true },
+        { "text": "Über die Rampe ist sie dreimal so groß.", "feedback": "Über die Rampe ist der Weg länger, aber die nötige Kraft kleiner. Das Produkt bleibt gleich." },
+        { "text": "Über die Rampe ist sie kleiner.", "feedback": "Am Ende hat der Koffer in beiden Fällen dieselbe potenzielle Energie." }
+      ],
+      "erklaerung": "Am Ende hat der Koffer in beiden Fällen dieselbe potenzielle Energie. Ohne Reibung muss deshalb auch dieselbe Arbeit verrichtet werden. Das ist die Goldene Regel der Mechanik." }
+  ]
+}

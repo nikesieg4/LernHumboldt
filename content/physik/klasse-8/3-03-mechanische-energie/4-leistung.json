@@ -1,0 +1,84 @@
+{
+  "id": "k8-leistung",
+  "titel": "Mechanische Leistung",
+  "kurz": "Wer die Treppe hochrennt, verrichtet dieselbe Arbeit wie jemand, der schlendert, aber eine größere Leistung.",
+  "reihenfolge": 4,
+  "lernziele": [
+    { "id": "lz1", "niveau": "E", "text": "Die Leistung als Arbeit pro Zeit beschreiben" },
+    { "id": "lz2", "niveau": "F", "text": "Mechanische Leistungen berechnen und Ergebnisse mit sinnvoller Genauigkeit angeben" },
+    { "id": "lz3", "niveau": "F", "text": "Zusammenhänge zwischen Arbeit, Energie und Leistung erläutern" }
+  ],
+  "verstehen": {
+    "einstieg": "Zwei Schüler tragen gleich schwere Kisten in den 2. Stock. Der eine braucht 30 Sekunden, der andere 2 Minuten. Wer hat mehr Arbeit verrichtet?",
+    "abschnitte": [
+      {
+        "titel": "Leistung ist Arbeit pro Zeit",
+        "text": "Die **Leistung** `P` gibt an, **wie schnell** Arbeit verrichtet bzw. Energie umgewandelt wird:\n\n`P = W / t`\n\nDie Einheit ist das **Watt** (W): 1 W = 1 J/s. Wer dieselbe Arbeit in kürzerer Zeit verrichtet, erbringt eine größere Leistung.\n\nBeide Schüler haben also dieselbe Arbeit verrichtet, aber der schnellere hat die viermal so große Leistung erbracht."
+      },
+      {
+        "titel": "Arbeit, Energie und Leistung",
+        "text": "**Arbeit** und **Energie** werden beide in Joule gemessen: Arbeit ist übertragene Energie. **Leistung** sagt, wie viel Energie pro Sekunde übertragen wird.\n\nUmgestellt gilt `W = P · t`. Daher kommt auch die Einheit **Kilowattstunde**: Ein Gerät mit 1 kW Leistung wandelt in einer Stunde 1 kWh = 3 600 000 J um.\n\nTypische Leistungen: Mensch beim Treppensteigen etwa 100 bis 500 W, Fahrradfahrer im Rennen bis 400 W, Auto 50 bis 200 kW. Die alte Einheit PS (Pferdestärke) entspricht etwa 735 W."
+      }
+    ],
+    "formeln": [
+      { "formel": "P = \\frac{W}{t}", "bedeutung": "Leistung `P` in W, Arbeit `W` in J, Zeit `t` in s" },
+      { "formel": "W = P · t", "bedeutung": "Umgestellt nach der Arbeit" }
+    ],
+    "merksatz": "Leistung ist Arbeit pro Zeit: `P = W / t`. Einheit: Watt (1 W = 1 J/s).",
+    "alltag": "Bei einem Fitnessgerät mit Leistungsanzeige kannst du deine eigene Leistung in Watt sehen. Ein trainierter Mensch schafft für kurze Zeit über 1000 W, über eine Stunde nur einen Bruchteil davon."
+  },
+  "interaktiv": [],
+  "uebungen": [
+    { "id": "k8-le-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Zwei Personen tragen gleich schwere Kisten gleich hoch. Anna braucht 20 s, Ben 40 s. Was gilt?",
+      "optionen": [
+        { "text": "Beide verrichten dieselbe Arbeit, Anna erbringt die doppelte Leistung.", "richtig": true },
+        { "text": "Anna verrichtet die doppelte Arbeit.", "feedback": "Die Arbeit hängt von Kraft und Weg ab, nicht von der Zeit." },
+        { "text": "Ben erbringt die größere Leistung, weil er länger arbeitet.", "feedback": "Längere Zeit für dieselbe Arbeit bedeutet **kleinere** Leistung." }
+      ],
+      "erklaerung": "Gleiche Arbeit in halber Zeit bedeutet doppelte Leistung: P = W / t." },
+    { "id": "k8-le-02", "typ": "zahl", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Ein Kran verrichtet in 10 s eine Arbeit von 5000 J. Wie groß ist seine Leistung?",
+      "gegeben": "`W = 5000 J`, `t = 10 s`", "gesucht": "Leistung `P`", "gesuchtSymbol": "P",
+      "loesung": 500, "einheit": "W", "alternativEinheiten": { "kW": 1000 },
+      "rechenweg": ["`P = \\frac{W}{t}`", "`P = \\frac{5000 J}{10 s} = 500 W`"],
+      "erklaerung": "Pro Sekunde werden 500 J übertragen." },
+    { "id": "k8-le-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Ein Schüler (60 kg) rennt in 8 s eine 4 m hohe Treppe hinauf. Welche Leistung erbringt er? (g = 9,81 N/kg)",
+      "gegeben": "`m = 60 kg`, `h = 4 m`, `t = 8 s`", "gesucht": "Leistung `P`", "gesuchtSymbol": "P",
+      "loesung": 294.3, "einheit": "W", "toleranz": 0.03,
+      "rechenweg": ["Hubarbeit: `W = m · g · h = 60 kg · 9,81 N/kg · 4 m = 2354,4 J`", "Leistung: `P = \\frac{2354,4 J}{8 s} ≈ 294 W`"],
+      "hinweis": "Berechne zuerst die Hubarbeit, dann teile durch die Zeit.",
+      "erklaerung": "Sinnvoll gerundet sind das etwa 290 W bis 300 W. Mehr Stellen täuschen eine Genauigkeit vor, die die Messung (Stoppuhr, Höhe) nicht hat." },
+    { "id": "k8-le-04", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Ein Motor mit 1,5 kW Leistung läuft 2 Minuten. Wie viel Arbeit verrichtet er?",
+      "gegeben": "`P = 1,5 kW`, `t = 2 min`", "gesucht": "Arbeit `W`", "gesuchtSymbol": "W",
+      "loesung": 180000, "einheit": "J", "alternativEinheiten": { "kJ": 1000 },
+      "rechenweg": ["Einheiten umrechnen: `P = 1500 W`, `t = 120 s`", "`W = P · t = 1500 W · 120 s = 180 000 J = 180 kJ`"],
+      "hinweis": "Rechne kW in W und Minuten in Sekunden um.",
+      "erklaerung": "Watt mal Sekunde ergibt Joule." },
+    { "id": "k8-le-05", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz3",
+      "frage": "Ordne jeder Größe ihre Einheit zu.",
+      "paare": [
+        { "links": "Kraft", "rechts": "Newton (N)" },
+        { "links": "Arbeit", "rechts": "Joule (J)" },
+        { "links": "Leistung", "rechts": "Watt (W)" }
+      ],
+      "extraRechts": ["Kilogramm (kg)"],
+      "erklaerung": "1 J = 1 N · m und 1 W = 1 J/s." },
+    { "id": "k8-le-06", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz2",
+      "frage": "Ein Aufzug mit 1000 kg Gesamtmasse soll in 20 s um 30 m gehoben werden. Welche Leistung braucht der Motor mindestens? (g = 9,81 N/kg)",
+      "gegeben": "`m = 1000 kg`, `h = 30 m`, `t = 20 s`", "gesucht": "Leistung `P`", "gesuchtSymbol": "P",
+      "loesung": 14715, "einheit": "W", "alternativEinheiten": { "kW": 1000 }, "toleranz": 0.03,
+      "rechenweg": ["`W = m · g · h = 1000 kg · 9,81 N/kg · 30 m = 294 300 J`", "`P = \\frac{294 300 J}{20 s} = 14 715 W ≈ 15 kW`"],
+      "erklaerung": "„Mindestens“, weil Reibung und Wirkungsgrad des Motors noch dazukommen. In der Praxis braucht man eine noch größere Leistung." },
+    { "id": "k8-le-07", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Ein Auto hat 100 kW, ein anderes 50 kW. Beide fahren gleich weit den gleichen Berg hinauf. Was gilt (gleiche Masse, ohne Reibung)?",
+      "optionen": [
+        { "text": "Beide brauchen dieselbe Energie, das stärkere Auto schafft es in der halben Zeit.", "richtig": true },
+        { "text": "Das stärkere Auto braucht doppelt so viel Energie.", "feedback": "Die Energie hängt nur von Masse und Höhenunterschied ab." },
+        { "text": "Das schwächere Auto kommt nicht hoch.", "feedback": "Es braucht nur länger. Leistung bestimmt die Geschwindigkeit, nicht ob es geht." }
+      ],
+      "erklaerung": "Die Hubarbeit ist für beide gleich. Die doppelte Leistung verrichtet sie in der halben Zeit." }
+  ]
+}

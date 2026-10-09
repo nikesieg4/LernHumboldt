@@ -1,0 +1,96 @@
+{
+  "id": "k7-strom-wirkungen",
+  "titel": "Strom als bewegte Ladung und seine Wirkungen",
+  "kurz": "Was im Draht passiert, wenn Strom fließt, und was der Strom alles bewirken kann.",
+  "reihenfolge": 3,
+  "lernziele": [
+    { "id": "lz1", "niveau": "E", "text": "Elektrischen Strom als bewegte elektrische Ladung beschreiben" },
+    { "id": "lz2", "niveau": "E", "text": "Die elektrische Leitung in Metallen mit dem Modell des Elektronengases erklären" },
+    { "id": "lz3", "niveau": "D", "text": "Wirkungen des elektrischen Stroms nennen und Beispiele zuordnen" },
+    { "id": "lz4", "niveau": "D", "text": "Elektrische Energiequellen nennen und Sicherheitsregeln in Haushalt und Verkehr übertragen" }
+  ],
+  "verstehen": {
+    "einstieg": "Schaltest du das Licht ein, leuchtet die Lampe sofort, obwohl die Elektronen im Draht nur im Schneckentempo kriechen. Wie passt das zusammen?",
+    "abschnitte": [
+      {
+        "titel": "Strom ist bewegte Ladung",
+        "text": "Elektrischer Strom ist die **gerichtete Bewegung von Ladungsträgern**. In Metallen sind das Elektronen.\n\n**Modell des Elektronengases:** Im Metall sitzen die Atomrümpfe fest an ihren Plätzen. Ein Teil der Elektronen kann sich zwischen ihnen frei bewegen, wie ein Gas. Ohne Spannung bewegen sie sich ungeordnet durcheinander. Legt man eine Quelle an, werden alle freien Elektronen gleichzeitig in eine Richtung angetrieben, vom Minus- zum Pluspol.\n\nDie Elektronen kriechen nur Millimeter pro Sekunde voran. Weil der Draht aber überall schon voller Elektronen ist, setzen sich alle **gleichzeitig** in Bewegung. Deshalb leuchtet die Lampe sofort, ähnlich wie bei einem Gartenschlauch voller Wasser."
+      },
+      {
+        "titel": "Technische Stromrichtung",
+        "text": "Bevor man die Elektronen kannte, hat man festgelegt: Der Strom fließt außerhalb der Quelle **von Plus nach Minus**. Diese **technische Stromrichtung** benutzt man bis heute in Schaltplänen. Die Elektronen bewegen sich tatsächlich in die Gegenrichtung."
+      },
+      {
+        "titel": "Wirkungen des elektrischen Stroms",
+        "text": "Strom selbst kann man nicht sehen. Man erkennt ihn an seinen **Wirkungen**:\n\n**Wärmewirkung:** Jeder Leiter erwärmt sich (Wasserkocher, Toaster, Föhn).\n**Lichtwirkung:** Glühdrähte, LEDs und Leuchtstoffröhren leuchten.\n**Magnetische Wirkung:** Um jeden stromdurchflossenen Leiter entsteht ein Magnetfeld (Elektromagnet, Elektromotor).\n**Chemische Wirkung:** Strom kann Stoffe zerlegen oder verändern (Laden eines Akkus, Galvanisieren).\n**Wirkung auf Lebewesen:** Strom lässt Muskeln zucken, das kann lebensgefährlich sein."
+      },
+      {
+        "titel": "Energiequellen und Sicherheit",
+        "text": "Elektrische Energiequellen sind z. B. Batterien und Akkus, Netzgeräte, Solarzellen und Generatoren in Kraftwerken.\n\n**Sicherheit im Alltag:** Die Steckdose (230 V) und Oberleitungen sind lebensgefährlich. Nie mit nassen Händen an Elektrogeräte fassen, keine beschädigten Kabel benutzen, Föhn nie in die Nähe der Badewanne. Bei der Bahn gilt: Abstand zu Oberleitungen halten, nie auf Waggons klettern. Die Berliner S-Bahn hat eine seitliche Stromschiene, die niemals betreten werden darf."
+      }
+    ],
+    "merksatz": "Elektrischer Strom ist bewegte Ladung, in Metallen die Bewegung freier Elektronen (Elektronengas). Man erkennt ihn an seinen Wirkungen: Wärme, Licht, Magnetismus, chemische Wirkung und Wirkung auf Lebewesen.",
+    "alltag": "Ein Elektroauto nutzt gleich mehrere Wirkungen: Der Motor die magnetische, der Akku beim Laden die chemische, die Scheinwerfer die Lichtwirkung und die Heizung die Wärmewirkung."
+  },
+  "interaktiv": [],
+  "uebungen": [
+    { "id": "k7-sw-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Was bewegt sich in einem Metalldraht, wenn Strom fließt?",
+      "optionen": [
+        { "text": "Freie Elektronen", "richtig": true },
+        { "text": "Die Atomrümpfe", "feedback": "Die Atomrümpfe bleiben an ihren festen Plätzen." },
+        { "text": "Luft im Draht", "feedback": "Im Draht ist keine Luft. Es bewegen sich Ladungsträger." }
+      ],
+      "erklaerung": "In Metallen sind freie Elektronen die Ladungsträger. Sie bilden das „Elektronengas“." },
+    { "id": "k7-sw-02", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz3",
+      "frage": "Ordne jedem Gerät die Wirkung des Stroms zu, die es hauptsächlich nutzt.",
+      "paare": [
+        { "links": "Wasserkocher", "rechts": "Wärmewirkung" },
+        { "links": "LED-Lampe", "rechts": "Lichtwirkung" },
+        { "links": "Elektromagnet am Schrottkran", "rechts": "magnetische Wirkung" },
+        { "links": "Akku beim Aufladen", "rechts": "chemische Wirkung" }
+      ],
+      "erklaerung": "Viele Geräte nutzen mehrere Wirkungen. Die Wärmewirkung tritt bei jedem Strom auf, oft ist sie aber ein unerwünschter Nebeneffekt." },
+    { "id": "k7-sw-03", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "In welche Richtung fließt der Strom nach der technischen Stromrichtung außerhalb der Quelle?",
+      "optionen": [
+        { "text": "Von Plus nach Minus", "richtig": true },
+        { "text": "Von Minus nach Plus", "feedback": "So bewegen sich die Elektronen. Die technische Stromrichtung wurde früher anders herum festgelegt." }
+      ],
+      "erklaerung": "Die technische Stromrichtung (Plus → Minus) ist eine historische Festlegung. Die Elektronen bewegen sich entgegengesetzt." },
+    { "id": "k7-sw-04", "typ": "text", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Beschreibe mit dem Modell des Elektronengases, was in einem Metalldraht passiert, wenn man ihn an eine Batterie anschließt.",
+      "stichworte": [
+        { "aspekt": "Im Metall gibt es frei bewegliche Elektronen zwischen festen Atomrümpfen", "woerter": ["freie elektronen", "frei beweglich", "elektronengas", "atomruempfe"] },
+        { "aspekt": "Ohne Spannung bewegen sie sich ungeordnet", "woerter": ["ungeordnet", "durcheinander", "zufaellig", "alle richtungen"] },
+        { "aspekt": "Mit der Batterie bewegen sie sich gemeinsam in eine Richtung (vom Minus- zum Pluspol)", "woerter": ["eine richtung", "gerichtet", "gemeinsam", "zum pluspol", "von minus", "angetrieben"] }
+      ],
+      "musterloesung": "Im Metall sitzen die Atomrümpfe fest an ihren Plätzen. Dazwischen gibt es frei bewegliche Elektronen, die sich wie ein Gas verhalten (Elektronengas). Ohne Batterie bewegen sie sich ungeordnet in alle Richtungen, und insgesamt fließt kein Strom. Schließt man den Draht an eine Batterie an, werden alle freien Elektronen gleichzeitig in eine Richtung angetrieben, vom Minuspol zum Pluspol. Diese gerichtete Bewegung ist der elektrische Strom.",
+      "erklaerung": "Das Modell erklärt auch, warum Metalle gute Leiter sind und Kunststoffe nicht: In Kunststoffen gibt es keine freien Elektronen." },
+    { "id": "k7-sw-05", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz2",
+      "frage": "Die Elektronen im Draht bewegen sich nur wenige Millimeter pro Sekunde. Trotzdem leuchtet eine Lampe sofort nach dem Einschalten. Warum?",
+      "optionen": [
+        { "text": "Der Draht ist überall schon voller Elektronen, die sich alle gleichzeitig in Bewegung setzen.", "richtig": true },
+        { "text": "Die Elektronen sind in Wirklichkeit lichtschnell.", "feedback": "Die einzelnen Elektronen sind tatsächlich langsam. Entscheidend ist, dass alle gleichzeitig losgehen." },
+        { "text": "Die Lampe enthält einen eigenen Vorrat an Elektronen.", "feedback": "Auch die Lampe ist Teil des Stromkreises, in dem überall Elektronen sind. Ein Vorrat erklärt das Leuchten aber nicht." }
+      ],
+      "erklaerung": "Wie bei einem Wasserschlauch: Öffnet man den Hahn, kommt sofort Wasser vorne heraus, obwohl das Wasser vom Hahn noch lange nicht vorne angekommen ist." },
+    { "id": "k7-sw-06", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Welche Verhaltensweisen sind gefährlich?",
+      "optionen": [
+        { "text": "Mit nassen Händen einen Stecker in die Steckdose stecken", "richtig": true },
+        { "text": "Ein Kabel mit beschädigter Isolierung weiter benutzen", "richtig": true },
+        { "text": "Bei der S-Bahn den Bereich neben den Gleisen mit der Stromschiene betreten", "richtig": true },
+        { "text": "Mit einer 1,5-V-Batterie und einer kleinen Lampe experimentieren", "feedback": "Kleine Batterien sind für Experimente gedacht und ungefährlich, solange man keinen Kurzschluss baut." }
+      ],
+      "erklaerung": "Netzspannung (230 V) und Bahnstrom sind lebensgefährlich. Wasser und beschädigte Isolierungen machen es leichter, dass Strom durch den Körper fließt." },
+    { "id": "k7-sw-07", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Welche **dieser** Wirkungen des Stroms tritt **immer** auf, wenn Strom durch einen Leiter fließt, auch wenn sie nicht erwünscht ist?",
+      "optionen": [
+        { "text": "Die Wärmewirkung", "richtig": true },
+        { "text": "Die Lichtwirkung", "feedback": "Viele Leiter leuchten nicht, z. B. ein Verlängerungskabel." },
+        { "text": "Die chemische Wirkung", "feedback": "Die chemische Wirkung tritt nur bei bestimmten Stoffen auf, z. B. in Flüssigkeiten." }
+      ],
+      "erklaerung": "Jeder Leiter hat einen Widerstand und wird warm. Auch die magnetische Wirkung tritt immer auf, ist aber nur mit empfindlichen Geräten zu bemerken. Bei Ladegeräten oder Laptops ist die Wärme ein unerwünschter Verlust." }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "id": "k10-wellenphaenomene",
+  "titel": "Reflexion, Brechung, Beugung und Interferenz",
+  "kurz": "Was Wellen an Hindernissen und beim Zusammentreffen machen: vom Echo bis zum Noise-Cancelling-Kopfhörer.",
+  "reihenfolge": 3,
+  "lernziele": [
+    { "id": "lz1", "niveau": "G", "text": "Reflexion und Brechung mechanischer Wellen beschreiben" },
+    { "id": "lz2", "niveau": "H", "text": "Beugung an Hindernissen und Öffnungen beschreiben" },
+    { "id": "lz3", "niveau": "H", "text": "Interferenz als Überlagerung von Wellen erklären (Verstärkung und Auslöschung)" },
+    { "id": "lz4", "niveau": "H", "text": "Wellenphänomene im Alltag erkennen und Sachverhalte in Fachsprache erklären" }
+  ],
+  "verstehen": {
+    "einstieg": "Warum hörst du die Musik aus dem Nachbarzimmer auch um die Ecke herum, siehst die Musiker aber nicht?",
+    "abschnitte": [
+      {
+        "titel": "Reflexion",
+        "text": "Trifft eine Welle auf ein Hindernis, wird sie **zurückgeworfen**. Dabei gilt das **Reflexionsgesetz**: Einfallswinkel = Reflexionswinkel (gemessen zum Lot).\n\nBeispiele: Echo in den Bergen, Wasserwellen an der Hafenmauer, Ultraschall beim Arzt, Echolot von Fledermäusen und Schiffen."
+      },
+      {
+        "titel": "Brechung",
+        "text": "Läuft eine Welle **schräg** in ein anderes Medium (oder in ein Gebiet mit anderer Ausbreitungsgeschwindigkeit), ändert sie ihre **Richtung**. Das ist **Brechung**. Die Ursache ist die Änderung der Ausbreitungsgeschwindigkeit.\n\nBeispiel: Wasserwellen laufen im flachen Wasser langsamer. Deshalb drehen Wellen am Strand so, dass sie fast parallel zur Küste ankommen."
+      },
+      {
+        "titel": "Beugung",
+        "text": "Wellen breiten sich auch **hinter Hindernisse** und hinter Öffnungen in den **Schattenraum** aus. Das heißt **Beugung**. Sie ist besonders stark, wenn das Hindernis oder die Öffnung ungefähr so groß ist wie die **Wellenlänge** oder kleiner.\n\nSchall hat Wellenlängen von Zentimetern bis Metern, ähnlich wie Türen. Deshalb hört man um die Ecke. Licht hat winzige Wellenlängen (unter einem Tausendstel Millimeter), deshalb sieht man nicht um die Ecke."
+      },
+      {
+        "titel": "Interferenz",
+        "text": "Treffen zwei Wellen aufeinander, **überlagern** sie sich: Die Auslenkungen addieren sich. Das ist **Interferenz**.\n\nTreffen Berg auf Berg, **verstärken** sich die Wellen (konstruktive Interferenz). Treffen Berg auf Tal, **löschen** sie sich ganz oder teilweise **aus** (destruktive Interferenz). Danach laufen beide Wellen ungestört weiter.\n\n**Noise-Cancelling-Kopfhörer** messen den Umgebungslärm und erzeugen eine Gegenschallwelle, die genau Tal auf Berg trifft. Der Lärm wird so ausgelöscht."
+      }
+    ],
+    "merksatz": "**Reflexion**: Zurückwerfen (Einfallswinkel = Reflexionswinkel). **Brechung**: Richtungsänderung durch Geschwindigkeitsänderung. **Beugung**: Ausbreitung in den Schattenraum, stark bei Hindernissen in der Größe der Wellenlänge. **Interferenz**: Überlagerung mit Verstärkung oder Auslöschung.",
+    "alltag": "In Konzertsälen werden Wände und Decken so geformt, dass Reflexionen den Klang verbessern und keine störenden Echos entstehen."
+  },
+  "interaktiv": ["k10-wellen"],
+  "uebungen": [
+    { "id": "k10-wp-01", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz4",
+      "frage": "Ordne jedem Beispiel das passende Wellenphänomen zu.",
+      "paare": [
+        { "links": "Echo in den Bergen", "rechts": "Reflexion" },
+        { "links": "Man hört die Musik um die Ecke herum.", "rechts": "Beugung" },
+        { "links": "Ein Kopfhörer löscht Lärm mit Gegenschall aus.", "rechts": "Interferenz" },
+        { "links": "Wellen drehen am flachen Strand Richtung Küste.", "rechts": "Brechung" }
+      ],
+      "erklaerung": "Alle vier Phänomene sind typisch für Wellen. Sie sind ein Hinweis darauf, dass etwas eine Welle ist." },
+    { "id": "k10-wp-02", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Eine Wasserwelle trifft unter einem Winkel von 30° zum Lot auf eine Mauer. Unter welchem Winkel wird sie reflektiert?",
+      "optionen": [
+        { "text": "30° zum Lot", "richtig": true },
+        { "text": "60° zum Lot", "feedback": "60° wäre der Winkel zur Mauer selbst, nicht zum Lot." },
+        { "text": "90° zum Lot", "feedback": "Es gilt: Einfallswinkel = Reflexionswinkel." }
+      ],
+      "erklaerung": "Reflexionsgesetz: Einfallswinkel = Reflexionswinkel, beide zum Lot gemessen." },
+    { "id": "k10-wp-03", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Wann ist die Beugung einer Welle an einer Öffnung besonders stark?",
+      "optionen": [
+        { "text": "Wenn die Öffnung etwa so groß wie die Wellenlänge oder kleiner ist", "richtig": true },
+        { "text": "Wenn die Öffnung viel größer als die Wellenlänge ist", "feedback": "Bei großen Öffnungen läuft die Welle fast geradeaus durch, mit scharfem Schatten." },
+        { "text": "Die Größe der Öffnung spielt keine Rolle.", "feedback": "Gerade das Verhältnis von Öffnung zu Wellenlänge ist entscheidend." }
+      ],
+      "erklaerung": "Deshalb wird Schall (große Wellenlänge) an Türen stark gebeugt, Licht (winzige Wellenlänge) kaum." },
+    { "id": "k10-wp-04", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Zwei gleich große Wellen treffen so aufeinander, dass Wellenberg auf Wellental trifft. Was passiert an dieser Stelle?",
+      "optionen": [
+        { "text": "Sie löschen sich aus.", "richtig": true },
+        { "text": "Sie verstärken sich zu doppelter Höhe.", "feedback": "Das passiert, wenn Berg auf Berg trifft." },
+        { "text": "Sie werden beide zurückgeworfen.", "feedback": "Wellen laufen nach der Überlagerung ungestört weiter." }
+      ],
+      "erklaerung": "Die Auslenkungen addieren sich: +y und −y ergeben null (destruktive Interferenz)." },
+    { "id": "k10-wp-05", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Welche Aussagen zur Brechung sind richtig?",
+      "optionen": [
+        { "text": "Brechung entsteht durch eine Änderung der Ausbreitungsgeschwindigkeit.", "richtig": true },
+        { "text": "Bei senkrechtem Einfall ändert sich die Richtung nicht.", "richtig": true },
+        { "text": "Bei der Brechung ändert sich die Frequenz der Welle.", "feedback": "Die Frequenz bleibt gleich. Es ändern sich Geschwindigkeit und Wellenlänge." },
+        { "text": "Brechung gibt es nur bei Licht.", "feedback": "Auch Schall- und Wasserwellen werden gebrochen." }
+      ],
+      "erklaerung": "Läuft eine Welle schräg ein, wird ein Teil der Wellenfront früher langsamer als der andere, dadurch dreht die Front." },
+    { "id": "k10-wp-06", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Erkläre, wie ein Noise-Cancelling-Kopfhörer Lärm unterdrückt. Verwende den Fachbegriff Interferenz.",
+      "stichworte": [
+        { "aspekt": "Ein Mikrofon nimmt den Umgebungslärm auf", "woerter": ["mikrofon", "misst", "nimmt auf", "erfasst"] },
+        { "aspekt": "Der Kopfhörer erzeugt eine Gegenwelle (Berg auf Tal, gegenphasig)", "woerter": ["gegenschall", "gegenwelle", "gegenphasig", "berg auf tal", "tal auf berg", "umgekehrt", "spiegelbild"] },
+        { "aspekt": "Durch Interferenz löschen sich die Wellen aus (destruktiv)", "woerter": ["interferenz", "ausloesch", "loeschen sich aus", "destruktiv", "heben sich auf"] }
+      ],
+      "musterloesung": "Ein kleines Mikrofon im Kopfhörer nimmt den Umgebungslärm auf. Die Elektronik erzeugt daraus eine Schallwelle, die genau umgekehrt schwingt: Wo der Lärm einen Wellenberg hat, hat die Gegenwelle ein Tal. Beide Wellen überlagern sich im Ohr. Bei dieser destruktiven Interferenz addieren sich Berg und Tal zu (fast) null, und der Lärm wird ausgelöscht. Die Musik wird dabei nicht verändert.",
+      "erklaerung": "Das funktioniert besonders gut bei gleichmäßigen, tiefen Geräuschen wie Flugzeug- oder Zugbrummen." },
+    { "id": "k10-wp-07", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz2",
+      "frage": "Warum kann man um eine Hausecke herum hören, aber nicht sehen?",
+      "optionen": [
+        { "text": "Schall hat Wellenlängen ähnlich der Größe von Hindernissen und wird stark gebeugt, Licht hat winzige Wellenlängen und kaum.", "richtig": true },
+        { "text": "Licht ist keine Welle.", "feedback": "Licht ist auch eine Welle, aber mit sehr kleiner Wellenlänge." },
+        { "text": "Schall wird an der Hauswand reflektiert, Licht nicht.", "feedback": "Auch Licht wird reflektiert. Entscheidend ist hier die Beugung." }
+      ],
+      "erklaerung": "Beugung ist stark, wenn die Wellenlänge ungefähr so groß ist wie das Hindernis. Bei Schall ist das der Fall, bei Licht nicht." }
+  ]
+}

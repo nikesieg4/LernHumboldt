@@ -28,18 +28,20 @@ Der IServ-Login (OAuth) wird bei keinem dieser Wege gebraucht. Stattdessen gibt 
 Auf iPads (besonders mit Schul-Verwaltung/MDM) kann man versteckte Dateien nicht einblenden. Deshalb lädst du hier **nur die ZIP-Datei** hoch, und GitHub packt sie selbst aus. Die ZIP musst du dafür nicht entpacken.
 
 1. Beim Anlegen des Repositories (Schritt 1.1) **doch** das Häkchen bei **Add a README file** setzen, damit das Repository nicht leer ist. Die README wird später durch die richtige ersetzt.
-2. Im Repository **Add file** → **Create new file**.
-3. Als Dateinamen genau das eintippen (die Schrägstriche erzeugen automatisch Ordner):
+2. **Zuerst GitHub Pages einschalten:** **Settings** → links **Pages** → bei **Build and deployment** → **Source** die Option **GitHub Actions** wählen. (Ohne diesen Schritt bricht der Workflow mit „Get Pages site failed … Not Found“ ab.)
+3. Im Repository **Add file** → **Create new file**.
+4. Als Dateinamen genau das eintippen (die Schrägstriche erzeugen automatisch Ordner):
 
    ```
    .github/workflows/zip-und-testseite.yml
    ```
 
-4. In das große Textfeld den **kompletten Inhalt** der Datei `zip-und-testseite.yml` einfügen. Die Datei liegt der Anleitung bei und steckt außerdem in der ZIP im Ordner `vorlagen`. Am iPad: Datei in der Dateien-App antippen, alles markieren, kopieren.
-5. **Commit changes…** → **Commit changes**.
-6. **Settings** → **Pages** → bei **Source** die Option **GitHub Actions** wählen.
+5. In das große Textfeld den **kompletten Inhalt** der Datei `zip-und-testseite.yml` einfügen. Die Datei liegt der Anleitung bei und steckt außerdem in der ZIP im Ordner `vorlagen`. Am iPad: Datei in der Dateien-App antippen, alles markieren, kopieren.
+6. **Commit changes…** → **Commit changes**.
 7. Zurück zum Reiter **Code** → **Add file** → **Upload files** → **choose your files** → in der Dateien-App `lernseite.zip` auswählen → **Commit changes**.
 8. Reiter **Actions** öffnen. Der Workflow „ZIP entpacken und Testseite veröffentlichen“ läuft jetzt. Er packt die ZIP aus, übernimmt alle Dateien (auch die versteckten), löscht die ZIP und veröffentlicht die Testseite (siehe Weg A). Nach 1–2 Minuten ist alles fertig.
+
+**Fehlermeldung „Get Pages site failed … Not Found“?** Dann war Pages beim Lauf noch nicht eingeschaltet. Schritt 2 nachholen, dann unter **Actions** den roten Lauf öffnen → oben rechts **Re-run jobs** → **Re-run all jobs**.
 
 Für eine neue Version lädst du einfach die neue `lernseite.zip` hoch. Der Workflow ersetzt die Dateien und baut die Seite neu. Einzelne Dateien, z. B. eine Übung in `content/`, kannst du auch direkt auf GitHub mit dem Stift-Symbol bearbeiten. Auch das baut die Testseite neu.
 

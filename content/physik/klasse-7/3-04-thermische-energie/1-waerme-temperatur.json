@@ -1,0 +1,92 @@
+{
+  "id": "k7-waerme-temperatur",
+  "titel": "Temperatur, Wärme und Temperaturausgleich",
+  "kurz": "Warum Temperatur und Wärme nicht dasselbe sind und wie sich ein heißer Tee abkühlt.",
+  "reihenfolge": 1,
+  "lernziele": [
+    { "id": "lz1", "niveau": "D", "text": "Zwischen Temperatur und Wärme in Alltags- und Fachsprache unterscheiden" },
+    { "id": "lz2", "niveau": "E", "text": "Den Zusammenhang zwischen thermischer Energie und Wärme beschreiben" },
+    { "id": "lz3", "niveau": "E", "text": "Den Temperaturausgleich zwischen unterschiedlich warmen Körpern beschreiben" },
+    { "id": "lz4", "niveau": "E", "text": "Den Temperaturverlauf bei der Wärmeübertragung zwischen zwei Wassermengen auswerten" }
+  ],
+  "verstehen": {
+    "einstieg": "Eine Badewanne mit 40 °C warmem Wasser und eine Tasse Tee mit 80 °C: Welche enthält mehr thermische Energie?",
+    "abschnitte": [
+      {
+        "titel": "Temperatur und thermische Energie",
+        "text": "Die **Temperatur** gibt an, wie heftig sich die Teilchen eines Körpers im Mittel bewegen. Sie wird mit dem Thermometer gemessen.\n\nDie **thermische Energie** ist die Energie, die in der Bewegung aller Teilchen eines Körpers steckt. Sie hängt nicht nur von der Temperatur ab, sondern auch davon, **wie viele Teilchen** es sind, also von der Masse. Die Badewanne hat eine niedrigere Temperatur als der Tee, aber wegen ihrer viel größeren Masse viel mehr thermische Energie."
+      },
+      {
+        "titel": "Wärme ist übertragene Energie",
+        "text": "In der Physik ist **Wärme** die Energie, die von einem Körper auf einen anderen **übertragen** wird, weil sie unterschiedliche Temperaturen haben. Wärme fließt immer von selbst vom wärmeren zum kälteren Körper, nie umgekehrt.\n\nIm Alltag sagt man „Heute ist es warm“ und meint die Temperatur. In der Fachsprache würde man sagen: „Die Temperatur ist heute hoch.“ Wärme ist das, was beim Erwärmen oder Abkühlen fließt."
+      },
+      {
+        "titel": "Der Temperaturausgleich",
+        "text": "Bringt man einen heißen und einen kalten Körper in Kontakt, wird Wärme vom heißen auf den kalten übertragen. Der heiße kühlt ab, der kalte erwärmt sich, bis **beide dieselbe Temperatur** haben. Dann fließt keine Wärme mehr.\n\nDie gemeinsame Endtemperatur liegt **zwischen** den Anfangstemperaturen. Mischt man gleich viel Wasser von 20 °C und 60 °C, stellt sich etwa 40 °C ein. Ist mehr kaltes Wasser da, liegt sie näher bei 20 °C.\n\nAm Anfang, wenn der Temperaturunterschied groß ist, geht der Ausgleich schnell, später immer langsamer."
+      }
+    ],
+    "merksatz": "**Temperatur**: wie heftig sich die Teilchen bewegen. **Thermische Energie**: Energie aller Teilchenbewegungen eines Körpers. **Wärme**: übertragene thermische Energie.\n\nWärme fließt immer vom wärmeren zum kälteren Körper, bis beide gleich warm sind.",
+    "alltag": "Ein Getränk im Kühlschrank kühlt ab, weil es Wärme an die kältere Luft im Kühlschrank abgibt. „Kälte“ fließt dabei nicht hinein, sondern Wärme fließt heraus."
+  },
+  "interaktiv": ["k7-temperaturausgleich"],
+  "uebungen": [
+    { "id": "k7-wt-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz3",
+      "frage": "In welche Richtung fließt Wärme von selbst?",
+      "optionen": [
+        { "text": "Vom wärmeren zum kälteren Körper", "richtig": true },
+        { "text": "Vom kälteren zum wärmeren Körper", "feedback": "Das passiert nie von selbst. Ein Kühlschrank braucht dafür Energie." },
+        { "text": "Vom größeren zum kleineren Körper", "feedback": "Die Größe spielt für die Richtung keine Rolle, nur die Temperatur." }
+      ],
+      "erklaerung": "Wärme fließt immer vom Körper mit der höheren zum Körper mit der niedrigeren Temperatur." },
+    { "id": "k7-wt-02", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Was misst ein Thermometer?",
+      "optionen": [
+        { "text": "Die Temperatur", "richtig": true },
+        { "text": "Die Wärme", "feedback": "Wärme ist übertragene Energie. Das Thermometer zeigt die Temperatur an." },
+        { "text": "Die thermische Energie", "feedback": "Dafür müsste man auch die Masse kennen. Das Thermometer misst nur die Temperatur." }
+      ],
+      "erklaerung": "Ein Thermometer zeigt an, wie heftig sich die Teilchen bewegen, also die Temperatur." },
+    { "id": "k7-wt-03", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Du mischst 1 Liter Wasser mit 20 °C und 1 Liter Wasser mit 60 °C. Welche Temperatur stellt sich ungefähr ein (ohne Wärmeverluste)?",
+      "optionen": [
+        { "text": "40 °C", "richtig": true },
+        { "text": "80 °C", "feedback": "Temperaturen addieren sich nicht. Die Mischtemperatur liegt immer zwischen den Anfangstemperaturen." },
+        { "text": "60 °C", "feedback": "Das kalte Wasser erwärmt sich, aber das warme kühlt dabei auch ab." },
+        { "text": "20 °C", "feedback": "Das warme Wasser gibt Wärme ab, das kalte nimmt sie auf." }
+      ],
+      "erklaerung": "Bei gleichen Mengen liegt die Mischtemperatur genau in der Mitte: (20 °C + 60 °C) / 2 = 40 °C." },
+    { "id": "k7-wt-04", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Welcher Körper enthält mehr thermische Energie: ein Eimer Wasser mit 30 °C oder ein Teelöffel Wasser mit 90 °C?",
+      "optionen": [
+        { "text": "Der Eimer mit 30 °C", "richtig": true },
+        { "text": "Der Teelöffel mit 90 °C", "feedback": "Der Teelöffel ist heißer, enthält aber viel weniger Teilchen." },
+        { "text": "Beide gleich viel", "feedback": "Die thermische Energie hängt von Temperatur **und** Masse ab." }
+      ],
+      "erklaerung": "Der Eimer hat zwar die niedrigere Temperatur, aber tausendmal mehr Wasser. Insgesamt steckt in seiner Teilchenbewegung viel mehr Energie." },
+    { "id": "k7-wt-05", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Ein Becherglas mit 80 °C heißem Wasser steht in einer Schale mit 20 °C kaltem Wasser. Welche Aussagen zum Temperaturverlauf sind richtig?",
+      "optionen": [
+        { "text": "Am Anfang ändern sich die Temperaturen am schnellsten.", "richtig": true },
+        { "text": "Am Ende haben beide Wassermengen dieselbe Temperatur.", "richtig": true },
+        { "text": "Die Endtemperatur liegt zwischen 20 °C und 80 °C.", "richtig": true },
+        { "text": "Das kalte Wasser wird am Ende wärmer als 80 °C.", "feedback": "Wärme fließt nur so lange, bis beide gleich warm sind. Wärmer als das heiße Wasser kann das kalte nicht werden." }
+      ],
+      "erklaerung": "Je größer der Temperaturunterschied, desto schneller fließt Wärme. Deshalb flachen beide Kurven mit der Zeit immer mehr ab." },
+    { "id": "k7-wt-06", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz1",
+      "frage": "Deine Freundin sagt: „Mach das Fenster zu, sonst kommt die Kälte rein!“ Beschreibe physikalisch korrekt, was beim offenen Fenster im Winter passiert.",
+      "stichworte": [
+        { "aspekt": "Wärme fließt vom warmen Zimmer nach draußen", "woerter": ["waerme fliesst", "waerme geht", "waerme wird", "nach draussen", "nach aussen", "abgegeben"] },
+        { "aspekt": "Kälte ist keine Größe, die fließt", "woerter": ["keine kaelte", "kaelte fliesst nicht", "nicht die kaelte", "kaelte gibt es nicht"] },
+        { "aspekt": "Grund: Wärme fließt vom wärmeren zum kälteren Ort", "woerter": ["waermer", "kaelter", "temperaturunterschied", "von warm nach kalt"] }
+      ],
+      "musterloesung": "Physikalisch kommt keine „Kälte“ herein. Stattdessen fließt Wärme aus dem warmen Zimmer nach draußen, weil Wärme immer vom wärmeren zum kälteren Ort fließt. Das Zimmer verliert dadurch thermische Energie, und seine Temperatur sinkt.",
+      "erklaerung": "„Kälte“ ist in der Physik keine eigene Größe. Es gibt nur Wärme, die vom Warmen zum Kalten fließt." },
+    { "id": "k7-wt-07", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Du mischst 3 Liter Wasser mit 20 °C und 1 Liter Wasser mit 80 °C. Welche Mischtemperatur stellt sich ein (ohne Verluste)?",
+      "gegeben": "3 l bei 20 °C, 1 l bei 80 °C", "gesucht": "Mischtemperatur `ϑ_{M}`", "gesuchtSymbol": "ϑ_{M}",
+      "loesung": 35, "einheit": "°C", "toleranz": 0.03,
+      "rechenweg": ["Die Mischtemperatur ist ein gewichteter Mittelwert:", "`ϑ_{M} = \\frac{3 l · 20 °C + 1 l · 80 °C}{3 l + 1 l}`", "`ϑ_{M} = \\frac{60 + 80}{4} °C = 35 °C`"],
+      "hinweis": "Das kalte Wasser ist dreimal so viel. Die Mischtemperatur liegt deshalb näher bei 20 °C.",
+      "erklaerung": "Die Wärme, die das heiße Wasser abgibt (45 K Abkühlung bei 1 l), nimmt das kalte Wasser auf (15 K Erwärmung bei 3 l). 1 · 45 = 3 · 15." }
+  ]
+}

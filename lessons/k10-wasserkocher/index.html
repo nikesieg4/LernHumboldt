@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wasserkocher: Wärmekapazität und Wirkungsgrad</title>
+<link rel="stylesheet" href="../../static/lesson-kit.css">
+<style>
+  .body { fill: var(--card); stroke: var(--line); stroke-width: 2.2; stroke-linejoin: round; }
+  .water { fill: var(--neg); opacity: .35; }
+  .water.oil { fill: var(--lamp); opacity: .55; }
+  .plate { fill: var(--warn); }
+  .base { fill: var(--grid); stroke: var(--line); stroke-width: 1.6; }
+  .bubble { fill: none; stroke: var(--card); stroke-width: 1.5; }
+  .steam { fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; }
+  .tube { fill: var(--card); stroke: var(--line); stroke-width: 1.6; }
+  .merc { fill: var(--warn); }
+  .boilline { stroke: var(--warn); stroke-width: 1; stroke-dasharray: 4 3; }
+  .big { font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .curve { fill: none; stroke: var(--warn); stroke-width: 2.4; stroke-linejoin: round; }
+  .plan { fill: none; stroke: var(--muted); stroke-width: 1.4; stroke-dasharray: 5 4; }
+  .band-in { fill: var(--accent); opacity: .85; }
+  .band-q { fill: var(--pos); opacity: .85; }
+  .band-v { fill: var(--c3); opacity: .85; }
+  .band-l { fill: var(--muted); opacity: .6; }
+  table { border-collapse: collapse; width: 100%; font-size: .82rem; font-variant-numeric: tabular-nums; margin-top: 8px; }
+  td, th { padding: 3px 5px; border-bottom: 1px solid var(--border); text-align: right; }
+  th:first-child, td:first-child { text-align: left; }
+  .guess { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+  .guess input { font: inherit; width: 6em; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--text); }
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: .82rem; margin-top: 6px; }
+  .legend i { display: inline-block; width: 18px; height: 0; border-top: 2px solid; margin-right: 4px; vertical-align: middle; }
+  @media (max-width: 500px) { svg .val { font-size: 15px; } svg .lbl { font-size: 16px; } }
+</style>
+</head>
+<body>
+<h1>Wasserkocher: Wärmekapazität und Wirkungsgrad</h1>
+<p class="muted small">Stelle Leistung, Masse, Anfangstemperatur und Wirkungsgrad ein und schalte den Wasserkocher ein. Die Zeit läuft im Zeitraffer. Beobachte das Thermometer, das Diagramm und den Energiefluss.</p>
+
+<div class="lk-grid">
+  <div>
+    <div class="lk-card">
+      <svg id="kettle" viewBox="0 0 520 260" role="img" aria-labelledby="k-title">
+        <title id="k-title">Wasserkocher mit Thermometer und Uhr</title>
+        <defs><clipPath id="inside"><path d="M66 72 L194 72 L208 222 L52 222 Z"/></clipPath></defs>
+        <g id="steam" opacity="0">
+          <path class="steam" d="M110 52 q-8 -10 0 -20 q8 -10 0 -20"/>
+          <path class="steam" d="M135 50 q-8 -10 0 -20 q8 -10 0 -20"/>
+          <path class="steam" d="M160 52 q-8 -10 0 -20 q8 -10 0 -20"/>
+        </g>
+        <path class="body" d="M218 95 C 250 95, 250 190, 212 195" style="fill:none"/>
+        <path class="body" d="M52 100 L22 78 L28 72 L58 88" />
+        <path class="body" d="M64 70 L196 70 L210 224 L50 224 Z"/>
+        <rect id="water" class="water" x="40" y="150" width="180" height="80" clip-path="url(#inside)"/>
+        <g id="bubbles" clip-path="url(#inside)"></g>
+        <path class="body" d="M64 70 L196 70 L210 224 L50 224 Z" style="fill:none"/>
+        <rect class="body" x="84" y="60" width="92" height="10" rx="3"/>
+        <rect id="plate" class="plate" x="54" y="224" width="152" height="6" opacity="0"/>
+        <rect class="base" x="40" y="230" width="180" height="16" rx="4"/>
+        <text x="130" y="258" class="val" text-anchor="middle" id="massTxt"></text>
+        <!-- Thermometer -->
+        <rect class="tube" x="282" y="24" width="14" height="200" rx="7"/>
+        <circle class="tube" cx="289" cy="230" r="12"/>
+        <circle class="merc" cx="289" cy="230" r="8"/>
+        <rect id="merc" class="merc" x="285.5" y="150" width="7" height="80"/>
+        <g id="tscale"></g>
+        <!-- Uhr -->
+        <text x="330" y="44" class="val">Zeit</text>
+        <text id="clock" x="330" y="72" class="big">0 s</text>
+        <text x="330" y="106" class="val">Temperatur</text>
+        <text id="temp" x="330" y="134" class="big">20,0 °C</text>
+        <text x="330" y="168" class="val">verdampftes Wasser</text>
+        <text id="vap" x="330" y="196" class="big">0 g</text>
+        <text id="speedTxt" x="330" y="230" class="val"></text>
+      </svg>
+      <p id="status" class="small muted" aria-live="polite"></p>
+    </div>
+
+    <div class="lk-card">
+      <h2>Temperatur gegen Zeit</h2>
+      <svg id="chart" viewBox="0 0 520 250" role="img" aria-label="Temperatur-Zeit-Diagramm des Wassers"></svg>
+      <div class="legend"><span><i style="border-color:var(--warn)"></i>Messung</span><span id="planLeg"><i style="border-color:var(--muted);border-top-style:dashed"></i>berechnet mit <span class="f">t = c·m·ΔT / (η·P)</span></span></div>
+    </div>
+
+    <div class="lk-card">
+      <h2>Energieflussschema</h2>
+      <div id="sankeyWrap">
+        <svg id="sankey" viewBox="0 0 520 210" role="img" aria-label="Energieflussschema: zugeführte Energie teilt sich in Wärme im Wasser, Verdampfen und Verlust"></svg>
+        <p class="small muted">Die Breite der Pfeile entspricht der Energie seit dem Einschalten.</p>
+      </div>
+      <p id="sankeyHidden" class="small muted" hidden>Beim unbekannten Wasserkocher wird die Aufteilung nicht verraten. Bestimme den Wirkungsgrad selbst aus deiner Messung.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="lk-card">
+      <h2>Einstellungen</h2>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Stoff wählen">
+          <button type="button" id="bWater" aria-pressed="true">Wasser</button>
+          <button type="button" id="bOil" aria-pressed="false">Speiseöl</button>
+        </div>
+      </div>
+      <label class="ctrl"><span>Leistung <span class="f">P</span> <output id="oP"></output></span>
+        <input type="range" id="sP" min="500" max="3000" step="100" value="2000"></label>
+      <label class="ctrl"><span>Masse <span class="f">m</span> <output id="oM"></output></span>
+        <input type="range" id="sM" min="0.2" max="1.7" step="0.1" value="1"></label>
+      <label class="ctrl"><span>Anfangstemperatur <output id="oT"></output></span>
+        <input type="range" id="sT" min="5" max="40" step="1" value="20"></label>
+      <label class="ctrl"><span>Wirkungsgrad <span class="f">η</span> <output id="oE"></output></span>
+        <input type="range" id="sE" min="50" max="100" step="1" value="90"></label>
+      <div class="row">
+        <button type="button" id="bMyst" aria-pressed="false">Unbekannter Wasserkocher</button>
+      </div>
+      <p class="small" style="margin:0 0 4px;font-weight:600">Zeitraffer</p>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Zeitraffer wählen">
+          <button type="button" data-speed="10" aria-pressed="false">10×</button>
+          <button type="button" data-speed="30" aria-pressed="true">30×</button>
+          <button type="button" data-speed="100" aria-pressed="false">100×</button>
+        </div>
+      </div>
+      <div class="row">
+        <button type="button" id="bOn" class="primary">Einschalten</button>
+        <button type="button" id="bReset">Zurücksetzen</button>
+      </div>
+      <div class="readouts">
+        <div class="readout"><span>Wärme bis 100 °C <span class="f">Q = c·m·ΔT</span></span><b id="rQ">–</b></div>
+        <div class="readout"><span>berechnete Zeit <span class="f">t = Q / (η·P)</span></span><b id="rTc">–</b></div>
+        <div class="readout"><span>zugeführt <span class="f">E<sub>zu</sub> = P·t</span></span><b id="rE">–</b></div>
+      </div>
+      <p class="small muted" id="cInfo"></p>
+      <table>
+        <thead><tr><th>Stoff</th><th><span class="f">m</span></th><th><span class="f">P</span></th><th><span class="f">η</span></th><th>Start</th><th><span class="f">t</span> bis 100 °C</th></tr></thead>
+        <tbody id="rows"><tr><td colspan="6" class="muted">Noch keine Messung.</td></tr></tbody>
+      </table>
+    </div>
+
+    <div class="lk-card tasks">
+      <h2>Entdecke selbst <span class="small muted" data-task-count></span></h2>
+      <div class="task" data-goal="t168"><p class="task-q">Erhitze 1 kg Wasser mit 2000 W bei <span class="f">η</span> = 100 % von 20 °C bis zum Sieden. Vergleiche die gemessene Zeit mit der berechneten.</p></div>
+      <div class="task" data-goal="dbl"><p class="task-q">Erhitze einmal eine Masse und einmal die doppelte Masse (z. B. 0,5 kg und 1 kg) bis 100 °C, alles andere gleich. Vergleiche die Zeiten in der Tabelle.</p></div>
+      <div class="task" data-goal="eta">
+        <p class="task-q">Schalte auf „Unbekannter Wasserkocher“, miss die Zeit bis 100 °C und berechne den Wirkungsgrad mit <span class="f">η = Q / (P·t)</span>.</p>
+        <div class="guess">
+          <label for="gEta" class="small">Dein Ergebnis für <span class="f">η</span> in %:</label>
+          <input id="gEta" type="text" inputmode="decimal" autocomplete="off">
+          <button type="button" id="bGuess">Prüfen</button>
+        </div>
+        <p class="fb" id="gFb" aria-live="polite"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Lass das Wasser kochen. Warum steigt die Temperatur beim Sieden nicht weiter?</p>
+        <div class="choices">
+          <button type="button" data-ok data-fb="Richtig: Beim Sieden wird die zugeführte Energie gebraucht, um Wasser in Wasserdampf umzuwandeln. Die Temperatur bleibt bei 100 °C, bis alles Wasser verdampft ist.">Die Energie wird zum Verdampfen des Wassers gebraucht.</button>
+          <button type="button" data-fb="Schau auf E_zu: Die Heizung ist weiterhin an und führt Energie zu.">Der Wasserkocher heizt beim Sieden nicht mehr.</button>
+          <button type="button" data-fb="Das Thermometer könnte mehr anzeigen. Wohin geht die Energie, die weiter zugeführt wird?">Das Thermometer zeigt nicht mehr als 100 °C an.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Erhitze 1 kg Speiseöl statt Wasser (gleiche Einstellungen). Wie lange dauert es im Vergleich?</p>
+        <div class="choices">
+          <button type="button" data-fb="Vergleiche die Zeiten in der Tabelle. Öl hat eine kleinere spezifische Wärmekapazität.">Etwa doppelt so lange</button>
+          <button type="button" data-ok data-fb="Genau: Öl hat mit etwa 2,0 kJ/(kg·K) nur knapp halb so viel Wärmekapazität wie Wasser (4,19 kJ/(kg·K)). Es braucht für dieselbe Erwärmung nur etwa halb so viel Energie.">Etwa halb so lange</button>
+          <button type="button" data-fb="Probiere es aus: Die Zeit hängt vom Stoff ab.">Gleich lange</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Bei <span class="f">η</span> = 80 % kommen nur 80 % der elektrischen Energie im Wasser an. Wohin geht der Rest?</p>
+        <div class="choices">
+          <button type="button" data-fb="Energie geht nie verloren, sie wird nur umgewandelt. Wo wird es warm?">Er wird vernichtet.</button>
+          <button type="button" data-ok data-fb="Richtig: Der Rest erwärmt den Wasserkocher selbst und die Luft in der Umgebung. Für das Erwärmen des Wassers ist er nicht nutzbar.">Er erwärmt den Kocher und die Umgebungsluft.</button>
+          <button type="button" data-fb="Das Wasser erhält nur die Nutzenergie Q. Schau ins Energieflussschema.">Er steckt auch im Wasser.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="all-done">Alles entdeckt! Weiter geht es mit den Übungen.</div>
+    </div>
+  </div>
+</div>
+<div class="lk-card" style="margin-top:14px">
+  <p class="small muted" style="margin:0">Vereinfachungen: Der Wirkungsgrad ist während des ganzen Vorgangs gleich. In Wirklichkeit gibt heißes Wasser mehr Wärme an die Umgebung ab als kaltes. Das Wasser siedet bei Normaldruck bei 100 °C, zum Verdampfen von 1 kg Wasser braucht man etwa 2257 kJ. Speiseöl wird hier nur bis 100 °C erhitzt, es siedet erst bei viel höherer Temperatur. Ein echter Wasserkocher schaltet beim Sieden ab, hier kocht er zur Beobachtung noch 60 s weiter.</p>
+</div>
+
+<script src="../../static/lesson-kit.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STOFF = { wasser: { name: 'Wasser', c: 4.19 }, oel: { name: 'Speiseöl', c: 2.0 } };
+  var R_VAP = 2257, T_END = 100, BOIL_EXTRA = 60;                 // kJ/kg, °C, s
+  var S = { stoff: 'wasser', P: 2000, m: 1, T0: 20, eta: 90, myst: false, hidden: 85, speed: 30 };
+  var run, runs = [];
+
+  function el(tag, a, parent) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); parent.appendChild(e); return e; }
+  function eta() { return (S.myst ? S.hidden : S.eta) / 100; }
+  function cc() { return STOFF[S.stoff].c; }
+  function Qneed() { return cc() * S.m * (T_END - S.T0); }        // kJ
+  function tCalc() { return Qneed() * 1000 / (eta() * S.P); }     // s
+  function kJ(x) { return LK.fmt(x, x < 100 ? 1 : 0) + ' kJ'; }
+  function clock(t) { var s = Math.floor(t + 1e-9); return s < 60 ? s + ' s' : Math.floor(s / 60) + ' min ' + (s % 60 < 10 ? '0' : '') + (s % 60) + ' s'; }
+  function say(s) { $('status').textContent = s; }
+
+  // ---------------------------------------------- Simulation
+  function reset() {
+    run = { t: 0, T: S.T0, on: false, phase: 'heat', Ezu: 0, Q: 0, Qv: 0, mVap: 0, tBoil: 0, t100: null, hist: [[0, S.T0]] };
+    $('bOn').textContent = 'Einschalten';
+    setupChart(); update();
+  }
+  function advance(dt) {
+    var Pn = eta() * S.P / 1000;                                   // kW = kJ/s im Wasser
+    while (dt > 1e-9 && run.on) {
+      if (run.phase === 'heat') {
+        var tLeft = (T_END - run.T) * cc() * S.m / Pn, h = Math.min(dt, tLeft);
+        run.T += Pn * h / (cc() * S.m); run.Q += Pn * h; run.Ezu += S.P / 1000 * h; run.t += h; dt -= h;
+        if (h >= tLeft - 1e-9) { run.T = T_END; reached(); }
+      } else if (run.phase === 'boil') {
+        var h2 = Math.min(dt, BOIL_EXTRA - run.tBoil);
+        run.Qv += Pn * h2; run.mVap += Pn * h2 / R_VAP; run.Ezu += S.P / 1000 * h2; run.t += h2; run.tBoil += h2; dt -= h2;
+        if (run.tBoil >= BOIL_EXTRA - 1e-9) { run.on = false; run.phase = 'done'; $('bOn').textContent = 'Einschalten'; say('Der Wasserkocher hat sich abgeschaltet. Insgesamt sind ' + LK.fmt(run.mVap * 1000, 0) + ' g Wasser verdampft.'); }
+      } else { run.on = false; }
+      run.hist.push([run.t, run.T]);
+    }
+  }
+  function reached() {
+    run.t100 = run.t;
+    var rec = { stoff: S.stoff, m: S.m, P: S.P, myst: S.myst, eta: S.myst ? S.hidden : S.eta, T0: S.T0, t: run.t };
+    runs.unshift(rec); if (runs.length > 8) runs.pop();
+    renderTable();
+    if (S.stoff === 'wasser') {
+      run.phase = 'boil';
+      say('100 °C nach ' + LK.fmt(run.t, 1) + ' s erreicht. Das Wasser siedet, die Temperatur steigt nicht weiter.');
+    } else {
+      run.phase = 'done'; run.on = false; $('bOn').textContent = 'Einschalten';
+      say('Das Öl hat nach ' + LK.fmt(run.t, 1) + ' s 100 °C erreicht. Der Versuch ist beendet.');
+    }
+    if (!S.myst && S.stoff === 'wasser' && S.m === 1 && S.P === 2000 && S.T0 === 20 && S.eta === 100) LK.reach('t168');
+    runs.forEach(function (a) {
+      runs.forEach(function (b) {
+        if (a.stoff === b.stoff && a.P === b.P && a.T0 === b.T0 && a.eta === b.eta && a.myst === b.myst && Math.abs(a.m - 2 * b.m) < 1e-6) LK.reach('dbl');
+      });
+    });
+  }
+  function renderTable() {
+    $('rows').innerHTML = runs.map(function (r) {
+      return '<tr><td>' + STOFF[r.stoff].name + '</td><td>' + LK.fmt(r.m, 1) + ' kg</td><td>' + r.P + ' W</td><td>' + (r.myst ? '?' : r.eta + ' %') + '</td><td>' + r.T0 + ' °C</td><td>' + LK.fmt(r.t, 1) + ' s</td></tr>';
+    }).join('') || '<tr><td colspan="6" class="muted">Noch keine Messung.</td></tr>';
+  }
+
+  // ---------------------------------------------- Wasserkocher und Thermometer
+  var tscale = $('tscale');
+  function ty(T) { return 220 - T / 110 * 190; }
+  for (var T = 0; T <= 100; T += 20) {
+    el('line', { x1: 296, x2: 302, y1: ty(T), y2: ty(T), class: 'axis' }, tscale);
+    el('text', { x: 278, y: ty(T) + 4, class: 'val', 'text-anchor': 'end' }, tscale).textContent = T;
+  }
+  el('text', { x: 278, y: 14, class: 'val', 'text-anchor': 'end' }, tscale).textContent = '°C';
+  var bubbles = [];
+  for (var i = 0; i < 14; i++) bubbles.push({ e: el('circle', { class: 'bubble', r: 2 + (i % 3), cx: 0, cy: 0 }, $('bubbles')), x: 62 + (i * 37) % 136, y: Math.random(), v: 0.4 + (i % 4) * 0.15 });
+
+  function drawKettle(dtReal) {
+    var level = 222 - (S.m - run.mVap) / 1.8 * 140;
+    $('water').setAttribute('y', level);
+    $('water').setAttribute('class', 'water' + (S.stoff === 'oel' ? ' oil' : ''));
+    $('plate').setAttribute('opacity', run.on ? 0.35 + 0.65 * S.P / 3000 : 0);
+    $('merc').setAttribute('y', ty(run.T)); $('merc').setAttribute('height', 230 - ty(run.T));
+    $('clock').textContent = clock(run.t);
+    $('temp').textContent = LK.fmt(run.T, 1) + ' °C';
+    $('vap').textContent = LK.fmt(run.mVap * 1000, 0) + ' g';
+    $('speedTxt').textContent = 'Zeitraffer ' + S.speed + '×';
+    $('massTxt').textContent = LK.fmt(S.m, 1) + ' kg ' + STOFF[S.stoff].name;
+    var boiling = run.phase === 'boil' && run.on;
+    $('steam').setAttribute('opacity', boiling ? 0.8 : (run.phase === 'done' && S.stoff === 'wasser' ? 0.25 : 0));
+    var active = run.on && !reduce ? (boiling ? 14 : run.T > 70 ? Math.round((run.T - 70) / 30 * 6) : 0) : 0;
+    bubbles.forEach(function (b, k) {
+      var on = k < active;
+      b.e.toggleAttribute('hidden', !on);
+      if (!on) return;
+      b.y += dtReal * b.v * (boiling ? 1.6 : 0.8);
+      if (b.y > 1) { b.y -= 1; b.x = 62 + Math.random() * 136; }
+      b.e.setAttribute('cx', b.x + Math.sin(b.y * 12 + k) * 3);
+      b.e.setAttribute('cy', 220 - b.y * (220 - level));
+    });
+  }
+
+  // ---------------------------------------------- Diagramm
+  var chart = $('chart'), X0 = 56, X1 = 505, Y0 = 210, Y1 = 20, tMax = 300, curve, plan;
+  function niceMax(t) { var s = [60, 120, 180, 240, 300, 420, 600, 900, 1200, 1800, 2400, 3000, 3600]; for (var i = 0; i < s.length; i++) if (s[i] >= t) return s[i]; return 3600; }
+  function cx(t) { return X0 + (X1 - X0) * t / tMax; }
+  function cy(T) { return Y0 - (Y0 - Y1) * T / 110; }
+  function setupChart() {
+    tMax = niceMax((tCalc() + (S.stoff === 'wasser' ? BOIL_EXTRA : 0)) * 1.05);
+    chart.innerHTML = '';
+    var step = tMax <= 300 ? 60 : tMax <= 900 ? 120 : tMax <= 1800 ? 300 : 600;
+    for (var t = 0; t <= tMax; t += step) {
+      el('line', { class: 'gridline', x1: cx(t), x2: cx(t), y1: Y1, y2: Y0 }, chart);
+      el('text', { class: 'val', x: cx(t), y: Y0 + 17, 'text-anchor': 'middle' }, chart).textContent = t;
+    }
+    for (var T = 0; T <= 100; T += 20) {
+      el('line', { class: 'gridline', x1: X0, x2: X1, y1: cy(T), y2: cy(T) }, chart);
+      el('text', { class: 'val', x: X0 - 6, y: cy(T) + 4, 'text-anchor': 'end' }, chart).textContent = T;
+    }
+    el('line', { class: 'boilline', x1: X0, x2: X1, y1: cy(100), y2: cy(100) }, chart);
+    el('line', { class: 'axis', x1: X0, x2: X1, y1: Y0, y2: Y0 }, chart);
+    el('line', { class: 'axis', x1: X0, x2: X0, y1: Y0, y2: Y1 - 6 }, chart);
+    el('text', { class: 'lbl', x: 4, y: 12 }, chart).textContent = 'Temperatur in °C';
+    el('text', { class: 'lbl', x: X1, y: Y0 + 36, 'text-anchor': 'end' }, chart).textContent = 't in s';
+    var tc = tCalc();
+    plan = el('polyline', { class: 'plan', points: cx(0) + ',' + cy(S.T0) + ' ' + cx(tc) + ',' + cy(100) + (S.stoff === 'wasser' ? ' ' + cx(Math.min(tMax, tc + BOIL_EXTRA)) + ',' + cy(100) : '') }, chart);
+    plan.toggleAttribute('hidden', S.myst);
+    $('planLeg').hidden = S.myst;
+    curve = el('polyline', { class: 'curve', points: '' }, chart);
+  }
+  function drawChart() {
+    var pts = [], h = run.hist, every = Math.max(1, Math.floor(h.length / 400));
+    for (var i = 0; i < h.length; i += every) pts.push(cx(h[i][0]).toFixed(1) + ',' + cy(h[i][1]).toFixed(1));
+    var l = h[h.length - 1]; pts.push(cx(l[0]).toFixed(1) + ',' + cy(l[1]).toFixed(1));
+    curve.setAttribute('points', pts.join(' '));
+  }
+
+  // ---------------------------------------------- Energieflussschema
+  var sk = $('sankey');
+  function band(x0, y0, x1, y1, h, cls) {
+    if (h < 0.5) return;
+    el('path', { class: cls, d: 'M' + x0 + ' ' + y0 + ' C' + (x0 + 90) + ' ' + y0 + ',' + (x1 - 90) + ' ' + y1 + ',' + x1 + ' ' + y1 +
+      ' L' + x1 + ' ' + (y1 + h) + ' C' + (x1 - 90) + ' ' + (y1 + h) + ',' + (x0 + 90) + ' ' + (y0 + h) + ',' + x0 + ' ' + (y0 + h) + ' Z' }, sk);
+    el('path', { class: cls, d: 'M' + x1 + ' ' + (y1 - 5) + ' L' + (x1 + 16) + ' ' + (y1 + h / 2) + ' L' + x1 + ' ' + (y1 + h + 5) + ' Z' }, sk);
+  }
+  function drawSankey() {
+    sk.innerHTML = '';
+    var E = run.Ezu, q, v, l;
+    if (E > 1e-9) { q = run.Q / E; v = run.Qv / E; l = 1 - q - v; } else { q = eta(); v = 0; l = 1 - q; }
+    var H = 100, top = 44, xa = 120, xb = 290;
+    el('rect', { class: 'band-in', x: 16, y: top, width: xa - 16, height: H }, sk);
+    el('text', { class: 'lbl', x: 16, y: top - 26 }, sk).textContent = 'zugeführt';
+    var te = el('text', { class: 'val', x: 16, y: top - 9 }, sk);
+    te.textContent = 'E'; el('tspan', { 'baseline-shift': 'sub', 'font-size': '75%' }, te).textContent = 'zu';
+    te.appendChild(document.createTextNode(' = P·t = ' + kJ(E)));
+    var parts = [[q, 'band-q', 'Wärme im ' + (S.stoff === 'wasser' ? 'Wasser' : 'Öl'), 'Q = ' + kJ(run.Q)],
+                 [v, 'band-v', 'Verdampfen', kJ(run.Qv)],
+                 [l, 'band-l', 'Verlust', kJ(Math.max(0, E - run.Q - run.Qv)) + ' an Kocher und Luft']];
+    var y0 = top, y1 = 20;
+    parts.forEach(function (p) {
+      var h = p[0] * H;
+      if (p[0] < 0.004 && p[1] !== 'band-q') return;
+      band(xa, y0, xb, y1, h, p[1]);
+      el('text', { class: 'lbl', x: xb + 22, y: y1 + h / 2 }, sk).textContent = p[2];
+      el('text', { class: 'val', x: xb + 22, y: y1 + h / 2 + 16 }, sk).textContent = p[3];
+      y0 += h; y1 += Math.max(h, 14) + 36;
+    });
+  }
+
+  // ---------------------------------------------- Anzeige und Bedienung
+  function update() {
+    $('oP').textContent = S.P + ' W';
+    $('oM').textContent = LK.fmt(S.m, 1) + ' kg';
+    $('oT').textContent = S.T0 + ' °C';
+    $('oE').textContent = S.myst ? '?' : S.eta + ' %';
+    $('sE').disabled = S.myst;
+    $('bMyst').setAttribute('aria-pressed', S.myst);
+    $('bWater').setAttribute('aria-pressed', S.stoff === 'wasser'); $('bOil').setAttribute('aria-pressed', S.stoff === 'oel');
+    $('rQ').textContent = kJ(Qneed());
+    $('rTc').textContent = S.myst ? '?' : LK.fmt(tCalc(), 0) + ' s';
+    $('cInfo').innerHTML = 'Spezifische Wärmekapazität von ' + STOFF[S.stoff].name + ': <span class="f">c</span> = ' + LK.fmt(cc(), 2) + ' kJ/(kg·K). Temperaturerhöhung bis 100 °C: <span class="f">ΔT</span> = ' + (100 - S.T0) + ' K.';
+    $('sankeyWrap').hidden = S.myst; $('sankeyHidden').hidden = !S.myst;
+    redraw(0);
+  }
+  function redraw(dtReal) {
+    $('rE').textContent = kJ(run.Ezu);
+    drawKettle(dtReal); drawChart(); if (!S.myst) drawSankey();
+  }
+  function changed(fn) { return function () { fn.call(this); reset(); say(''); }; }
+  $('sP').oninput = changed(function () { S.P = Number(this.value); });
+  $('sM').oninput = changed(function () { S.m = Math.round(Number(this.value) * 10) / 10; });
+  $('sT').oninput = changed(function () { S.T0 = Number(this.value); });
+  $('sE').oninput = changed(function () { S.eta = Number(this.value); });
+  $('bWater').onclick = changed(function () { S.stoff = 'wasser'; });
+  $('bOil').onclick = changed(function () { S.stoff = 'oel'; });
+  $('bMyst').onclick = function () {
+    S.myst = !S.myst;
+    if (S.myst) S.hidden = 72 + Math.floor(Math.random() * 21);
+    reset();
+    say(S.myst ? 'Unbekannter Wasserkocher: Sein Wirkungsgrad ist geheim. Miss die Zeit bis 100 °C.' : 'Der Wirkungsgrad ist wieder einstellbar.');
+  };
+  document.querySelectorAll('[data-speed]').forEach(function (b) {
+    b.onclick = function () {
+      S.speed = Number(b.dataset.speed);
+      document.querySelectorAll('[data-speed]').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+      redraw(0);
+    };
+  });
+  $('bOn').onclick = function () {
+    if (run.phase === 'done') reset();
+    run.on = !run.on;
+    this.textContent = run.on ? 'Ausschalten' : 'Einschalten';
+    if (run.on && run.t === 0) say('Der Wasserkocher heizt.');
+  };
+  $('bReset').onclick = function () { reset(); say(''); };
+  $('bGuess').onclick = function () {
+    var raw = $('gEta').value.replace(',', '.').replace('%', '').trim(), g = parseFloat(raw), fb = $('gFb');
+    if (!S.myst) { fb.textContent = 'Schalte zuerst auf „Unbekannter Wasserkocher“.'; return; }
+    var measured = runs.some(function (r) { return r.myst && r.eta === S.hidden; });
+    if (!measured) { fb.textContent = 'Miss zuerst die Zeit, bis die Flüssigkeit 100 °C erreicht.'; return; }
+    if (!isFinite(g)) { fb.textContent = 'Gib eine Zahl ein, z. B. 85.'; return; }
+    if (g <= 1) g *= 100;
+    if (Math.abs(g - S.hidden) <= 2) { fb.textContent = '✓ Sehr gut! Der Wirkungsgrad beträgt ' + S.hidden + ' %.'; LK.reach('eta'); }
+    else fb.textContent = 'Noch nicht. Berechne Q = c·m·ΔT (in kJ) und E_zu = P·t (in kJ, mit t in s). Dann ist η = Q / E_zu.';
+  };
+
+  var last = performance.now();
+  function frame(now) {
+    var dt = Math.min(0.05, (now - last) / 1000); last = now;
+    if (run.on) advance(dt * S.speed);
+    redraw(dt);
+    requestAnimationFrame(frame);
+  }
+  reset();
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

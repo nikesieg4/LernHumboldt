@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teilchenmodell im Experiment</title>
+<link rel="stylesheet" href="../../static/lesson-kit.css">
+<style>
+  .boxwall { fill: none; stroke: var(--line); stroke-width: 3; stroke-linejoin: round; }
+  .p-water { fill: var(--neg); }
+  .p-metal { fill: var(--c3); }
+  .p-gas { fill: var(--pos); }
+  .piston { fill: var(--grid); stroke: var(--line); stroke-width: 2; }
+  .piston.hit { stroke: var(--warn); fill: var(--warn-soft); }
+  .refline { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 4; }
+  .nowline { stroke: var(--warn); stroke-width: 2; }
+  .clamp { fill: var(--grid); stroke: var(--line); stroke-width: 2; }
+  .bar { height: 8px; border-radius: 4px; background: var(--grid); margin-top: 4px; overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 0; background: var(--pos); border-radius: 4px; }
+  .seg button { padding: 7px 10px; }
+  #status { font-weight: 650; }
+  svg .lbl { font-size: 15px; }
+  .readout span { hyphens: manual; }
+</style>
+</head>
+<body>
+<h1>Teilchenmodell im Experiment</h1>
+<p class="muted small">Wähle oben rechts einen Versuch und verändere die Temperatur. Beobachte, wie sich die Teilchen bewegen und wie viel Platz sie brauchen.</p>
+
+<div class="lk-grid">
+  <div>
+    <div class="lk-card">
+      <svg id="svg" viewBox="0 0 440 300" role="img" aria-labelledby="svgTitle">
+        <title id="svgTitle">Teilchen in einem Behälter</title>
+        <g id="scene"></g>
+        <g id="parts"></g>
+        <g id="labels"></g>
+      </svg>
+      <p id="status" class="small" aria-live="polite"></p>
+      <p id="note" class="small muted"></p>
+    </div>
+  </div>
+
+  <div>
+    <div class="lk-card">
+      <h2>Einstellungen</h2>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Versuch wählen">
+          <button type="button" id="mStates" aria-pressed="true">Zustände</button>
+          <button type="button" id="mExp" aria-pressed="false">Ausdehnung</button>
+          <button type="button" id="mGas" aria-pressed="false">Gasdruck</button>
+        </div>
+      </div>
+      <div class="row" id="matRow" hidden>
+        <div class="seg" role="group" aria-label="Metall wählen">
+          <button type="button" id="matAl" aria-pressed="true">Aluminium</button>
+          <button type="button" id="matFe" aria-pressed="false">Eisen</button>
+        </div>
+      </div>
+      <label class="ctrl"><span>Temperatur <span class="f">ϑ</span> <output id="oT"></output></span>
+        <input type="range" id="sT" min="-20" max="150" step="1" value="20"></label>
+      <label class="ctrl" id="vCtrl" hidden><span>Volumen <span class="f">V</span> (Kolben) <output id="oV"></output></span>
+        <input type="range" id="sV" min="0.4" max="1" step="0.05" value="1"></label>
+      <div class="row">
+        <button type="button" id="bPause">Anhalten</button>
+        <button type="button" id="bReset">Zurücksetzen</button>
+      </div>
+      <div class="readouts">
+        <div class="readout"><span id="l1"></span><b id="r1"></b></div>
+        <div class="readout"><span id="l2"></span><b id="r2"></b><div class="bar" id="barWrap"><i id="bar"></i></div></div>
+        <div class="readout"><span id="l3"></span><b id="r3"></b></div>
+      </div>
+    </div>
+
+    <div class="lk-card tasks">
+      <h2>Entdecke selbst <span class="small muted" data-task-count></span></h2>
+      <div class="task" data-goal="boil"><p class="task-q">Versuch „Zustände“: Mach aus dem Wasser zuerst Eis und bring es dann zum Sieden.</p></div>
+      <div class="task">
+        <p class="task-q">Was passiert mit den Wasserteilchen, wenn du das Wasser erwärmst?</p>
+        <div class="choices">
+          <button type="button" data-ok data-fb="Richtig: Je höher die Temperatur, desto schneller bewegen sich die Teilchen.">Sie bewegen sich schneller.</button>
+          <button type="button" data-fb="Beobachte die Teilchen genau: Ihre Größe ändert sich nie, nur ihre Bewegung.">Sie werden größer.</button>
+          <button type="button" data-fb="Einzelne Teilchen sind nicht warm oder kalt. Die Temperatur beschreibt, wie schnell sie sich im Mittel bewegen.">Sie werden selbst warm.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Versuch „Ausdehnung“: Warum wird der Metallstab beim Erwärmen länger?</p>
+        <div class="choices">
+          <button type="button" data-fb="Schau genau hin: Die Kreise sind bei jeder Temperatur gleich groß.">Die Teilchen werden größer.</button>
+          <button type="button" data-ok data-fb="Genau: Die Teilchen schwingen heftiger und brauchen mehr Platz. Die Abstände wachsen, die Teilchen selbst nicht.">Die Abstände zwischen den Teilchen werden größer.</button>
+          <button type="button" data-fb="Zähle nach: Es sind immer gleich viele Teilchen.">Es kommen Teilchen hinzu.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task" data-goal="double"><p class="task-q">Versuch „Gasdruck“: Erzeuge etwa doppelt so viele Treffer am Kolben pro Sekunde wie bei 20&nbsp;°C und 1,0&nbsp;L.</p></div>
+      <div class="task">
+        <p class="task-q">Warum lässt sich ein Gas leicht zusammendrücken, flüssiges Wasser aber kaum?</p>
+        <div class="choices">
+          <button type="button" data-fb="Die Teilchen selbst lassen sich nicht zusammendrücken. Vergleiche die Abstände im Gas und in der Flüssigkeit.">Gasteilchen sind weich.</button>
+          <button type="button" data-fb="Es kommt nicht auf die Größe der Teilchen an, sondern auf den Raum zwischen ihnen.">Gasteilchen sind kleiner.</button>
+          <button type="button" data-ok data-fb="Richtig: Zwischen den Gasteilchen ist viel leerer Raum. In der Flüssigkeit liegen die Teilchen schon dicht beieinander.">Zwischen den Gasteilchen ist viel leerer Raum.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Du erwärmst das Gas bei festem Volumen. Warum steigt der Druck?</p>
+        <div class="choices">
+          <button type="button" data-ok data-fb="Genau: Schnellere Teilchen treffen häufiger auf die Wände und stoßen dabei auch heftiger.">Die Teilchen treffen häufiger und heftiger auf die Wände.</button>
+          <button type="button" data-fb="Der Behälter ist geschlossen. Zähle nach: Die Anzahl der Teilchen bleibt gleich.">Es kommen Teilchen hinzu.</button>
+          <button type="button" data-fb="Die Teilchen selbst dehnen sich nicht aus. Beobachte ihre Bewegung.">Die Teilchen dehnen sich aus.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="all-done">Alles entdeckt! Weiter geht es mit den Übungen.</div>
+    </div>
+  </div>
+</div>
+
+<script src="../../static/lesson-kit.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var S = { mode: 'states', T: 20, mat: 'al', V: 1, running: !reduced };
+  var MAT = { al: { name: 'Aluminium', alpha: 23e-6 }, fe: { name: 'Eisen', alpha: 12e-6 } };
+  var EXAG = 30;                       // Ausdehnung im Bild 30-fach übertrieben
+  var BX0 = 20, BX1 = 420, BY0 = 20, BY1 = 280;
+  var GX0 = 40, GX1 = 400, GBOT = 280, GHMAX = 240;
+  var P = [], dots = [], simTime = 0, lastState = null;
+  var hits = [], winStart = 0, flash = 0, doubleSince = null, seenIce = false;
+
+  function el(tag, a, parent) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); if (parent) parent.appendChild(e); return e; }
+  function TK() { return S.T + 273.15; }
+  function stateOf(T) { return T <= 0 ? 'fest' : (T < 100 ? 'flüssig' : 'gasförmig'); }
+  function visSpeed() { return 40 + 1.4 * (S.T + 20); }          // Bildgeschwindigkeit in px/s (nicht maßstäblich)
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  function rayleigh(mean) { var s = mean / Math.sqrt(Math.PI / 2); return s * Math.sqrt(-2 * Math.log(1 - Math.random())); }
+
+  // ------------------------------------------------------------ Aufbau je Versuch
+  function makeDots(n, r, cls) {
+    var g = $('parts'); g.innerHTML = ''; dots = [];
+    for (var i = 0; i < n; i++) dots.push(el('circle', { r: r, class: cls }, g));
+  }
+
+  var SOL = { cols: 8, rows: 6, d: 21, r: 8 };
+  function solidSite(i) {
+    var c = i % SOL.cols, row = Math.floor(i / SOL.cols);
+    return { x: 220 + (c - (SOL.cols - 1) / 2) * SOL.d, y: BY1 - SOL.r - 2 - row * SOL.d };
+  }
+  function assignSites() {
+    var order = P.slice().sort(function (a, b) { return b.y - a.y; });
+    for (var row = 0; row < SOL.rows; row++) {
+      var chunk = order.slice(row * SOL.cols, (row + 1) * SOL.cols).sort(function (a, b) { return a.x - b.x; });
+      chunk.forEach(function (p, c) { var s = solidSite(row * SOL.cols + c); p.sx = s.x; p.sy = s.y; });
+    }
+  }
+
+  function setupStates() {
+    P = [];
+    var st = stateOf(S.T);
+    for (var i = 0; i < SOL.cols * SOL.rows; i++) {
+      var p = { ph: rnd(0, 6.28), w: rnd(0.8, 1.25), f: rnd(0, 6.28), vx: 0, vy: 0 };
+      if (st === 'gasförmig') { p.x = rnd(BX0 + 10, BX1 - 10); p.y = rnd(BY0 + 10, BY1 - 10); }
+      else if (st === 'flüssig') { p.x = BX0 + 12 + (i % 22) * 17.5; p.y = BY1 - 10 - Math.floor(i / 22) * 17; }
+      else { var s = solidSite(i); p.x = s.x; p.y = s.y; }
+      var a = rnd(0, 6.28), v = visSpeed(); p.vx = v * Math.cos(a); p.vy = v * Math.sin(a);
+      p.bx = p.x; p.by = p.y;
+      P.push(p);
+    }
+    if (st === 'fest') assignSites();
+    lastState = st;
+    makeDots(P.length, SOL.r, 'p-water');
+  }
+
+  var ROD = { cols: 14, rows: 4, d0: 18, r: 7, x0: 64, yc: 150 };
+  function setupExp() {
+    P = [];
+    for (var i = 0; i < ROD.cols * ROD.rows; i++) P.push({ c: i % ROD.cols, row: Math.floor(i / ROD.cols), ph: rnd(0, 6.28), w: rnd(0.8, 1.25), f: rnd(0, 6.28) });
+    makeDots(P.length, ROD.r, 'p-metal');
+  }
+
+  var GAS_N = 40, GAS_R = 5, GAS_V0 = 200;
+  function pistonY() { return GBOT - GHMAX * S.V; }
+  function setupGas() {
+    P = [];
+    var py = pistonY();
+    for (var i = 0; i < GAS_N; i++) {
+      var a = rnd(0, 6.28), v = rayleigh(GAS_V0 * Math.sqrt(TK() / 293.15));
+      P.push({ x: rnd(GX0 + 8, GX1 - 8), y: rnd(py + 8, GBOT - 8), vx: v * Math.cos(a), vy: v * Math.sin(a) });
+    }
+    makeDots(P.length, GAS_R, 'p-gas');
+    hits = []; winStart = simTime;
+  }
+
+  function drawScene() {
+    var g = $('scene'), lab = $('labels'); g.innerHTML = ''; lab.innerHTML = '';
+    if (S.mode === 'states') {
+      el('path', { class: 'boxwall', d: 'M' + (BX0 - 2) + ' ' + (BY0 - 2) + ' V' + (BY1 + 2) + ' H' + (BX1 + 2) + ' V' + (BY0 - 2) }, g);
+      var t = el('text', { x: 220, y: 14, class: 'lbl', 'text-anchor': 'middle' }, lab); t.textContent = 'Wasser in einem Gefäß';
+      $('svgTitle').textContent = 'Wasserteilchen in einem Gefäß, Aggregatzustand hängt von der Temperatur ab';
+    } else if (S.mode === 'exp') {
+      el('rect', { class: 'clamp', x: 30, y: 85, width: 26, height: 130, rx: 3 }, g);
+      el('line', { id: 'refLine', class: 'refline', x1: 0, x2: 0, y1: 92, y2: 222 }, g);
+      el('line', { id: 'nowLine', class: 'nowline', x1: 0, x2: 0, y1: 92, y2: 222 }, g);
+      var t1 = el('text', { id: 'refTxt', x: 0, y: 244, class: 'val', 'text-anchor': 'middle' }, lab); t1.textContent = 'Länge bei 20 °C';
+      var t2 = el('text', { x: 220, y: 30, class: 'lbl', 'text-anchor': 'middle' }, lab); t2.id = 'rodTitle';
+      var t3 = el('text', { x: 220, y: 276, class: 'val', 'text-anchor': 'middle' }, lab); t3.textContent = 'Ausdehnung im Bild etwa 30-fach übertrieben';
+      $('svgTitle').textContent = 'Metallstab aus Teilchen, eingespannt am linken Ende';
+    } else {
+      el('path', { class: 'boxwall', d: 'M' + (GX0 - 2) + ' 20 V' + (GBOT + 2) + ' H' + (GX1 + 2) + ' V20' }, g);
+      el('rect', { id: 'rodP', x: 214, y: 0, width: 12, height: 10, fill: 'var(--muted)' }, g);
+      el('rect', { id: 'piston', class: 'piston', x: GX0, y: 0, width: GX1 - GX0, height: 14, rx: 2 }, g);
+      var t4 = el('text', { id: 'kolbenTxt', x: 234, y: 0, class: 'val' }, lab); t4.textContent = 'Kolben';
+      $('svgTitle').textContent = 'Gasteilchen in einem Zylinder mit beweglichem Kolben';
+    }
+  }
+
+  // ------------------------------------------------------------ Physik je Versuch
+  function wallBounce(p, x0, x1, y0, y1, r) {
+    var hitTop = false;
+    if (p.x < x0 + r) { p.x = x0 + r; p.vx = Math.abs(p.vx); }
+    if (p.x > x1 - r) { p.x = x1 - r; p.vx = -Math.abs(p.vx); }
+    if (p.y < y0 + r) { p.y = y0 + r; if (p.vy < 0) hitTop = true; p.vy = Math.abs(p.vy); }
+    if (p.y > y1 - r) { p.y = y1 - r; p.vy = -Math.abs(p.vy); }
+    return hitTop;
+  }
+
+  function collide(r) {
+    var d2min = 4 * r * r;
+    for (var i = 0; i < P.length; i++) for (var j = i + 1; j < P.length; j++) {
+      var a = P[i], b = P[j], dx = b.x - a.x, dy = b.y - a.y, d2 = dx * dx + dy * dy;
+      if (d2 >= d2min || d2 === 0) continue;
+      var d = Math.sqrt(d2), nx = dx / d, ny = dy / d, ov = (2 * r - d) / 2;
+      a.x -= nx * ov; a.y -= ny * ov; b.x += nx * ov; b.y += ny * ov;
+      var rel = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
+      if (rel < 0) { a.vx += rel * nx; a.vy += rel * ny; b.vx -= rel * nx; b.vy -= rel * ny; }
+    }
+  }
+
+  function stepStates(dt) {
+    var st = stateOf(S.T), vs = visSpeed();
+    if (st === 'fest') {
+      if (lastState !== 'fest') assignSites();
+      var A = 1 + 0.12 * (S.T + 20), om = 8 + 0.08 * (S.T + 20);
+      P.forEach(function (p) {
+        var k = Math.min(1, dt * 5);
+        p.bx += (p.sx - p.bx) * k; p.by += (p.sy - p.by) * k;
+        p.ph += dt * om * p.w;
+        p.x = p.bx + A * Math.sin(p.ph); p.y = p.by + A * Math.cos(1.3 * p.ph + p.f);
+      });
+    } else {
+      if (lastState === 'fest') P.forEach(function (p) { var a = rnd(0, 6.28); p.vx = vs * Math.cos(a); p.vy = vs * Math.sin(a); });
+      var g = st === 'flüssig' ? 1400 : 0;
+      var n = Math.ceil(dt / 0.008), h = dt / n;
+      for (var s = 0; s < n; s++) {
+        P.forEach(function (p) { p.vy += g * h; p.x += p.vx * h; p.y += p.vy * h; wallBounce(p, BX0, BX1, BY0, BY1, SOL.r); });
+        collide(SOL.r);
+      }
+      var m = 0; P.forEach(function (p) { m += Math.sqrt(p.vx * p.vx + p.vy * p.vy); }); m /= P.length;
+      var f = 1 + (vs / Math.max(1, m) - 1) * Math.min(1, dt * 4);
+      P.forEach(function (p) { p.vx *= f; p.vy *= f; p.bx = p.x; p.by = p.y; });
+    }
+    lastState = st;
+    P.forEach(function (p, i) { dots[i].setAttribute('cx', p.x.toFixed(1)); dots[i].setAttribute('cy', p.y.toFixed(1)); });
+  }
+
+  function rodSpacing() { return ROD.d0 * (1 + MAT[S.mat].alpha * (S.T - 20) * EXAG); }
+  function stepExp(dt) {
+    var d = rodSpacing(), A = 0.8 + 0.012 * (S.T + 20), om = 8 + 0.08 * (S.T + 20);
+    var x0 = ROD.x0;
+    P.forEach(function (p, i) {
+      p.ph += dt * om * p.w;
+      var x = x0 + p.c * d + A * Math.sin(p.ph), y = ROD.yc + (p.row - (ROD.rows - 1) / 2) * d + A * Math.cos(1.3 * p.ph + p.f);
+      dots[i].setAttribute('cx', x.toFixed(1)); dots[i].setAttribute('cy', y.toFixed(1));
+    });
+    var end = x0 + (ROD.cols - 1) * d + ROD.r, ref = x0 + (ROD.cols - 1) * ROD.d0 + ROD.r;
+    var rl = $('refLine'), nl = $('nowLine');
+    if (rl) { rl.setAttribute('x1', ref); rl.setAttribute('x2', ref); nl.setAttribute('x1', end + 3); nl.setAttribute('x2', end + 3); $('refTxt').setAttribute('x', ref); }
+  }
+
+  function stepGas(dt) {
+    var py = pistonY(), n = Math.ceil(dt / 0.008), h = dt / n;
+    for (var s = 0; s < n; s++) {
+      simTime += h;
+      P.forEach(function (p) {
+        p.x += p.vx * h; p.y += p.vy * h;
+        if (wallBounce(p, GX0, GX1, py, GBOT, GAS_R)) { hits.push(simTime); flash = 0.08; }
+      });
+    }
+    while (hits.length && hits[0] < simTime - 3) hits.shift();
+    flash = Math.max(0, flash - dt);
+    var pist = $('piston');
+    if (pist) {
+      pist.setAttribute('y', py - 14); $('rodP').setAttribute('y', 6); $('rodP').setAttribute('height', Math.max(0, py - 20));
+      $('kolbenTxt').setAttribute('y', py - 20);
+      pist.classList.toggle('hit', flash > 0);
+    }
+    P.forEach(function (p, i) { dots[i].setAttribute('cx', p.x.toFixed(1)); dots[i].setAttribute('cy', p.y.toFixed(1)); });
+  }
+
+  // ------------------------------------------------------------ Anzeigen
+  function meanSpeedWater() { // mittlere Geschwindigkeit eines Wassermoleküls (m = 18 u)
+    var k = 1.380649e-23, m = 18 * 1.66054e-27;
+    return Math.sqrt(8 * k * TK() / (Math.PI * m));
+  }
+  function word(T) { return T < 20 ? 'langsam' : (T < 90 ? 'mittel' : 'schnell'); }
+  function hitRate() {
+    var from = Math.max(winStart, simTime - 3), span = simTime - from;
+    if (span < 0.8) return null;
+    var c = 0; for (var i = 0; i < hits.length; i++) if (hits[i] >= from) c++;
+    return c / span;
+  }
+
+  var lastStatus = '';
+  function readouts() {
+    $('oT').textContent = LK.fmt(S.T, 0) + ' °C';
+    $('oV').textContent = LK.fmt(S.V, 2) + ' L';
+    var status = '', note = '';
+    $('barWrap').hidden = S.mode !== 'states';
+    if (S.mode === 'states') {
+      var st = stateOf(S.T);
+      $('l1').textContent = 'Zustand'; $('r1').textContent = st;
+      $('l2').textContent = 'Bewegung der Teilchen'; $('r2').textContent = word(S.T);
+      $('bar').style.width = (15 + 85 * (S.T + 20) / 170).toFixed(0) + '%';
+      $('l3').textContent = 'mittlere Geschwin\u00ADdigkeit'; $('r3').textContent = '≈ ' + LK.fmt(Math.round(meanSpeedWater() / 10) * 10, 0) + ' m/s';
+      status = st === 'fest' ? (S.T === 0 ? 'Bei 0 °C schmilzt Eis: Die Teilchen lösen sich aus dem Gitter.' : 'Eis: Die Teilchen sitzen auf festen Plätzen und schwingen nur hin und her.')
+        : st === 'flüssig' ? 'Flüssiges Wasser: Die Teilchen liegen dicht, können sich aber aneinander vorbeibewegen.'
+        : (S.T === 100 ? 'Bei 100 °C siedet Wasser: Die Teilchen reißen sich los und fliegen frei umher.' : 'Wasserdampf: Die Teilchen sind weit voneinander entfernt und fliegen frei umher.');
+      note = 'Vereinfachungen: Der Regler stellt die Temperatur direkt ein. In Wirklichkeit bleibt sie beim Schmelzen und Sieden gleich, bis alles geschmolzen oder verdampft ist. Wasser verdunstet auch unter 100 °C. Die Teilchen bewegen sich im Bild viel langsamer als in Wirklichkeit, und die Unterschiede sind übertrieben. Eis ist eine Ausnahme: Seine Teilchen brauchen etwas mehr Platz als im flüssigen Wasser (Anomalie des Wassers).';
+    } else if (S.mode === 'exp') {
+      var a = MAT[S.mat].alpha, L = 1000 * (1 + a * (S.T - 20)), dL = L - 1000;
+      $('l1').textContent = 'Längenänderung eines 1 m langen Stabs'; $('r1').textContent = (dL >= 0 ? '+' : '−') + LK.fmt(Math.abs(dL), 2) + ' mm';
+      $('l2').textContent = 'Abstand der Teilchen'; $('r2').textContent = (dL >= 0 ? '+' : '−') + LK.fmt(Math.abs(dL) / 10, 2) + ' %';
+      $('l3').textContent = 'Temperatur in Kelvin'; $('r3').textContent = LK.fmt(Math.round(S.T + 273), 0) + ' K';
+      var rt = $('rodTitle'); if (rt) rt.textContent = 'Stab aus ' + MAT[S.mat].name;
+      status = S.T > 20 ? 'Wärmer als 20 °C: Die Teilchen schwingen heftiger, ihre Abstände werden größer, der Stab wird länger.'
+        : S.T < 20 ? 'Kälter als 20 °C: Die Teilchen schwingen schwächer, ihre Abstände werden kleiner, der Stab wird kürzer.'
+        : 'Bei 20 °C hat der Stab genau seine Ausgangslänge.';
+      note = 'Die Teilchen selbst werden nicht größer, nur ihre Abstände. Aluminium dehnt sich etwa doppelt so stark aus wie Eisen. Mit Wasser würde dieser Versuch zwischen 0 °C und 4 °C anders aussehen: Dort zieht sich Wasser beim Erwärmen zusammen (Anomalie des Wassers).';
+    } else {
+      var p = 1013 * (TK() / 293.15) / S.V, hr = hitRate();
+      $('l1').innerHTML = 'Druck <span class="f">p</span>'; $('r1').textContent = LK.fmt(Math.round(p), 0) + ' hPa';
+      $('l2').textContent = 'Treffer am Kolben pro Sekunde'; $('r2').textContent = hr === null ? '…' : LK.fmt(hr, 1);
+      $('l3').textContent = 'Temperatur in Kelvin'; $('r3').textContent = LK.fmt(Math.round(S.T + 273), 0) + ' K';
+      status = 'Jeder Treffer drückt den Kolben ein winziges Stück nach oben. Alle Treffer zusammen ergeben den Gasdruck.';
+      note = 'Die Treffer werden über die letzten 3 Sekunden gezählt und schwanken deshalb etwas. Der Druck steigt mit der Temperatur stärker als die Zahl der Treffer, weil schnellere Teilchen auch heftiger aufprallen. Bei 20 °C und 1,0 L herrscht im Modell der normale Luftdruck von 1013 hPa. Der Druck ist proportional zur Temperatur in Kelvin und umgekehrt proportional zum Volumen.';
+    }
+    if (status !== lastStatus) { $('status').textContent = status; lastStatus = status; }
+    if ($('note').textContent !== note) $('note').textContent = note;
+  }
+
+  function goals() {
+    if (S.mode === 'states' && S.T <= 0) seenIce = true;
+    if (S.mode === 'states' && S.T >= 100 && seenIce) LK.reach('boil');
+    if (S.mode === 'gas') {
+      var ratio = Math.sqrt(TK() / 293.15) / S.V;
+      if (ratio >= 1.95) {
+        if (doubleSince === null) doubleSince = simTime;
+        if (simTime - doubleSince >= 2 && hitRate() !== null) LK.reach('double');
+      } else doubleSince = null;
+    }
+  }
+
+  // ------------------------------------------------------------ Schleife
+  var last = performance.now(), acc = 0;
+  function frame(t) {
+    var dt = Math.min(0.05, (t - last) / 1000); last = t;
+    if (S.running) {
+      if (S.mode !== 'gas') simTime += dt;
+      if (S.mode === 'states') stepStates(dt);
+      else if (S.mode === 'exp') stepExp(dt);
+      else stepGas(dt);
+    } else if (S.mode === 'exp') stepExp(0);
+    acc += dt;
+    if (acc > 0.25) { acc = 0; readouts(); }
+    goals();
+    requestAnimationFrame(frame);
+  }
+
+  function setMode(m) {
+    S.mode = m;
+    $('mStates').setAttribute('aria-pressed', m === 'states');
+    $('mExp').setAttribute('aria-pressed', m === 'exp');
+    $('mGas').setAttribute('aria-pressed', m === 'gas');
+    $('matRow').hidden = m !== 'exp';
+    $('vCtrl').hidden = m !== 'gas';
+    drawScene();
+    if (m === 'states') setupStates(); else if (m === 'exp') setupExp(); else setupGas();
+    if (!S.running) { if (m === 'states') stepStates(0); else if (m === 'gas') stepGas(0); }
+    readouts();
+  }
+  function setMat(k) {
+    S.mat = k;
+    $('matAl').setAttribute('aria-pressed', k === 'al'); $('matFe').setAttribute('aria-pressed', k === 'fe');
+    readouts();
+  }
+
+  $('mStates').onclick = function () { setMode('states'); };
+  $('mExp').onclick = function () { setMode('exp'); };
+  $('mGas').onclick = function () { setMode('gas'); };
+  $('matAl').onclick = function () { setMat('al'); };
+  $('matFe').onclick = function () { setMat('fe'); };
+  $('sT').oninput = function () {
+    var Told = TK();
+    S.T = Number(this.value);
+    if (S.mode === 'gas') { var f = Math.sqrt(TK() / Told); P.forEach(function (p) { p.vx *= f; p.vy *= f; }); winStart = simTime; }
+    if (!S.running && S.mode === 'states') stepStates(0.05);
+    readouts();
+  };
+  $('sV').oninput = function () { S.V = Number(this.value); winStart = simTime; if (!S.running) stepGas(0); readouts(); };
+  $('bPause').onclick = function () { S.running = !S.running; this.textContent = S.running ? 'Anhalten' : 'Weiter'; };
+  $('bReset').onclick = function () {
+    S.T = 20; S.V = 1; $('sT').value = 20; $('sV').value = 1;
+    setMode(S.mode);
+  };
+  $('bPause').textContent = S.running ? 'Anhalten' : 'Weiter';
+  setMode('states');
+  if (!S.running) stepStates(0);
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

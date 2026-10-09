@@ -1,0 +1,94 @@
+{
+  "id": "k10-newton",
+  "titel": "Die newtonschen Gesetze",
+  "kurz": "Trägheit, F = m · a und actio = reactio: drei Gesetze, mit denen man Bewegungen vorhersagen kann.",
+  "reihenfolge": 1,
+  "lernziele": [
+    { "id": "lz1", "niveau": "G", "text": "Das Trägheitsgesetz formulieren und auf Alltagssituationen anwenden" },
+    { "id": "lz2", "niveau": "H", "text": "Das Grundgesetz der Dynamik `F = m · a` zum Problemlösen anwenden" },
+    { "id": "lz3", "niveau": "G", "text": "Das Wechselwirkungsgesetz anwenden" },
+    { "id": "lz4", "niveau": "H", "text": "Sicherheitseinrichtungen in Fahrzeugen mit den newtonschen Gesetzen beurteilen" }
+  ],
+  "verstehen": {
+    "einstieg": "Ein Bus bremst scharf, und alle stehenden Fahrgäste kippen nach vorn. Wer oder was schiebt sie?",
+    "abschnitte": [
+      {
+        "titel": "1. Trägheitsgesetz",
+        "text": "Ein Körper bleibt in Ruhe oder bewegt sich geradlinig gleichförmig weiter, **solange keine resultierende Kraft auf ihn wirkt**.\n\nKörper sind also „träge“: Sie wollen ihren Bewegungszustand beibehalten. Je größer die Masse, desto größer die Trägheit.\n\nIm bremsenden Bus schiebt niemand die Fahrgäste nach vorn. Ihr Körper bewegt sich einfach mit der alten Geschwindigkeit weiter, während der Bus langsamer wird."
+      },
+      {
+        "titel": "2. Grundgesetz der Dynamik",
+        "text": "Wirkt eine resultierende Kraft, ändert sich die Bewegung. Die Beschleunigung ist umso größer, je größer die Kraft und je kleiner die Masse ist:\n\n`F = m · a`\n\nDaraus folgt die Einheit Newton: **1 N = 1 kg · m/s²**. Ein Newton ist die Kraft, die einen Körper von 1 kg mit 1 m/s² beschleunigt.\n\nWichtig: `F` ist immer die **resultierende** Kraft, also z. B. Antriebskraft minus Reibung."
+      },
+      {
+        "titel": "3. Wechselwirkungsgesetz",
+        "text": "Übt ein Körper A auf einen Körper B eine Kraft aus, so übt B auf A eine **gleich große, entgegengesetzte** Kraft aus (**actio = reactio**). Die beiden Kräfte wirken auf **verschiedene** Körper.\n\nBeispiele: Rückstoß beim Gewehr, Rakete, Schwimmer, der sich vom Beckenrand abstößt."
+      },
+      {
+        "titel": "Kräfte an Fahrzeugen",
+        "text": "Bei einem Unfall stoppt das Auto in Sekundenbruchteilen, die Insassen bewegen sich wegen ihrer Trägheit weiter. **Sicherheitsgurt** und **Airbag** halten sie zurück und verlängern dabei den Bremsweg des Körpers etwas. Längerer Bremsweg bedeutet kleinere Verzögerung und nach `F = m · a` kleinere Kräfte auf den Körper. Die **Knautschzone** verlängert den Bremsweg des ganzen Autos. Die **Kopfstütze** schützt bei Auffahrunfällen von hinten, wenn der Körper nach vorn beschleunigt wird und der Kopf wegen seiner Trägheit zurückbleibt."
+      }
+    ],
+    "formeln": [
+      { "formel": "F = m · a", "bedeutung": "resultierende Kraft `F` in N, Masse `m` in kg, Beschleunigung `a` in m/s²" },
+      { "formel": "1 N = 1 kg · \\frac{m}{s^{2}}", "bedeutung": "Definition des Newton" }
+    ],
+    "merksatz": "1. Ohne resultierende Kraft keine Bewegungsänderung (Trägheit).\n2. `F = m · a`.\n3. Kraft = Gegenkraft, auf verschiedene Körper (actio = reactio).",
+    "alltag": "Beim Ausschütteln eines Handtuchs oder beim Ausklopfen eines Teppichs nutzt man die Trägheit: Der Stoff wird ruckartig bewegt, der Staub bleibt zurück."
+  },
+  "interaktiv": ["k8-kraefte"],
+  "uebungen": [
+    { "id": "k10-nw-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ein Bus fährt plötzlich an. Was passiert mit stehenden Fahrgästen, die sich nicht festhalten?",
+      "optionen": [
+        { "text": "Sie kippen nach hinten.", "richtig": true },
+        { "text": "Sie kippen nach vorne.", "feedback": "Nach vorne kippen sie beim Bremsen." },
+        { "text": "Nichts, sie fahren mit.", "feedback": "Ihre Füße werden mitgenommen, der Oberkörper bleibt wegen seiner Trägheit zunächst zurück." }
+      ],
+      "erklaerung": "Der Körper will wegen seiner Trägheit in Ruhe bleiben, während der Bus nach vorn beschleunigt." },
+    { "id": "k10-nw-02", "typ": "zahl", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Welche resultierende Kraft ist nötig, um ein Auto mit 1200 kg mit 2 m/s² zu beschleunigen?",
+      "gegeben": "`m = 1200 kg`, `a = 2 m/s²`", "gesucht": "`F`", "gesuchtSymbol": "F",
+      "loesung": 2400, "einheit": "N", "alternativEinheiten": { "kN": 1000 },
+      "rechenweg": ["`F = m · a = 1200 kg · 2 m/s² = 2400 N`"],
+      "erklaerung": "Die Antriebskraft muss noch etwas größer sein, weil Reibung und Luftwiderstand dazukommen." },
+    { "id": "k10-nw-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Auf einen Schlitten (40 kg) wirkt eine Zugkraft von 100 N und eine Reibungskraft von 20 N. Wie groß ist seine Beschleunigung?",
+      "gegeben": "`m = 40 kg`, `F_{Zug} = 100 N`, `F_{R} = 20 N`", "gesucht": "`a`", "gesuchtSymbol": "a",
+      "loesung": 2, "einheit": "m/s²",
+      "rechenweg": ["Resultierende Kraft: `F = 100 N − 20 N = 80 N`", "`a = \\frac{F}{m} = \\frac{80 N}{40 kg} = 2 m/s²`"],
+      "hinweis": "In `F = m · a` gehört die **resultierende** Kraft.",
+      "erklaerung": "Häufiger Fehler: nur mit der Zugkraft rechnen. Dann käme 2,5 m/s² heraus." },
+    { "id": "k10-nw-04", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Eine Rakete fliegt im Weltraum, wo es keine Luft gibt. Wogegen „drückt“ sie sich ab?",
+      "optionen": [
+        { "text": "Gegen die ausgestoßenen Gase: Sie drückt die Gase nach hinten, die Gase drücken die Rakete nach vorn.", "richtig": true },
+        { "text": "Gegen die Luft, deshalb funktioniert sie im Weltraum nicht.", "feedback": "Raketen funktionieren gerade im Weltraum sehr gut. Sie brauchen keine Luft zum Abstoßen." },
+        { "text": "Gegen die Erde", "feedback": "Die Rakete hat keinen Kontakt zur Erde mehr." }
+      ],
+      "erklaerung": "Wechselwirkungsgesetz: Die Kraft der Rakete auf die Gase und die Kraft der Gase auf die Rakete sind gleich groß und entgegengesetzt." },
+    { "id": "k10-nw-05", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Ein Ball (0,4 kg) wird beim Schuss mit einer Kraft von 200 N beschleunigt. Wie groß ist seine Beschleunigung?",
+      "gegeben": "`m = 0,4 kg`, `F = 200 N`", "gesucht": "`a`", "gesuchtSymbol": "a",
+      "loesung": 500, "einheit": "m/s²",
+      "rechenweg": ["`a = \\frac{F}{m} = \\frac{200 N}{0,4 kg} = 500 m/s²`"],
+      "erklaerung": "Die Kraft wirkt nur ganz kurz. Trotzdem reicht es für eine Ballgeschwindigkeit von über 100 km/h." },
+    { "id": "k10-nw-06", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Erkläre mit den newtonschen Gesetzen, warum ein Sicherheitsgurt bei einem Unfall Leben rettet.",
+      "stichworte": [
+        { "aspekt": "Trägheit: Der Körper bewegt sich weiter, wenn das Auto plötzlich stoppt", "woerter": ["traeg", "bewegt sich weiter", "weiterbewegen", "fliegt nach vorn", "nach vorne"] },
+        { "aspekt": "Der Gurt hält den Körper zurück und bremst ihn über einen längeren Weg / längere Zeit ab", "woerter": ["laengere zeit", "laengeren weg", "dehnt", "nachgibt", "abgebremst", "haelt zurueck", "zurueckhalten"] },
+        { "aspekt": "Kleinere Verzögerung bedeutet nach F = m · a kleinere Kraft auf den Körper", "woerter": ["kleinere kraft", "geringere kraft", "weniger kraft", "f = m", "kleinere beschleunigung", "kleinere verzoegerung"] }
+      ],
+      "musterloesung": "Bei einem Aufprall stoppt das Auto in Sekundenbruchteilen. Nach dem Trägheitsgesetz bewegt sich der Körper der Insassen mit der alten Geschwindigkeit weiter nach vorn, ohne Gurt bis gegen Lenkrad oder Scheibe. Dort würde er auf wenigen Zentimetern gestoppt, die Verzögerung wäre riesig, und nach `F = m · a` wirkten gewaltige Kräfte. Der Gurt hält den Körper früh zurück, dehnt sich etwas und bremst ihn zusammen mit der Knautschzone über einen längeren Weg ab. Die Verzögerung und damit die Kraft auf den Körper werden dadurch viel kleiner.",
+      "erklaerung": "Die gleiche Idee steckt im Airbag, in Fahrradhelmen und im Weichmatten beim Hochsprung: längerer Bremsweg, kleinere Kraft." },
+    { "id": "k10-nw-07", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz1",
+      "frage": "Ein Eishockeypuck gleitet nach dem Schuss auf (nahezu reibungsfreiem) Eis. Welche Aussage trifft zu, solange er gleitet?",
+      "optionen": [
+        { "text": "Er braucht keine Kraft in Bewegungsrichtung, um weiterzugleiten.", "richtig": true },
+        { "text": "Die Kraft des Schlägers wirkt weiter, solange er sich bewegt.", "feedback": "Die Kraft des Schlägers wirkt nur während des Schlags. Danach gleitet der Puck aufgrund seiner Trägheit weiter." },
+        { "text": "Er wird von selbst immer langsamer, weil Bewegung Kraft verbraucht.", "feedback": "Langsamer wird er nur durch Reibung. Ohne Reibung würde er ewig weitergleiten." }
+      ],
+      "erklaerung": "Das ist das Trägheitsgesetz: Für eine gleichförmige Bewegung braucht man keine Kraft. Nur zum Ändern der Bewegung." }
+  ]
+}

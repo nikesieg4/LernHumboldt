@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flaschenzug-Labor: Goldene Regel der Mechanik</title>
+<link rel="stylesheet" href="../../static/lesson-kit.css">
+<style>
+  .rope { fill: none; stroke: var(--line); stroke-width: 2.6; stroke-linecap: round; }
+  .carry { stroke: var(--ok); stroke-width: 4.5; stroke-linecap: round; opacity: .75; }
+  .pulley { fill: var(--card); stroke: var(--line); stroke-width: 2.2; }
+  .rod { stroke: var(--muted); stroke-width: 3; stroke-linecap: round; }
+  .ceil { fill: var(--muted); }
+  .ground { fill: var(--grid); }
+  .load { fill: var(--soft-accent); stroke: var(--line); stroke-width: 2; }
+  .tick { fill: var(--pos); }
+  .num { font-size: 15px; font-weight: 700; fill: var(--ok) !important; paint-order: stroke; stroke: var(--card); stroke-width: 4px; }
+  .alab { font-size: 17px; font-weight: 700; paint-order: stroke; stroke: var(--card); stroke-width: 4px; stroke-linejoin: round; }
+  .alab tspan.sub { font-size: 12px; }
+  #scene .val { font-size: 14px; }
+  .fist { fill: var(--card); stroke: var(--line); stroke-width: 2; }
+  .bars { display: grid; gap: 10px; }
+  .bgroup h3 { font-size: .9rem; margin: 0 0 4px; }
+  .brow { display: grid; grid-template-columns: 112px minmax(0, 1fr) 76px; gap: 8px; align-items: center; font-size: .84rem; margin: 3px 0; }
+  .brow > span { color: var(--muted); }
+  .brow > b { text-align: right; font-variant-numeric: tabular-nums; }
+  .track { height: 14px; background: var(--grid); border-radius: 7px; overflow: hidden; }
+  .fill { height: 100%; width: 0; border-radius: 7px; }
+  .fill.ref { background: var(--muted); }
+  .fill.mit { background: var(--accent); }
+  @media (max-width: 420px) { .brow { grid-template-columns: 86px minmax(0, 1fr) 70px; font-size: .8rem; } }
+  .readouts.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .status { margin: 10px 0 0; padding: 8px 10px; border-radius: 10px; background: var(--bg); font-size: .9rem; }
+  .status:empty { display: none; }
+  .formula { font-size: .95rem; margin: 8px 0 0; }
+</style>
+</head>
+<body>
+<h1>Flaschenzug-Labor: Goldene Regel der Mechanik</h1>
+<p class="muted small">Wähle die Anzahl der tragenden Seilstücke <span class="f">n</span> (bei <span class="f">n</span> = 1 nur eine feste Rolle), stelle Last und Hubhöhe ein und klicke auf „Ziehen“. Vergleiche dann Kraft, Seilweg und Arbeit mit dem direkten Heben.</p>
+
+<div class="lk-grid">
+  <div>
+    <div class="lk-card">
+      <svg id="scene" viewBox="0 0 520 480" role="img" aria-labelledby="sc-title">
+        <title id="sc-title">Flaschenzug mit Last</title>
+        <path id="measure" d="M0 0" fill="none" stroke="none"/>
+        <g id="layer"></g>
+      </svg>
+      <p class="small muted" style="margin:6px 0 0">Grün und nummeriert: die tragenden Seilstücke. Die orangen Punkte sind Markierungen auf dem Seil, so siehst du, wie schnell das Seil läuft. Das gezogene Seil sammelt sich unten auf dem Boden. Alle Kraftpfeile sind im selben Maßstab gezeichnet.</p>
+    </div>
+
+    <div class="lk-card">
+      <h2>Vergleich: direkt heben oder mit Rollen</h2>
+      <div class="bars">
+        <div class="bgroup"><h3>Kraft</h3>
+          <div class="brow"><span>direkt heben</span><div class="track"><div class="fill ref" id="bF0"></div></div><b id="vF0"></b></div>
+          <div class="brow"><span>mit Rollen</span><div class="track"><div class="fill mit" id="bF1"></div></div><b id="vF1"></b></div>
+        </div>
+        <div class="bgroup"><h3>Weg</h3>
+          <div class="brow"><span>direkt heben</span><div class="track"><div class="fill ref" id="bS0"></div></div><b id="vS0"></b></div>
+          <div class="brow"><span>mit Rollen</span><div class="track"><div class="fill mit" id="bS1"></div></div><b id="vS1"></b></div>
+        </div>
+        <div class="bgroup"><h3>Arbeit</h3>
+          <div class="brow"><span>direkt heben</span><div class="track"><div class="fill ref" id="bW0"></div></div><b id="vW0"></b></div>
+          <div class="brow"><span>mit Rollen</span><div class="track"><div class="fill mit" id="bW1"></div></div><b id="vW1"></b></div>
+        </div>
+      </div>
+      <p class="small muted" style="margin:8px 0 0">Direkt heben: Kraft <span class="f">F<sub>G</sub></span> über die Hubhöhe <span class="f">h</span>. Mit Rollen: Kraft <span class="f">F</span> über den Seilweg <span class="f">s</span>.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="lk-card">
+      <h2>Einstellungen</h2>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Anzahl der tragenden Seilstücke wählen">
+          <button type="button" id="n1" aria-pressed="false" title="eine feste Rolle">n = 1</button>
+          <button type="button" id="n2" aria-pressed="true">n = 2</button>
+          <button type="button" id="n4" aria-pressed="false">n = 4</button>
+          <button type="button" id="n6" aria-pressed="false">n = 6</button>
+        </div>
+      </div>
+      <label class="ctrl"><span>Last: Gewichtskraft <span class="f">F<sub>G</sub></span> <output id="oG"></output></span>
+        <input type="range" id="sG" min="100" max="1200" step="50" value="400"></label>
+      <label class="ctrl"><span>Hubhöhe <span class="f">h</span> <output id="oH"></output></span>
+        <input type="range" id="sH" min="0.25" max="2" step="0.25" value="0.5"></label>
+      <div class="row">
+        <button type="button" id="bPull" class="primary">Ziehen</button>
+        <button type="button" id="bDown">Last absenken</button>
+      </div>
+      <div class="readouts two">
+        <div class="readout"><span>Zugkraft <span class="f">F = F<sub>G</sub> / n</span></span><b id="rF">–</b></div>
+        <div class="readout"><span>gehoben <span class="f">h</span></span><b id="rH">–</b></div>
+        <div class="readout"><span>Seilweg <span class="f">s = n · h</span></span><b id="rS">–</b></div>
+        <div class="readout"><span>Arbeit <span class="f">W = F · s</span></span><b id="rW">–</b></div>
+      </div>
+      <p class="formula"><span class="f">W = F · s = </span><span class="f" id="fW"></span></p>
+      <p class="status" id="status" aria-live="polite"></p>
+      <p class="small muted" id="note"></p>
+      <p class="small muted">Vereinfachung: Rollen und Seil sind masselos, und es gibt keine Reibung. In Wirklichkeit braucht man deshalb etwas mehr Kraft und Arbeit.</p>
+    </div>
+
+    <div class="lk-card tasks">
+      <h2>Entdecke selbst <span class="small muted" data-task-count></span></h2>
+      <div class="task" data-goal="g150"><p class="task-q">Eine Last von 600 N soll gehoben werden, du schaffst aber höchstens 150 N Zugkraft. Wähle eine passende Anordnung und ziehe die Last hoch.</p></div>
+      <div class="task" data-goal="n4h1"><p class="task-q">Hebe mit <span class="f">n</span> = 4 eine Last genau 1 m hoch.</p></div>
+      <div class="task">
+        <p class="task-q">Wie viel Seil musstest du bei <span class="f">n</span> = 4 und <span class="f">h</span> = 1 m ziehen?</p>
+        <div class="choices">
+          <button type="button" data-fb="Schau auf den Seilweg: Jedes der 4 tragenden Seilstücke wird 1 m kürzer.">1 m</button>
+          <button type="button" data-ok data-fb="Richtig: s = n · h = 4 · 1 m = 4 m. Jedes der 4 tragenden Seilstücke wird 1 m kürzer.">4 m</button>
+          <button type="button" data-fb="Die Kraft wird kleiner, der Weg aber nicht. Schau auf die Anzeige „Seilweg“.">0,25 m</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Spart man mit einem Flaschenzug Arbeit?</p>
+        <div class="choices">
+          <button type="button" data-fb="Die Kraft wird kleiner, aber der Seilweg wird im selben Maß größer. Vergleiche die Balken für die Arbeit.">Ja, weil man weniger Kraft braucht.</button>
+          <button type="button" data-ok data-fb="Genau: Was man an Kraft spart, muss man an Weg zusetzen. Die Arbeit W = F · s ist genauso groß wie beim direkten Heben (Goldene Regel der Mechanik).">Nein, die Arbeit bleibt gleich.</button>
+          <button type="button" data-fb="Ziehe einmal mit n = 6 und vergleiche die Balken für die Arbeit.">Ja, bei n = 6 nur ein Sechstel.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Wozu dient eine einzelne feste Rolle (<span class="f">n</span> = 1)?</p>
+        <div class="choices">
+          <button type="button" data-fb="Wähle „feste Rolle“ und vergleiche die Zugkraft mit der Gewichtskraft.">Sie halbiert die Kraft.</button>
+          <button type="button" data-fb="Bei n = 1 ist der Seilweg genauso lang wie die Hubhöhe.">Sie verkürzt den Seilweg.</button>
+          <button type="button" data-ok data-fb="Richtig: Du ziehst nach unten statt nach oben, brauchst aber die volle Gewichtskraft der Last als Zugkraft.">Sie ändert nur die Richtung der Kraft.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Echte Rollen haben Reibung, und die losen Rollen müssen mit angehoben werden. Was bedeutet das?</p>
+        <div class="choices">
+          <button type="button" data-ok data-fb="Richtig: Man muss zusätzlich die Reibung überwinden und die losen Rollen heben. Arbeit sparen kann man nie.">Man braucht etwas mehr Kraft und Arbeit als berechnet.</button>
+          <button type="button" data-fb="Reibung wirkt immer gegen die Bewegung. Hilft sie dir also beim Ziehen?">Man braucht weniger Kraft.</button>
+          <button type="button" data-fb="Überlege: Auch die losen Rollen haben eine Gewichtskraft.">Es ändert sich nichts.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="all-done">Alles entdeckt! Weiter geht es mit den Übungen.</div>
+    </div>
+  </div>
+</div>
+
+<script src="../../static/lesson-kit.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var PXM = 100, FLOOR = 440, YF = 64, CEIL = 16, K = 0.05, TICK = 25, HAND = 238;
+  var S = { n: 2, G: 400, h: 0.5, y: 0, anim: null };
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var layer = $('layer'), measure = $('measure');
+
+  function el(tag, a, parent) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); (parent || layer).appendChild(e); return e; }
+  function label(x, y, main, sub, rest, color, anchor) {
+    var t = el('text', { x: x, y: y, class: 'alab', 'text-anchor': anchor || 'start', 'dominant-baseline': 'central' });
+    t.style.fill = color;
+    el('tspan', {}, t).textContent = main;
+    if (sub) el('tspan', { class: 'sub', dy: 4 }, t).textContent = sub;
+    el('tspan', sub ? { dy: -4 } : {}, t).textContent = rest || '';
+    return t;
+  }
+  function arrowDown(x, y, len, color) {
+    if (len < 1) return;
+    var head = Math.min(12, len * 0.6);
+    el('line', { x1: x, y1: y, x2: x, y2: y + len - head, stroke: color, 'stroke-width': 4, 'stroke-linecap': 'round' });
+    el('polygon', { points: x + ',' + (y + len) + ' ' + (x - 6) + ',' + (y + len - head) + ' ' + (x + 6) + ',' + (y + len - head), fill: color });
+  }
+  var N = function (x) { return LK.fmt(x, Math.abs(x - Math.round(x)) < 1e-6 ? 0 : (Math.abs(x * 10 - Math.round(x * 10)) < 1e-6 ? 1 : 2)); };
+  var M = function (x) { return N(x) + ' m'; };
+
+  // Anordnung der Rollen für n tragende Seilstücke
+  function layout() {
+    var n = S.n;
+    if (n === 1) return { r: 26, fixed: [260], loose: [], anchorX: null, handX: 286, segX: [234] };
+    var m = n / 2, c0 = 280 - 40 * m, o = { r: 20, fixed: [], loose: [], anchorX: c0 - 20, handX: c0 + 80 * m - 20, segX: [] };
+    for (var i = 0; i < m; i++) { o.loose.push(c0 + 80 * i); o.fixed.push(c0 + 80 * i + 40); }
+    for (var j = 0; j < n; j++) o.segX.push(c0 - 20 + 40 * j);
+    return o;
+  }
+
+  function draw() {
+    layer.innerHTML = '';
+    var L = layout(), r = L.r, n = S.n, F = S.G / n;
+    var loadBottom = FLOOR - S.y * PXM, loadTop = loadBottom - 56;
+    // Boden, Decke, Höhenmaßstab
+    el('rect', { x: 0, y: FLOOR, width: 520, height: 40, class: 'ground' });
+    el('line', { x1: 0, x2: 520, y1: FLOOR, y2: FLOOR, stroke: 'var(--line)', 'stroke-width': 2 });
+    el('rect', { x: 70, y: 4, width: 440, height: CEIL - 4, class: 'ceil' });
+    for (var hm = 0; hm <= 2; hm += 0.5) {
+      var yy = FLOOR - hm * PXM;
+      el('line', { x1: 34, x2: hm % 1 === 0 ? 48 : 42, y1: yy, y2: yy, stroke: 'var(--line)', 'stroke-width': 1.2 });
+      el('text', { x: 28, y: yy + (hm === 0 ? -2 : 4), class: 'val', 'text-anchor': 'end' }).textContent = LK.fmt(hm, hm % 1 === 0 ? 0 : 1);
+    }
+    el('line', { x1: 34, x2: 34, y1: FLOOR, y2: FLOOR - 2 * PXM, stroke: 'var(--line)', 'stroke-width': 1.2 });
+    el('text', { x: 4, y: FLOOR - 2 * PXM - 14, class: 'val' }).textContent = 'h in m';
+    // Zielhöhe und erreichte Höhe
+    el('line', { x1: 34, x2: 120, y1: FLOOR - S.h * PXM, y2: FLOOR - S.h * PXM, stroke: 'var(--ok)', 'stroke-width': 1.5, 'stroke-dasharray': '5 4' });
+    el('polygon', { points: '50,' + loadBottom + ' 60,' + (loadBottom - 6) + ' 60,' + (loadBottom + 6), fill: 'var(--accent)' });
+
+    // Seilverlauf
+    var d, ropeEnd = loadTop - 10, yL = loadTop - 12 - 34, segs = [];
+    if (n === 1) {
+      var c = L.fixed[0];
+      d = 'M' + (c - r) + ' ' + ropeEnd + ' L' + (c - r) + ' ' + YF + ' A' + r + ' ' + r + ' 0 0 1 ' + (c + r) + ' ' + YF + ' L' + L.handX + ' ' + (FLOOR - 4);
+      segs.push([c - r, YF, ropeEnd]);
+    } else {
+      d = 'M' + L.anchorX + ' ' + CEIL;
+      for (var i = 0; i < L.loose.length; i++) {
+        var lx = L.loose[i], fx = L.fixed[i];
+        d += ' L' + (lx - r) + ' ' + yL + ' A' + r + ' ' + r + ' 0 0 0 ' + (lx + r) + ' ' + yL;
+        d += ' L' + (fx - r) + ' ' + YF + ' A' + r + ' ' + r + ' 0 0 1 ' + (fx + r) + ' ' + YF;
+      }
+      d += ' L' + L.handX + ' ' + (FLOOR - 4);
+      L.segX.forEach(function (x, j) { segs.push([x, j === 0 ? CEIL : YF, yL]); });
+    }
+    // Aufhängungen
+    L.fixed.forEach(function (x) { el('line', { x1: x, x2: x, y1: CEIL, y2: YF, class: 'rod' }); });
+    var cx = n === 1 ? L.fixed[0] - r : (L.loose[0] + L.loose[L.loose.length - 1]) / 2;
+    var halfW = n === 1 ? 30 : (L.loose[L.loose.length - 1] - L.loose[0]) / 2 + 34;
+    if (n > 1) {
+      var yBar = loadTop - 12;
+      L.loose.forEach(function (x) { el('line', { x1: x, x2: x, y1: yL, y2: yBar, class: 'rod' }); });
+      el('line', { x1: L.loose[0], x2: L.loose[L.loose.length - 1], y1: yBar, y2: yBar, class: 'rod' });
+      el('line', { x1: cx, x2: cx, y1: yBar, y2: loadTop, class: 'rod' });
+    } else {
+      el('line', { x1: cx, x2: cx, y1: ropeEnd, y2: loadTop, class: 'rod' });
+    }
+    // Last
+    el('rect', { x: cx - halfW, y: loadTop, width: 2 * halfW, height: 56, rx: 4, class: 'load' });
+    // Seil, tragende Seilstücke, Rollen
+    el('path', { d: d, class: 'rope' });
+    segs.forEach(function (s, j) {
+      el('line', { x1: s[0], x2: s[0], y1: s[1] + (j === 0 && n > 1 ? 2 : 0), y2: s[2], class: 'carry' });
+      el('text', { x: s[0] - 7, y: (s[1] + s[2]) / 2 + (j % 2 ? 14 : -4), class: 'num', 'text-anchor': 'end' }).textContent = j + 1;
+    });
+    L.fixed.forEach(function (x) { el('circle', { cx: x, cy: YF, r: r, class: 'pulley' }); el('circle', { cx: x, cy: YF, r: 3, fill: 'var(--line)' }); });
+    L.loose.forEach(function (x) { el('circle', { cx: x, cy: yL, r: r, class: 'pulley' }); el('circle', { cx: x, cy: yL, r: 3, fill: 'var(--line)' }); });
+    if (n === 1) el('circle', { cx: cx, cy: ropeEnd, r: 3, fill: 'var(--line)' });
+    // Markierungen auf dem Seil (feste Stellen des Seils, gezählt vom festen Ende)
+    measure.setAttribute('d', d);
+    var len = measure.getTotalLength();
+    for (var u = TICK / 2; u < len - 2; u += TICK) {
+      var p = measure.getPointAtLength(u);
+      if (p.y > HAND - 4 && p.y < HAND + 32 && Math.abs(p.x - L.handX) < 2) continue;
+      el('circle', { cx: p.x, cy: p.y, r: 3, class: 'tick' });
+    }
+    // Seilhaufen am Boden
+    var coils = 1 + Math.min(7, Math.floor(n * S.y / 0.5));
+    for (var k = 0; k < coils; k++) el('ellipse', { cx: L.handX + 4, cy: FLOOR - 4 - k * 3, rx: 14 + k * 2, ry: 4, fill: 'none', stroke: 'var(--line)', 'stroke-width': 1.6 });
+    // Hand und Kräfte
+    el('rect', { x: L.handX - 10, y: HAND, width: 20, height: 28, rx: 8, class: 'fist' });
+    arrowDown(L.handX, HAND + 30, F * K, 'var(--accent)');
+    label(L.handX + 16, HAND + 30 + Math.max(10, F * K / 2), 'F', '', ' = ' + N(F) + ' N', 'var(--accent)');
+    var cy = loadTop + 28;
+    arrowDown(cx, cy, S.G * K, 'var(--c3)');
+    el('circle', { cx: cx, cy: cy, r: 3.5, fill: 'var(--line)' });
+    label(cx - 10, cy + S.G * K - 8, 'F', 'G', ' = ' + N(S.G) + ' N', 'var(--c3)', 'end');
+    $('sc-title').textContent = 'Rollenanordnung mit ' + n + ' tragenden Seilstücken, Last ' + N(S.G) + ' N, gehoben um ' + M(S.y);
+  }
+
+  function setBar(id, frac, text) {
+    $('b' + id).style.width = Math.max(0, Math.min(1, frac)) * 100 + '%';
+    $('v' + id).textContent = text;
+  }
+  function readouts() {
+    var n = S.n, F = S.G / n, s = n * S.y, W = F * s;
+    $('oG').textContent = N(S.G) + ' N';
+    $('oH').textContent = M(S.h);
+    $('rF').textContent = N(F) + ' N';
+    $('rH').textContent = M(S.y);
+    $('rS').textContent = M(s);
+    $('rW').textContent = N(W) + ' J';
+    $('fW').textContent = N(F) + ' N · ' + M(s) + ' = ' + N(W) + ' J';
+    var Wmax = S.G * S.h;
+    setBar('F0', 1, N(S.G) + ' N'); setBar('F1', F / S.G, N(F) + ' N');
+    setBar('S0', S.y / (n * S.h), M(S.y)); setBar('S1', s / (n * S.h), M(s));
+    setBar('W0', S.G * S.y / Wmax, N(S.G * S.y) + ' J'); setBar('W1', W / Wmax, N(W) + ' J');
+    ['n1', 'n2', 'n4', 'n6'].forEach(function (id) { $(id).setAttribute('aria-pressed', id === 'n' + n); });
+    $('note').innerHTML = n === 1
+      ? 'Eine <b>feste Rolle</b> ändert nur die Richtung der Kraft: Du ziehst nach unten statt nach oben, brauchst aber die volle Kraft <span class="f">F = F<sub>G</sub></span>.'
+      : (n === 2
+        ? 'Die <b>lose Rolle</b> hängt an 2 Seilstücken, jedes trägt die Hälfte der Last. Die obere feste Rolle lenkt das Seil nur um.'
+        : 'Beim <b>Flaschenzug</b> hängt die Last an ' + n + ' tragenden Seilstücken. Jedes trägt nur <span class="f">F<sub>G</sub> / ' + n + '</span>.');
+  }
+  function render() { draw(); readouts(); }
+
+  function finished() {
+    var n = S.n, F = S.G / n;
+    $('status').textContent = 'Last um ' + M(S.h) + ' gehoben. Du hast ' + M(n * S.h) + ' Seil mit ' + N(F) + ' N gezogen: W = ' + N(F * n * S.h) + ' J, genauso viel wie beim direkten Heben.';
+    if (S.G === 600 && F <= 150) LK.reach('g150');
+    if (n === 4 && S.h === 1) LK.reach('n4h1');
+  }
+
+  var last = 0;
+  function frame(t) {
+    if (!S.anim) return;
+    var dt = Math.min(0.05, (t - (last || t)) / 1000); last = t;
+    S.y = Math.min(S.h, S.y + dt * S.anim);
+    render();
+    if (S.y >= S.h - 1e-9) { S.y = S.h; S.anim = null; render(); finished(); return; }
+    requestAnimationFrame(frame);
+  }
+  function pull() {
+    if (S.anim) return;
+    if (S.y >= S.h - 1e-9) { S.y = 0; }
+    $('status').textContent = '';
+    if (reduce) { S.y = S.h; render(); finished(); return; }
+    var dur = 1.8 + 0.2 * S.n * S.h;          // Sekunden für die ganze Hubhöhe
+    S.anim = S.h / dur;
+    last = 0;
+    requestAnimationFrame(frame);
+  }
+  function lower() { S.anim = null; S.y = 0; $('status').textContent = ''; render(); }
+
+  [1, 2, 4, 6].forEach(function (n) { $('n' + n).onclick = function () { S.n = n; lower(); }; });
+  $('sG').oninput = function () { S.G = Number(this.value); render(); };
+  $('sH').oninput = function () { S.h = Number(this.value); lower(); };
+  $('bPull').onclick = pull;
+  $('bDown').onclick = lower;
+  render();
+})();
+</script>
+</body>
+</html>

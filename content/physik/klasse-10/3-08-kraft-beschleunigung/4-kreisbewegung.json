@@ -1,0 +1,92 @@
+{
+  "id": "k10-kreisbewegung",
+  "titel": "Kreisbewegung und Radialkraft",
+  "kurz": "Warum man eine Kraft zum Mittelpunkt braucht, um im Kreis zu fahren, und was in der Kurve wirklich passiert.",
+  "reihenfolge": 4,
+  "lernziele": [
+    { "id": "lz1", "niveau": "G", "text": "Die Radialkraft als Ursache einer Kreisbewegung beschreiben (qualitativ)" },
+    { "id": "lz2", "niveau": "G", "text": "Angeben, wovon die nötige Radialkraft abhängt" },
+    { "id": "lz3", "niveau": "H", "text": "Bewegungsabläufe in Kurven mit den newtonschen Gesetzen voraussagen und Gefahren beurteilen" }
+  ],
+  "verstehen": {
+    "einstieg": "Du schleuderst einen Ball an einer Schnur im Kreis. Plötzlich reißt die Schnur. In welche Richtung fliegt der Ball weg?",
+    "abschnitte": [
+      {
+        "titel": "Kreisbewegung braucht eine Kraft",
+        "text": "Nach dem Trägheitsgesetz würde sich ein Körper ohne Kraft **geradlinig** weiterbewegen. Bei einer Kreisbewegung ändert sich aber ständig die **Richtung**. Dafür ist eine Kraft nötig, die immer **zum Mittelpunkt** des Kreises zeigt: die **Radialkraft** (auch Zentripetalkraft).\n\nWer oder was diese Kraft aufbringt, ist verschieden: die Schnur beim Ball, die Haftreibung der Reifen beim Auto in der Kurve, die Gravitation beim Mond, der um die Erde kreist."
+      },
+      {
+        "titel": "Wenn die Kraft fehlt",
+        "text": "Reißt die Schnur, fehlt die Radialkraft. Der Ball fliegt dann **tangential** weiter, also in die Richtung, in die er sich gerade bewegt hat, und nicht nach außen weg.\n\nIn einem Auto in der Kurve hat man das Gefühl, nach außen gedrückt zu werden. In Wirklichkeit will der Körper wegen seiner Trägheit geradeaus weiter, und das Auto (Sitz, Tür, Gurt) zwingt ihn auf die Kurvenbahn."
+      },
+      {
+        "titel": "Wovon die Radialkraft abhängt",
+        "text": "Die nötige Radialkraft ist umso größer, je **größer die Masse**, je **größer die Geschwindigkeit** und je **kleiner der Radius** (je enger die Kurve) ist. Die Geschwindigkeit wirkt dabei besonders stark: Doppelte Geschwindigkeit erfordert die vierfache Kraft.\n\nIn einer Kurve muss die Haftreibung der Reifen diese Kraft aufbringen. Ist man zu schnell oder ist die Straße nass oder vereist, reicht die Haftreibung nicht, und das Auto rutscht tangential aus der Kurve."
+      }
+    ],
+    "merksatz": "Für eine Kreisbewegung ist eine Radialkraft zum Mittelpunkt nötig. Fehlt sie, bewegt sich der Körper tangential geradeaus weiter. Sie wächst mit Masse und Geschwindigkeit und wird bei engeren Kurven größer.",
+    "alltag": "Eine Salatschleuder trocknet Salat: Die Blätter werden vom Korb auf der Kreisbahn gehalten, das Wasser aber kann durch die Löcher geradeaus weiterfliegen."
+  },
+  "interaktiv": [],
+  "uebungen": [
+    { "id": "k10-kb-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "In welche Richtung zeigt die Radialkraft bei einer Kreisbewegung?",
+      "optionen": [
+        { "text": "Zum Mittelpunkt des Kreises", "richtig": true },
+        { "text": "Vom Mittelpunkt weg nach außen", "feedback": "Nach außen fühlt es sich nur an. Die nötige Kraft zeigt nach innen." },
+        { "text": "In Bewegungsrichtung", "feedback": "Eine Kraft in Bewegungsrichtung würde den Körper schneller machen, nicht auf die Kreisbahn zwingen." }
+      ],
+      "erklaerung": "Nur eine Kraft zum Mittelpunkt kann die Richtung ständig ändern, ohne das Tempo zu ändern." },
+    { "id": "k10-kb-02", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ein Ball wird an einer Schnur im Kreis geschleudert. Die Schnur reißt. Wie fliegt der Ball weiter (von oben betrachtet)?",
+      "optionen": [
+        { "text": "Geradlinig in die Richtung, in die er sich gerade bewegt hat (tangential)", "richtig": true },
+        { "text": "Gerade nach außen, vom Mittelpunkt weg", "feedback": "Ohne Kraft bewegt sich der Ball einfach geradeaus in seiner letzten Bewegungsrichtung." },
+        { "text": "Weiter auf der Kreisbahn", "feedback": "Ohne Schnur gibt es keine Kraft mehr, die ihn auf der Kreisbahn hält." }
+      ],
+      "erklaerung": "Trägheitsgesetz: Ohne Kraft geradlinig gleichförmig weiter, also tangential zum Kreis." },
+    { "id": "k10-kb-03", "typ": "zuordnung", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Ordne zu, welche Kraft jeweils die Radialkraft aufbringt.",
+      "paare": [
+        { "links": "Auto in einer Kurve", "rechts": "Haftreibung zwischen Reifen und Straße" },
+        { "links": "Mond auf seiner Bahn um die Erde", "rechts": "Gravitationskraft der Erde" },
+        { "links": "Kettenkarussell", "rechts": "Kraft in den Ketten" }
+      ],
+      "extraRechts": ["Luftwiderstand"],
+      "erklaerung": "„Radialkraft“ ist keine neue Kraftart, sondern eine Aufgabe, die eine vorhandene Kraft übernimmt." },
+    { "id": "k10-kb-04", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Wann ist in einer Kurve eine größere Radialkraft nötig?",
+      "optionen": [
+        { "text": "Bei höherer Geschwindigkeit", "richtig": true },
+        { "text": "Bei einer engeren Kurve (kleinerer Radius)", "richtig": true },
+        { "text": "Bei einem schwereren Fahrzeug", "richtig": true },
+        { "text": "Bei einer weiteren Kurve (größerer Radius)", "feedback": "Weite Kurven brauchen weniger Kraft. Deshalb haben Autobahnen weite Kurven." }
+      ],
+      "erklaerung": "Masse, Geschwindigkeit (stark) und Krümmung der Kurve bestimmen die nötige Radialkraft." },
+    { "id": "k10-kb-05", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Ein Auto fährt doppelt so schnell durch dieselbe Kurve. Wie verändert sich die nötige Radialkraft?",
+      "optionen": [
+        { "text": "Sie wird viermal so groß.", "richtig": true },
+        { "text": "Sie wird doppelt so groß.", "feedback": "Die Geschwindigkeit geht quadratisch ein." },
+        { "text": "Sie bleibt gleich.", "feedback": "Schnellere Fahrt erfordert eine stärkere Richtungsänderung pro Sekunde." }
+      ],
+      "erklaerung": "Die Radialkraft wächst mit dem Quadrat der Geschwindigkeit. Schon etwas zu schnell in der Kurve kann die Haftreibung übersteigen." },
+    { "id": "k10-kb-06", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Bei Glatteis rutscht ein Auto in einer Kurve geradeaus von der Straße. Erkläre das mit den newtonschen Gesetzen.",
+      "stichworte": [
+        { "aspekt": "Für die Kurve ist eine Radialkraft zum Mittelpunkt nötig, die die Haftreibung aufbringt", "woerter": ["radialkraft", "zentripetalkraft", "zum mittelpunkt", "nach innen"] },
+        { "aspekt": "Auf Eis ist die Haftreibung zu klein", "woerter": ["haftreibung", "reibung", "zu klein", "zu gering", "glatt"] },
+        { "aspekt": "Wegen der Trägheit fährt das Auto tangential geradeaus weiter", "woerter": ["traeg", "geradeaus", "tangential", "geradlinig"] }
+      ],
+      "musterloesung": "Damit ein Auto einer Kurve folgt, braucht es eine Radialkraft zum Kurvenmittelpunkt. Diese Kraft bringt normalerweise die Haftreibung zwischen Reifen und Straße auf. Auf Glatteis ist die Haftreibung sehr klein und reicht nicht mehr aus. Dann fehlt die nötige Radialkraft, und nach dem Trägheitsgesetz bewegt sich das Auto in seiner bisherigen Richtung geradlinig weiter, also tangential aus der Kurve heraus.",
+      "erklaerung": "Bei Glätte hilft nur: deutlich langsamer fahren, denn die nötige Kraft sinkt mit dem Quadrat der Geschwindigkeit." },
+    { "id": "k10-kb-07", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Auf einem Karussell liegt ein Becher lose auf dem Boden. Das Karussell dreht sich immer schneller. Was passiert?",
+      "optionen": [
+        { "text": "Ab einer bestimmten Geschwindigkeit reicht die Haftreibung nicht mehr, und der Becher rutscht nach außen weg.", "richtig": true },
+        { "text": "Der Becher rutscht zur Mitte.", "feedback": "Der Becher will geradeaus weiter, das führt ihn vom Mittelpunkt weg." },
+        { "text": "Der Becher bleibt immer liegen, egal wie schnell.", "feedback": "Die nötige Radialkraft wächst mit der Geschwindigkeit, die Haftreibung hat aber eine Grenze." }
+      ],
+      "erklaerung": "Die Haftreibung muss die Radialkraft aufbringen. Übersteigt die nötige Kraft die maximale Haftreibung, rutscht der Becher." }
+  ]
+}

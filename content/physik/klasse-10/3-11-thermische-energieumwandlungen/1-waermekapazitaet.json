@@ -1,0 +1,88 @@
+{
+  "id": "k10-waermekapazitaet",
+  "titel": "Wärme und spezifische Wärmekapazität",
+  "kurz": "Wie viel Energie man braucht, um einen Stoff zu erwärmen, und warum Wasser dafür so viel braucht.",
+  "reihenfolge": 1,
+  "lernziele": [
+    { "id": "lz1", "niveau": "G", "text": "Die Abhängigkeit der Wärme von Temperaturänderung, Masse und Stoff experimentell bestätigen" },
+    { "id": "lz2", "niveau": "H", "text": "Wärmen mit `Q = c · m · ΔT` berechnen" },
+    { "id": "lz3", "niveau": "H", "text": "Die thermische Leistung einer Wärmequelle bestimmen" },
+    { "id": "lz4", "niveau": "H", "text": "Aus Messdaten die spezifische Wärmekapazität ermitteln" }
+  ],
+  "verstehen": {
+    "einstieg": "Am Strand ist der Sand mittags glühend heiß, das Meer aber erfrischend kühl, obwohl beide gleich lange in der Sonne liegen. Warum?",
+    "abschnitte": [
+      {
+        "titel": "Wovon die Wärme abhängt",
+        "text": "Um einen Körper zu erwärmen, muss man ihm die Wärme `Q` zuführen. Experimente zeigen: Die nötige Wärme ist proportional\n\nzur **Temperaturänderung** `ΔT` (doppelte Erwärmung, doppelte Wärme),\nzur **Masse** `m` (doppelte Menge, doppelte Wärme)\n\nund hängt vom **Stoff** ab. Diese Stoffeigenschaft heißt **spezifische Wärmekapazität** `c`. Zusammen gilt: `Q = c · m · ΔT`."
+      },
+      {
+        "titel": "Die spezifische Wärmekapazität",
+        "text": "`c` gibt an, wie viel Energie man braucht, um **1 kg** eines Stoffes um **1 K** zu erwärmen. Einheit: kJ/(kg·K).\n\nWasser 4,19 · Luft 1,0 · Aluminium 0,90 · Sand etwa 0,8 · Eisen 0,45 · Kupfer 0,39 (alle in kJ/(kg·K)).\n\nWasser hat eine besonders große spezifische Wärmekapazität. Es erwärmt sich langsam und speichert viel Energie. Deshalb ist das Meer mittags kühler als der Sand, nachts aber wärmer, und deshalb nutzt man Wasser in Heizungen und Wärmflaschen.\n\nTemperaturänderungen in Kelvin und Grad Celsius sind gleich groß: ΔT = 20 K entspricht einer Erwärmung um 20 °C."
+      },
+      {
+        "titel": "Thermische Leistung",
+        "text": "Die **thermische Leistung** einer Wärmequelle gibt an, wie viel Wärme sie pro Sekunde abgibt: `P = Q / t`. Man bestimmt sie, indem man z. B. Wasser erwärmt, die Temperatur misst und `Q = c · m · ΔT` durch die Zeit teilt.\n\nUmgekehrt kann man aus bekannter Leistung die Zeit zum Erwärmen berechnen: `t = Q / P`."
+      }
+    ],
+    "formeln": [
+      { "formel": "Q = c · m · ΔT", "bedeutung": "Wärme `Q` in kJ, spez. Wärmekapazität `c` in kJ/(kg·K), Masse `m` in kg, Temperaturänderung `ΔT` in K" },
+      { "formel": "P = \\frac{Q}{t}", "bedeutung": "thermische Leistung in W (= J/s)" }
+    ],
+    "merksatz": "Die Wärme zum Erwärmen ist `Q = c · m · ΔT`. Wasser hat mit 4,19 kJ/(kg·K) eine besonders große spezifische Wärmekapazität.",
+    "alltag": "Küstenregionen haben ein milderes Klima als das Landesinnere: Das Meer gleicht mit seiner großen Wärmekapazität Temperaturschwankungen aus."
+  },
+  "interaktiv": ["k10-wasserkocher"],
+  "uebungen": [
+    { "id": "k10-wk-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Man erwärmt einmal 1 kg und einmal 2 kg Wasser jeweils um 10 K. Wie viel Wärme braucht man im zweiten Fall?",
+      "optionen": [
+        { "text": "Doppelt so viel", "richtig": true },
+        { "text": "Gleich viel", "feedback": "Doppelte Masse bedeutet doppelt so viele Teilchen, die schneller werden müssen." },
+        { "text": "Viermal so viel", "feedback": "Die Wärme ist proportional zur Masse, nicht zu ihrem Quadrat." }
+      ],
+      "erklaerung": "`Q ~ m`: doppelte Masse, doppelte Wärme." },
+    { "id": "k10-wk-02", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Wie viel Wärme braucht man, um 2 kg Wasser von 20 °C auf 70 °C zu erwärmen? (c = 4,19 kJ/(kg·K))",
+      "gegeben": "`m = 2 kg`, `ΔT = 50 K`, `c = 4,19 kJ/(kg·K)`", "gesucht": "`Q`", "gesuchtSymbol": "Q",
+      "loesung": 419, "einheit": "kJ", "alternativEinheiten": { "J": 0.001, "MJ": 1000 },
+      "rechenweg": ["`ΔT = 70 °C − 20 °C = 50 K`", "`Q = c · m · ΔT = 4,19 kJ/(kg·K) · 2 kg · 50 K = 419 kJ`"],
+      "erklaerung": "Das ist ungefähr so viel Energie, wie ein 2-kW-Wasserkocher in dreieinhalb Minuten umsetzt." },
+    { "id": "k10-wk-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Ein Eisentopf (1,5 kg) wird von 20 °C auf 100 °C erhitzt. Wie viel Wärme nimmt er auf? (c_{Eisen} = 0,45 kJ/(kg·K))",
+      "gegeben": "`m = 1,5 kg`, `ΔT = 80 K`, `c = 0,45 kJ/(kg·K)`", "gesucht": "`Q`", "gesuchtSymbol": "Q",
+      "loesung": 54, "einheit": "kJ", "alternativEinheiten": { "J": 0.001 },
+      "rechenweg": ["`Q = 0,45 kJ/(kg·K) · 1,5 kg · 80 K = 54 kJ`"],
+      "erklaerung": "Für dieselbe Erwärmung bräuchte die gleiche Masse Wasser fast zehnmal so viel Energie." },
+    { "id": "k10-wk-04", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Warum ist der Sand am Strand mittags viel heißer als das Meer?",
+      "optionen": [
+        { "text": "Wasser hat eine viel größere spezifische Wärmekapazität als Sand.", "richtig": true },
+        { "text": "Das Meer bekommt weniger Sonnenstrahlung ab.", "feedback": "Beide bekommen ungefähr gleich viel Strahlung." },
+        { "text": "Sand leitet die Wärme besser in die Tiefe.", "feedback": "Sand leitet Wärme eher schlecht. Entscheidend ist die Wärmekapazität (und dass sich Wasser durchmischt)." }
+      ],
+      "erklaerung": "Bei gleicher zugeführter Energie erwärmt sich ein Stoff mit großer Wärmekapazität weniger. Zusätzlich verteilt sich die Wärme im Meer durch Strömungen auf viel mehr Wasser." },
+    { "id": "k10-wk-05", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Ein Tauchsieder erwärmt 0,5 kg Wasser in 3 Minuten um 30 K. Welche thermische Leistung gibt er an das Wasser ab? (c = 4,19 kJ/(kg·K))",
+      "gegeben": "`m = 0,5 kg`, `ΔT = 30 K`, `t = 180 s`", "gesucht": "thermische Leistung `P`", "gesuchtSymbol": "P",
+      "loesung": 349.17, "einheit": "W", "alternativEinheiten": { "kW": 1000 }, "toleranz": 0.02,
+      "rechenweg": ["`Q = 4,19 kJ/(kg·K) · 0,5 kg · 30 K = 62,85 kJ = 62 850 J`", "`P = \\frac{Q}{t} = \\frac{62 850 J}{180 s} ≈ 349 W`"],
+      "hinweis": "Berechne zuerst die Wärme in Joule und teile dann durch die Zeit in Sekunden.",
+      "erklaerung": "Das ist die Leistung, die tatsächlich im Wasser ankommt. Die elektrische Leistung des Geräts ist etwas größer." },
+    { "id": "k10-wk-06", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Ein Metallblock (0,5 kg) nimmt 9 kJ Wärme auf und erwärmt sich dabei um 20 K. Berechne die spezifische Wärmekapazität. Um welches Metall handelt es sich vermutlich?",
+      "gegeben": "`m = 0,5 kg`, `Q = 9 kJ`, `ΔT = 20 K`", "gesucht": "`c`", "gesuchtSymbol": "c",
+      "loesung": 0.9, "einheit": "kJ/(kg·K)",
+      "rechenweg": ["`c = \\frac{Q}{m · ΔT}`", "`c = \\frac{9 kJ}{0,5 kg · 20 K} = 0,9 kJ/(kg·K)`", "Das passt zu Aluminium."],
+      "erklaerung": "Wie die Dichte ist auch die spezifische Wärmekapazität eine Stoffeigenschaft, mit der man Stoffe erkennen kann." },
+    { "id": "k10-wk-07", "typ": "text", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Warum werden Wärmflaschen mit Wasser gefüllt und nicht mit Sand?",
+      "stichworte": [
+        { "aspekt": "Wasser hat eine große spezifische Wärmekapazität", "woerter": ["waermekapazitaet", "4,19", "speichert viel"] },
+        { "aspekt": "Es kann deshalb viel Energie speichern", "woerter": ["viel energie", "viel waerme", "speicher"] },
+        { "aspekt": "Es gibt die Wärme lange / langsam ab, ohne schnell abzukühlen", "woerter": ["lange", "langsam", "nicht so schnell", "kuehlt langsam"] }
+      ],
+      "musterloesung": "Wasser hat eine viel größere spezifische Wärmekapazität als Sand (4,19 statt etwa 0,8 kJ/(kg·K)). Bei gleicher Masse und gleicher Temperatur speichert es deshalb etwa fünfmal so viel Energie. Beim Abkühlen gibt es diese Energie nach und nach ab, ohne dass seine Temperatur schnell sinkt. Die Wärmflasche bleibt so lange warm.",
+      "erklaerung": "Aus demselben Grund nutzt man Wasser in Heizungsanlagen und Warmwasserspeichern." }
+  ]
+}

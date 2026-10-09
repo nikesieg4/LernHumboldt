@@ -1,0 +1,103 @@
+{
+  "id": "k7-teilchenmodell",
+  "titel": "Teilchenmodell und Aggregatzustände",
+  "kurz": "Alles besteht aus winzigen Teilchen, die sich ständig bewegen. Damit lassen sich fest, flüssig und gasförmig erklären.",
+  "reihenfolge": 1,
+  "lernziele": [
+    { "id": "lz1", "niveau": "D", "text": "Die Grundannahmen des Teilchenmodells nennen" },
+    { "id": "lz2", "niveau": "D", "text": "Die drei Aggregatzustände im Teilchenmodell beschreiben" },
+    { "id": "lz3", "niveau": "D", "text": "Aggregatzustandsänderungen mit einfachen Teilchenvorstellungen erklären" },
+    { "id": "lz4", "niveau": "E", "text": "Die Brownsche Bewegung beschreiben und das Teilchenmodell auf seine Grenzen prüfen" }
+  ],
+  "verstehen": {
+    "einstieg": "Ein Tropfen Tinte in einem Glas Wasser verteilt sich von allein, auch wenn niemand umrührt. Warum?",
+    "abschnitte": [
+      {
+        "titel": "Das Teilchenmodell",
+        "text": "Physiker stellen sich vor, dass alle Stoffe aus winzigen **Teilchen** bestehen. Das Modell beruht auf drei Annahmen:\n\n1. Alle Stoffe bestehen aus kleinsten Teilchen. Die Teilchen eines Stoffes sind untereinander gleich.\n2. Die Teilchen sind **ständig in Bewegung**. Je höher die Temperatur, desto schneller bewegen sie sich.\n3. Zwischen den Teilchen wirken **Anziehungskräfte**, die umso stärker sind, je näher sie sich kommen.\n\nZwischen den Teilchen ist **nichts**, also leerer Raum. Die Teilchen selbst sind nicht warm oder kalt, farbig oder hart. Diese Eigenschaften hat nur der Stoff als Ganzes."
+      },
+      {
+        "titel": "Fest, flüssig, gasförmig",
+        "text": "**Fest:** Die Teilchen liegen dicht und geordnet auf festen Plätzen. Sie schwingen nur hin und her. Ein fester Körper hat eine feste Form und ein festes Volumen.\n\n**Flüssig:** Die Teilchen liegen dicht, können sich aber aneinander vorbeibewegen. Eine Flüssigkeit hat ein festes Volumen, aber keine feste Form.\n\n**Gasförmig:** Die Teilchen sind weit voneinander entfernt und fliegen frei durch den Raum. Ein Gas füllt jeden Raum aus und lässt sich leicht zusammendrücken.\n\nBeim Erwärmen bewegen sich die Teilchen immer heftiger. Irgendwann reichen die Anziehungskräfte nicht mehr aus, um sie zusammenzuhalten: Der Stoff **schmilzt** oder **verdampft**."
+      },
+      {
+        "titel": "Brownsche Bewegung",
+        "text": "Unter dem Mikroskop zittern winzige Rauch- oder Fettteilchen ständig unregelmäßig hin und her. Diese **Brownsche Bewegung** entsteht, weil sie von allen Seiten von den unsichtbaren, sich bewegenden Luft- oder Wasserteilchen angestoßen werden. Sie ist ein Hinweis darauf, dass es die Teilchen wirklich gibt.\n\n**Grenzen des Modells:** Das Teilchenmodell erklärt viel, aber nicht alles. Es sagt z. B. nichts darüber, wie die Teilchen selbst aufgebaut sind oder warum ein Stoff eine bestimmte Farbe hat."
+      }
+    ],
+    "merksatz": "Alle Stoffe bestehen aus kleinsten Teilchen, die sich ständig bewegen und sich gegenseitig anziehen. Je höher die Temperatur, desto schneller die Bewegung.\n\nDer Aggregatzustand hängt davon ab, wie stark die Bewegung im Vergleich zu den Anziehungskräften ist.",
+    "alltag": "Parfüm riecht man nach kurzer Zeit im ganzen Raum, weil sich die Duftteilchen durch ihre Bewegung zwischen den Luftteilchen verteilen. Das nennt man **Diffusion**. In warmem Wasser geht das schneller als in kaltem."
+  },
+  "interaktiv": ["k7-teilchenmodell"],
+  "uebungen": [
+    { "id": "k7-tm-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Was befindet sich laut Teilchenmodell zwischen den Teilchen eines Stoffes?",
+      "optionen": [
+        { "text": "Nichts (leerer Raum)", "richtig": true },
+        { "text": "Luft", "feedback": "Luft besteht selbst aus Teilchen. Auch zwischen den Luftteilchen ist leerer Raum." },
+        { "text": "Wasser", "feedback": "Wasser ist ein Stoff aus eigenen Teilchen. Zwischen Teilchen ist nichts." }
+      ],
+      "erklaerung": "Zwischen den Teilchen ist leerer Raum. Deshalb kann man z. B. Gase zusammendrücken." },
+    { "id": "k7-tm-02", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Ordne jedem Aggregatzustand die passende Beschreibung im Teilchenmodell zu.",
+      "paare": [
+        { "links": "fest", "rechts": "dicht, geordnet, schwingen auf festen Plätzen" },
+        { "links": "flüssig", "rechts": "dicht, aber gegeneinander verschiebbar" },
+        { "links": "gasförmig", "rechts": "weit voneinander entfernt, fliegen frei umher" }
+      ],
+      "extraRechts": ["Teilchen stehen völlig still"],
+      "erklaerung": "In allen drei Zuständen bewegen sich die Teilchen. Sie stehen nie völlig still." },
+    { "id": "k7-tm-03", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Was passiert mit der Bewegung der Teilchen, wenn ein Stoff erwärmt wird?",
+      "optionen": [
+        { "text": "Sie bewegen sich schneller.", "richtig": true },
+        { "text": "Sie bewegen sich langsamer.", "feedback": "Langsamer werden sie beim Abkühlen." },
+        { "text": "Die Teilchen werden größer.", "feedback": "Die Teilchen selbst ändern ihre Größe nicht. Nur ihre Bewegung und ihre Abstände ändern sich." }
+      ],
+      "erklaerung": "Die Temperatur ist ein Maß dafür, wie heftig sich die Teilchen bewegen." },
+    { "id": "k7-tm-04", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Welche Aussagen über Gase sind richtig?",
+      "optionen": [
+        { "text": "Gase füllen jeden Raum vollständig aus.", "richtig": true },
+        { "text": "Gase lassen sich leicht zusammendrücken.", "richtig": true },
+        { "text": "Gase haben eine feste Form.", "feedback": "Gase haben weder eine feste Form noch ein festes Volumen." },
+        { "text": "Die Teilchen eines Gases sind größer als die einer Flüssigkeit.", "feedback": "Wasserdampf und flüssiges Wasser bestehen aus denselben Teilchen. Nur die Abstände sind verschieden." }
+      ],
+      "erklaerung": "Weil die Gasteilchen weit voneinander entfernt sind und frei umherfliegen, verteilen sie sich im ganzen Raum, und man kann sie zusammendrücken." },
+    { "id": "k7-tm-05", "typ": "reihenfolge", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Ein Eiswürfel wird langsam immer weiter erwärmt. Bringe die Vorgänge in die richtige Reihenfolge.",
+      "elemente": [
+        "Die Teilchen schwingen auf festen Plätzen (Eis).",
+        "Die Schwingungen werden heftiger, die Teilchen verlassen ihre Plätze: Das Eis schmilzt.",
+        "Die Teilchen bewegen sich aneinander vorbei (Wasser).",
+        "Die Teilchen werden so schnell, dass sie sich voneinander lösen: Das Wasser verdampft.",
+        "Die Teilchen fliegen frei umher (Wasserdampf)."
+      ],
+      "erklaerung": "Mit steigender Temperatur wird die Teilchenbewegung immer stärker, bis die Anziehungskräfte die Teilchen nicht mehr zusammenhalten können." },
+    { "id": "k7-tm-06", "typ": "text", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Erkläre mit dem Teilchenmodell, warum sich ein Tropfen Tinte in heißem Wasser schneller verteilt als in kaltem.",
+      "stichworte": [
+        { "aspekt": "Die Teilchen bewegen sich ständig und mischen sich dadurch (Diffusion)", "woerter": ["bewegen", "bewegung", "diffusion", "vermischen", "verteilen"] },
+        { "aspekt": "In heißem Wasser bewegen sich die Teilchen schneller", "woerter": ["schneller", "heftiger", "staerker"] },
+        { "aspekt": "Deshalb geht das Vermischen schneller", "woerter": ["schneller verteilt", "schneller vermischt", "geht schneller", "deshalb", "dadurch"] }
+      ],
+      "musterloesung": "Wasser- und Tintenteilchen bewegen sich ständig. Durch diese Bewegung stoßen sie aneinander und vermischen sich nach und nach von selbst (Diffusion). In heißem Wasser bewegen sich die Teilchen schneller als in kaltem. Deshalb vermischen sich die Teilchen schneller, und die Tinte verteilt sich schneller.",
+      "erklaerung": "Diffusion ist ein Beleg dafür, dass sich Teilchen ständig bewegen." },
+    { "id": "k7-tm-07", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Unter dem Mikroskop zittern Fetttröpfchen in Milch ständig unregelmäßig hin und her. Wie erklärt man das?",
+      "optionen": [
+        { "text": "Sie werden von den unsichtbaren, sich bewegenden Wasserteilchen von allen Seiten unregelmäßig angestoßen.", "richtig": true },
+        { "text": "Die Fetttröpfchen sind lebendig.", "feedback": "Das dachte man zuerst. Die Bewegung tritt aber auch bei unbelebten Teilchen wie Rauch auf." },
+        { "text": "Das Mikroskop wackelt.", "feedback": "Dann würden sich alle Tröpfchen gleich bewegen. Sie bewegen sich aber unabhängig voneinander." }
+      ],
+      "erklaerung": "Das ist die **Brownsche Bewegung**. Sie macht die Bewegung der unsichtbaren Teilchen indirekt sichtbar." },
+    { "id": "k7-tm-08", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Ein Schüler sagt: „Eisen ist grau, also sind auch die Eisenteilchen grau.“ Was ist an dieser Aussage falsch?",
+      "optionen": [
+        { "text": "Einzelne Teilchen haben keine Farbe. Farbe ist eine Eigenschaft des ganzen Stoffes.", "richtig": true },
+        { "text": "Nichts, die Aussage ist richtig.", "feedback": "Eigenschaften wie Farbe, Härte oder Temperatur gelten nur für den Stoff als Ganzes, nicht für einzelne Teilchen." },
+        { "text": "Eisenteilchen sind in Wirklichkeit rot.", "feedback": "Einzelne Teilchen haben überhaupt keine Farbe." }
+      ],
+      "erklaerung": "Das ist eine Grenze des Teilchenmodells: Man darf Eigenschaften des Stoffes (Farbe, Temperatur, Härte) nicht auf einzelne Teilchen übertragen." }
+  ]
+}

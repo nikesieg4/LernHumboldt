@@ -1,0 +1,98 @@
+{
+  "id": "k8-energieformen",
+  "titel": "Energieformen und Energieerhaltung",
+  "kurz": "Energie geht nie verloren, sie wird nur umgewandelt. Aber nicht jede Form ist gleich nützlich.",
+  "reihenfolge": 1,
+  "lernziele": [
+    { "id": "lz1", "niveau": "E", "text": "Energieformen nennen und Energieumwandlungen bei Vorgängen in Natur und Technik beschreiben" },
+    { "id": "lz2", "niveau": "E", "text": "Den Energieerhaltungssatz wiedergeben und exemplarisch anwenden" },
+    { "id": "lz3", "niveau": "E", "text": "Energieumwandlungen mit Energieflussdiagrammen darstellen" },
+    { "id": "lz4", "niveau": "E", "text": "Zwischen regenerativen und erschöpfbaren Energiequellen unterscheiden" }
+  ],
+  "verstehen": {
+    "einstieg": "Wenn eine Schaukel ausschwingt, bleibt sie irgendwann stehen. Ist die Energie dann verschwunden?",
+    "abschnitte": [
+      {
+        "titel": "Energieformen",
+        "text": "Energie ist die Fähigkeit, Arbeit zu verrichten, Wärme abzugeben oder Licht auszusenden. Sie tritt in verschiedenen **Formen** auf:\n\n**Kinetische Energie** (Bewegungsenergie): fahrendes Auto, fließendes Wasser.\n**Potenzielle Energie** (Lageenergie): hochgehobener Stein, Wasser im Stausee. Auch eine gespannte Feder hat potenzielle Energie (Spannenergie).\n**Chemische Energie**: Nahrung, Benzin, Batterie.\n**Thermische Energie**: heißes Wasser.\n**Elektrische Energie**: Strom aus der Steckdose.\n**Strahlungsenergie**: Sonnenlicht.\n**Kernenergie**: im Atomkern."
+      },
+      {
+        "titel": "Energieerhaltung",
+        "text": "Energie kann **weder erzeugt noch vernichtet** werden. Sie wird nur von einer Form in eine andere umgewandelt oder von einem Körper auf einen anderen übertragen. Das ist der **Energieerhaltungssatz**.\n\nDie Schaukel verliert ihre Energie also nicht. Durch Reibung in der Aufhängung und mit der Luft wird sie nach und nach in **thermische Energie** umgewandelt. Diese verteilt sich so in der Umgebung, dass man sie kaum noch nutzen kann. Man spricht von **entwerteter Energie**.\n\nWenn man im Alltag von „Energieverbrauch“ spricht, meint man genau das: Nützliche Energie wird in weniger nützliche umgewandelt."
+      },
+      {
+        "titel": "Energieflussdiagramme",
+        "text": "Energieumwandlungen stellt man mit **Energieflussdiagrammen** dar: Pfeile zeigen, welche Energieform hineinfließt und welche herauskommt. Die Breite der Pfeile entspricht der Energiemenge.\n\nBeispiel Glühlampe: elektrische Energie → Licht (nur etwa 5 %) und thermische Energie (etwa 95 %). Bei einer LED ist der Anteil des Lichts viel größer."
+      },
+      {
+        "titel": "Energiequellen",
+        "text": "**Erschöpfbare** Energieträger sind nur begrenzt vorhanden: Kohle, Erdöl, Erdgas, Uran. Fossile Brennstoffe setzen beim Verbrennen CO₂ frei.\n\n**Regenerative** (erneuerbare) Energiequellen stehen dauerhaft zur Verfügung: Sonne, Wind, Wasser, Biomasse, Erdwärme. Fast alle stammen letztlich aus der Energie der Sonne."
+      }
+    ],
+    "merksatz": "Energie wird nie erzeugt oder vernichtet, nur umgewandelt (Energieerhaltung). Bei jeder Umwandlung entsteht auch thermische Energie, die meist nicht mehr nutzbar ist.",
+    "alltag": "Auch dein Körper ist ein Energiewandler: Er wandelt die chemische Energie der Nahrung in Bewegungsenergie und thermische Energie um. Deshalb wird dir beim Sport warm."
+  },
+  "interaktiv": [],
+  "uebungen": [
+    { "id": "k8-ef-01", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ordne jedem Beispiel die Energieform zu, die darin hauptsächlich gespeichert ist.",
+      "paare": [
+        { "links": "ein rollender Fußball", "rechts": "kinetische Energie" },
+        { "links": "Wasser in einem hoch gelegenen Stausee", "rechts": "potenzielle Energie" },
+        { "links": "ein Butterbrot", "rechts": "chemische Energie" },
+        { "links": "heißer Tee", "rechts": "thermische Energie" }
+      ],
+      "extraRechts": ["Kernenergie"],
+      "erklaerung": "Die Energieform hängt davon ab, worin die Energie steckt: in der Bewegung, der Lage, chemischen Bindungen oder der Teilchenbewegung." },
+    { "id": "k8-ef-02", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Was besagt der Energieerhaltungssatz?",
+      "optionen": [
+        { "text": "Energie kann weder erzeugt noch vernichtet, sondern nur umgewandelt werden.", "richtig": true },
+        { "text": "Man sollte Energie sparen.", "feedback": "Das ist ein sinnvoller Rat, aber kein physikalisches Gesetz." },
+        { "text": "Bei jeder Umwandlung geht Energie verloren.", "feedback": "Insgesamt geht keine Energie verloren. Ein Teil wird nur in weniger nützliche thermische Energie umgewandelt." }
+      ],
+      "erklaerung": "Die Gesamtenergie in einem abgeschlossenen System bleibt immer gleich." },
+    { "id": "k8-ef-03", "typ": "reihenfolge", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Ein Fahrraddynamo versorgt das Licht. Bringe die Energieformen in die richtige Reihenfolge.",
+      "elemente": [
+        "chemische Energie (Nahrung des Radfahrers)",
+        "kinetische Energie (Bewegung von Rad und Dynamo)",
+        "elektrische Energie (Dynamo)",
+        "Strahlungsenergie (Licht der Lampe)"
+      ],
+      "erklaerung": "Bei jedem Schritt entsteht zusätzlich thermische Energie, z. B. durch Reibung." },
+    { "id": "k8-ef-04", "typ": "text", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Eine Schaukel schwingt immer weniger weit und bleibt schließlich stehen. Tom sagt: „Die Energie ist weg.“ Nimm Stellung.",
+      "stichworte": [
+        { "aspekt": "Energie geht nicht verloren (Energieerhaltung)", "woerter": ["nicht verloren", "nicht weg", "energieerhaltung", "nicht vernichtet", "bleibt erhalten"] },
+        { "aspekt": "Sie wird durch Reibung in thermische Energie umgewandelt", "woerter": ["reibung", "thermische energie", "waerme", "umgewandelt"] },
+        { "aspekt": "Diese verteilt sich in der Umgebung und ist kaum nutzbar (entwertet)", "woerter": ["umgebung", "verteilt", "entwertet", "nicht mehr nutzbar", "kaum nutzbar"] }
+      ],
+      "musterloesung": "Tom hat nicht recht. Nach dem Energieerhaltungssatz kann Energie nicht verschwinden. Durch die Reibung in der Aufhängung und mit der Luft wird die Bewegungs- und Lageenergie der Schaukel nach und nach in thermische Energie umgewandelt. Diese verteilt sich in der Umgebung und ist so kaum noch nutzbar. Man sagt: Die Energie wurde entwertet, aber nicht vernichtet.",
+      "erklaerung": "„Energieverlust“ bedeutet in der Physik immer: Umwandlung in nicht mehr nutzbare Formen." },
+    { "id": "k8-ef-05", "typ": "multi", "schwierigkeit": "leicht", "lernziel": "lz4",
+      "frage": "Welche Energiequellen sind erschöpfbar?",
+      "optionen": [
+        { "text": "Erdöl", "richtig": true },
+        { "text": "Kohle", "richtig": true },
+        { "text": "Erdgas", "richtig": true },
+        { "text": "Windenergie", "feedback": "Wind entsteht ständig neu durch die Sonne. Er ist regenerativ." },
+        { "text": "Sonnenenergie", "feedback": "Die Sonne wird noch Milliarden Jahre scheinen. Sie gilt als regenerativ." }
+      ],
+      "erklaerung": "Fossile Brennstoffe sind in Millionen von Jahren entstanden und werden viel schneller verbraucht, als sie nachwachsen." },
+    { "id": "k8-ef-06", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Eine Glühlampe nimmt in einer Stunde 216 kJ elektrische Energie auf. Davon werden 11 kJ als Licht abgegeben. Wie viel Energie wird in thermische Energie umgewandelt?",
+      "gegeben": "zugeführt 216 kJ, Licht 11 kJ", "gesucht": "thermische Energie",
+      "loesung": 205, "einheit": "kJ", "alternativEinheiten": { "J": 0.001 },
+      "rechenweg": ["Energieerhaltung: zugeführte Energie = Licht + Wärme", "Wärme = 216 kJ − 11 kJ = 205 kJ"],
+      "erklaerung": "Über 90 % werden zu Wärme. Deshalb wurden Glühlampen durch LEDs ersetzt." },
+    { "id": "k8-ef-07", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz1",
+      "frage": "Ein Ball fällt aus 2 m Höhe zu Boden und springt nur noch 1,5 m hoch. Welche Aussage ist richtig?",
+      "optionen": [
+        { "text": "Ein Teil der Energie wurde beim Aufprall in thermische Energie und Schall umgewandelt.", "richtig": true },
+        { "text": "Ein Teil der Energie wurde vernichtet.", "feedback": "Energie kann nicht vernichtet werden." },
+        { "text": "Der Ball hat beim Fallen Masse verloren.", "feedback": "Die Masse bleibt gleich. Die Energie wurde in andere Formen umgewandelt." }
+      ],
+      "erklaerung": "Beim Aufprall wird der Ball verformt. Dabei wird ein Teil der Energie in thermische Energie (Ball und Boden werden minimal wärmer) und in Schall umgewandelt." }
+  ]
+}

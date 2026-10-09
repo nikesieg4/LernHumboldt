@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bewegungs-Labor</title>
+<link rel="stylesheet" href="../../static/lesson-kit.css">
+<style>
+  .road { fill: var(--border); }
+  .car-body { fill: var(--accent); }
+  .car-win { fill: var(--card); opacity: .85; }
+  .wheel { fill: var(--line); }
+  .spur { fill: var(--pos); }
+  .spur-lbl { font-size: 11px; fill: var(--pos) !important; font-weight: 650; }
+  .goalflag { stroke: var(--ok); stroke-width: 2; }
+  .goalflag-f { fill: var(--ok); }
+  .curve { fill: none; stroke: var(--accent); stroke-width: 2.6; stroke-linejoin: round; }
+  .curve-old { fill: none; stroke: var(--muted); stroke-width: 2; opacity: .45; stroke-dasharray: 6 4; }
+  .area { fill: var(--accent); opacity: .16; }
+  .dot { fill: var(--accent); }
+  .formula { font-size: .92rem; background: var(--bg); border-radius: 10px; padding: 8px 10px; margin-top: 10px; font-variant-numeric: tabular-nums; }
+  .formula div + div { margin-top: 2px; }
+  .legend { font-size: .82rem; margin: 6px 0 0; }
+  .legend i { display: inline-block; width: 18px; height: 0; border-top: 2.6px solid var(--accent); margin-right: 4px; vertical-align: middle; }
+  .legend i.old { border-top: 2px dashed var(--muted); opacity: .7; }
+  .charts h2 { margin-top: 4px; }
+  .readouts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lk-grid > div { min-width: 0; }
+  @media (max-width: 520px) { svg .val { font-size: 15px; } svg .lbl { font-size: 16px; } .spur-lbl { font-size: 15px; } }
+  .charts svg + h2 { margin-top: 12px; }
+</style>
+</head>
+<body>
+<h1>Bewegungs-Labor: gleichförmig und beschleunigt</h1>
+<p class="muted small">Wähle die Bewegungsart, stelle Geschwindigkeit oder Beschleunigung ein und drücke „Start“. Jede Sekunde hinterlässt der Wagen einen Spur-Punkt. Die Diagramme entstehen live.</p>
+
+<div class="lk-grid">
+  <div>
+    <div class="lk-card">
+      <svg id="track" viewBox="0 0 520 112" role="img" aria-labelledby="tr-title">
+        <title id="tr-title">Strecke von 0 bis 100 Meter mit dem Wagen und den Spur-Punkten nach jeder Sekunde</title>
+      </svg>
+      <div class="formula" id="formula" aria-live="off"></div>
+    </div>
+
+    <div class="lk-card charts">
+      <h2>Weg-Zeit-Diagramm (<span class="f">s</span>-<span class="f">t</span>)</h2>
+      <svg id="chS" viewBox="0 0 520 205" role="img" aria-label="Weg-Zeit-Diagramm des Laufs"></svg>
+      <h2>Geschwindigkeit-Zeit-Diagramm (<span class="f">v</span>-<span class="f">t</span>)</h2>
+      <svg id="chV" viewBox="0 0 520 205" role="img" aria-label="Geschwindigkeit-Zeit-Diagramm des Laufs"></svg>
+      <p class="legend" id="legend"></p>
+    </div>
+  </div>
+
+  <div>
+    <div class="lk-card">
+      <h2>Einstellungen</h2>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Bewegungsart wählen">
+          <button type="button" id="bUni" aria-pressed="true">gleichförmig</button>
+          <button type="button" id="bAcc" aria-pressed="false">beschleunigt</button>
+        </div>
+      </div>
+      <label class="ctrl" id="cV"><span>Geschwindigkeit <span class="f">v</span> <output id="oV"></output></span>
+        <input type="range" id="sV" min="1" max="30" step="1" value="10"></label>
+      <label class="ctrl" id="cA" hidden><span>Beschleunigung <span class="f">a</span> <output id="oA"></output></span>
+        <input type="range" id="sA" min="0.5" max="10" step="0.5" value="2"></label>
+      <label class="ctrl" id="cV0" hidden><span>Startgeschwindigkeit <span class="f">v<sub>0</sub></span> <output id="oV0"></output></span>
+        <input type="range" id="sV0" min="0" max="15" step="1" value="0"></label>
+      <div class="row">
+        <button type="button" id="bStart" class="primary">Start</button>
+        <button type="button" id="bReset">Zurücksetzen</button>
+        <button type="button" id="bClear">Alte Kurven löschen</button>
+      </div>
+      <div class="readouts">
+        <div class="readout"><span>Zeit <span class="f">t</span></span><b id="rT">0,0 s</b></div>
+        <div class="readout"><span>Weg <span class="f">s</span></span><b id="rS">0,0 m</b></div>
+        <div class="readout"><span>Geschwindigkeit <span class="f">v</span></span><b id="rV">–</b><span id="rVk"></span></div>
+        <div class="readout"><span>Weg nach 5 s</span><b id="r5">–</b></div>
+      </div>
+      <p id="msg" class="small muted" aria-live="polite"></p>
+      <p class="small muted">Vereinfachung: Der Wagen hält seine Geschwindigkeit bzw. Beschleunigung genau konstant. Ein Lauf endet am Ende der 100-m-Strecke oder nach 10 s.</p>
+    </div>
+
+    <div class="lk-card tasks">
+      <h2>Entdecke selbst <span class="small muted" data-task-count></span></h2>
+      <div class="task" data-goal="v72"><p class="task-q">Lass den Wagen gleichförmig mit 72 km/h über die ganze Strecke fahren. Wie viele Meter schafft er pro Sekunde?</p></div>
+      <div class="task">
+        <p class="task-q">Wie liegen die Spur-Punkte bei der gleichförmigen Bewegung?</p>
+        <div class="choices">
+          <button data-ok data-fb="Richtig: In gleichen Zeiten legt der Wagen gleiche Wege zurück. Das ist genau die Bedeutung von „gleichförmig“.">Alle gleich weit auseinander.</button>
+          <button data-fb="Starte einen gleichförmigen Lauf und miss die Abstände der Punkte auf der Meter-Skala.">Immer weiter auseinander.</button>
+          <button data-fb="Starte einen gleichförmigen Lauf und miss die Abstände der Punkte auf der Meter-Skala.">Immer enger zusammen.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Mache einen gleichförmigen und einen beschleunigten Lauf (Start aus dem Stand). Welche Form hat das <span class="f">s</span>-<span class="f">t</span>-Diagramm jeweils?</p>
+        <div class="choices">
+          <button data-ok data-fb="Genau: Gleichförmig ergibt eine Gerade (s ~ t). Beschleunigt ergibt eine Parabel, die immer steiler wird (s ~ t²), weil der Wagen immer schneller wird.">gleichförmig: Gerade, beschleunigt: Parabel</button>
+          <button data-fb="Vergleiche die blasse Kurve des alten Laufs mit der neuen. Welche ist gebogen?">gleichförmig: Parabel, beschleunigt: Gerade</button>
+          <button data-fb="Eine waagerechte Linie im s-t-Diagramm würde Stillstand bedeuten. Schau noch einmal hin.">beide: waagerechte Linie</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Im <span class="f">v</span>-<span class="f">t</span>-Diagramm ist die Fläche unter der Linie eingefärbt. Was gibt diese Fläche an?</p>
+        <div class="choices">
+          <button data-ok data-fb="Richtig: Bei gleichförmiger Bewegung ist sie ein Rechteck v · t, bei beschleunigter ein Dreieck ½ · v · t. Beides ist der Weg s. Vergleiche mit der Anzeige „Weg“.">den zurückgelegten Weg</button>
+          <button data-fb="Die Beschleunigung steckt in der Steigung der v-t-Linie, nicht in der Fläche.">die Beschleunigung</button>
+          <button data-fb="Die Zeit kannst du direkt auf der waagerechten Achse ablesen. Die Fläche ist „Geschwindigkeit mal Zeit“.">die Zeit</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Beschleunigter Lauf aus dem Stand: Vergleiche den Weg nach 2 s mit dem Weg nach 4 s (Spur-Punkte oder Diagramm). Bei doppelter Zeit ist der Weg …</p>
+        <div class="choices">
+          <button data-fb="Das gilt nur bei gleichförmiger Bewegung. Lies die Spur-Punkte bei 2 s und 4 s ab.">doppelt so groß.</button>
+          <button data-fb="Lies die Spur-Punkte bei 2 s und 4 s auf der Meter-Skala ab und teile die Werte.">dreimal so groß.</button>
+          <button data-ok data-fb="Richtig: s = ½ · a · t². Doppelte Zeit bedeutet (2t)² = 4t², also vierfacher Weg. Bei a = 4 m/s²: 8 m nach 2 s, 32 m nach 4 s.">viermal so groß.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task" data-goal="a4"><p class="task-q">Stelle die Beschleunigung so ein, dass der Wagen aus dem Stand (<span class="f">v<sub>0</sub></span> = 0) in genau 5 s genau 50 m zurücklegt. Die grüne Fahne markiert 50 m.</p></div>
+      <div class="all-done">Alles entdeckt! Weiter geht es mit den Übungen.</div>
+    </div>
+  </div>
+</div>
+
+<script src="../../static/lesson-kit.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var L = 100, TMAX = 10, VMAX = 50, MAXOLD = 4;
+  var S = { mode: 'uni', v: 10, a: 2, v0: 0 };
+  var run, running = false, old = [], runNo = 0;
+
+  function el(tag, a, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in a) e.setAttribute(k, a[k]);
+    parent.appendChild(e);
+    return e;
+  }
+  function txt(parent, x, y, s, cls, anchor) { var t = el('text', { x: x, y: y, class: cls || 'val', 'text-anchor': anchor || 'start' }, parent); t.textContent = s; return t; }
+
+  // ---------------------------------------------- Physik
+  function newRun() {
+    runNo++;
+    return { no: runNo, mode: S.mode, v: S.v, a: S.a, v0: S.mode === 'acc' ? S.v0 : S.v, t: 0, done: false, s5: null };
+  }
+  function sAt(r, t) { return r.mode === 'uni' ? r.v * t : r.v0 * t + 0.5 * r.a * t * t; }
+  function vAt(r, t) { return r.mode === 'uni' ? r.v : r.v0 + r.a * t; }
+  function tEnd(r) {
+    var tl = r.mode === 'uni' ? L / r.v : (-r.v0 + Math.sqrt(r.v0 * r.v0 + 2 * r.a * L)) / r.a;
+    return Math.min(TMAX, tl);
+  }
+  function desc(r) {
+    if (r.mode === 'uni') return 'gleichförmig, v = ' + r.v + ' m/s';
+    return 'beschleunigt, a = ' + LK.fmt(r.a, 1) + ' m/s²' + (r.v0 ? ', v₀ = ' + r.v0 + ' m/s' : '');
+  }
+
+  function archive() {
+    if (run && run.t > 0.05) { old.push(run); if (old.length > MAXOLD) old.shift(); }
+  }
+  function reset(keepOld) {
+    running = false;
+    if (!keepOld) archive();
+    run = newRun();
+    $('msg').textContent = '';
+    render();
+  }
+
+  // ---------------------------------------------- Strecke
+  var track = $('track');
+  var TX0 = 40, TX1 = 500, tx = function (s) { return TX0 + (TX1 - TX0) * s / L; };
+  var trackStatic = el('g', {}, track), trackDyn = el('g', {}, track);
+  (function () {
+    el('rect', { x: TX0 - 30, y: 52, width: TX1 - TX0 + 46, height: 12, rx: 3, class: 'road' }, trackStatic);
+    for (var m = 0; m <= L; m += 5) {
+      el('line', { x1: tx(m), x2: tx(m), y1: 64, y2: m % 10 ? 68 : 72, class: 'axis' }, trackStatic);
+      if (m % 10 === 0) txt(trackStatic, tx(m), 86, String(m), 'val', 'middle');
+    }
+    txt(trackStatic, TX0 - 30, 104, 'Skala in m. Spur-Punkte: Ort nach 1 s, 2 s, 3 s …', 'val');
+  })();
+  var flag = el('g', {}, track);
+  el('line', { x1: tx(50), x2: tx(50), y1: 31, y2: 52, class: 'goalflag' }, flag);
+  el('path', { d: 'M' + tx(50) + ' 31 l12 4.5 l-12 4.5 z', class: 'goalflag-f' }, flag);
+  var car = el('g', {}, track);
+  el('rect', { x: -24, y: 40, width: 24, height: 10, rx: 3, class: 'car-body' }, car);
+  el('path', { d: 'M-19 40 l4 -7 h9 l4 7 z', class: 'car-body' }, car);
+  el('path', { d: 'M-16 39 l3 -5 h3 v5 z M-8 39 v-5 h2 l3 5 z', class: 'car-win' }, car);
+  el('circle', { cx: -18, cy: 51, r: 3.6, class: 'wheel' }, car);
+  el('circle', { cx: -6, cy: 51, r: 3.6, class: 'wheel' }, car);
+
+  function drawTrack() {
+    trackDyn.innerHTML = '';
+    var lastX = -99, n = Math.floor(run.t + 1e-9);
+    for (var k = 1; k <= n; k++) {
+      var x = tx(sAt(run, k));
+      el('circle', { cx: x, cy: 58, r: 3.4, class: 'spur' }, trackDyn);
+      if (x - lastX >= 32) { txt(trackDyn, x, 24, k + ' s', 'spur-lbl', 'middle'); el('line', { x1: x, x2: x, y1: 28, y2: 54, stroke: 'var(--pos)', 'stroke-width': 1, 'stroke-dasharray': '2 3' }, trackDyn); lastX = x; }
+    }
+    car.setAttribute('transform', 'translate(' + tx(sAt(run, run.t)).toFixed(1) + ' 0)');
+    flag.toggleAttribute('hidden', S.mode !== 'acc');
+  }
+
+  // ---------------------------------------------- Diagramme
+  var CX0 = 50, CX1 = 505, CY0 = 172, CY1 = 30;
+  var cx = function (t) { return CX0 + (CX1 - CX0) * t / TMAX; };
+  function frame(svg, ymax, ystep, ylabel) {
+    svg.innerHTML = '';
+    var cy = function (y) { return CY0 - (CY0 - CY1) * Math.min(y, ymax) / ymax; };
+    for (var t = 0; t <= TMAX; t++) {
+      el('line', { x1: cx(t), x2: cx(t), y1: CY1, y2: CY0, class: 'gridline' }, svg);
+      txt(svg, cx(t), CY0 + 16, String(t), 'val', 'middle');
+    }
+    for (var y = 0; y <= ymax; y += ystep) {
+      el('line', { x1: CX0, x2: CX1, y1: cy(y), y2: cy(y), class: 'gridline' }, svg);
+      txt(svg, CX0 - 7, cy(y) + 4, String(y), 'val', 'end');
+    }
+    el('line', { x1: CX0, x2: CX1, y1: CY0, y2: CY0, class: 'axis' }, svg);
+    el('line', { x1: CX0, x2: CX0, y1: CY0, y2: CY1, class: 'axis' }, svg);
+    txt(svg, CX1, CY0 + 31, 't in s', 'lbl', 'end');
+    txt(svg, 4, 14, ylabel, 'lbl');
+    return cy;
+  }
+  function pts(r, t1, f, cy) {
+    var p = [], n = 60;
+    for (var i = 0; i <= n; i++) { var t = t1 * i / n; p.push(cx(t).toFixed(1) + ',' + cy(f(r, t)).toFixed(1)); }
+    return p.join(' ');
+  }
+  function drawCharts() {
+    var svgS = $('chS'), svgV = $('chV');
+    var cyS = frame(svgS, L, 20, 's in m'), cyV = frame(svgV, VMAX, 10, 'v in m/s');
+    old.forEach(function (r) {
+      el('polyline', { points: pts(r, r.t, sAt, cyS), class: 'curve-old' }, svgS);
+      el('polyline', { points: pts(r, r.t, vAt, cyV), class: 'curve-old' }, svgV);
+      txt(svgS, cx(r.t) + 4, cyS(sAt(r, r.t)) + 4, String(r.no), 'val');
+      txt(svgV, cx(r.t) + 4, cyV(vAt(r, r.t)) + 4, String(r.no), 'val');
+    });
+    if (run.t > 0) {
+      el('polygon', { points: cx(0) + ',' + CY0 + ' ' + pts(run, run.t, vAt, cyV) + ' ' + cx(run.t) + ',' + CY0, class: 'area' }, svgV);
+      el('polyline', { points: pts(run, run.t, sAt, cyS), class: 'curve' }, svgS);
+      el('polyline', { points: pts(run, run.t, vAt, cyV), class: 'curve' }, svgV);
+      el('circle', { cx: cx(run.t), cy: cyS(sAt(run, run.t)), r: 4.5, class: 'dot' }, svgS);
+      el('circle', { cx: cx(run.t), cy: cyV(vAt(run, run.t)), r: 4.5, class: 'dot' }, svgV);
+      txt(svgV, CX0 + 8, CY1 + 12, 'Fläche unter der Linie = ' + LK.fmt(sAt(run, run.t), 1) + ' m = Weg', 'val');
+    } else {
+      el('circle', { cx: cx(0), cy: cyV(vAt(run, 0)), r: 4.5, class: 'dot' }, svgV);
+    }
+    var leg = '<span><i></i>aktueller Lauf ' + run.no + ': ' + desc(run) + '</span>';
+    old.forEach(function (r) { leg += '<br><span><i class="old"></i>Lauf ' + r.no + ': ' + desc(r) + '</span>'; });
+    $('legend').innerHTML = leg;
+  }
+
+  // ---------------------------------------------- Anzeige
+  function kmh(v) { return LK.fmt(v * 3.6, 1) + ' km/h'; }
+  function render() {
+    var t = run.t, s = sAt(run, t), v = vAt(run, t);
+    var T = LK.fmt(t, 1) + ' s';
+    $('rT').textContent = T;
+    $('rS').textContent = LK.fmt(s, 1) + ' m';
+    $('rV').textContent = LK.fmt(v, 1) + ' m/s';
+    $('rVk').textContent = '= ' + kmh(v);
+    $('r5').textContent = run.s5 === null ? '–' : LK.fmt(run.s5, 1) + ' m';
+    var f = '';
+    if (run.mode === 'uni') {
+      f = '<div><span class="f">s = v · t</span> = ' + run.v + ' m/s · ' + T + ' = <b>' + LK.fmt(s, 1) + ' m</b></div>';
+    } else if (!run.v0) {
+      f = '<div><span class="f">s = ½ · a · t²</span> = ½ · ' + LK.fmt(run.a, 1) + ' m/s² · (' + T + ')² = <b>' + LK.fmt(s, 1) + ' m</b></div>' +
+          '<div><span class="f">v = a · t</span> = ' + LK.fmt(run.a, 1) + ' m/s² · ' + T + ' = <b>' + LK.fmt(v, 1) + ' m/s</b></div>';
+    } else {
+      f = '<div><span class="f">s = v<sub>0</sub> · t + ½ · a · t²</span> = ' + run.v0 + ' m/s · ' + T + ' + ½ · ' + LK.fmt(run.a, 1) + ' m/s² · (' + T + ')² = <b>' + LK.fmt(s, 1) + ' m</b></div>' +
+          '<div><span class="f">v = v<sub>0</sub> + a · t</span> = ' + run.v0 + ' m/s + ' + LK.fmt(run.a, 1) + ' m/s² · ' + T + ' = <b>' + LK.fmt(v, 1) + ' m/s</b></div>';
+    }
+    $('formula').innerHTML = f;
+    $('bStart').textContent = running ? 'Pause' : (run.done ? 'Neuer Lauf' : (t > 0 ? 'Weiter' : 'Start'));
+    drawTrack(); drawCharts();
+  }
+  function renderCtrls() {
+    $('oV').textContent = S.v + ' m/s = ' + LK.fmt(S.v * 3.6, 1) + ' km/h';
+    $('oA').textContent = LK.fmt(S.a, 1) + ' m/s²';
+    $('oV0').textContent = S.v0 + ' m/s = ' + LK.fmt(S.v0 * 3.6, 1) + ' km/h';
+    $('cV').hidden = S.mode !== 'uni';
+    $('cA').hidden = $('cV0').hidden = S.mode !== 'acc';
+    $('bUni').setAttribute('aria-pressed', S.mode === 'uni');
+    $('bAcc').setAttribute('aria-pressed', S.mode === 'acc');
+  }
+
+  // ---------------------------------------------- Ablauf
+  function finish() {
+    run.done = true; running = false;
+    var s = sAt(run, run.t);
+    $('msg').textContent = (s >= L - 0.01 ? 'Ende der Strecke nach ' : 'Zeit abgelaufen nach ') + LK.fmt(run.t, 1) + ' s. Weg: ' + LK.fmt(s, 1) + ' m.';
+    if (run.mode === 'uni' && run.v === 20 && s >= L - 0.01) LK.reach('v72');
+  }
+  function step(dt) {
+    var te = tEnd(run), t0 = run.t;
+    run.t = Math.min(te, run.t + dt);
+    if (t0 < 5 && run.t >= 5 - 1e-9) {
+      run.s5 = sAt(run, 5);
+      if (run.mode === 'acc' && run.v0 === 0 && Math.abs(run.s5 - 50) < 0.01) {
+        LK.reach('a4');
+        $('msg').textContent = 'Geschafft: Nach 5 s ist der Wagen genau 50 m weit. Dafür braucht er a = 4 m/s².';
+      }
+    }
+    if (run.t >= te - 1e-9) finish();
+  }
+  var last = performance.now();
+  function loop(t) {
+    var dt = Math.min(0.05, (t - last) / 1000); last = t;
+    if (running) { step(dt); render(); }
+    requestAnimationFrame(loop);
+  }
+
+  function changeSetting() { if (run.t > 0 || running) reset(); else { run = newRun(); runNo--; run.no = runNo; render(); } }
+  $('bUni').onclick = function () { S.mode = 'uni'; renderCtrls(); changeSetting(); };
+  $('bAcc').onclick = function () { S.mode = 'acc'; renderCtrls(); changeSetting(); };
+  $('sV').oninput = function () { S.v = Number(this.value); renderCtrls(); changeSetting(); };
+  $('sA').oninput = function () { S.a = Number(this.value); renderCtrls(); changeSetting(); };
+  $('sV0').oninput = function () { S.v0 = Number(this.value); renderCtrls(); changeSetting(); };
+  $('bStart').onclick = function () {
+    if (run.done) { archive(); run = newRun(); running = true; $('msg').textContent = ''; }
+    else running = !running;
+    last = performance.now();
+    render();
+  };
+  $('bReset').onclick = function () { reset(); };
+  $('bClear').onclick = function () { old = []; render(); };
+
+  renderCtrls();
+  run = newRun();
+  render();
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

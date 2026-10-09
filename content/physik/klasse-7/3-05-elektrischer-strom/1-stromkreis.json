@@ -1,0 +1,99 @@
+{
+  "id": "k7-stromkreis",
+  "titel": "Der elektrische Stromkreis",
+  "kurz": "Quelle, Leitung, Schalter, Lampe: wie ein Stromkreis aufgebaut ist und wie man ihn als Schaltplan zeichnet.",
+  "reihenfolge": 1,
+  "lernziele": [
+    { "id": "lz1", "niveau": "D", "text": "Den einfachen Stromkreis aus Energiequelle, Schalter und Energiewandler beschreiben" },
+    { "id": "lz2", "niveau": "D", "text": "Schaltzeichen kennen, Schaltpläne beschreiben und Daten aus ihnen entnehmen" },
+    { "id": "lz3", "niveau": "E", "text": "Reihen- und Parallelschaltung unterscheiden und Schaltpläne erstellen" },
+    { "id": "lz4", "niveau": "E", "text": "Leiter und Isolatoren unterscheiden und Sicherheitsregeln im Umgang mit Strom einhalten" }
+  ],
+  "verstehen": {
+    "einstieg": "Eine Lampe leuchtet nur, wenn sie mit zwei Kabeln an der Batterie hängt. Warum reicht ein Kabel nicht?",
+    "abschnitte": [
+      {
+        "titel": "Der geschlossene Stromkreis",
+        "text": "Elektrischer Strom fließt nur in einem **geschlossenen Stromkreis**: von einem Pol der Quelle durch die Leitung, durch das Gerät und durch eine zweite Leitung zurück zum anderen Pol.\n\nEin einfacher Stromkreis besteht aus:\n- einer **Energiequelle** (Batterie, Netzgerät, Solarzelle),\n- **Leitungen** (Kabel),\n- einem **Energiewandler** (Lampe, Motor, Klingel), der die elektrische Energie in Licht, Bewegung oder Schall umwandelt,\n- meist einem **Schalter**, der den Kreis öffnet oder schließt.\n\nIst der Stromkreis an einer Stelle unterbrochen, fließt überall kein Strom."
+      },
+      {
+        "titel": "Leiter und Isolatoren",
+        "text": "**Leiter** lassen den Strom gut durch: alle Metalle, Graphit, Salzwasser, auch der menschliche Körper.\n**Isolatoren** (Nichtleiter) lassen praktisch keinen Strom durch: Kunststoff, Gummi, Glas, trockenes Holz, Luft.\n\nKabel bestehen deshalb aus einem Metallkern (meist Kupfer) mit einem Kunststoffmantel."
+      },
+      {
+        "titel": "Schaltpläne",
+        "text": "Damit jeder eine Schaltung verstehen kann, zeichnet man sie mit genormten **Schaltzeichen** als **Schaltplan**. Leitungen werden als gerade Linien gezeichnet, Verbindungsstellen als Punkte.\n\n**Reihenschaltung:** Die Bauteile liegen hintereinander in einem einzigen Stromweg. Ein offener Schalter oder eine kaputte Lampe unterbricht alles.\n**Parallelschaltung:** Der Stromkreis verzweigt sich. Jedes Bauteil hat seinen eigenen Weg und kann unabhängig geschaltet werden.\n\nZwei Schalter in Reihe ergeben eine **UND-Schaltung** (beide müssen geschlossen sein), zwei Schalter parallel eine **ODER-Schaltung** (einer reicht)."
+      },
+      {
+        "titel": "Sicherheit",
+        "text": "Experimente nur mit Batterien oder Schul-Netzgeräten mit kleiner Spannung durchführen. **Niemals** an der Steckdose experimentieren. Ein **Kurzschluss** entsteht, wenn die Pole einer Quelle direkt, ohne Gerät dazwischen, verbunden werden. Dann fließt ein sehr großer Strom, und Leitungen können heiß werden oder Batterien beschädigt werden."
+      }
+    ],
+    "merksatz": "Strom fließt nur in einem geschlossenen Stromkreis. Reihenschaltung: ein Weg, alles hängt voneinander ab. Parallelschaltung: mehrere Wege, die Bauteile sind unabhängig.",
+    "alltag": "In einer Wohnung sind Lampen und Steckdosen parallel geschaltet. In einem Treppenhaus gibt es Wechselschaltungen, damit man das Licht von oben und unten schalten kann."
+  },
+  "interaktiv": ["k7-stromkreis"],
+  "uebungen": [
+    { "id": "k7-sk-01", "typ": "multi", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Was braucht man mindestens, damit eine Lampe leuchtet?",
+      "optionen": [
+        { "text": "Eine Energiequelle, z. B. eine Batterie", "richtig": true },
+        { "text": "Leitungen, die einen geschlossenen Kreis bilden", "richtig": true },
+        { "text": "Einen Schalter", "feedback": "Ein Schalter ist praktisch, aber nicht nötig. Ohne Schalter leuchtet die Lampe einfach dauerhaft." },
+        { "text": "Ein Messgerät", "feedback": "Ein Messgerät braucht man nur zum Messen, nicht zum Leuchten." }
+      ],
+      "erklaerung": "Notwendig sind Quelle, Lampe und ein geschlossener Weg vom einen Pol zum anderen." },
+    { "id": "k7-sk-02", "typ": "multi", "schwierigkeit": "leicht", "lernziel": "lz4",
+      "frage": "Welche Stoffe sind elektrische Leiter?",
+      "optionen": [
+        { "text": "Kupfer", "richtig": true },
+        { "text": "Eisen", "richtig": true },
+        { "text": "Graphit (Bleistiftmine)", "richtig": true },
+        { "text": "Kunststoff", "feedback": "Kunststoff ist ein Isolator. Deshalb sind Kabel damit ummantelt." },
+        { "text": "Glas", "feedback": "Glas ist ein Isolator." }
+      ],
+      "erklaerung": "Alle Metalle leiten. Graphit ist eine Besonderheit: Es ist kein Metall, leitet aber trotzdem." },
+    { "id": "k7-sk-03", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Ordne jedem Bauteil seine Aufgabe im Stromkreis zu.",
+      "paare": [
+        { "links": "Batterie", "rechts": "Energiequelle" },
+        { "links": "Lampe", "rechts": "wandelt elektrische Energie in Licht um" },
+        { "links": "Schalter", "rechts": "öffnet und schließt den Stromkreis" },
+        { "links": "Leitung", "rechts": "verbindet die Bauteile" }
+      ],
+      "erklaerung": "Jedes Bauteil hat ein eigenes Schaltzeichen im Schaltplan." },
+    { "id": "k7-sk-04", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Zwei Lampen sind in Reihe geschaltet. Eine Lampe wird herausgedreht. Was passiert mit der anderen?",
+      "optionen": [
+        { "text": "Sie geht aus.", "richtig": true },
+        { "text": "Sie leuchtet heller.", "feedback": "In der Reihenschaltung unterbricht die fehlende Lampe den einzigen Stromweg." },
+        { "text": "Sie leuchtet unverändert weiter.", "feedback": "Das wäre bei einer Parallelschaltung so." }
+      ],
+      "erklaerung": "In der Reihenschaltung gibt es nur einen Weg. Fehlt eine Lampe, ist der Stromkreis unterbrochen." },
+    { "id": "k7-sk-05", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Eine Lampe soll nur leuchten, wenn Schalter A **und** Schalter B geschlossen sind. Wie schaltest du die beiden Schalter?",
+      "optionen": [
+        { "text": "In Reihe", "richtig": true },
+        { "text": "Parallel", "feedback": "Parallel würde schon einer der beiden Schalter reichen (ODER-Schaltung)." },
+        { "text": "Das ist nicht möglich.", "feedback": "Probiere es im Stromkreis-Baukasten aus." }
+      ],
+      "erklaerung": "In Reihe muss der Strom durch beide Schalter. Das ist eine UND-Schaltung, wie bei manchen Maschinen, die nur mit beiden Händen gestartet werden dürfen." },
+    { "id": "k7-sk-06", "typ": "text", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Was ist ein Kurzschluss und warum ist er gefährlich?",
+      "stichworte": [
+        { "aspekt": "Die Pole der Quelle werden direkt verbunden (ohne Gerät)", "woerter": ["direkt", "ohne geraet", "ohne lampe", "ohne verbraucher", "pole verbunden", "plus und minus"] },
+        { "aspekt": "Es fließt ein sehr großer Strom", "woerter": ["sehr grosser strom", "grosser strom", "viel strom", "hoher strom", "starker strom"] },
+        { "aspekt": "Leitungen werden heiß, es kann brennen oder die Quelle wird beschädigt", "woerter": ["heiss", "brand", "feuer", "schmelz", "kaputt", "beschaedig", "gluehen"] }
+      ],
+      "musterloesung": "Bei einem Kurzschluss werden die beiden Pole einer Quelle direkt miteinander verbunden, ohne dass ein Gerät dazwischen ist. Dann fließt ein sehr großer Strom. Die Leitungen werden dabei stark erhitzt, die Isolierung kann schmelzen, und es kann ein Brand entstehen. Außerdem kann die Batterie beschädigt werden.",
+      "erklaerung": "Sicherungen im Haus unterbrechen den Stromkreis bei einem Kurzschluss sofort." },
+    { "id": "k7-sk-07", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Im Flur soll eine Lampe von zwei Stellen aus eingeschaltet werden können, und zwar so, dass **jeder** der beiden Schalter sie allein einschalten kann. Welche einfache Schaltung erfüllt das (wenn man sie auch ausschalten will, braucht man eine Wechselschaltung)?",
+      "optionen": [
+        { "text": "Zwei Schalter parallel (ODER-Schaltung)", "richtig": true },
+        { "text": "Zwei Schalter in Reihe (UND-Schaltung)", "feedback": "Dann müssten beide Schalter geschlossen sein, damit die Lampe leuchtet." },
+        { "text": "Ein Schalter direkt zwischen die Pole der Batterie", "feedback": "Das wäre ein Kurzschluss, wenn er geschlossen wird." }
+      ],
+      "erklaerung": "Bei der Parallelschaltung reicht ein geschlossener Weg. Jeder Schalter kann die Lampe einschalten, aber zum Ausschalten müssen beide offen sein. Echte Treppenhausschaltungen nutzen deshalb Wechselschalter." }
+  ]
+}

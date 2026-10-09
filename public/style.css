@@ -236,3 +236,4 @@ input.mark-richtig, input.mark-falsch, textarea.mark-richtig { border-width: 2px
 .panel h3 { margin: 18px 0 4px; font-size: 1rem; }
 
 @media (max-width: 900px) { .interactive iframe { height: 820px; } }
+.sqrt { border-top: 1px solid currentColor; padding: 0 2px; }

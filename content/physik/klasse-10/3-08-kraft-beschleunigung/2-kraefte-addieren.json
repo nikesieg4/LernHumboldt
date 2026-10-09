@@ -1,0 +1,91 @@
+{
+  "id": "k10-kraefte-addieren",
+  "titel": "Kräfte addieren und zerlegen",
+  "kurz": "Wie mehrere Kräfte zu einer resultierenden Kraft zusammenwirken und wie man eine Kraft in Teile zerlegt.",
+  "reihenfolge": 2,
+  "lernziele": [
+    { "id": "lz1", "niveau": "G", "text": "Kräfte gleicher und entgegengesetzter Richtung addieren" },
+    { "id": "lz2", "niveau": "H", "text": "Die resultierende Kraft zweier Kräfte mit dem Kräfteparallelogramm bestimmen" },
+    { "id": "lz3", "niveau": "H", "text": "Kräfte in Teilkräfte zerlegen, z. B. an der geneigten Ebene" }
+  ],
+  "verstehen": {
+    "einstieg": "Zwei Personen ziehen einen Schlitten an zwei Seilen, eine schräg nach links vorn, eine schräg nach rechts vorn. In welche Richtung bewegt er sich, und wie stark wird er gezogen?",
+    "abschnitte": [
+      {
+        "titel": "Kräfte auf einer Linie",
+        "text": "Zeigen zwei Kräfte in **dieselbe Richtung**, addiert man ihre Beträge. Zeigen sie in **entgegengesetzte Richtungen**, subtrahiert man sie. Die resultierende Kraft zeigt dann in Richtung der größeren Kraft."
+      },
+      {
+        "titel": "Das Kräfteparallelogramm",
+        "text": "Wirken zwei Kräfte unter einem **Winkel**, zeichnet man beide Kraftpfeile vom gemeinsamen Angriffspunkt aus und ergänzt sie zu einem **Parallelogramm**. Die Diagonale vom Angriffspunkt aus ist die **resultierende Kraft**.\n\nStehen die Kräfte **senkrecht** aufeinander, kann man den Betrag mit dem Satz des Pythagoras berechnen: `F_{res} = √(F_{1}² + F_{2}²)`.\n\nDie resultierende Kraft ist immer **kleiner als die Summe** der Beträge (außer die Kräfte zeigen in dieselbe Richtung)."
+      },
+      {
+        "titel": "Kräfte zerlegen: die geneigte Ebene",
+        "text": "Umgekehrt kann man eine Kraft in **Teilkräfte** zerlegen. Auf einen Körper auf einer schiefen Ebene wirkt die Gewichtskraft senkrecht nach unten. Man zerlegt sie in:\n\n**Hangabtriebskraft** `F_{H}` parallel zum Hang (zieht den Körper hinunter),\n**Normalkraft** `F_{N}` senkrecht zum Hang (drückt ihn auf die Unterlage).\n\nJe steiler der Hang, desto größer `F_{H}` und desto kleiner `F_{N}`. Ohne Reibung gilt: `F_{H} = F_{G} · h / l` (Höhe `h`, Länge `l` der Ebene)."
+      }
+    ],
+    "formeln": [
+      { "formel": "F_{res} = \\sqrt{F_{1}^{2} + F_{2}^{2}}", "bedeutung": "nur für zwei Kräfte im rechten Winkel" },
+      { "formel": "F_{H} = F_{G} · \\frac{h}{l}", "bedeutung": "Hangabtriebskraft an der geneigten Ebene (Höhe `h`, Länge `l`)" }
+    ],
+    "merksatz": "Kräfte auf einer Linie werden addiert oder subtrahiert. Kräfte unter einem Winkel addiert man mit dem Kräfteparallelogramm. Eine Kraft lässt sich auch in Teilkräfte zerlegen.",
+    "alltag": "Eine Hängematte hängt nie ganz gerade. Je straffer man sie spannt, desto größer werden die Kräfte in den Seilen, weil sie fast waagerecht ziehen und sich gegenseitig fast aufheben."
+  },
+  "interaktiv": ["k8-kraefte"],
+  "uebungen": [
+    { "id": "k10-ka-01", "typ": "zahl", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Zwei Kinder schieben einen Wagen in dieselbe Richtung, eines mit 30 N, das andere mit 45 N. Wie groß ist die resultierende Kraft?",
+      "gegeben": "`F_{1} = 30 N`, `F_{2} = 45 N`, gleiche Richtung", "gesucht": "`F_{res}`", "gesuchtSymbol": "F_{res}",
+      "loesung": 75, "einheit": "N",
+      "rechenweg": ["Gleiche Richtung: addieren", "`F_{res} = 30 N + 45 N = 75 N`"],
+      "erklaerung": "Kräfte in dieselbe Richtung verstärken sich." },
+    { "id": "k10-ka-02", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Ein Boot wird von zwei Seilen gezogen: 300 N nach Norden und 400 N nach Osten. Wie groß ist die resultierende Kraft?",
+      "gegeben": "`F_{1} = 300 N` (N), `F_{2} = 400 N` (O), rechter Winkel", "gesucht": "`F_{res}`", "gesuchtSymbol": "F_{res}",
+      "loesung": 500, "einheit": "N",
+      "rechenweg": ["Rechter Winkel: Satz des Pythagoras", "`F_{res} = \\sqrt{300^{2} + 400^{2}} N = \\sqrt{250 000} N = 500 N`"],
+      "erklaerung": "Die resultierende Kraft (500 N) ist kleiner als die Summe (700 N), weil die Kräfte nicht in dieselbe Richtung zeigen." },
+    { "id": "k10-ka-03", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Zwei Kräfte von je 50 N greifen an einem Punkt an. Welcher Betrag der resultierenden Kraft ist **nicht** möglich?",
+      "optionen": [
+        { "text": "120 N", "richtig": true },
+        { "text": "100 N", "feedback": "100 N ergibt sich, wenn beide Kräfte in dieselbe Richtung zeigen." },
+        { "text": "0 N", "feedback": "0 N ergibt sich, wenn beide Kräfte entgegengesetzt sind." },
+        { "text": "70 N", "feedback": "Etwa 70 N ergeben sich bei einem rechten Winkel (√(50² + 50²) ≈ 71 N)." }
+      ],
+      "erklaerung": "Die resultierende Kraft liegt immer zwischen der Differenz (0 N) und der Summe (100 N) der Beträge." },
+    { "id": "k10-ka-04", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Ein Wagen steht auf einer Rampe. Die Rampe wird steiler gestellt. Was passiert mit der Hangabtriebskraft?",
+      "optionen": [
+        { "text": "Sie wird größer.", "richtig": true },
+        { "text": "Sie wird kleiner.", "feedback": "Auf einer waagerechten Fläche wäre sie null, bei senkrechter Wand so groß wie die Gewichtskraft." },
+        { "text": "Sie bleibt gleich, weil sich die Gewichtskraft nicht ändert.", "feedback": "Die Gewichtskraft bleibt gleich, aber ihre Zerlegung ändert sich mit dem Winkel." }
+      ],
+      "erklaerung": "Je steiler der Hang, desto größer der Anteil der Gewichtskraft, der parallel zum Hang wirkt." },
+    { "id": "k10-ka-05", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Eine Kiste mit 600 N Gewichtskraft steht auf einer 5 m langen Rampe, die 1 m hoch ist. Wie groß ist die Hangabtriebskraft (ohne Reibung)?",
+      "gegeben": "`F_{G} = 600 N`, `h = 1 m`, `l = 5 m`", "gesucht": "`F_{H}`", "gesuchtSymbol": "F_{H}",
+      "loesung": 120, "einheit": "N",
+      "rechenweg": ["`F_{H} = F_{G} · \\frac{h}{l}`", "`F_{H} = 600 N · \\frac{1 m}{5 m} = 120 N`"],
+      "erklaerung": "Um die Kiste auf der Rampe festzuhalten, braucht man (ohne Reibung) 120 N, also nur ein Fünftel der Gewichtskraft." },
+    { "id": "k10-ka-06", "typ": "reihenfolge", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Bringe die Schritte zur zeichnerischen Bestimmung der resultierenden Kraft in die richtige Reihenfolge.",
+      "elemente": [
+        "Maßstab festlegen (z. B. 1 cm ≙ 10 N)",
+        "Beide Kraftpfeile vom gemeinsamen Angriffspunkt aus zeichnen",
+        "Parallelen zu beiden Pfeilen durch deren Spitzen zeichnen",
+        "Diagonale vom Angriffspunkt zum Schnittpunkt der Parallelen zeichnen",
+        "Länge der Diagonale messen und mit dem Maßstab in Newton umrechnen"
+      ],
+      "erklaerung": "Die Diagonale des Parallelogramms ist die resultierende Kraft nach Betrag und Richtung." },
+    { "id": "k10-ka-07", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz2",
+      "frage": "Eine Lampe hängt an zwei Seilen, die schräg nach oben zur Decke führen. Warum ist die Kraft in jedem Seil größer als die halbe Gewichtskraft der Lampe?",
+      "stichworte": [
+        { "aspekt": "Die Seilkräfte zeigen schräg, nicht senkrecht nach oben", "woerter": ["schraeg", "winkel", "nicht senkrecht", "seitlich"] },
+        { "aspekt": "Nur ihr senkrechter Anteil trägt die Lampe, die waagerechten Anteile heben sich auf", "woerter": ["senkrechter anteil", "senkrecht", "waagerecht", "heben sich auf", "teilkraft", "zerleg"] },
+        { "aspekt": "Deshalb müssen die Seilkräfte insgesamt größer sein", "woerter": ["groesser", "mehr kraft", "staerker"] }
+      ],
+      "musterloesung": "Die beiden Seile ziehen nicht senkrecht nach oben, sondern schräg. Man kann jede Seilkraft in einen senkrechten und einen waagerechten Anteil zerlegen. Die waagerechten Anteile der beiden Seile heben sich gegenseitig auf. Nur die senkrechten Anteile tragen die Lampe, zusammen müssen sie so groß sein wie die Gewichtskraft. Weil jede Seilkraft auch einen waagerechten Anteil hat, ist sie größer als ihr senkrechter Anteil und damit größer als die halbe Gewichtskraft. Je flacher die Seile, desto größer werden die Seilkräfte.",
+      "erklaerung": "Deshalb reißen straff gespannte Wäscheleinen leichter als locker durchhängende." }
+  ]
+}

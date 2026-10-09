@@ -1,0 +1,96 @@
+{
+  "id": "k7-ladung",
+  "titel": "Elektrische Ladung und elektrisches Feld",
+  "kurz": "Warum ein geriebener Luftballon an der Wand klebt und wie man Ladungen nachweist.",
+  "reihenfolge": 2,
+  "lernziele": [
+    { "id": "lz1", "niveau": "D", "text": "Anziehung und Abstoßung zwischen elektrisch geladenen Körpern beschreiben" },
+    { "id": "lz2", "niveau": "E", "text": "Das Elektron als Träger der negativen Ladung kennen und Aufladen durch Reiben erklären" },
+    { "id": "lz3", "niveau": "E", "text": "Ladungen mit einem Elektroskop nachweisen" },
+    { "id": "lz4", "niveau": "F", "text": "Elektrische Felder mithilfe von Feldlinien veranschaulichen" }
+  ],
+  "verstehen": {
+    "einstieg": "Reibst du einen Luftballon an deinen Haaren, stehen sie danach zu Berge, und der Ballon bleibt an der Wand kleben. Was ist da passiert?",
+    "abschnitte": [
+      {
+        "titel": "Zwei Arten von Ladung",
+        "text": "Es gibt **positive** und **negative** elektrische Ladung. Für die Kräfte zwischen geladenen Körpern gilt:\n\n**Gleichnamige** Ladungen (+ und +, − und −) **stoßen sich ab**.\n**Ungleichnamige** Ladungen (+ und −) **ziehen sich an**.\n\nDie Kräfte sind umso größer, je größer die Ladungen sind und je näher sie sich kommen."
+      },
+      {
+        "titel": "Woher die Ladung kommt",
+        "text": "Alle Stoffe bestehen aus Atomen. Sie enthalten positive Ladungen im Kern und negativ geladene **Elektronen** in der Hülle. Normalerweise sind beide gleich viele, und der Körper ist **neutral**.\n\nBeim Reiben werden Elektronen von einem Körper auf den anderen übertragen. Wer Elektronen dazubekommt, ist **negativ** geladen. Wer Elektronen abgibt, hat einen Elektronenmangel und ist **positiv** geladen. Ladung entsteht dabei nicht neu, sie wird nur **getrennt**.\n\nGeladene Körper verlieren ihre Ladung wieder, wenn man sie mit der Erde verbindet (Erdung) oder sie berührt."
+      },
+      {
+        "titel": "Das Elektroskop",
+        "text": "Mit einem **Elektroskop** weist man Ladung nach. Es besteht aus einem Metallstab mit einem leichten, beweglichen Zeiger. Berührt man es mit einem geladenen Körper, verteilt sich die Ladung auf Stab und Zeiger. Weil beide gleichnamig geladen sind, **stoßen sie sich ab**, und der Zeiger schlägt aus. Je größer die Ladung, desto größer der Ausschlag."
+      },
+      {
+        "titel": "Das elektrische Feld",
+        "text": "Um einen geladenen Körper herum wirken Kräfte auf andere Ladungen, ohne dass sie sich berühren. Diesen Raum nennt man **elektrisches Feld**. Man stellt es mit **Feldlinien** dar.\n\nFeldlinien beginnen an **positiven** und enden an **negativen** Ladungen. Ihre Richtung zeigt, in welche Richtung eine positive Probeladung gezogen würde. Wo sie dicht liegen, ist das Feld stark.\n\nDie Feldlinien sind ein **Modell**: Sie zeigen die Wirkung des Feldes, sind aber nicht wirklich zu sehen. Anziehung und Abstoßung sind dagegen Beobachtungen."
+      }
+    ],
+    "merksatz": "Gleichnamige Ladungen stoßen sich ab, ungleichnamige ziehen sich an. Beim Reiben werden Elektronen übertragen: Elektronenüberschuss bedeutet negativ, Elektronenmangel positiv.\n\nEin Elektroskop zeigt Ladung an, Feldlinien veranschaulichen das elektrische Feld.",
+    "alltag": "Nach dem Laufen über einen Teppich bekommst du manchmal einen kleinen Schlag an der Türklinke. Du hast dich beim Laufen aufgeladen, und die Ladung springt als Funke über."
+  },
+  "interaktiv": [],
+  "uebungen": [
+    { "id": "k7-la-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Zwei negativ geladene Kugeln werden einander genähert. Was passiert?",
+      "optionen": [
+        { "text": "Sie stoßen sich ab.", "richtig": true },
+        { "text": "Sie ziehen sich an.", "feedback": "Anziehen tun sich nur ungleichnamige Ladungen." },
+        { "text": "Es passiert nichts.", "feedback": "Zwischen geladenen Körpern wirken immer Kräfte." }
+      ],
+      "erklaerung": "Gleichnamige Ladungen stoßen sich ab." },
+    { "id": "k7-la-02", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Ein Kunststoffstab wird mit einem Wolltuch gerieben und ist danach negativ geladen. Was ist passiert?",
+      "optionen": [
+        { "text": "Elektronen sind vom Tuch auf den Stab übergegangen.", "richtig": true },
+        { "text": "Im Stab sind neue Elektronen entstanden.", "feedback": "Ladung entsteht nicht neu, sie wird nur von einem Körper auf einen anderen übertragen." },
+        { "text": "Positive Ladung ist vom Stab auf das Tuch übergegangen.", "feedback": "Beim Reiben werden die beweglichen Elektronen übertragen, nicht die positiven Ladungen der Atomkerne." }
+      ],
+      "erklaerung": "Der Stab hat jetzt einen Elektronenüberschuss (negativ), das Tuch einen Elektronenmangel (positiv)." },
+    { "id": "k7-la-03", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Nach dem Reiben ist der Stab negativ geladen. Wie ist das Wolltuch danach geladen?",
+      "optionen": [
+        { "text": "Positiv", "richtig": true },
+        { "text": "Negativ", "feedback": "Das Tuch hat Elektronen abgegeben, es hat also einen Elektronenmangel." },
+        { "text": "Gar nicht", "feedback": "Was der Stab an Elektronen gewonnen hat, fehlt dem Tuch." }
+      ],
+      "erklaerung": "Ladungen werden getrennt: Was der eine Körper an Elektronen gewinnt, verliert der andere." },
+    { "id": "k7-la-04", "typ": "text", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Erkläre, warum der Zeiger eines Elektroskops ausschlägt, wenn man es mit einem geladenen Stab berührt.",
+      "stichworte": [
+        { "aspekt": "Die Ladung verteilt sich auf Stab und Zeiger", "woerter": ["verteilt", "fliesst", "geht auf", "uebertragen"] },
+        { "aspekt": "Stab und Zeiger sind gleichnamig geladen", "woerter": ["gleichnamig", "gleich geladen", "gleiche ladung", "beide negativ", "beide positiv"] },
+        { "aspekt": "Gleichnamige Ladungen stoßen sich ab", "woerter": ["abstoss", "stossen sich ab", "stossen ab"] }
+      ],
+      "musterloesung": "Beim Berühren geht ein Teil der Ladung des Stabes auf das Elektroskop über und verteilt sich auf den Metallstab und den Zeiger. Dadurch sind Stab und Zeiger gleichnamig geladen. Gleichnamige Ladungen stoßen sich ab, deshalb drückt der Zeiger vom Stab weg und schlägt aus.",
+      "erklaerung": "Ein größerer Ausschlag bedeutet eine größere Ladung." },
+    { "id": "k7-la-05", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Welche Aussagen über elektrische Feldlinien sind richtig?",
+      "optionen": [
+        { "text": "Sie beginnen an positiven und enden an negativen Ladungen.", "richtig": true },
+        { "text": "Wo sie dicht liegen, ist das Feld stark.", "richtig": true },
+        { "text": "Sie sind ein Modell und nicht wirklich zu sehen.", "richtig": true },
+        { "text": "Sie verlaufen immer als geschlossene Kreise.", "feedback": "Geschlossen sind magnetische Feldlinien. Elektrische haben Anfang und Ende." }
+      ],
+      "erklaerung": "Feldlinien sind eine Darstellung der Kräfte im Feld. Man kann sie z. B. mit Grießkörnern in Öl sichtbar machen, die sich entlang der Linien ausrichten." },
+    { "id": "k7-la-06", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz1",
+      "frage": "Ein geladener Luftballon wird an ein ungeladenes Papierschnipselchen gehalten. Das Papier wird angezogen. Warum, obwohl es gar nicht geladen ist?",
+      "optionen": [
+        { "text": "Die Ladungen im Papier verschieben sich etwas, sodass die dem Ballon zugewandte Seite ungleichnamig geladen ist.", "richtig": true },
+        { "text": "Das Papier ist in Wirklichkeit auch geladen.", "feedback": "Das Papier ist insgesamt neutral. Entscheidend ist, wie die Ladungen in ihm verteilt sind." },
+        { "text": "Der Ballon ist magnetisch.", "feedback": "Ein geriebener Ballon ist elektrisch geladen, nicht magnetisch." }
+      ],
+      "erklaerung": "Die ungleichnamigen Ladungen im Papier werden zum Ballon hin gezogen, die gleichnamigen weggedrückt. Weil die anziehenden Ladungen näher sind, überwiegt die Anziehung." },
+    { "id": "k7-la-07", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Was ist der Unterschied zwischen „Zwei Ladungen ziehen sich an“ und „Zwischen den Ladungen verlaufen Feldlinien“?",
+      "optionen": [
+        { "text": "Das Erste ist eine Beobachtung, das Zweite eine Modellvorstellung.", "richtig": true },
+        { "text": "Beides sind Beobachtungen.", "feedback": "Feldlinien kann man nicht direkt sehen. Sie sind ein Modell, mit dem man die Kräfte darstellt." },
+        { "text": "Beides sind Modelle.", "feedback": "Die Anziehung kann man direkt beobachten und messen." }
+      ],
+      "erklaerung": "In der Physik unterscheidet man zwischen dem, was man beobachtet, und den Modellen, mit denen man es erklärt." }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "id": "k7-waermetransport",
+  "titel": "Wärmeleitung, Wärmeströmung, Wärmestrahlung",
+  "kurz": "Die drei Wege, auf denen Wärme von einem Ort zum anderen kommt, und wie man sie bremst.",
+  "reihenfolge": 3,
+  "lernziele": [
+    { "id": "lz1", "niveau": "D", "text": "Wärmeleitung, Wärmeströmung und Wärmestrahlung unterscheiden und Beispiele nennen" },
+    { "id": "lz2", "niveau": "D", "text": "Wärmeleitung mit dem Teilchenmodell beschreiben" },
+    { "id": "lz3", "niveau": "E", "text": "Grenzen des Teilchenmodells beim Wärmetransport erkennen" },
+    { "id": "lz4", "niveau": "E", "text": "Schlussfolgerungen für Wärmedämmung, Lüften und energiesparendes Kochen ziehen" }
+  ],
+  "verstehen": {
+    "einstieg": "Eine Thermoskanne hält Tee stundenlang heiß und Saft kalt. Gegen welche Arten des Wärmetransports ist sie gebaut?",
+    "abschnitte": [
+      {
+        "titel": "Wärmeleitung",
+        "text": "Bei der **Wärmeleitung** wird Wärme durch einen Stoff hindurch weitergegeben, ohne dass sich der Stoff selbst bewegt. Ein Löffel im heißen Tee wird auch am Griff warm.\n\n**Teilchenmodell:** Die schnell schwingenden Teilchen am heißen Ende stoßen ihre Nachbarn an, diese wieder ihre Nachbarn und so weiter.\n\n**Gute Wärmeleiter** sind Metalle (Kupfer, Aluminium). **Schlechte Wärmeleiter** (Dämmstoffe) sind Luft, Holz, Kunststoff, Styropor und Wolle. Dämmstoffe enthalten oft viel eingeschlossene Luft."
+      },
+      {
+        "titel": "Wärmeströmung",
+        "text": "Bei der **Wärmeströmung** (Konvektion) bewegt sich ein erwärmter Stoff selbst und nimmt die Wärme mit. Das geht nur in Flüssigkeiten und Gasen.\n\nWarme Luft und warmes Wasser dehnen sich aus, haben eine kleinere Dichte und **steigen nach oben**. Kältere sinken nach unten. So entsteht ein Kreislauf. Beispiele: Luft über dem Heizkörper, Wind, Meeresströmungen, Wasser im Kochtopf."
+      },
+      {
+        "titel": "Wärmestrahlung",
+        "text": "Jeder warme Körper sendet **Wärmestrahlung** aus. Sie braucht **keinen Stoff** und gelangt sogar durch den leeren Weltraum. So erwärmt die Sonne die Erde.\n\nDunkle, matte Flächen nehmen Strahlung gut auf und geben sie gut ab. Helle, glänzende Flächen werfen sie zurück.\n\n**Grenze des Teilchenmodells:** Wärmeleitung und Wärmeströmung lassen sich mit bewegten Teilchen erklären. Die Wärmestrahlung nicht, denn im leeren Weltraum gibt es keine Teilchen, die sich anstoßen könnten."
+      },
+      {
+        "titel": "Wärme bremsen: Dämmen, Lüften, Kochen",
+        "text": "Eine **Thermoskanne** hat eine doppelte Glaswand mit Vakuum dazwischen (keine Leitung, keine Strömung) und eine verspiegelte Innenseite (keine Strahlung).\n\n**Häuser** dämmt man mit Stoffen, die viel Luft einschließen. **Stoßlüften** (Fenster kurz weit auf) tauscht die Luft schnell aus, ohne dass Wände und Möbel auskühlen. Ein dauerhaft gekipptes Fenster lässt dagegen ständig Wärme entweichen.\n\n**Energiesparend kochen:** Deckel auf den Topf (weniger Verdunstung und Strömung), Topf passend zur Herdplatte, nur so viel Wasser erhitzen wie nötig."
+      }
+    ],
+    "merksatz": "**Wärmeleitung**: durch einen Stoff, Teilchen stoßen ihre Nachbarn an. **Wärmeströmung**: der erwärmte Stoff strömt selbst. **Wärmestrahlung**: ohne Stoff, auch durch das Vakuum.",
+    "alltag": "Im Winter fühlt sich eine Metallbank kälter an als eine Holzbank, obwohl beide gleich kalt sind: Metall leitet die Wärme deiner Hand schnell ab, Holz nicht."
+  },
+  "interaktiv": [],
+  "uebungen": [
+    { "id": "k7-wtr-01", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ordne jedem Beispiel die Art des Wärmetransports zu.",
+      "paare": [
+        { "links": "Der Griff eines Metalllöffels im heißen Tee wird warm.", "rechts": "Wärmeleitung" },
+        { "links": "Warme Luft steigt über dem Heizkörper auf.", "rechts": "Wärmeströmung" },
+        { "links": "Die Sonne wärmt dein Gesicht.", "rechts": "Wärmestrahlung" }
+      ],
+      "extraRechts": ["Wärmeverdunstung"],
+      "erklaerung": "Leitung: durch den Stoff. Strömung: Stoff bewegt sich mit. Strahlung: ohne Stoff." },
+    { "id": "k7-wtr-02", "typ": "multi", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Welche Stoffe sind **schlechte** Wärmeleiter und eignen sich zur Dämmung?",
+      "optionen": [
+        { "text": "Styropor", "richtig": true },
+        { "text": "Wolle", "richtig": true },
+        { "text": "Luft", "richtig": true },
+        { "text": "Kupfer", "feedback": "Kupfer ist einer der besten Wärmeleiter. Deshalb haben gute Töpfe oft einen Kupferboden." },
+        { "text": "Aluminium", "feedback": "Metalle leiten Wärme gut." }
+      ],
+      "erklaerung": "Viele Dämmstoffe wirken, weil sie Luft in kleinen Kammern einschließen. Die Luft leitet schlecht, und in den kleinen Kammern kann sie nicht strömen." },
+    { "id": "k7-wtr-03", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Welche Art des Wärmetransports funktioniert auch im leeren Weltraum?",
+      "optionen": [
+        { "text": "Wärmestrahlung", "richtig": true },
+        { "text": "Wärmeleitung", "feedback": "Für Wärmeleitung braucht man Teilchen, die sich anstoßen. Im Vakuum gibt es keine." },
+        { "text": "Wärmeströmung", "feedback": "Strömung braucht einen Stoff, der strömen kann." }
+      ],
+      "erklaerung": "Nur Wärmestrahlung braucht keinen Stoff. Hier stößt das Teilchenmodell an seine Grenzen." },
+    { "id": "k7-wtr-04", "typ": "text", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Erkläre mit dem Teilchenmodell, wie die Wärme in einem Metallstab, der an einem Ende erhitzt wird, zum anderen Ende gelangt.",
+      "stichworte": [
+        { "aspekt": "Die Teilchen am heißen Ende schwingen heftiger", "woerter": ["heftiger", "schneller", "staerker"] },
+        { "aspekt": "Sie stoßen ihre Nachbarteilchen an", "woerter": ["stossen", "nachbar", "uebertragen", "geben weiter", "anstoss"] },
+        { "aspekt": "Die Teilchen selbst bleiben an ihrem Platz, nur die Bewegung wird weitergegeben", "woerter": ["bleiben", "an ihrem platz", "nicht mit", "nur die bewegung", "weitergegeben", "weitergereicht"] }
+      ],
+      "musterloesung": "Am erhitzten Ende schwingen die Teilchen heftiger. Dabei stoßen sie ihre Nachbarteilchen an, die dadurch auch heftiger schwingen. Diese stoßen wieder ihre Nachbarn an, und so wird die Bewegung Schritt für Schritt bis zum anderen Ende weitergegeben. Die Teilchen selbst bleiben dabei an ihren Plätzen, nur ihre Bewegung, also die Energie, wird weitergereicht.",
+      "erklaerung": "Das ist der Unterschied zur Wärmeströmung: Bei der Leitung wandern die Teilchen nicht mit." },
+    { "id": "k7-wtr-05", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Wie lüftet man im Winter am energiesparendsten?",
+      "optionen": [
+        { "text": "Mehrmals am Tag wenige Minuten alle Fenster weit öffnen (Stoßlüften)", "richtig": true },
+        { "text": "Das Fenster den ganzen Tag gekippt lassen", "feedback": "Durch das Kippfenster entweicht ständig Wärme, und die Wand um das Fenster kühlt aus." },
+        { "text": "Gar nicht lüften", "feedback": "Ohne Lüften wird die Luft feucht und verbraucht, es kann Schimmel entstehen." }
+      ],
+      "erklaerung": "Beim Stoßlüften wird die Luft schnell ausgetauscht. Wände und Möbel speichern dabei ihre Wärme und erwärmen die frische Luft danach schnell wieder." },
+    { "id": "k7-wtr-06", "typ": "multi", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Eine Thermoskanne verhindert alle drei Arten des Wärmetransports. Welche Bauteile tragen dazu bei?",
+      "optionen": [
+        { "text": "Das Vakuum zwischen den Glaswänden (gegen Leitung und Strömung)", "richtig": true },
+        { "text": "Die verspiegelten Wände (gegen Strahlung)", "richtig": true },
+        { "text": "Der gut schließende Deckel (gegen Strömung und Verdunstung)", "richtig": true },
+        { "text": "Ein Metallmantel innen, damit sich die Wärme gleichmäßig verteilt", "feedback": "Metall würde Wärme gut nach außen leiten. Genau das soll verhindert werden." }
+      ],
+      "erklaerung": "Ohne Teilchen (Vakuum) gibt es keine Leitung und keine Strömung. Die Spiegelschicht wirft die Wärmestrahlung zurück." },
+    { "id": "k7-wtr-07", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Nenne zwei Tipps zum energiesparenden Kochen und begründe sie physikalisch.",
+      "stichworte": [
+        { "aspekt": "Deckel auf den Topf: weniger Wärme entweicht durch Strömung und Verdunstung", "woerter": ["deckel"] },
+        { "aspekt": "Topf passend zur Herdplatte bzw. mit flachem Boden: weniger Wärme geht an die Umgebung", "woerter": ["topfgroesse", "passend", "herdplatte", "groesse", "boden", "gleich gross"] },
+        { "aspekt": "Nur so viel Wasser erhitzen wie nötig / Wasserkocher nutzen", "woerter": ["nur so viel", "weniger wasser", "wasserkocher", "noetig", "menge"] }
+      ],
+      "musterloesung": "1. Einen Deckel auf den Topf legen: Ohne Deckel steigt warme Luft mit Wasserdampf auf, und durch Strömung und Verdunstung geht viel Wärme verloren. Mit Deckel bleibt sie im Topf.\n\n2. Einen Topf verwenden, der zur Herdplatte passt: Ist die Platte größer als der Topf, gibt sie Wärme direkt an die Luft ab statt an den Topf.\n\n3. Nur so viel Wasser erhitzen, wie man braucht: Jedes zusätzliche Wasser muss mit erwärmt werden.",
+      "erklaerung": "Energiesparend kochen heißt: die Wärme dorthin bringen, wo sie gebraucht wird, und unnötige Wärmeverluste vermeiden." }
+  ]
+}

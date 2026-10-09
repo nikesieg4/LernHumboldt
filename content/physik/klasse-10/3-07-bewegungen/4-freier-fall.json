@@ -1,0 +1,86 @@
+{
+  "id": "k10-freier-fall",
+  "titel": "Freier Fall und waagerechter Wurf",
+  "kurz": "Warum ohne Luft eine Feder so schnell fällt wie ein Hammer und was ein geworfener Ball damit zu tun hat.",
+  "reihenfolge": 4,
+  "lernziele": [
+    { "id": "lz1", "niveau": "G", "text": "Den freien Fall als gleichmäßig beschleunigte Bewegung mit der Fallbeschleunigung g beschreiben" },
+    { "id": "lz2", "niveau": "H", "text": "Fallzeiten, Fallwege und Geschwindigkeiten beim freien Fall berechnen" },
+    { "id": "lz3", "niveau": "G", "text": "Den waagerechten Wurf als zusammengesetzte Bewegung qualitativ beschreiben" }
+  ],
+  "verstehen": {
+    "einstieg": "Ein Astronaut ließ 1971 auf dem Mond gleichzeitig einen Hammer und eine Feder fallen. Was hat er beobachtet?",
+    "abschnitte": [
+      {
+        "titel": "Der freie Fall",
+        "text": "Fällt ein Körper **ohne Luftwiderstand**, spricht man vom **freien Fall**. Er ist eine gleichmäßig beschleunigte Bewegung mit der **Fallbeschleunigung** `g ≈ 9,81 m/s²` (auf der Erde).\n\n**Alle Körper fallen ohne Luftwiderstand gleich schnell**, unabhängig von ihrer Masse. Auf dem Mond (ohne Luft) kamen Hammer und Feder deshalb gleichzeitig am Boden an. Auf der Erde bremst die Luft die Feder viel stärker.\n\nFür den freien Fall aus der Ruhe gilt: `v = g · t` und `s = ½ · g · t²`."
+      },
+      {
+        "titel": "Der waagerechte Wurf",
+        "text": "Wirft man einen Ball waagerecht, setzt sich seine Bewegung aus zwei **unabhängigen** Teilbewegungen zusammen:\n\n**waagerecht:** gleichförmig mit der Abwurfgeschwindigkeit (ohne Luftwiderstand),\n**senkrecht:** freier Fall.\n\nDie Bahn ist eine **Parabel** (Wurfparabel). Ein waagerecht geworfener Ball kommt **gleichzeitig** am Boden an wie ein Ball, den man aus derselben Höhe einfach fallen lässt. Er fliegt nur weiter."
+      }
+    ],
+    "formeln": [
+      { "formel": "v = g · t", "bedeutung": "Fallgeschwindigkeit, `g ≈ 9,81 m/s²`" },
+      { "formel": "s = \\frac{1}{2} · g · t^{2}", "bedeutung": "Fallweg" }
+    ],
+    "merksatz": "Ohne Luftwiderstand fallen alle Körper gleich schnell mit `g ≈ 9,81 m/s²`. Der waagerechte Wurf setzt sich aus einer gleichförmigen waagerechten Bewegung und dem freien Fall zusammen.",
+    "alltag": "Fallschirmspringer werden nicht immer schneller: Der Luftwiderstand wächst mit der Geschwindigkeit, bis er so groß ist wie die Gewichtskraft. Dann fallen sie mit etwa 200 km/h gleichmäßig weiter."
+  },
+  "interaktiv": [],
+  "uebungen": [
+    { "id": "k10-ff-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Eine Stahlkugel und eine Feder fallen in einer luftleeren Röhre gleichzeitig los. Was passiert?",
+      "optionen": [
+        { "text": "Beide kommen gleichzeitig unten an.", "richtig": true },
+        { "text": "Die Stahlkugel ist zuerst unten.", "feedback": "Ohne Luft fallen alle Körper gleich schnell." },
+        { "text": "Die Feder schwebt.", "feedback": "Auch auf die Feder wirkt die Gewichtskraft. Ohne Luft bremst sie nichts." }
+      ],
+      "erklaerung": "Ohne Luftwiderstand ist die Fallbeschleunigung für alle Körper gleich." },
+    { "id": "k10-ff-02", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Ein Stein fällt 3 s frei. Welche Geschwindigkeit hat er dann? (g = 9,81 m/s²)",
+      "gegeben": "`t = 3 s`, `g = 9,81 m/s²`", "gesucht": "`v`", "gesuchtSymbol": "v",
+      "loesung": 29.43, "einheit": "m/s", "alternativEinheiten": { "km/h": 0.2777777777777778 },
+      "rechenweg": ["`v = g · t = 9,81 m/s² · 3 s = 29,43 m/s ≈ 106 km/h`"],
+      "erklaerung": "Schon nach 3 Sekunden freiem Fall ist ein Körper über 100 km/h schnell." },
+    { "id": "k10-ff-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Wie tief fällt ein Stein in 2 s (ohne Luftwiderstand, g = 9,81 m/s²)?",
+      "gegeben": "`t = 2 s`", "gesucht": "Fallweg `s`", "gesuchtSymbol": "s",
+      "loesung": 19.62, "einheit": "m",
+      "rechenweg": ["`s = \\frac{1}{2} · g · t^{2}`", "`s = 0,5 · 9,81 m/s² · 4 s² = 19,62 m`"],
+      "erklaerung": "So kann man die Tiefe eines Brunnens abschätzen: Stein fallen lassen und die Zeit bis zum Aufschlag messen." },
+    { "id": "k10-ff-04", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz2",
+      "frage": "Von einem 45 m hohen Turm wird ein Ball fallen gelassen. Wie lange dauert der Fall (ohne Luftwiderstand, rechne mit g = 10 m/s²)?",
+      "gegeben": "`s = 45 m`, `g = 10 m/s²`", "gesucht": "Fallzeit `t`", "gesuchtSymbol": "t",
+      "loesung": 3, "einheit": "s",
+      "rechenweg": ["`s = \\frac{1}{2} g t^{2}` umstellen: `t^{2} = 2s / g`", "`t^{2} = \\frac{2 · 45 m}{10 m/s²} = 9 s²`", "`t = 3 s`"],
+      "hinweis": "Stelle die Gleichung nach t² um und ziehe am Ende die Wurzel.",
+      "erklaerung": "Mit g = 9,81 m/s² ergibt sich etwa 3,03 s. Die Näherung g ≈ 10 m/s² ist für Abschätzungen gut geeignet." },
+    { "id": "k10-ff-05", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Ball A wird von einem Tisch waagerecht weggeschossen, Ball B gleichzeitig vom selben Tisch fallen gelassen. Welcher landet zuerst (ohne Luftwiderstand)?",
+      "optionen": [
+        { "text": "Beide gleichzeitig", "richtig": true },
+        { "text": "Ball B, weil er den kürzeren Weg hat", "feedback": "Für die Fallzeit zählt nur die senkrechte Bewegung, und die ist bei beiden gleich." },
+        { "text": "Ball A, weil er schneller ist", "feedback": "A ist waagerecht schneller, aber senkrecht fallen beide gleich." }
+      ],
+      "erklaerung": "Waagerechte und senkrechte Bewegung sind unabhängig voneinander. Senkrecht fallen beide Bälle frei aus derselben Höhe." },
+    { "id": "k10-ff-06", "typ": "multi", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Welche Aussagen zum waagerechten Wurf sind richtig (ohne Luftwiderstand)?",
+      "optionen": [
+        { "text": "Die waagerechte Geschwindigkeit bleibt konstant.", "richtig": true },
+        { "text": "Die senkrechte Bewegung ist ein freier Fall.", "richtig": true },
+        { "text": "Die Bahn ist eine Parabel.", "richtig": true },
+        { "text": "Je schneller man wirft, desto länger dauert der Flug.", "feedback": "Die Flugdauer hängt nur von der Höhe ab. Ein schnellerer Wurf fliegt nur weiter." }
+      ],
+      "erklaerung": "Überlagerung zweier unabhängiger Bewegungen: gleichförmig waagerecht plus freier Fall senkrecht." },
+    { "id": "k10-ff-07", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz1",
+      "frage": "Auf der Erde fällt eine Feder viel langsamer als ein Hammer, auf dem Mond gleich schnell. Erkläre den Unterschied.",
+      "stichworte": [
+        { "aspekt": "Auf der Erde bremst der Luftwiderstand", "woerter": ["luftwiderstand", "luft bremst", "luftreibung", "luft"] },
+        { "aspekt": "Auf die leichte, große Feder wirkt er im Verhältnis viel stärker", "woerter": ["feder", "leicht", "grosse flaeche", "im verhaeltnis", "staerker"] },
+        { "aspekt": "Auf dem Mond gibt es keine Luft, beide fallen frei mit gleicher Beschleunigung", "woerter": ["keine luft", "keine atmosphaere", "vakuum", "luftleer", "gleiche beschleunigung", "gleich schnell"] }
+      ],
+      "musterloesung": "Auf der Erde wirkt beim Fallen der Luftwiderstand. Die Feder hat eine kleine Masse, aber eine große Fläche. Der Luftwiderstand bremst sie deshalb im Verhältnis zu ihrer Gewichtskraft sehr stark, beim schweren Hammer fällt er kaum ins Gewicht. Auf dem Mond gibt es keine Luft. Beide fallen dort frei mit derselben Fallbeschleunigung (etwa 1,62 m/s²) und kommen gleichzeitig unten an.",
+      "erklaerung": "Schon Galileo Galilei hat erkannt, dass die Masse für die Fallgeschwindigkeit keine Rolle spielt, sondern nur der Luftwiderstand." }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "id": "k10-beschleunigt",
+  "titel": "Gleichmäßig beschleunigte Bewegung",
+  "kurz": "Wenn die Geschwindigkeit in jeder Sekunde um denselben Wert wächst: Beschleunigung, Parabeln und Fallen.",
+  "reihenfolge": 3,
+  "lernziele": [
+    { "id": "lz1", "niveau": "G", "text": "Die Beschleunigung als Geschwindigkeitsänderung pro Zeit beschreiben" },
+    { "id": "lz2", "niveau": "H", "text": "Die Bewegungsgesetze `v = a · t` und `s = ½ · a · t²` anwenden" },
+    { "id": "lz3", "niveau": "H", "text": "s(t)- und v(t)-Diagramme der beschleunigten Bewegung erstellen und deuten" }
+  ],
+  "verstehen": {
+    "einstieg": "Ein Auto beschleunigt aus dem Stand. Nach 1 s ist es 2 m weit, nach 2 s schon 8 m. Warum nicht 4 m?",
+    "abschnitte": [
+      {
+        "titel": "Beschleunigung",
+        "text": "Die **Beschleunigung** `a` gibt an, wie schnell sich die Geschwindigkeit ändert: `a = Δv / Δt`. Ihre Einheit ist m/s² (Meter pro Sekunde pro Sekunde).\n\n`a = 4 m/s²` heißt: In jeder Sekunde wird der Körper um 4 m/s schneller. Bremsen ist eine Beschleunigung mit negativem Vorzeichen (Verzögerung).\n\nBei einer **gleichmäßig beschleunigten** Bewegung ist `a` konstant."
+      },
+      {
+        "titel": "Die Bewegungsgesetze",
+        "text": "Startet der Körper aus der Ruhe, gilt:\n\nGeschwindigkeit: `v = a · t`\nWeg: `s = ½ · a · t²`\n\nDer Weg wächst mit dem **Quadrat** der Zeit: In doppelter Zeit legt der Körper den vierfachen Weg zurück. Deshalb sind es nach 2 s nicht 4 m, sondern 8 m (bei a = 4 m/s²)."
+      },
+      {
+        "titel": "Diagramme",
+        "text": "**v(t)-Diagramm:** eine Ursprungsgerade. Ihre Steigung ist die Beschleunigung `a`. Die Fläche darunter (ein Dreieck: ½ · t · v) ist der Weg.\n\n**s(t)-Diagramm:** eine **Parabel**, die immer steiler wird, weil der Körper immer schneller wird."
+      }
+    ],
+    "formeln": [
+      { "formel": "a = \\frac{Δv}{Δt}", "bedeutung": "Beschleunigung in m/s²" },
+      { "formel": "v = a · t", "bedeutung": "Geschwindigkeit nach der Zeit `t` (Start aus der Ruhe)" },
+      { "formel": "s = \\frac{1}{2} · a · t^{2}", "bedeutung": "Weg nach der Zeit `t` (Start aus der Ruhe)" }
+    ],
+    "merksatz": "Gleichmäßig beschleunigte Bewegung aus der Ruhe: `v = a · t`, `s = ½ · a · t²`. v(t) ist eine Ursprungsgerade, s(t) eine Parabel.",
+    "alltag": "Ein E-Auto beschleunigt mit etwa 4 m/s². Ein Sportwagen schafft über 10 m/s², ein Fahrrad aus eigener Kraft etwa 1 m/s²."
+  },
+  "interaktiv": ["k10-bewegung"],
+  "uebungen": [
+    { "id": "k10-be-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ein Körper hat eine Beschleunigung von 3 m/s². Was bedeutet das?",
+      "optionen": [
+        { "text": "Seine Geschwindigkeit nimmt in jeder Sekunde um 3 m/s zu.", "richtig": true },
+        { "text": "Er legt in jeder Sekunde 3 m zurück.", "feedback": "Das wäre eine Geschwindigkeit von 3 m/s, keine Beschleunigung." },
+        { "text": "Er ist nach 3 s am Ziel.", "feedback": "Die Beschleunigung sagt etwas über die Änderung der Geschwindigkeit." }
+      ],
+      "erklaerung": "m/s² = (m/s) pro s: Geschwindigkeitszuwachs pro Sekunde." },
+    { "id": "k10-be-02", "typ": "zahl", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ein Auto beschleunigt in 5 s von 0 auf 20 m/s. Wie groß ist die Beschleunigung?",
+      "gegeben": "`Δv = 20 m/s`, `Δt = 5 s`", "gesucht": "`a`", "gesuchtSymbol": "a",
+      "loesung": 4, "einheit": "m/s²",
+      "rechenweg": ["`a = \\frac{Δv}{Δt} = \\frac{20 m/s}{5 s} = 4 m/s²`"],
+      "erklaerung": "In jeder Sekunde wird das Auto 4 m/s schneller." },
+    { "id": "k10-be-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Ein Motorrad startet aus dem Stand mit a = 5 m/s². Welchen Weg hat es nach 4 s zurückgelegt?",
+      "gegeben": "`a = 5 m/s²`, `t = 4 s`", "gesucht": "Weg `s`", "gesuchtSymbol": "s",
+      "loesung": 40, "einheit": "m",
+      "rechenweg": ["`s = \\frac{1}{2} · a · t^{2}`", "`s = 0,5 · 5 m/s² · (4 s)^{2} = 0,5 · 5 · 16 m = 40 m`"],
+      "hinweis": "Vergiss nicht, die Zeit zu quadrieren.",
+      "erklaerung": "Nach 4 s ist es übrigens 20 m/s = 72 km/h schnell." },
+    { "id": "k10-be-04", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Ein Körper startet aus der Ruhe und wird gleichmäßig beschleunigt. Wie verändert sich der zurückgelegte Weg, wenn sich die Zeit verdoppelt?",
+      "optionen": [
+        { "text": "Er vervierfacht sich.", "richtig": true },
+        { "text": "Er verdoppelt sich.", "feedback": "Das gilt bei gleichförmiger Bewegung. Bei der beschleunigten wächst der Weg mit t²." },
+        { "text": "Er bleibt gleich.", "feedback": "Der Körper bewegt sich ja weiter und wird sogar schneller." }
+      ],
+      "erklaerung": "`s ~ t²`: (2t)² = 4t². In der zweiten Hälfte der Zeit ist der Körper schneller und legt mehr Weg zurück." },
+    { "id": "k10-be-05", "typ": "zuordnung", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Ordne zu, wie die Diagramme der gleichmäßig beschleunigten Bewegung aus der Ruhe aussehen.",
+      "paare": [
+        { "links": "v(t)-Diagramm", "rechts": "Ursprungsgerade" },
+        { "links": "s(t)-Diagramm", "rechts": "Parabel, die immer steiler wird" },
+        { "links": "a(t)-Diagramm", "rechts": "waagerechte Linie" }
+      ],
+      "extraRechts": ["fallende Gerade"],
+      "erklaerung": "a ist konstant, v wächst gleichmäßig, s wächst quadratisch." },
+    { "id": "k10-be-06", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz2",
+      "frage": "Ein Zug beschleunigt gleichmäßig aus dem Stand und erreicht nach 800 m eine Geschwindigkeit von 40 m/s. Wie lange hat das gedauert?",
+      "gegeben": "`s = 800 m`, `v = 40 m/s`, Start aus der Ruhe", "gesucht": "Zeit `t`", "gesuchtSymbol": "t",
+      "loesung": 40, "einheit": "s",
+      "rechenweg": ["Bei gleichmäßiger Beschleunigung aus der Ruhe ist die Durchschnittsgeschwindigkeit halb so groß wie die Endgeschwindigkeit: 20 m/s.", "`t = \\frac{s}{v_{Durchschnitt}} = \\frac{800 m}{20 m/s} = 40 s`", "Alternativ: `a = 1 m/s²` aus `s = ½ a t²` und `v = a t`."],
+      "hinweis": "Die Fläche unter der v(t)-Geraden (ein Dreieck) ist der Weg: `s = ½ · v · t`.",
+      "erklaerung": "Der Trick mit der Durchschnittsgeschwindigkeit funktioniert nur bei gleichmäßiger Beschleunigung." },
+    { "id": "k10-be-07", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Im v(t)-Diagramm eines Autos steigt die Gerade von (0 s | 0 m/s) auf (6 s | 18 m/s). Welchen Weg legt das Auto in diesen 6 s zurück?",
+      "gegeben": "v steigt gleichmäßig von 0 auf 18 m/s in 6 s", "gesucht": "Weg `s`", "gesuchtSymbol": "s",
+      "loesung": 54, "einheit": "m",
+      "rechenweg": ["Fläche des Dreiecks unter der Geraden:", "`s = \\frac{1}{2} · 6 s · 18 m/s = 54 m`"],
+      "erklaerung": "Die Fläche unter dem v(t)-Graphen ist immer der Weg, egal wie die Bewegung aussieht." }
+  ]
+}

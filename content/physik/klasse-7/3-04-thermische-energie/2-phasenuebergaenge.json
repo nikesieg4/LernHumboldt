@@ -1,0 +1,96 @@
+{
+  "id": "k7-phasenuebergaenge",
+  "titel": "Schmelzen, Sieden und Verdunsten",
+  "kurz": "Warum die Temperatur beim Schmelzen nicht steigt und warum Wasserdampf schlimmer verbrüht als kochendes Wasser.",
+  "reihenfolge": 2,
+  "lernziele": [
+    { "id": "lz1", "niveau": "D", "text": "Die Übergänge zwischen den Aggregatzuständen benennen" },
+    { "id": "lz2", "niveau": "E", "text": "Schmelz- und Siedetemperatur sowie den Temperaturverlauf beim Erwärmen beschreiben" },
+    { "id": "lz3", "niveau": "E", "text": "Schmelzwärme, Verdampfungswärme und Verdunstungskälte erklären" },
+    { "id": "lz4", "niveau": "E", "text": "Gefahren durch heißes Wasser und Dampf begründen" }
+  ],
+  "verstehen": {
+    "einstieg": "Du stellst einen Topf mit Eis und Wasser auf die heiße Herdplatte. Das Thermometer zeigt 0 °C, und zwar so lange, bis das letzte Eis geschmolzen ist. Wohin geht die ganze zugeführte Energie?",
+    "abschnitte": [
+      {
+        "titel": "Die Übergänge",
+        "text": "**Schmelzen**: fest → flüssig. **Erstarren**: flüssig → fest.\n**Verdampfen** (bzw. Sieden): flüssig → gasförmig. **Kondensieren**: gasförmig → flüssig.\n**Verdunsten**: flüssig → gasförmig, aber **unterhalb** der Siedetemperatur, nur an der Oberfläche.\n\nJeder Stoff hat eine bestimmte **Schmelztemperatur** und **Siedetemperatur**. Für Wasser sind es 0 °C und 100 °C (bei normalem Luftdruck). Auf hohen Bergen ist der Luftdruck kleiner, und Wasser siedet schon unter 100 °C."
+      },
+      {
+        "titel": "Schmelzwärme und Verdampfungswärme",
+        "text": "Während ein Stoff schmilzt oder siedet, **steigt die Temperatur nicht**, obwohl weiter Wärme zugeführt wird. Diese Energie wird gebraucht, um die Teilchen voneinander zu lösen. Man nennt sie **Schmelzwärme** bzw. **Verdampfungswärme**.\n\nBeim Erstarren und Kondensieren wird genau diese Energie wieder **frei**.\n\nZum Verdampfen braucht Wasser fast siebenmal so viel Energie wie zum Schmelzen. Beim Kondensieren von Wasserdampf wird entsprechend viel Wärme abgegeben. Deshalb verursacht **Dampf schwerere Verbrühungen** als gleich heißes Wasser: Er kondensiert auf der Haut und gibt dabei zusätzlich seine Verdampfungswärme ab."
+      },
+      {
+        "titel": "Verdunstungskälte",
+        "text": "Beim Verdunsten verlassen die **schnellsten** Teilchen die Flüssigkeit. Die langsameren bleiben zurück, und die Flüssigkeit kühlt ab. Die nötige Energie wird auch der Umgebung entzogen.\n\nSo kühlt uns Schweiß an heißen Tagen, und nach dem Schwimmen friert man im Wind. Verdunstung geht schneller bei höherer Temperatur, größerer Oberfläche, Wind und trockener Luft."
+      }
+    ],
+    "merksatz": "Beim Schmelzen und Sieden bleibt die Temperatur konstant, die zugeführte Wärme löst die Teilchen voneinander. Beim Erstarren und Kondensieren wird diese Energie wieder frei.\n\nVerdunsten entzieht der Umgebung Wärme (Verdunstungskälte).",
+    "alltag": "Wasserdampf aus dem Wasserkocher oder Kochtopf verbrüht stärker als heißes Wasser. Halte Hände und Gesicht beim Öffnen des Deckels vom Dampf weg."
+  },
+  "interaktiv": ["k7-teilchenmodell"],
+  "uebungen": [
+    { "id": "k7-ph-01", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ordne die Fachbegriffe den Übergängen zu.",
+      "paare": [
+        { "links": "Schmelzen", "rechts": "fest → flüssig" },
+        { "links": "Erstarren", "rechts": "flüssig → fest" },
+        { "links": "Verdampfen", "rechts": "flüssig → gasförmig" },
+        { "links": "Kondensieren", "rechts": "gasförmig → flüssig" }
+      ],
+      "extraRechts": ["fest → gasförmig"],
+      "erklaerung": "Den direkten Übergang von fest zu gasförmig gibt es auch, er heißt Sublimieren (z. B. Trockeneis)." },
+    { "id": "k7-ph-02", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Ein Topf mit Eiswürfeln und Wasser steht auf der heißen Herdplatte. Was zeigt das Thermometer im Wasser, solange noch Eis vorhanden ist?",
+      "optionen": [
+        { "text": "Ungefähr 0 °C", "richtig": true },
+        { "text": "Eine Temperatur, die ständig steigt", "feedback": "Solange Eis schmilzt, wird die zugeführte Wärme dafür gebraucht. Die Temperatur bleibt bei 0 °C." },
+        { "text": "100 °C", "feedback": "100 °C ist die Siedetemperatur. Solange Eis da ist, bleibt das Wasser bei 0 °C." }
+      ],
+      "erklaerung": "Die zugeführte Energie wird als Schmelzwärme gebraucht. Erst wenn alles Eis geschmolzen ist, steigt die Temperatur weiter." },
+    { "id": "k7-ph-03", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Warum frierst du nach dem Schwimmen im Wind, obwohl die Luft warm ist?",
+      "optionen": [
+        { "text": "Das Wasser auf der Haut verdunstet und entzieht dem Körper dabei Wärme.", "richtig": true },
+        { "text": "Der Wind ist kalt.", "feedback": "Auch warmer Wind kühlt eine nasse Haut. Entscheidend ist die Verdunstung." },
+        { "text": "Das Wasser im Schwimmbad war kalt.", "feedback": "Auch nach einem warmen Bad friert man im Wind, solange die Haut nass ist." }
+      ],
+      "erklaerung": "Verdunstung braucht Energie. Die schnellsten Wasserteilchen verlassen die Haut, und es bleibt weniger thermische Energie zurück. Wind verstärkt die Verdunstung." },
+    { "id": "k7-ph-04", "typ": "text", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Begründe, warum Wasserdampf von 100 °C schwerere Verbrühungen verursacht als Wasser von 100 °C.",
+      "stichworte": [
+        { "aspekt": "Der Dampf kondensiert auf der (kälteren) Haut", "woerter": ["kondens", "wird wieder fluessig", "wird zu wasser"] },
+        { "aspekt": "Dabei wird die Verdampfungswärme (Kondensationswärme) frei", "woerter": ["verdampfungswaerme", "kondensationswaerme", "energie frei", "waerme frei", "zusaetzlich", "gibt waerme ab"] },
+        { "aspekt": "Die Haut bekommt deshalb viel mehr Energie ab", "woerter": ["mehr energie", "mehr waerme", "viel energie", "zusaetzliche energie"] }
+      ],
+      "musterloesung": "Trifft Wasserdampf auf die kältere Haut, kondensiert er dort zu Wasser. Beim Kondensieren wird die Verdampfungswärme wieder frei, also genau die große Energie, die vorher zum Verdampfen nötig war. Die Haut erhält deshalb zusätzlich zur Wärme des 100 °C heißen Wassers noch diese Kondensationswärme, also viel mehr Energie. Dadurch entstehen schwerere Verbrühungen.",
+      "erklaerung": "Wasser braucht zum Verdampfen fast siebenmal so viel Energie wie zum Schmelzen. Genau diese Energie gibt Dampf beim Kondensieren ab." },
+    { "id": "k7-ph-05", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Wodurch verdunstet Wäsche auf der Leine schneller?",
+      "optionen": [
+        { "text": "Durch Wind", "richtig": true },
+        { "text": "Durch höhere Lufttemperatur", "richtig": true },
+        { "text": "Durch trockene Luft", "richtig": true },
+        { "text": "Durch Zusammenfalten der Wäsche", "feedback": "Zusammengefaltet ist die Oberfläche kleiner. Dann verdunstet das Wasser langsamer." }
+      ],
+      "erklaerung": "Verdunstung findet an der Oberfläche statt. Sie wird schneller, wenn die Teilchen schneller sind (Wärme), der Dampf weggetragen wird (Wind) und die Luft noch viel Wasser aufnehmen kann (trocken)." },
+    { "id": "k7-ph-06", "typ": "reihenfolge", "schwierigkeit": "schwer", "lernziel": "lz2",
+      "frage": "Eis von −10 °C wird gleichmäßig erwärmt, bis Wasserdampf von 110 °C entsteht. Bringe die Abschnitte des Temperaturverlaufs in die richtige Reihenfolge.",
+      "elemente": [
+        "Temperatur steigt von −10 °C auf 0 °C",
+        "Temperatur bleibt bei 0 °C, das Eis schmilzt",
+        "Temperatur steigt von 0 °C auf 100 °C",
+        "Temperatur bleibt bei 100 °C, das Wasser siedet",
+        "Temperatur des Dampfes steigt über 100 °C"
+      ],
+      "erklaerung": "Im Diagramm (Temperatur gegen Zeit) sieht man zwei waagerechte Abschnitte. Das Sieden dauert dabei viel länger als das Schmelzen, weil die Verdampfungswärme so groß ist." },
+    { "id": "k7-ph-07", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz2",
+      "frage": "Auf der Zugspitze (fast 3000 m hoch) siedet Wasser schon bei etwa 90 °C. Warum?",
+      "optionen": [
+        { "text": "Der Luftdruck ist dort kleiner.", "richtig": true },
+        { "text": "Es ist dort kälter.", "feedback": "Die Lufttemperatur ändert nicht, bei welcher Temperatur das Wasser im Topf siedet." },
+        { "text": "Das Wasser ist dort sauberer.", "feedback": "Die Reinheit des Wassers spielt hier praktisch keine Rolle." }
+      ],
+      "erklaerung": "Die Siedetemperatur hängt vom Luftdruck ab. Je kleiner der Druck, desto leichter können die Teilchen die Flüssigkeit verlassen. Nudeln brauchen dort deshalb länger." }
+  ]
+}

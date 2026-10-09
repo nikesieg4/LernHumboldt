@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Federlabor: hookesches Gesetz</title>
+<link rel="stylesheet" href="../../static/lesson-kit.css">
+<style>
+  .lab { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; }
+  .lab > .scene { flex: 1 1 190px; max-width: 250px; margin: 0 auto; }
+  .lab > .side { flex: 2 1 260px; min-width: 0; }
+  .spring { fill: none; stroke: var(--line); stroke-width: 2.4; stroke-linejoin: round; }
+  .spring.bent { stroke: var(--warn); }
+  .stand { fill: none; stroke: var(--muted); stroke-width: 6; stroke-linecap: round; }
+  .mass { fill: var(--muted); stroke: var(--line); stroke-width: 1; }
+  .tick { stroke: var(--line); stroke-width: 1; }
+  .ruler { fill: var(--card); stroke: var(--line); stroke-width: 1.2; }
+  .ptr { stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  .fit { fill: none; stroke-width: 2; stroke-dasharray: 7 5; }
+  table { border-collapse: collapse; width: 100%; font-size: .85rem; font-variant-numeric: tabular-nums; }
+  td, th { padding: 3px 6px; border-bottom: 1px solid var(--border); text-align: right; }
+  th:first-child, td:first-child { text-align: left; }
+  .tablewrap { max-height: 360px; overflow: auto; }
+  .readouts.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; font-size: .82rem; margin-top: 6px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+  .warnbox { margin: 10px 0 0; padding: 8px 10px; border-radius: 10px; background: var(--warn-soft); color: var(--warn); font-weight: 600; font-size: .9rem; }
+  .warnbox:empty { display: none; }
+  #scene .val { font-size: 14px; }
+  #scene .lbl { font-size: 15px; }
+</style>
+</head>
+<body>
+<h1>Federlabor: hookesches Gesetz</h1>
+<p class="muted small">Wähle eine Feder, hänge Massestücke von je 50 g an und lies die Verlängerung (Dehnung) <span class="f">s</span> am Maßstab ab. Mit „Messwert eintragen“ entsteht das <span class="f">F</span>-<span class="f">s</span>-Diagramm.</p>
+
+<div class="lk-grid">
+  <div>
+    <div class="lk-card">
+      <div class="lab">
+        <svg class="scene" id="scene" viewBox="0 0 280 480" role="img" aria-labelledby="sc-title">
+          <title id="sc-title">Schraubenfeder an einem Stativ mit Massestücken und Maßstab</title>
+          <path class="stand" d="M30 470 V22 H170"/>
+          <path d="M10 472 H120" stroke="var(--muted)" stroke-width="8" stroke-linecap="round"/>
+          <g id="rulerG"></g>
+          <path id="spring" class="spring" d=""/>
+          <g id="hanger"></g>
+          <line id="ptr" class="ptr" x1="150" x2="214" y1="0" y2="0"/>
+          <text id="sLabel" x="208" y="0" class="lbl" text-anchor="end"></text>
+        </svg>
+        <div class="side">
+          <h2>Messwerte</h2>
+          <div class="tablewrap"><table><thead><tr><th>Feder</th><th>m in g</th><th>F in N</th><th>s in cm</th><th>F / s in N/cm</th></tr></thead><tbody id="rows"></tbody></table></div>
+        </div>
+      </div>
+    </div>
+    <div class="lk-card">
+      <h2>Diagramm: Kraft <span class="f">F</span> gegen Verlängerung <span class="f">s</span></h2>
+      <svg id="chart" viewBox="0 0 520 300" role="img" aria-label="F-s-Diagramm der eingetragenen Messwerte"></svg>
+      <div class="legend" id="legend"></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="lk-card">
+      <h2>Einstellungen</h2>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Feder wählen">
+          <button type="button" id="sprA" aria-pressed="true">Feder A</button>
+          <button type="button" id="sprB" aria-pressed="false">Feder B</button>
+          <button type="button" id="sprC" aria-pressed="false">Feder C</button>
+        </div>
+      </div>
+      <label class="ctrl"><span>Massestücke (je 50 g) <output id="oN"></output></span>
+        <input type="range" id="sN" min="0" max="10" step="1" value="0"></label>
+      <div class="row">
+        <button type="button" id="bMinus" aria-label="ein Massestück abnehmen">− 50 g</button>
+        <button type="button" id="bPlus" aria-label="ein Massestück anhängen">+ 50 g</button>
+        <button type="button" id="bNew">Neue Feder</button>
+      </div>
+      <div class="readouts two">
+        <div class="readout"><span>Masse <span class="f">m</span></span><b id="rM">–</b></div>
+        <div class="readout"><span>Kraft <span class="f">F = m · g</span></span><b id="rF">–</b></div>
+        <div class="readout"><span>Verlängerung <span class="f">s</span></span><b id="rS">–</b></div>
+        <div class="readout"><span><span class="f">F / s</span></span><b id="rD">–</b></div>
+      </div>
+      <p class="warnbox" id="warn" aria-live="polite"></p>
+      <div class="row" style="margin-top:12px">
+        <button type="button" id="bAdd" class="primary">Messwert eintragen</button>
+        <button type="button" id="bClear">Diagramm leeren</button>
+      </div>
+      <p id="hint" class="small muted" aria-live="polite"></p>
+      <p class="small muted">Hookesches Gesetz: <span class="f">F = D · s</span>, also <span class="f">s = F / D</span>. Die Federkonstante <span class="f">D</span> findest du als Steigung der Geraden im Diagramm.</p>
+      <p class="small muted">Vereinfachungen: Die Masse von Feder und Haken wird vernachlässigt, <span class="f">g</span> = 9,81 N/kg. Die Verlängerung <span class="f">s</span> wird vom Ende der unbelasteten Feder aus gemessen, nicht die ganze Federlänge.</p>
+    </div>
+
+    <div class="lk-card tasks">
+      <h2>Entdecke selbst <span class="small muted" data-task-count></span></h2>
+      <div class="task" data-goal="mess4"><p class="task-q">Nimm mit einer Feder mindestens 4 Messwerte mit verschiedenen Massen auf.</p></div>
+      <div class="task">
+        <p class="task-q">Was passiert mit der Verlängerung <span class="f">s</span>, wenn du die Kraft verdoppelst?</p>
+        <div class="choices">
+          <button type="button" data-ok data-fb="Richtig: Verlängerung und Kraft sind proportional. Im Diagramm liegen die Punkte auf einer Ursprungsgeraden.">Sie verdoppelt sich.</button>
+          <button type="button" data-fb="Vergleiche zum Beispiel 2 und 4 Massestücke.">Sie bleibt gleich.</button>
+          <button type="button" data-fb="Rechne nach: Wie groß ist F / s bei 2 und bei 4 Massestücken?">Sie vervierfacht sich.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task" data-goal="zwei"><p class="task-q">Nimm auch mit einer zweiten Feder mindestens 2 Messwerte auf und vergleiche die Geraden.</p></div>
+      <div class="task">
+        <p class="task-q">Welche Feder ist die härteste, und woran erkennst du das im Diagramm?</p>
+        <div class="choices">
+          <button type="button" data-ok data-fb="Genau: Feder C braucht für 1 cm Verlängerung die größte Kraft. Ihre Gerade ist am steilsten, die Steigung ist die Federkonstante D.">Feder C, ihre Gerade ist am steilsten.</button>
+          <button type="button" data-fb="Eine harte Feder dehnt sich bei gleicher Kraft wenig. Welche Gerade steigt also am stärksten?">Feder A, ihre Gerade ist am flachsten.</button>
+          <button type="button" data-fb="Wer sich weit dehnt, ist weich. Schau auf die Steigung der Geraden.">Feder A, sie dehnt sich am weitesten.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task" data-goal="ueber"><p class="task-q">Überdehne Feder A mit vielen Massestücken. Nimm danach alle Massestücke wieder ab und beobachte den Zeiger.</p></div>
+      <div class="task">
+        <p class="task-q">Warum misst ein überdehnter Federkraftmesser nicht mehr richtig?</p>
+        <div class="choices">
+          <button type="button" data-ok data-fb="Richtig: Die Feder ist plastisch verformt. Sie geht nicht mehr auf den Nullpunkt zurück, also stimmt die Skala nicht mehr.">Die Feder ist bleibend verformt und geht nicht mehr auf null zurück.</button>
+          <button type="button" data-fb="Die Feder dehnt sich ja weiterhin. Was hast du nach dem Abhängen am Zeiger gesehen?">Die Feder dehnt sich gar nicht mehr.</button>
+          <button type="button" data-fb="Probiere es aus: Nach dem Überdehnen bleibt eine Restverlängerung.">Er misst weiterhin richtig.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="all-done">Alles entdeckt! Weiter geht es mit den Übungen.</div>
+    </div>
+  </div>
+</div>
+
+<script src="../../static/lesson-kit.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var G = 9.81, PIECE = 0.05;                    // kg je Massestück
+  // Federkonstante D in N/cm, Elastizitätsgrenze FE in N
+  var SPR = {
+    A: { name: 'Feder A', D: 0.20, FE: 3.5, color: 'var(--accent)', maxF: 0, pts: [] },
+    B: { name: 'Feder B', D: 0.40, FE: 4.0, color: 'var(--pos)', maxF: 0, pts: [] },
+    C: { name: 'Feder C', D: 1.00, FE: 8.0, color: 'var(--c3)', maxF: 0, pts: [] }
+  };
+  var S = { key: 'A', n: 0 };
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    parent.appendChild(e);
+    return e;
+  }
+  function spr() { return SPR[S.key]; }
+  function force() { return S.n * PIECE * G; }
+  // bleibende Verlängerung durch Überdehnung
+  function plastic(sp) { return sp.maxF > sp.FE ? 1.5 * (sp.maxF - sp.FE) / sp.D : 0; }
+  function extension(sp, F) { return F / sp.D + plastic(sp); }
+  function bent(sp) { return sp.maxF > sp.FE; }
+
+  // ---------------------------------------------- Stativ, Feder, Maßstab
+  var TOP = 30, LEAD = 10, L0 = 64, PX = 6;      // 6 Bildpunkte je cm
+  var REST = TOP + LEAD * 2 + L0;                 // unteres Federende ohne Last
+  (function ruler() {
+    var g = $('rulerG');
+    el('rect', { x: 214, y: REST - 8, width: 22, height: 40 * PX + 16, class: 'ruler' }, g);
+    for (var c = 0; c <= 40; c++) {
+      var y = REST + c * PX, len = c % 5 === 0 ? 10 : 5;
+      el('line', { x1: 214, x2: 214 + len, y1: y, y2: y, class: 'tick' }, g);
+      if (c % 5 === 0) {
+        var t = el('text', { x: 240, y: y + 4, class: 'val' }, g);
+        t.textContent = c;
+      }
+    }
+    var u = el('text', { x: 225, y: REST - 22, class: 'val', 'text-anchor': 'middle' }, g);
+    u.textContent = 's in cm';
+  })();
+
+  var cur = 0;                                     // angezeigte Verlängerung in cm (animiert)
+  function drawSpring(s) {
+    var y1 = TOP, y2 = REST + s * PX, coils = 14, w = 11, x = 150;
+    var a = y1 + LEAD, b = y2 - LEAD, d = 'M' + x + ' ' + y1 + ' V' + a;
+    for (var i = 0; i < coils; i++) {
+      var ya = a + (b - a) * (i + 0.25) / coils, yb = a + (b - a) * (i + 0.75) / coils;
+      d += ' L' + (x + w) + ' ' + ya + ' L' + (x - w) + ' ' + yb;
+    }
+    d += ' L' + x + ' ' + b + ' V' + y2;
+    $('spring').setAttribute('d', d);
+    $('spring').classList.toggle('bent', bent(spr()));
+    // Haken und Massestücke
+    var h = $('hanger'); h.innerHTML = '';
+    el('path', { d: 'M150 ' + y2 + ' v6 a5 5 0 1 1 -5 5', fill: 'none', stroke: 'var(--line)', 'stroke-width': 2 }, h);
+    if (S.n > 0) {
+      var top = y2 + 14;
+      el('line', { x1: 150, x2: 150, y1: top - 4, y2: top + S.n * 9 + 4, stroke: 'var(--line)', 'stroke-width': 2 }, h);
+      for (var k = 0; k < S.n; k++) el('rect', { x: 134, y: top + k * 9, width: 32, height: 8, rx: 2, class: 'mass' }, h);
+    }
+    $('ptr').setAttribute('y1', y2); $('ptr').setAttribute('y2', y2);
+    var lab = $('sLabel');
+    lab.setAttribute('y', y2 - 6);
+    lab.textContent = LK.fmt(s, 1) + ' cm';
+  }
+
+  // ---------------------------------------------- Diagramm
+  var chart = $('chart');
+  var X0 = 56, X1 = 500, Y0 = 250, Y1 = 24, SMAX = 40, FMAX = 5;
+  var px = function (s) { return X0 + (X1 - X0) * s / SMAX; };
+  var py = function (f) { return Y0 - (Y0 - Y1) * f / FMAX; };
+  function fitD(sp) {
+    var sfs = 0, ss = 0, n = 0;
+    sp.pts.forEach(function (p) { if (!p.bent && p.F > 0) { sfs += p.F * p.s; ss += p.s * p.s; n++; } });
+    return n >= 2 ? sfs / ss : null;
+  }
+  function drawChart() {
+    chart.innerHTML = '';
+    for (var s = 0; s <= SMAX; s += 5) {
+      el('line', { x1: px(s), x2: px(s), y1: Y1, y2: Y0, class: 'gridline' }, chart);
+      el('text', { x: px(s), y: Y0 + 18, 'text-anchor': 'middle', class: 'val' }, chart).textContent = s;
+    }
+    for (var f = 0; f <= FMAX; f++) {
+      el('line', { x1: X0, x2: X1, y1: py(f), y2: py(f), class: 'gridline' }, chart);
+      el('text', { x: X0 - 8, y: py(f) + 4, 'text-anchor': 'end', class: 'val' }, chart).textContent = f;
+    }
+    el('line', { x1: X0, x2: X1, y1: Y0, y2: Y0, class: 'axis' }, chart);
+    el('line', { x1: X0, x2: X0, y1: Y0, y2: Y1, class: 'axis' }, chart);
+    el('text', { x: X1, y: Y0 + 38, 'text-anchor': 'end', class: 'lbl' }, chart).textContent = 's in cm';
+    el('text', { x: 8, y: 14, class: 'lbl' }, chart).textContent = 'F in N';
+    var legend = '', rows = '';
+    Object.keys(SPR).forEach(function (key) {
+      var sp = SPR[key];
+      if (!sp.pts.length) return;
+      var D = fitD(sp);
+      if (D) {
+        var sEnd = Math.min(SMAX, FMAX / D);
+        el('line', { x1: px(0), y1: py(0), x2: px(sEnd), y2: py(D * sEnd), class: 'fit', stroke: sp.color, opacity: 0.7 }, chart);
+      }
+      sp.pts.slice().sort(function (a, b) { return a.s - b.s; }).forEach(function (p) {
+        if (p.bent) el('circle', { cx: px(Math.min(p.s, SMAX)), cy: py(p.F), r: 5, fill: 'var(--card)', stroke: 'var(--warn)', 'stroke-width': 2.5 }, chart);
+        else el('circle', { cx: px(p.s), cy: py(p.F), r: 5, fill: sp.color }, chart);
+        rows += '<tr><td>' + sp.name + (p.bent ? ' (überdehnt)' : '') + '</td><td>' + p.n * 50 + '</td><td>' + LK.fmt(p.F, 2) + '</td><td>' + LK.fmt(p.s, 1) +
+          '</td><td>' + (p.s > 0 ? LK.fmt(p.F / p.s, 2) : '–') + '</td></tr>';
+      });
+      legend += '<span><i style="background:' + sp.color + '"></i>' + sp.name + (D ? ': Steigung <span class="f">D</span> ≈ ' + LK.fmt(D, 2) + ' N/cm' : '') + '</span>';
+    });
+    if (Object.keys(SPR).some(function (k) { return SPR[k].pts.some(function (p) { return p.bent; }); }))
+      legend += '<span><i style="background:var(--card);border:2px solid var(--warn)"></i>überdehnt gemessen</span>';
+    $('legend').innerHTML = legend;
+    $('rows').innerHTML = rows || '<tr><td colspan="5" class="muted">Noch keine Messwerte.</td></tr>';
+  }
+
+  // ---------------------------------------------- Anzeige
+  function checkGoals() {
+    var two = 0;
+    Object.keys(SPR).forEach(function (k) {
+      var sp = SPR[k], good = {};
+      sp.pts.forEach(function (p) { if (!p.bent && p.n > 0) good[p.n] = true; });
+      var c = Object.keys(good).length;
+      if (c >= 4) LK.reach('mess4');
+      if (c >= 2) two++;
+    });
+    if (two >= 2) LK.reach('zwei');
+    if (S.key === 'A' && bent(SPR.A) && S.n === 0) LK.reach('ueber');
+  }
+  function update() {
+    var sp = spr(), F = force();
+    if (F > sp.maxF) sp.maxF = F;
+    var s = extension(sp, F);
+    $('sN').value = S.n;
+    $('oN').textContent = S.n + ' Stück';
+    $('rM').textContent = S.n * 50 + ' g';
+    $('rF').textContent = LK.fmt(F, 2) + ' N';
+    $('rS').textContent = LK.fmt(s, 1) + ' cm';
+    $('rD').textContent = s > 0.05 ? LK.fmt(F / s, 2) + ' N/cm' : '–';
+    ['A', 'B', 'C'].forEach(function (k) { $('spr' + k).setAttribute('aria-pressed', k === S.key); });
+    var w = '';
+    if (bent(sp)) {
+      w = S.n === 0
+        ? 'Die Feder geht nicht mehr ganz zurück: Restverlängerung ' + LK.fmt(plastic(sp), 1) + ' cm. Sie ist bleibend (plastisch) verformt. Hol dir mit „Neue Feder“ eine neue.'
+        : 'Achtung, überdehnt! Die Kraft war größer als die Elastizitätsgrenze (' + LK.fmt(sp.FE, 1) + ' N). Die Feder ist jetzt bleibend verformt.';
+    }
+    if ($('warn').textContent !== w) $('warn').textContent = w;
+    $('sc-title').textContent = sp.name + ' mit ' + S.n + ' Massestücken, Verlängerung ' + LK.fmt(s, 1) + ' Zentimeter';
+    if (reduce) { cur = s; drawSpring(cur); }
+    checkGoals();
+  }
+
+  var last = performance.now();
+  function frame(t) {
+    var dt = Math.min(0.05, (t - last) / 1000); last = t;
+    var target = extension(spr(), force());
+    if (Math.abs(target - cur) > 0.01) { cur += (target - cur) * Math.min(1, dt * 7); drawSpring(cur); }
+    else if (cur !== target) { cur = target; drawSpring(cur); }
+    requestAnimationFrame(frame);
+  }
+
+  // ---------------------------------------------- Bedienung
+  function setN(n) { S.n = Math.max(0, Math.min(10, n)); $('hint').textContent = ''; update(); }
+  $('sN').oninput = function () { setN(Number(this.value)); };
+  $('bPlus').onclick = function () { setN(S.n + 1); };
+  $('bMinus').onclick = function () { setN(S.n - 1); };
+  ['A', 'B', 'C'].forEach(function (k) {
+    $('spr' + k).onclick = function () { S.key = k; $('hint').textContent = ''; update(); drawSpring(cur); };
+  });
+  $('bNew').onclick = function () {
+    var sp = spr(); sp.maxF = 0;
+    $('hint').textContent = 'Neue ' + sp.name + ' eingehängt.';
+    update(); drawSpring(cur);
+  };
+  $('bAdd').onclick = function () {
+    var sp = spr(), F = force(), s = extension(sp, F);
+    var same = sp.pts.findIndex(function (p) { return p.n === S.n && p.bent === bent(sp); });
+    var p = { n: S.n, F: F, s: s, bent: bent(sp) };
+    if (same >= 0) sp.pts[same] = p; else sp.pts.push(p);
+    $('hint').textContent = 'Eingetragen: ' + sp.name + ', F = ' + LK.fmt(F, 2) + ' N, s = ' + LK.fmt(s, 1) + ' cm.';
+    drawChart(); checkGoals();
+  };
+  $('bClear').onclick = function () { Object.keys(SPR).forEach(function (k) { SPR[k].pts = []; }); drawChart(); };
+
+  update(); drawSpring(cur); drawChart(); requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

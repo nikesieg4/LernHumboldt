@@ -1,0 +1,92 @@
+{
+  "id": "k10-wirkungsgrad",
+  "titel": "Wirkungsgrad und Energiegewinnung",
+  "kurz": "Wie viel von der eingesetzten Energie wirklich ankommt und wie man Kraftwerke und Geräte vergleicht.",
+  "reihenfolge": 2,
+  "lernziele": [
+    { "id": "lz1", "niveau": "H", "text": "Den Wirkungsgrad als Verhältnis von Nutzenergie zu zugeführter Energie berechnen" },
+    { "id": "lz2", "niveau": "H", "text": "Energieumwandlungen mit Energieflussschemen darstellen" },
+    { "id": "lz3", "niveau": "H", "text": "Den Wirkungsgrad eines Wasserkochers mit Energieansätzen bestimmen" },
+    { "id": "lz4", "niveau": "G", "text": "Möglichkeiten der Energiegewinnung vergleichen und bewerten" }
+  ],
+  "verstehen": {
+    "einstieg": "Ein Auto tankt 50 Liter Benzin. Wie viel davon treibt das Auto tatsächlich an?",
+    "abschnitte": [
+      {
+        "titel": "Der Wirkungsgrad",
+        "text": "Bei jeder Energieumwandlung wird nur ein Teil der zugeführten Energie in die gewünschte Form umgewandelt. Der Rest wird zu nicht nutzbarer Energie, meist Wärme an die Umgebung. Der **Wirkungsgrad** `η` (griechisch „eta“) gibt an, welcher Anteil genutzt wird:\n\n`η = E_{nutz} / E_{zu}` (oder mit Leistungen: `η = P_{nutz} / P_{zu}`)\n\nEr ist eine Zahl zwischen 0 und 1 bzw. 0 % und 100 %. 100 % sind nie erreichbar."
+      },
+      {
+        "titel": "Typische Wirkungsgrade",
+        "text": "Elektromotor 80 bis 95 % · Wasserkocher etwa 80 bis 90 % · moderne Gasheizung über 90 % · Wasserkraftwerk etwa 90 % · Gas-und-Dampf-Kraftwerk bis 60 % · Kohlekraftwerk etwa 40 % · Ottomotor im Auto etwa 25 bis 35 % · Solarzelle etwa 20 % · Glühlampe (als Lichtquelle) etwa 5 %.\n\nIn einem **Energieflussschema** (Sankey-Diagramm) zeigt ein breiter Pfeil die zugeführte Energie, der sich in einen Nutzpfeil und Verlustpfeile aufteilt. Die Breiten entsprechen den Energiemengen."
+      },
+      {
+        "titel": "Beispiel Wasserkocher",
+        "text": "Ein Wasserkocher mit 2000 W erhitzt 1 kg Wasser in 3 Minuten von 20 °C auf 100 °C.\n\nZugeführt: `E_{zu} = P · t = 2000 W · 180 s = 360 kJ`\nIm Wasser angekommen: `Q = 4,19 kJ/(kg·K) · 1 kg · 80 K = 335 kJ`\nWirkungsgrad: `η = 335 / 360 ≈ 0,93 = 93 %`\n\nDer Rest erwärmt den Kocher selbst und die Luft."
+      },
+      {
+        "titel": "Energiegewinnung bewerten",
+        "text": "Bei der Bewertung von Energiequellen zählt nicht nur der Wirkungsgrad, sondern z. B. auch: CO₂-Ausstoß und Klima, Kosten, Verfügbarkeit (Tag/Nacht, Wetter), Rohstoffverbrauch, Flächenbedarf, Sicherheit und Abfälle. Ein Solarmodul hat zwar nur etwa 20 % Wirkungsgrad, aber sein „Brennstoff“ Sonnenlicht ist kostenlos und unerschöpflich."
+      }
+    ],
+    "formeln": [
+      { "formel": "η = \\frac{E_{nutz}}{E_{zu}} = \\frac{P_{nutz}}{P_{zu}}", "bedeutung": "Wirkungsgrad (ohne Einheit, oft in %)" }
+    ],
+    "merksatz": "Der Wirkungsgrad `η = E_{nutz} / E_{zu}` gibt an, welcher Anteil der Energie genutzt wird. Er ist immer kleiner als 100 %.",
+    "alltag": "Ein E-Auto nutzt etwa 70 bis 80 % der Energie aus dem Akku für den Antrieb, ein Benziner nur etwa ein Viertel bis ein Drittel der Energie aus dem Tank."
+  },
+  "interaktiv": ["k10-wasserkocher"],
+  "uebungen": [
+    { "id": "k10-wg-01", "typ": "zahl", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ein Motor nimmt 500 J elektrische Energie auf und gibt 400 J als Bewegungsenergie ab. Wie groß ist sein Wirkungsgrad?",
+      "gegeben": "`E_{zu} = 500 J`, `E_{nutz} = 400 J`", "gesucht": "`η`", "gesuchtSymbol": "η",
+      "loesung": 80, "einheit": "%", "alternativEinheiten": { "(ohne Einheit)": 100 },
+      "rechenweg": ["`η = \\frac{E_{nutz}}{E_{zu}} = \\frac{400 J}{500 J} = 0,8 = 80 %`"],
+      "erklaerung": "Die restlichen 100 J werden zu Wärme, der Motor wird warm." },
+    { "id": "k10-wg-02", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Warum kann ein Wirkungsgrad nie über 100 % liegen?",
+      "optionen": [
+        { "text": "Weil dann mehr Energie herauskäme als hineingesteckt wurde, was der Energieerhaltung widerspricht", "richtig": true },
+        { "text": "Weil es dafür noch keine Technik gibt", "feedback": "Es ist grundsätzlich unmöglich, nicht nur technisch schwierig." },
+        { "text": "Weil man Prozent nur bis 100 rechnen darf", "feedback": "Prozent über 100 gibt es durchaus. Hier verbietet es die Physik." }
+      ],
+      "erklaerung": "Energie kann nicht aus dem Nichts entstehen. Ein „Perpetuum mobile“ ist deshalb unmöglich." },
+    { "id": "k10-wg-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Ein Kohlekraftwerk hat einen Wirkungsgrad von 40 %. Es soll eine elektrische Leistung von 800 MW liefern. Welche Leistung muss die Kohle liefern?",
+      "gegeben": "`η = 0,40`, `P_{nutz} = 800 MW`", "gesucht": "`P_{zu}`", "gesuchtSymbol": "P_{zu}",
+      "loesung": 2000, "einheit": "MW", "alternativEinheiten": { "GW": 1000 },
+      "rechenweg": ["`P_{zu} = \\frac{P_{nutz}}{η}`", "`P_{zu} = \\frac{800 MW}{0,40} = 2000 MW`"],
+      "hinweis": "Stelle `η = P_{nutz} / P_{zu}` nach `P_{zu}` um.",
+      "erklaerung": "1200 MW gehen als Abwärme verloren, z. B. über die Kühltürme." },
+    { "id": "k10-wg-04", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Ein Wasserkocher (1800 W) erhitzt 1 kg Wasser von 20 °C auf 100 °C in 3 min 30 s. Berechne seinen Wirkungsgrad. (c = 4,19 kJ/(kg·K))",
+      "gegeben": "`P = 1800 W`, `t = 210 s`, `m = 1 kg`, `ΔT = 80 K`", "gesucht": "`η`", "gesuchtSymbol": "η",
+      "loesung": 88.68, "einheit": "%", "toleranz": 0.02,
+      "rechenweg": ["Zugeführt: `E_{zu} = 1800 W · 210 s = 378 000 J = 378 kJ`", "Nutzwärme: `Q = 4,19 · 1 · 80 kJ = 335,2 kJ`", "`η = \\frac{335,2}{378} ≈ 0,887 ≈ 89 %`"],
+      "hinweis": "Zugeführte Energie = Leistung · Zeit (in Sekunden). Nutzenergie = Wärme im Wasser.",
+      "erklaerung": "Den Wirkungsgrad eines Wasserkochers kannst du zu Hause selbst bestimmen: Wasser abwiegen, Temperaturen messen, Zeit stoppen." },
+    { "id": "k10-wg-05", "typ": "reihenfolge", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Ordne nach dem typischen Wirkungsgrad, beginnend mit dem **kleinsten**.",
+      "elemente": ["Glühlampe (Licht)", "Solarzelle", "Ottomotor im Auto", "Kohlekraftwerk", "Elektromotor"],
+      "erklaerung": "Glühlampe etwa 5 %, Solarzelle etwa 20 %, Ottomotor etwa 30 %, Kohlekraftwerk etwa 40 %, Elektromotor etwa 90 %." },
+    { "id": "k10-wg-06", "typ": "multi", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Welche Aussagen über ein Energieflussschema (Sankey-Diagramm) sind richtig?",
+      "optionen": [
+        { "text": "Die Breite der Pfeile entspricht der Energiemenge.", "richtig": true },
+        { "text": "Die Summe aller abgehenden Pfeile ist so breit wie der zugeführte Pfeil.", "richtig": true },
+        { "text": "Der Nutzpfeil ist immer der breiteste.", "feedback": "Bei einer Glühlampe ist der Wärmepfeil viel breiter als der Lichtpfeil." },
+        { "text": "Verluste werden nicht eingezeichnet.", "feedback": "Gerade die Verluste machen das Diagramm aussagekräftig." }
+      ],
+      "erklaerung": "Wegen der Energieerhaltung muss alles, was hineingeht, auch irgendwo wieder herauskommen." },
+    { "id": "k10-wg-07", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Ein Solarmodul hat nur einen Wirkungsgrad von etwa 20 %, ein Gaskraftwerk bis zu 60 %. Ist das Gaskraftwerk deshalb besser? Bewerte mit mindestens zwei weiteren Kriterien.",
+      "stichworte": [
+        { "aspekt": "Der Wirkungsgrad allein reicht für eine Bewertung nicht aus", "woerter": ["nicht nur", "allein", "nicht automatisch", "reicht nicht", "nicht besser"] },
+        { "aspekt": "Klima: Gas setzt CO₂ frei, Sonne nicht", "woerter": ["co2", "klima", "treibhaus", "kohlenstoffdioxid", "abgase"] },
+        { "aspekt": "Ressourcen/Kosten: Sonnenlicht ist kostenlos und unerschöpflich, Gas ist begrenzt und muss bezahlt werden", "woerter": ["kostenlos", "unerschoepflich", "regenerativ", "erneuerbar", "begrenzt", "erschoepf", "kosten", "brennstoff"] },
+        { "aspekt": "Verfügbarkeit: Solarstrom nur bei Tageslicht, Gaskraftwerk jederzeit regelbar", "woerter": ["nacht", "tag", "wetter", "verfuegbar", "regelbar", "jederzeit", "speicher", "schwank"] }
+      ],
+      "musterloesung": "Der Wirkungsgrad allein reicht für eine Bewertung nicht aus. Das Solarmodul nutzt zwar nur 20 % des Sonnenlichts, aber das Sonnenlicht ist kostenlos und unerschöpflich, und im Betrieb entsteht kein CO₂. Das Gaskraftwerk verbrennt Erdgas, einen begrenzten fossilen Rohstoff, der bezahlt werden muss und CO₂ freisetzt. Dafür kann es jederzeit und nach Bedarf Strom liefern, während Solarstrom nur bei Tageslicht und abhängig vom Wetter entsteht. Unter dem Gesichtspunkt Klima und Ressourcen ist das Solarmodul besser, unter dem Gesichtspunkt Versorgungssicherheit hat das Gaskraftwerk Vorteile.",
+      "erklaerung": "Bei Bewertungsaufgaben kommt es darauf an, mehrere Kriterien zu nennen und abzuwägen." }
+  ]
+}

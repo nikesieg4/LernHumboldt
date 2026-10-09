@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stromkreis-Baukasten</title>
+<link rel="stylesheet" href="../../static/lesson-kit.css">
+<style>
+  .flow { fill: var(--accent); }
+  .contact { fill: var(--line); }
+  .bulb { fill: var(--card); stroke: var(--line); stroke-width: 2.2; }
+  .bulb-out { fill: none; stroke: var(--warn); stroke-width: 2; stroke-dasharray: 4 3; }
+  .glow { fill: var(--lamp); }
+  .pole { font-size: 24px; font-weight: 700; }
+  .pole.p { fill: var(--pos); } .pole.n { fill: var(--neg); }
+  #svg .lbl { font-size: 17px; }
+  #svg .val { font-size: 14px; }
+  .hit { fill: var(--card); fill-opacity: 0; cursor: pointer; pointer-events: all; }
+  .clickable:focus { outline: none; }
+  .clickable:focus-visible .hit { stroke: var(--accent); stroke-width: 2; stroke-opacity: 1; }
+  .clamp { fill: var(--card); stroke: var(--line); stroke-width: 2; }
+  .group-lbl { font-size: .85rem; font-weight: 650; margin: 0 0 6px; }
+  .picks { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+  .picks button { font-size: .88rem; padding: 6px 10px; }
+  #status { font-weight: 650; min-height: 1.5em; }
+</style>
+</head>
+<body>
+<h1>Stromkreis-Baukasten</h1>
+<p class="muted small">Schalte die Schalter, drehe Lampen heraus und setze verschiedene Gegenstände in die Prüfstrecke. Du kannst auch direkt auf die Schalter und Lampen im Schaltplan tippen.</p>
+
+<div class="lk-grid">
+  <div>
+    <div class="lk-card">
+      <svg id="svg" viewBox="0 0 550 330" role="img" aria-labelledby="svgTitle">
+        <title id="svgTitle">Schaltplan</title>
+        <g id="wires"></g>
+        <g id="parts"></g>
+        <g id="dots"></g>
+      </svg>
+      <p id="status" class="small" aria-live="polite"></p>
+      <p class="small muted">Die blauen Punkte zeigen die <b>technische Stromrichtung</b>: außerhalb der Batterie vom Pluspol (+) zum Minuspol (−). Die Elektronen bewegen sich in Wirklichkeit in die Gegenrichtung. Je schneller die Punkte laufen, desto größer ist die Stromstärke.</p>
+      <p class="small muted">Vereinfachungen: Die Lampen haben immer denselben Widerstand. Holz ist nur trocken ein Isolator, feuchtes Holz leitet ein wenig. Graphit leitet schlechter als Metall, deshalb leuchten die Lampen dann etwas schwächer.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="lk-card">
+      <h2>Einstellungen</h2>
+      <p class="group-lbl">Lampen</p>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Lampen schalten">
+          <button type="button" id="lSer" aria-pressed="true">in Reihe</button>
+          <button type="button" id="lPar" aria-pressed="false">parallel</button>
+        </div>
+      </div>
+      <p class="group-lbl">Schalter</p>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Schalter anordnen">
+          <button type="button" id="sAnd" aria-pressed="true">UND (in Reihe)</button>
+          <button type="button" id="sOr" aria-pressed="false">ODER (parallel)</button>
+        </div>
+      </div>
+      <div class="row">
+        <button type="button" id="bS1" aria-pressed="false">S1: offen</button>
+        <button type="button" id="bS2" aria-pressed="false">S2: offen</button>
+      </div>
+      <div class="row">
+        <button type="button" id="bL1">Lampe L1 herausdrehen</button>
+        <button type="button" id="bL2">Lampe L2 herausdrehen</button>
+      </div>
+      <p class="group-lbl" id="pickLbl">In der Prüfstrecke</p>
+      <div class="picks" role="group" aria-labelledby="pickLbl" id="picks"></div>
+      <div class="readouts">
+        <div class="readout"><span>Strom fließt</span><b id="rC"></b></div>
+        <div class="readout"><span>Lampe L1</span><b id="rL1"></b></div>
+        <div class="readout"><span>Lampe L2</span><b id="rL2"></b></div>
+      </div>
+    </div>
+
+    <div class="lk-card tasks">
+      <h2>Entdecke selbst <span class="small muted" data-task-count></span></h2>
+      <div class="task" data-goal="and"><p class="task-q">UND-Schaltung: Finde heraus, welche Schalter geschlossen sein müssen, damit die Lampen leuchten. Probiere einen Schalter allein und beide zusammen.</p></div>
+      <div class="task" data-goal="or"><p class="task-q">ODER-Schaltung: Bringe die Lampen zum Leuchten, wobei nur S1 geschlossen ist. Schaffst du es auch nur mit S2?</p></div>
+      <div class="task" data-goal="serOut"><p class="task-q">Lampen in Reihe: Lass beide Lampen leuchten. Drehe dann eine Lampe heraus. Was passiert mit der anderen?</p></div>
+      <div class="task">
+        <p class="task-q">Lampen parallel: Beide leuchten, und du drehst L1 heraus. Was passiert mit L2?</p>
+        <div class="choices">
+          <button type="button" data-ok data-fb="Richtig: In der Parallelschaltung hat jede Lampe ihren eigenen Stromweg. L2 bleibt in einem geschlossenen Kreis.">L2 leuchtet weiter.</button>
+          <button type="button" data-fb="Probiere es aus: Stelle die Lampen auf „parallel“ und drehe L1 heraus.">L2 geht auch aus.</button>
+          <button type="button" data-fb="Probiere es aus und vergleiche, wie hell L2 vorher und nachher leuchtet.">L2 leuchtet viel schwächer.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task" data-goal="cond"><p class="task-q">Teste alle sechs Gegenstände in der Prüfstrecke. Sorge dafür, dass der Stromkreis sonst geschlossen ist.</p></div>
+      <div class="task">
+        <p class="task-q">Welche der getesteten Gegenstände sind Leiter?</p>
+        <div class="choices">
+          <button type="button" data-fb="Teste noch einmal die Bleistiftmine: Leuchten die Lampen?">Nur Kupfer und Eisennagel</button>
+          <button type="button" data-ok data-fb="Genau: Alle Metalle leiten, und auch Graphit ist ein Leiter. Holz, Kunststoff und Glas sind Isolatoren.">Kupfer, Eisennagel und Graphit</button>
+          <button type="button" data-fb="Teste Holz und Glas noch einmal: Leuchten die Lampen?">Kupfer, Holz und Glas</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="all-done">Alles entdeckt! Weiter geht es mit den Übungen.</div>
+    </div>
+  </div>
+</div>
+
+<script src="../../static/lesson-kit.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var U = 4.5, RL = 12, RI = 0.5;   // Flachbatterie 4,5 V, Lampenwiderstand 12 Ω, Innenwiderstand 0,5 Ω
+  var MAT = {
+    wire:  { name: 'Kabel', R: 0 },
+    cu:    { name: 'Kupferdraht', R: 0 },
+    fe:    { name: 'Eisennagel', R: 0.1 },
+    wood:  { name: 'Holzstab', R: Infinity },
+    plast: { name: 'Kunststoff', R: Infinity },
+    graph: { name: 'Graphit (Bleistiftmine)', R: 10 },
+    glass: { name: 'Glasstab', R: Infinity },
+    air:   { name: 'nichts (Luft)', R: Infinity }
+  };
+  var ORDER = ['wire', 'cu', 'fe', 'wood', 'plast', 'graph', 'glass', 'air'];
+  var TEST = ['cu', 'fe', 'wood', 'plast', 'graph', 'glass'];
+  var S = { lamps: 'ser', sw: 'and', s1: false, s2: false, in1: true, in2: true, gap: 'wire' };
+  var seen = { andOne: false, andBoth: false, orA: false, orB: false, serLit: false, tested: {} };
+  var segs = [];
+
+  function el(tag, a, parent) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); parent.appendChild(e); return e; }
+  function txt(parent, x, y, s, cls, anchor) { var t = el('text', { x: x, y: y, class: cls || 'lbl', 'text-anchor': anchor || 'start' }, parent); t.textContent = s; return t; }
+
+  // ------------------------------------------------------------ Berechnung
+  function solve() {
+    var Rsw = S.sw === 'and' ? (S.s1 && S.s2 ? 0 : Infinity) : (S.s1 || S.s2 ? 0 : Infinity);
+    var Rl;
+    if (S.lamps === 'ser') Rl = S.in1 && S.in2 ? 2 * RL : Infinity;
+    else Rl = S.in1 && S.in2 ? RL / 2 : (S.in1 || S.in2 ? RL : Infinity);
+    var Rg = MAT[S.gap].R, R = RI + Rsw + Rl + Rg;
+    var I = isFinite(R) ? U / R : 0;
+    var r = { I: I, swOk: isFinite(Rsw), lampOk: isFinite(Rl), gapOk: isFinite(Rg) };
+    if (S.lamps === 'ser') { r.I1 = I; r.I2 = I; }
+    else { var Ub = I * Rl; r.I1 = S.in1 && I > 0 ? Ub / RL : 0; r.I2 = S.in2 && I > 0 ? Ub / RL : 0; }
+    if (S.sw === 'and') { r.Ia = I; r.Ib = I; }
+    else if (S.s1 && S.s2) { r.Ia = I / 2; r.Ib = I / 2; }
+    else { r.Ia = S.s1 ? I : 0; r.Ib = S.s2 ? I : 0; }
+    // Helligkeit: Leistung der Lampe im Vergleich zu einer Lampe direkt an 4,5 V
+    r.b1 = Math.pow(r.I1 * RL / U, 2); r.b2 = Math.pow(r.I2 * RL / U, 2);
+    return r;
+  }
+  function level(b, inside) { return !inside ? 'heraus' : b > 0.5 ? 'hell' : b > 0.03 ? 'schwach' : 'aus'; }
+
+  // ------------------------------------------------------------ Zeichnen
+  function sw(g, key, xa, xb, y, closed, label, ly) {
+    var grp = el('g', { class: 'clickable', 'data-key': key, tabindex: 0, role: 'button', 'aria-label': 'Schalter ' + label + (closed ? ' öffnen' : ' schließen') }, g);
+    el('rect', { class: 'hit', x: xa - 10, y: y - 32, width: xb - xa + 20, height: 44, rx: 6 }, grp);
+    el('line', { class: 'wire', x1: xa, y1: y, x2: closed ? xb : xb - 6, y2: closed ? y : y - 22 }, grp);
+    el('circle', { class: 'contact', cx: xa, cy: y, r: 3.5 }, grp);
+    el('circle', { class: 'contact', cx: xb, cy: y, r: 3.5 }, grp);
+    txt(grp, (xa + xb) / 2, ly, label, 'lbl', 'middle');
+    grp.addEventListener('click', function () { toggle(key); });
+    grp.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(key); } });
+  }
+
+  function lamp(g, key, cx, cy, inside, b, label, lx, anchor) {
+    var grp = el('g', { class: 'clickable', 'data-key': key, tabindex: 0, role: 'button', 'aria-label': 'Lampe ' + label + (inside ? ' herausdrehen' : ' eindrehen') }, g);
+    el('rect', { class: 'hit', x: cx - 26, y: cy - 26, width: 52, height: 52, rx: 8 }, grp);
+    if (inside) {
+      var on = b > 0.03;
+      el('circle', { class: 'glow', cx: cx, cy: cy, r: 28, opacity: on ? (0.2 + 0.6 * Math.sqrt(Math.min(1, b))).toFixed(2) : 0 }, grp);
+      el('circle', { class: 'bulb', cx: cx, cy: cy, r: 18 }, grp);
+      if (on) el('circle', { class: 'glow', cx: cx, cy: cy, r: 16, opacity: (0.3 + 0.7 * Math.sqrt(Math.min(1, b))).toFixed(2) }, grp);
+      el('path', { class: 'wire', d: 'M' + (cx - 12.7) + ' ' + (cy - 12.7) + ' L' + (cx + 12.7) + ' ' + (cy + 12.7) + ' M' + (cx + 12.7) + ' ' + (cy - 12.7) + ' L' + (cx - 12.7) + ' ' + (cy + 12.7) }, grp);
+    } else {
+      el('circle', { class: 'bulb-out', cx: cx, cy: cy, r: 18 }, grp);
+    }
+    txt(grp, lx, cy + 5, label, 'lbl', anchor);
+    grp.addEventListener('click', function () { toggle(key); });
+    grp.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(key); } });
+  }
+
+  function gapItem(g) {
+    var k = S.gap, y = 290;
+    el('circle', { class: 'clamp', cx: 198, cy: y, r: 5 }, g);
+    el('circle', { class: 'clamp', cx: 322, cy: y, r: 5 }, g);
+    if (k === 'wire') el('line', { class: 'wire', x1: 203, y1: y, x2: 317, y2: y }, g);
+    else if (k === 'cu') el('rect', { x: 203, y: y - 3, width: 114, height: 6, rx: 3, fill: 'var(--pos)' }, g);
+    else if (k === 'fe') { el('rect', { x: 212, y: y - 3, width: 105, height: 6, fill: 'var(--muted)' }, g); el('rect', { x: 203, y: y - 9, width: 9, height: 18, rx: 2, fill: 'var(--muted)' }, g); }
+    else if (k === 'wood') el('rect', { x: 203, y: y - 7, width: 114, height: 14, rx: 3, fill: 'var(--warn)', opacity: 0.55, stroke: 'var(--warn)' }, g);
+    else if (k === 'plast') el('rect', { x: 203, y: y - 7, width: 114, height: 14, rx: 3, fill: 'var(--c3)', opacity: 0.5, stroke: 'var(--c3)' }, g);
+    else if (k === 'graph') el('rect', { x: 203, y: y - 2.5, width: 114, height: 5, rx: 1, fill: 'var(--line)' }, g);
+    else if (k === 'glass') el('rect', { x: 203, y: y - 6, width: 114, height: 12, rx: 6, fill: 'var(--soft-accent)', stroke: 'var(--accent)', 'stroke-width': 1.5 }, g);
+    txt(g, 260, y - 16, MAT[k].name, 'lbl', 'middle');
+    txt(g, 260, y + 28, 'Prüfstrecke', 'val', 'middle');
+  }
+
+  function draw() {
+    var W = $('wires'), P = $('parts'); W.innerHTML = ''; P.innerHTML = '';
+    var r = solve(), wires = [], dotsAt = [];
+    // Batterie und Grundleitungen
+    wires.push('M60 165 V70 H110', 'M290 70 H450 V100', 'M450 260 V290 H193', 'M327 290 H450', 'M193 290 H60 V185');
+    el('line', { x1: 40, y1: 165, x2: 80, y2: 165, stroke: 'var(--line)', 'stroke-width': 3 }, P);
+    el('line', { x1: 50, y1: 185, x2: 70, y2: 185, stroke: 'var(--line)', 'stroke-width': 7 }, P);
+    txt(P, 90, 165, '+', 'pole p'); txt(P, 90, 197, '−', 'pole n');
+    txt(P, 116, 190, '4,5 V', 'val');
+    txt(P, 116, 172, 'Batterie', 'val');
+    // Schalter
+    if (S.sw === 'and') {
+      wires.push('M110 70 H130', 'M170 70 H230', 'M270 70 H290');
+      sw(P, 's1', 130, 170, 70, S.s1, 'S1', 98);
+      sw(P, 's2', 230, 270, 70, S.s2, 'S2', 98);
+      dotsAt.push({ d: 'M60 165 V70 H450 V100', i: r.I });
+    } else {
+      wires.push('M110 70 V36 H180 M220 36 H290 V70', 'M110 70 V104 H180 M220 104 H290 V70');
+      el('circle', { class: 'contact', cx: 110, cy: 70, r: 3.5 }, P); el('circle', { class: 'contact', cx: 290, cy: 70, r: 3.5 }, P);
+      sw(P, 's1', 180, 220, 36, S.s1, 'S1', 62);
+      sw(P, 's2', 180, 220, 104, S.s2, 'S2', 130);
+      dotsAt.push({ d: 'M60 165 V70 H110', i: r.I }, { d: 'M110 70 V36 H290 V70', i: r.Ia }, { d: 'M110 70 V104 H290 V70', i: r.Ib }, { d: 'M290 70 H450 V100', i: r.I });
+    }
+    // Lampen
+    if (S.lamps === 'ser') {
+      wires.push('M450 100 V122', 'M450 158 V202', 'M450 238 V260');
+      lamp(P, 'in1', 450, 140, S.in1, r.b1, 'L1', 420, 'end');
+      lamp(P, 'in2', 450, 220, S.in2, r.b2, 'L2', 420, 'end');
+      dotsAt.push({ d: 'M450 100 V260', i: r.I });
+    } else {
+      wires.push('M450 100 H410 V162 M410 198 V260 H450', 'M450 100 H490 V162 M490 198 V260 H450');
+      el('circle', { class: 'contact', cx: 450, cy: 100, r: 3.5 }, P); el('circle', { class: 'contact', cx: 450, cy: 260, r: 3.5 }, P);
+      lamp(P, 'in1', 410, 180, S.in1, r.b1, 'L1', 378, 'end');
+      lamp(P, 'in2', 490, 180, S.in2, r.b2, 'L2', 522, 'start');
+      dotsAt.push({ d: 'M450 100 H410 V260 H450', i: r.I1 }, { d: 'M450 100 H490 V260 H450', i: r.I2 });
+    }
+    dotsAt.push({ d: 'M450 260 V290 H60 V185', i: r.I });
+    wires.forEach(function (d) { el('path', { class: 'wire', d: d }, W); });
+    gapItem(P);
+    $('svgTitle').textContent = 'Schaltplan: Batterie, Schalter S1 und S2 ' + (S.sw === 'and' ? 'in Reihe (UND)' : 'parallel (ODER)') + ', Lampen L1 und L2 ' + (S.lamps === 'ser' ? 'in Reihe' : 'parallel') + ', Prüfstrecke mit ' + MAT[S.gap].name;
+    buildDots(dotsAt);
+    return r;
+  }
+
+  function buildDots(list) {
+    var g = $('dots'); g.innerHTML = ''; segs = [];
+    var Iref = U / RL;
+    list.forEach(function (s) {
+      if (s.i <= 1e-6) return;
+      var path = el('path', { d: s.d, fill: 'none', stroke: 'none' }, g);
+      var len = path.getTotalLength(), n = Math.max(2, Math.round(len / 30)), dots = [];
+      for (var k = 0; k < n; k++) dots.push(el('circle', { r: 3.6, class: 'flow', opacity: 0.9 }, g));
+      segs.push({ path: path, len: len, n: n, dots: dots, v: 110 * s.i / Iref, off: 0 });
+    });
+    place();
+  }
+  function place() {
+    segs.forEach(function (s) {
+      var gap = s.len / s.n;
+      s.dots.forEach(function (d, k) { var p = s.path.getPointAtLength((k * gap + s.off) % s.len); d.setAttribute('cx', p.x.toFixed(1)); d.setAttribute('cy', p.y.toFixed(1)); });
+    });
+  }
+
+  // ------------------------------------------------------------ Anzeigen und Ziele
+  function reason(r) {
+    if (!r.swOk) return S.sw === 'and' ? 'In der UND-Schaltung ist ein Schalter offen. Beide müssen geschlossen sein.' : 'Beide Schalter sind offen.';
+    if (!r.lampOk) return S.lamps === 'ser' ? 'Eine Lampe ist herausgedreht. In der Reihenschaltung ist damit der einzige Stromweg unterbrochen.' : 'Beide Lampen sind herausgedreht.';
+    if (!r.gapOk) return S.gap === 'air' ? 'Die Prüfstrecke ist leer. Luft ist ein Isolator.' : MAT[S.gap].name + ' lässt keinen Strom durch. Es ist ein Isolator.';
+    return '';
+  }
+
+  function update() {
+    var r = draw();
+    var on = r.I > 0, l1 = level(r.b1, S.in1), l2 = level(r.b2, S.in2), st;
+    $('rC').textContent = on ? 'ja' : 'nein';
+    $('rL1').textContent = l1; $('rL2').textContent = l2;
+    if (!on) st = 'Kein Strom: ' + reason(r);
+    else if (S.lamps === 'par' && (!S.in1 || !S.in2)) st = 'Lampe ' + (S.in1 ? 'L1' : 'L2') + ' leuchtet weiter, denn in der Parallelschaltung hat sie ihren eigenen Stromweg.';
+    else st = 'Der Stromkreis ist geschlossen. L1 leuchtet ' + l1 + ', L2 leuchtet ' + l2 + '.' + (S.gap === 'graph' ? ' Graphit leitet, aber schlechter als Metall.' : TEST.indexOf(S.gap) >= 0 ? ' ' + MAT[S.gap].name + ' ist ein Leiter.' : '');
+    if ($('status').textContent !== st) $('status').textContent = st;
+    // Bedienelemente
+    $('lSer').setAttribute('aria-pressed', S.lamps === 'ser'); $('lPar').setAttribute('aria-pressed', S.lamps === 'par');
+    $('sAnd').setAttribute('aria-pressed', S.sw === 'and'); $('sOr').setAttribute('aria-pressed', S.sw === 'or');
+    $('bS1').setAttribute('aria-pressed', S.s1); $('bS1').textContent = 'S1: ' + (S.s1 ? 'geschlossen' : 'offen');
+    $('bS2').setAttribute('aria-pressed', S.s2); $('bS2').textContent = 'S2: ' + (S.s2 ? 'geschlossen' : 'offen');
+    $('bL1').textContent = 'Lampe L1 ' + (S.in1 ? 'herausdrehen' : 'eindrehen');
+    $('bL2').textContent = 'Lampe L2 ' + (S.in2 ? 'herausdrehen' : 'eindrehen');
+    ORDER.forEach(function (k) { $('m_' + k).setAttribute('aria-pressed', S.gap === k); });
+    // Ziele
+    if (r.lampOk && r.gapOk) {
+      if (S.sw === 'and') { if (S.s1 !== S.s2) seen.andOne = true; if (S.s1 && S.s2) seen.andBoth = true; }
+      if (S.sw === 'or' && on) { if (S.s1 && !S.s2) seen.orA = true; if (S.s2 && !S.s1) seen.orB = true; }
+    }
+    if (seen.andOne && seen.andBoth) LK.reach('and');
+    if (seen.orA && seen.orB) LK.reach('or');
+    if (S.lamps === 'ser' && S.in1 && S.in2 && on) seen.serLit = true;
+    if (seen.serLit && S.lamps === 'ser' && S.in1 !== S.in2 && r.swOk && r.gapOk) LK.reach('serOut');
+    if (r.swOk && r.lampOk && TEST.indexOf(S.gap) >= 0) {
+      seen.tested[S.gap] = true;
+      if (TEST.every(function (k) { return seen.tested[k]; })) LK.reach('cond');
+    }
+  }
+
+  function toggle(key) {
+    var a = document.activeElement, refocus = a && a.getAttribute && a.getAttribute('data-key') === key;
+    S[key] = !S[key]; update();
+    if (refocus) { var n = document.querySelector('[data-key="' + key + '"]'); if (n && n.focus) n.focus(); }
+  }
+
+  // ------------------------------------------------------------ Bedienung
+  var picks = $('picks');
+  ORDER.forEach(function (k) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.id = 'm_' + k; b.textContent = MAT[k].name; b.setAttribute('aria-pressed', 'false');
+    b.onclick = function () { S.gap = k; update(); };
+    picks.appendChild(b);
+  });
+  $('lSer').onclick = function () { S.lamps = 'ser'; update(); };
+  $('lPar').onclick = function () { S.lamps = 'par'; update(); };
+  $('sAnd').onclick = function () { S.sw = 'and'; update(); };
+  $('sOr').onclick = function () { S.sw = 'or'; update(); };
+  $('bS1').onclick = function () { toggle('s1'); };
+  $('bS2').onclick = function () { toggle('s2'); };
+  $('bL1').onclick = function () { toggle('in1'); };
+  $('bL2').onclick = function () { toggle('in2'); };
+
+  var last = performance.now();
+  function frame(t) {
+    var dt = Math.min(0.05, (t - last) / 1000); last = t;
+    if (!reduced) {
+      segs.forEach(function (s) { s.off = (s.off + dt * s.v) % (s.len / s.n); });
+      place();
+    }
+    requestAnimationFrame(frame);
+  }
+  update();
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

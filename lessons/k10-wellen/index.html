@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wellen: Querwelle, Längswelle und Interferenz</title>
+<link rel="stylesheet" href="../../static/lesson-kit.css">
+<style>
+  .rest { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; }
+  .string { fill: none; stroke: var(--muted); stroke-width: 1.4; }
+  .pt { fill: var(--accent); }
+  .layer { stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; }
+  .mark { fill: var(--pos); stroke: var(--line); stroke-width: 1.2; }
+  .markline { stroke: var(--pos); stroke-width: 3.4; stroke-linecap: round; }
+  .exciter { fill: var(--card); stroke: var(--line); stroke-width: 1.6; }
+  .lam { stroke: var(--ok); stroke-width: 2; fill: none; }
+  .lamguide { stroke: var(--ok); stroke-width: 1; stroke-dasharray: 3 3; }
+  .lamtxt { fill: var(--ok) !important; font-size: 13px; font-weight: 700; }
+  .w1 { fill: none; stroke: var(--accent); stroke-width: 2.2; }
+  .w2 { fill: none; stroke: var(--pos); stroke-width: 2.2; }
+  .ws { fill: none; stroke: var(--c3); stroke-width: 2.8; }
+  .probe { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 3; }
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: .82rem; margin-top: 6px; }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+  @media (max-width: 500px) { svg .val { font-size: 15px; } svg .lbl, .lamtxt { font-size: 16px; } }
+</style>
+</head>
+<body>
+<h1>Wellen: Querwelle, Längswelle und Interferenz</h1>
+<p class="muted small">Links schwingt ein Erreger. Die gekoppelten Teilchen geben die Schwingung weiter, so breitet sich eine Welle aus. Beobachte das rot markierte Teilchen genau.</p>
+
+<div class="lk-grid">
+  <div>
+    <div class="lk-card" id="waveCard">
+      <h2 id="waveTitle">Querwelle</h2>
+      <svg id="wave" viewBox="0 0 520 240" role="img" aria-labelledby="w-title">
+        <title id="w-title">Kette aus 61 gekoppelten Teilchen über 2 m, links der Erreger</title>
+      </svg>
+      <div class="legend"><span><i style="background:var(--accent)"></i>Teilchen</span><span><i style="background:var(--pos)"></i>markiertes Teilchen</span><span><i style="background:var(--ok)"></i>Wellenlänge <span class="f">λ</span></span></div>
+      <p id="waveNote" class="small muted"></p>
+    </div>
+    <div class="lk-card" id="intCard" hidden>
+      <h2>Interferenz: Überlagerung zweier Wellen</h2>
+      <svg id="inter" viewBox="0 0 520 300" role="img" aria-label="Welle 1, Welle 2 und ihre Summe untereinander, mit einer Messstelle bei 1 m"></svg>
+      <p class="small muted">Beide Wellen laufen am selben Ort. Damit man sie getrennt sieht, sind sie hier untereinander gezeichnet. An jeder Stelle addieren sich die Auslenkungen, zum Beispiel an der gestrichelten Messstelle.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="lk-card">
+      <h2>Einstellungen</h2>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Ansicht wählen">
+          <button type="button" id="mWave" aria-pressed="true">Welle</button>
+          <button type="button" id="mInt" aria-pressed="false">Interferenz</button>
+        </div>
+      </div>
+      <div class="row" id="typeRow">
+        <div class="seg" role="group" aria-label="Wellenart wählen">
+          <button type="button" id="tQuer" aria-pressed="true">Querwelle</button>
+          <button type="button" id="tLaengs" aria-pressed="false">Längswelle</button>
+        </div>
+      </div>
+      <label class="ctrl"><span>Frequenz <span class="f">f</span> <output id="oF"></output></span>
+        <input type="range" id="sF" min="0.5" max="2" step="0.1" value="1"></label>
+      <label class="ctrl"><span>Ausbreitungsgeschwindigkeit <span class="f">c</span> <output id="oC"></output></span>
+        <input type="range" id="sC" min="0.5" max="2.5" step="0.1" value="1"></label>
+      <label class="ctrl" id="phCtrl" hidden><span>Phasenverschiebung <span class="f">Δφ</span> <output id="oPh"></output></span>
+        <input type="range" id="sPh" min="0" max="360" step="15" value="90"></label>
+      <div class="row">
+        <button type="button" id="bRun" class="primary">Pause</button>
+        <button type="button" id="bSlow" aria-pressed="false">Zeitlupe</button>
+        <button type="button" id="bReset">Neu starten</button>
+      </div>
+      <div class="readouts">
+        <div class="readout"><span>Wellenlänge <span class="f">λ = c / f</span></span><b id="rL">–</b></div>
+        <div class="readout"><span>Periodendauer <span class="f">T = 1 / f</span></span><b id="rT">–</b></div>
+        <div class="readout" id="rAbox" hidden><span>Amplitude der Summe</span><b id="rA">–</b></div>
+      </div>
+      <p id="status" class="small muted" aria-live="polite"></p>
+    </div>
+
+    <div class="lk-card tasks">
+      <h2>Entdecke selbst <span class="small muted" data-task-count></span></h2>
+      <div class="task" data-goal="lam"><p class="task-q">Stelle eine Wellenlänge von <span class="f">λ</span> = 0,5 m ein.</p></div>
+      <div class="task">
+        <p class="task-q">Was macht das rot markierte Teilchen, während die Welle durchläuft?</p>
+        <div class="choices">
+          <button type="button" data-fb="Beobachte die gestrichelte Linie: Das Teilchen kommt immer wieder an dieselbe Stelle zurück.">Es wandert mit der Welle nach rechts.</button>
+          <button type="button" data-ok data-fb="Richtig: Die Teilchen schwingen nur um ihre Ruhelage. Die Welle transportiert Energie, aber keine Materie.">Es schwingt nur um seine Ruhelage.</button>
+          <button type="button" data-fb="Das Teilchen bewegt sich, sobald die Welle angekommen ist. Schau noch einmal hin.">Es bleibt die ganze Zeit in Ruhe.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Schalte auf Längswelle. Schall in Luft besteht aus Verdichtungen und Verdünnungen. Was für eine Welle ist Schall?</p>
+        <div class="choices">
+          <button type="button" data-ok data-fb="Genau: Die Luftteilchen schwingen in Ausbreitungsrichtung hin und her. Dabei entstehen Verdichtungen und Verdünnungen.">eine Längswelle</button>
+          <button type="button" data-fb="Bei einer Querwelle schwingen die Teilchen senkrecht zur Ausbreitung. Wo entstehen Verdichtungen?">eine Querwelle</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Verdopple die Frequenz bei gleicher Ausbreitungsgeschwindigkeit. Was passiert mit der Wellenlänge?</p>
+        <div class="choices">
+          <button type="button" data-fb="Probiere es aus: z. B. f = 1 Hz und f = 2 Hz bei c = 1 m/s.">Sie verdoppelt sich.</button>
+          <button type="button" data-ok data-fb="Richtig: λ = c / f. Doppelte Frequenz bei gleichem c ergibt halbe Wellenlänge.">Sie halbiert sich.</button>
+          <button type="button" data-fb="Schau auf die grüne Markierung, wenn du die Frequenz änderst.">Sie bleibt gleich.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task" data-goal="aus"><p class="task-q">Wechsle zu „Interferenz“ und stelle die Phasenverschiebung so ein, dass sich die Wellen auslöschen.</p></div>
+      <div class="task">
+        <p class="task-q">Bei welcher Phasenverschiebung verstärken sich die beiden Wellen am meisten?</p>
+        <div class="choices">
+          <button type="button" data-ok data-fb="Genau: Bei 0° (oder 360°) trifft Berg auf Berg. Die Summe hat die doppelte Amplitude (konstruktive Interferenz).">bei 0°</button>
+          <button type="button" data-fb="Probiere es aus und beobachte die Amplitude der Summe.">bei 90°</button>
+          <button type="button" data-fb="Bei 180° trifft Berg auf Tal. Was passiert dann?">bei 180°</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="all-done">Alles entdeckt! Weiter geht es mit den Übungen.</div>
+    </div>
+  </div>
+</div>
+<div class="lk-card" style="margin-top:14px">
+  <p class="small muted" style="margin:0">Vereinfachungen: Die Ausschläge sind zur besseren Sichtbarkeit groß gezeichnet (bei der Längswelle an die Wellenlänge angepasst, damit sich die Teilchen nicht überholen), und die Welle wird am rechten Ende nicht reflektiert. Wenn du <span class="f">c</span> änderst, startet die Welle neu, weil sich dafür das Material ändern müsste.</p>
+</div>
+
+<script src="../../static/lesson-kit.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var S = { mode: 'wave', type: 'quer', f: 1, c: 1, ph: 90, running: !reduce, slow: false };
+  var L = 2, N = 61, MARK = 30, H = 1 / 500;                    // Medium 2 m, Zeitschritt 2 ms
+  var X0 = 40, X1 = 500, K = (X1 - X0) / L, Y = 110;
+  var AQ = 0.15;                                                // Amplitude der Querwelle in m
+  function AL() { return Math.min(0.07, 0.12 * S.c / S.f); }    // Längswelle: so groß, dass sich die Teilchen nicht überholen
+  var sim = { t: 0, phi: 0, hist: [0], acc: 0 }, tI = 0;
+
+  function el(tag, a, parent) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); parent.appendChild(e); return e; }
+  function m(x, d) { return LK.fmt(x, d === undefined ? 2 : d) + ' m'; }
+
+  // ---------------------------------------------- Welle: Aufbau
+  var svg = $('wave');
+  el('text', { x: X1, y: 22, class: 'val', 'text-anchor': 'end' }, svg).textContent = 'Ausbreitungsrichtung →';
+  var restLine = el('line', { class: 'rest', x1: X0, x2: X1, y1: Y, y2: Y }, svg);
+  var markGuide = el('line', { class: 'rest', x1: X0 + MARK * L / (N - 1) * K, x2: X0 + MARK * L / (N - 1) * K, y1: 60, y2: 160 }, svg);
+  var exc = el('rect', { class: 'exciter', x: 16, y: Y - 10, width: 20, height: 20, rx: 3 }, svg);
+  el('text', { x: 4, y: 186, class: 'val' }, svg).textContent = 'Erreger';
+  var str = el('polyline', { class: 'string', points: '' }, svg);
+  var gP = el('g', {}, svg), dots = [], lines = [];
+  for (var i = 0; i < N; i++) {
+    lines.push(el('line', { class: i === MARK ? 'markline' : 'layer', y1: Y - 34, y2: Y + 34 }, gP));
+    dots.push(el('circle', { class: i === MARK ? 'mark' : 'pt', r: i === MARK ? 6.5 : 4 }, gP));
+  }
+  var gLam = el('g', {}, svg);
+  var lamG1 = el('line', { class: 'lamguide' }, gLam), lamG2 = el('line', { class: 'lamguide' }, gLam);
+  var lamPath = el('path', { class: 'lam' }, gLam);
+  var lamTxt = el('text', { class: 'lamtxt', 'text-anchor': 'middle' }, gLam);
+  // Ortsachse
+  el('line', { class: 'axis', x1: X0, x2: X1, y1: 205, y2: 205 }, svg);
+  [0, 0.5, 1, 1.5, 2].forEach(function (s) {
+    el('line', { class: 'axis', x1: X0 + s * K, x2: X0 + s * K, y1: 201, y2: 209 }, svg);
+    el('text', { class: 'val', x: X0 + s * K, y: 225, 'text-anchor': 'middle' }, svg).textContent = LK.fmt(s, s % 1 ? 1 : 0);
+  });
+  el('text', { class: 'lbl', x: X1, y: 239, 'text-anchor': 'end' }, svg).textContent = 's in m';
+
+  // Phase des Erregers zur Zeit t (aus der gespeicherten Vorgeschichte)
+  function phaseAt(t) {
+    if (t < 0) return null;
+    var k = t / H, i = Math.floor(k), h = sim.hist;
+    if (i >= h.length - 1) return h[h.length - 1];
+    return h[i] + (h[i + 1] - h[i]) * (k - i);
+  }
+  function advanceWave(dt) {
+    sim.acc += dt;
+    while (sim.acc >= H) { sim.acc -= H; sim.phi += 2 * Math.PI * S.f * H; sim.t += H; sim.hist.push(sim.phi); }
+    if (sim.hist.length > 6 / H) {                                 // ältere Werte werden nicht mehr gebraucht (L / c ≤ 4 s)
+      var drop = sim.hist.length - Math.round(5 / H);
+      sim.hist.splice(0, drop); sim.t0 = (sim.t0 || 0) + drop * H;
+    }
+  }
+  function phaseRet(x) { return phaseAt(sim.t - x / S.c - (sim.t0 || 0)); }
+
+  function drawWave() {
+    var quer = S.type === 'quer', pts = [];
+    var pe = sim.phi, ye = Math.sin(pe);
+    exc.setAttribute('y', Y - 10 - (quer ? ye * AQ * K : 0));
+    exc.setAttribute('x', 16 + (quer ? 0 : ye * AL() * K));
+    for (var i = 0; i < N; i++) {
+      var x = i * L / (N - 1), p = phaseRet(x), u = p === null ? 0 : Math.sin(p);
+      var px = X0 + x * K + (quer ? 0 : u * AL() * K), py = Y - (quer ? u * AQ * K : 0);
+      dots[i].setAttribute('cx', px); dots[i].setAttribute('cy', py);
+      dots[i].toggleAttribute('hidden', !quer);
+      lines[i].setAttribute('x1', px); lines[i].setAttribute('x2', px);
+      lines[i].toggleAttribute('hidden', quer);
+      pts.push(px.toFixed(1) + ',' + py.toFixed(1));
+    }
+    str.setAttribute('points', pts.join(' '));
+    str.toggleAttribute('hidden', !quer);
+    restLine.toggleAttribute('hidden', !quer);
+    // Wellenlänge: Abstand zweier benachbarter Wellenberge (quer) bzw. Verdichtungen (längs)
+    var target = quer ? Math.PI / 2 : 0, found = [], prev = null, reach = Math.min(L, S.c * sim.t);
+    for (var j = 0; j <= 800; j++) {
+      var xs = j * L / 800;
+      if (xs > reach) break;
+      var q = phaseRet(xs);
+      if (q === null) break;
+      var n = Math.floor((q - target) / (2 * Math.PI));
+      if (prev !== null && n !== prev) found.push(xs - L / 1600);
+      prev = n;
+      if (found.length === 2) break;
+    }
+    var show = found.length === 2;
+    gLam.toggleAttribute('hidden', !show);
+    if (show) {
+      var a = X0 + found[0] * K, b = X0 + found[1] * K, yb = 190;
+      var top = quer ? Y - AQ * K : Y + 36;
+      lamG1.setAttribute('x1', a); lamG1.setAttribute('x2', a); lamG1.setAttribute('y1', top); lamG1.setAttribute('y2', yb);
+      lamG2.setAttribute('x1', b); lamG2.setAttribute('x2', b); lamG2.setAttribute('y1', top); lamG2.setAttribute('y2', yb);
+      lamPath.setAttribute('d', 'M' + a + ' ' + (yb - 5) + ' V' + (yb + 5) + ' M' + a + ' ' + yb + ' H' + b + ' M' + b + ' ' + (yb - 5) + ' V' + (yb + 5));
+      var mid = Math.max(X0 + 40, Math.min(X1 - 40, (a + b) / 2));
+      lamTxt.setAttribute('x', mid); lamTxt.setAttribute('y', yb - 7);
+      lamTxt.textContent = 'λ = ' + m(found[1] - found[0]);
+    }
+  }
+
+  // ---------------------------------------------- Interferenz
+  var isvg = $('inter'), IX0 = 78, IX1 = 505, IK = (IX1 - IX0) / L, rows = [50, 130, 230], IA = 26;
+  [['Welle 1', 0], ['Welle 2', 1], ['Summe', 2]].forEach(function (r) {
+    el('line', { class: 'rest', x1: IX0, x2: IX1, y1: rows[r[1]], y2: rows[r[1]] }, isvg);
+    el('text', { class: 'lbl', x: 4, y: rows[r[1]] + 5 }, isvg).textContent = r[0];
+  });
+  el('text', { class: 'val', x: 4, y: rows[2] + 22 }, isvg).textContent = '(1 + 2)';
+  var probeX = IX0 + 1 * IK;
+  el('line', { class: 'probe', x1: probeX, x2: probeX, y1: 14, y2: 292 }, isvg);
+  var c1 = el('polyline', { class: 'w1' }, isvg), c2 = el('polyline', { class: 'w2' }, isvg), cs = el('polyline', { class: 'ws' }, isvg);
+  var d1 = el('circle', { r: 5, fill: 'var(--accent)' }, isvg), d2 = el('circle', { r: 5, fill: 'var(--pos)' }, isvg), ds = el('circle', { r: 5.5, fill: 'var(--c3)' }, isvg);
+  function drawInter() {
+    var k = 2 * Math.PI * S.f / S.c, w = 2 * Math.PI * S.f, dp = S.ph * Math.PI / 180, p1 = [], p2 = [], ps = [];
+    for (var j = 0; j <= 200; j++) {
+      var x = j * L / 200, a = Math.sin(w * tI - k * x), b = Math.sin(w * tI - k * x - dp), px = (IX0 + x * IK).toFixed(1);
+      p1.push(px + ',' + (rows[0] - a * IA).toFixed(1));
+      p2.push(px + ',' + (rows[1] - b * IA).toFixed(1));
+      ps.push(px + ',' + (rows[2] - (a + b) * IA).toFixed(1));
+    }
+    c1.setAttribute('points', p1.join(' ')); c2.setAttribute('points', p2.join(' ')); cs.setAttribute('points', ps.join(' '));
+    var a1 = Math.sin(w * tI - k), b1 = Math.sin(w * tI - k - dp);
+    d1.setAttribute('cx', probeX); d1.setAttribute('cy', rows[0] - a1 * IA);
+    d2.setAttribute('cx', probeX); d2.setAttribute('cy', rows[1] - b1 * IA);
+    ds.setAttribute('cx', probeX); ds.setAttribute('cy', rows[2] - (a1 + b1) * IA);
+  }
+
+  // ---------------------------------------------- Anzeige und Bedienung
+  function sumAmp() { return Math.abs(2 * Math.cos(S.ph * Math.PI / 360)); }
+  function update() {
+    var lam = S.c / S.f, wave = S.mode === 'wave';
+    $('oF').textContent = LK.fmt(S.f, 1) + ' Hz';
+    $('oC').textContent = LK.fmt(S.c, 1) + ' m/s';
+    $('oPh').textContent = S.ph + '°';
+    $('rL').textContent = m(lam);
+    $('rT').textContent = LK.fmt(1 / S.f, 2) + ' s';
+    $('rA').textContent = LK.fmt(sumAmp(), 2) + ' · ŷ';
+    $('waveCard').hidden = !wave; $('intCard').hidden = wave;
+    $('typeRow').hidden = !wave; $('phCtrl').hidden = wave; $('rAbox').hidden = wave;
+    $('mWave').setAttribute('aria-pressed', wave); $('mInt').setAttribute('aria-pressed', !wave);
+    $('tQuer').setAttribute('aria-pressed', S.type === 'quer'); $('tLaengs').setAttribute('aria-pressed', S.type !== 'quer');
+    $('waveTitle').textContent = S.type === 'quer' ? 'Querwelle' : 'Längswelle';
+    $('waveNote').textContent = S.type === 'quer'
+      ? 'Querwelle: Die Teilchen schwingen senkrecht zur Ausbreitungsrichtung (hier auf und ab).'
+      : 'Längswelle: Die Teilchen schwingen in Ausbreitungsrichtung hin und her. Es entstehen Verdichtungen und Verdünnungen. Die grüne Markierung reicht von Verdichtung zu Verdichtung.';
+    $('bSlow').setAttribute('aria-pressed', S.slow);
+    $('bRun').textContent = S.running ? 'Pause' : 'Start';
+    if (wave && Math.abs(lam - 0.5) < 1e-6) LK.reach('lam');
+    if (!wave && (S.ph === 180)) LK.reach('aus');
+    if (wave) drawWave(); else drawInter();
+  }
+  function restart() { sim = { t: 0, phi: 0, hist: [0], acc: 0, t0: 0 }; update(); }
+
+  var lastF = 1;
+  $('sF').oninput = function () {
+    S.f = Number(this.value);
+    if (S.mode === 'wave') $('status').textContent = S.f !== lastF ? 'Neue Frequenz: Die Änderung wandert vom Erreger aus durch die Kette.' : '';
+    lastF = S.f; update();
+  };
+  $('sC').oninput = function () { S.c = Number(this.value); restart(); };
+  $('sPh').oninput = function () {
+    S.ph = Number(this.value); update();
+    var a = sumAmp();
+    $('status').textContent = a < 0.01 ? 'Berg trifft auf Tal: Die Wellen löschen sich vollständig aus (destruktive Interferenz).'
+      : a > 1.99 ? 'Berg trifft auf Berg: Die Wellen verstärken sich zur doppelten Amplitude (konstruktive Interferenz).' : '';
+  };
+  $('mWave').onclick = function () { S.mode = 'wave'; $('status').textContent = ''; update(); };
+  $('mInt').onclick = function () { S.mode = 'int'; $('status').textContent = ''; update(); };
+  $('tQuer').onclick = function () { S.type = 'quer'; update(); };
+  $('tLaengs').onclick = function () { S.type = 'laengs'; update(); };
+  $('bRun').onclick = function () { S.running = !S.running; update(); };
+  $('bSlow').onclick = function () { S.slow = !S.slow; update(); };
+  $('bReset').onclick = function () { restart(); tI = 0; S.running = true; update(); };
+
+  var last = performance.now();
+  function frame(now) {
+    var dt = Math.min(0.05, (now - last) / 1000); last = now;
+    if (S.running) {
+      var d = dt * (S.slow ? 0.25 : 1);
+      advanceWave(d); tI += d;
+      if (S.mode === 'wave') drawWave(); else drawInter();
+    }
+    requestAnimationFrame(frame);
+  }
+  restart();
+  if (reduce) $('status').textContent = 'Die Animation ist pausiert. Starte sie mit „Start“.';
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

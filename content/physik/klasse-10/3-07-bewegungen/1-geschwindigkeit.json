@@ -1,0 +1,88 @@
+{
+  "id": "k10-geschwindigkeit",
+  "titel": "Bewegung und Geschwindigkeit",
+  "kurz": "Bezugssystem, Bewegungsarten und der Unterschied zwischen Durchschnitts- und Momentangeschwindigkeit.",
+  "reihenfolge": 1,
+  "lernziele": [
+    { "id": "lz1", "niveau": "G", "text": "Bewegungen in einem gewählten Bezugssystem beschreiben" },
+    { "id": "lz2", "niveau": "G", "text": "Bewegungsarten unterscheiden und reale Bewegungen zuordnen" },
+    { "id": "lz3", "niveau": "G", "text": "Die Geschwindigkeit `v = s / t` berechnen und Einheiten umrechnen" },
+    { "id": "lz4", "niveau": "G", "text": "Momentan- und Durchschnittsgeschwindigkeit unterscheiden" }
+  ],
+  "verstehen": {
+    "einstieg": "Du sitzt im fahrenden Zug. Bewegst du dich oder nicht?",
+    "abschnitte": [
+      {
+        "titel": "Bezugssystem",
+        "text": "Ob und wie sich ein Körper bewegt, hängt davon ab, **von wo aus** man ihn betrachtet. Diesen Standpunkt nennt man **Bezugssystem**.\n\nIm Zug sitzend bist du **relativ zum Zug** in Ruhe, **relativ zum Bahnsteig** bewegst du dich mit 120 km/h. Beide Beschreibungen sind richtig. Man muss nur sagen, auf welches Bezugssystem man sich bezieht. Meist ist es die Erdoberfläche."
+      },
+      {
+        "titel": "Bewegungsarten",
+        "text": "Nach der **Bahn**: geradlinig, kreisförmig, krummlinig.\nNach dem **Tempo**: **gleichförmig** (Geschwindigkeit bleibt gleich) oder **beschleunigt** (Geschwindigkeit ändert sich: schneller, langsamer oder Richtungsänderung).\n\nEin Auto auf der Autobahn mit Tempomat fährt geradlinig gleichförmig. Ein Karussell dreht sich kreisförmig. Ein Apfel fällt geradlinig beschleunigt."
+      },
+      {
+        "titel": "Die Geschwindigkeit",
+        "text": "Die **Geschwindigkeit** gibt an, welchen Weg ein Körper in einer bestimmten Zeit zurücklegt: `v = s / t`.\n\nEinheiten: m/s und km/h. Umrechnung: 1 m/s = 3,6 km/h. Von km/h nach m/s teilt man also durch 3,6.\n\nDie **Durchschnittsgeschwindigkeit** ist der Gesamtweg geteilt durch die Gesamtzeit. Die **Momentangeschwindigkeit** ist die Geschwindigkeit in einem bestimmten Augenblick, so wie sie der Tacho anzeigt. Man misst sie, indem man Weg und Zeit über einen sehr kurzen Abschnitt bestimmt."
+      }
+    ],
+    "formeln": [
+      { "formel": "v = \\frac{s}{t}", "bedeutung": "Geschwindigkeit `v` in m/s, Weg `s` in m, Zeit `t` in s" },
+      { "formel": "1 \\frac{m}{s} = 3,6 \\frac{km}{h}", "bedeutung": "Umrechnung: km/h ÷ 3,6 = m/s" }
+    ],
+    "merksatz": "Bewegung ist immer relativ zu einem Bezugssystem. Geschwindigkeit ist Weg pro Zeit: `v = s / t`. 1 m/s = 3,6 km/h.",
+    "alltag": "Bei der Abschnittskontrolle (Section Control) wird die Durchschnittsgeschwindigkeit über mehrere Kilometer gemessen. Kurz vor dem Blitzer zu bremsen hilft dort nicht."
+  },
+  "interaktiv": ["k10-bewegung"],
+  "uebungen": [
+    { "id": "k10-ge-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Ein Fahrgast sitzt in einem fahrenden Bus. In welchem Bezugssystem ist er in Ruhe?",
+      "optionen": [
+        { "text": "Im Bezugssystem Bus", "richtig": true },
+        { "text": "Im Bezugssystem Straße", "feedback": "Relativ zur Straße bewegt er sich mit dem Bus mit." },
+        { "text": "In keinem, er bewegt sich immer", "feedback": "Ob sich etwas bewegt, hängt vom Bezugssystem ab." }
+      ],
+      "erklaerung": "Relativ zum Bus ändert er seinen Ort nicht. Relativ zur Straße schon." },
+    { "id": "k10-ge-02", "typ": "zahl", "schwierigkeit": "leicht", "lernziel": "lz3",
+      "frage": "Ein Auto fährt 120 km in 2 Stunden. Wie groß ist seine Durchschnittsgeschwindigkeit?",
+      "gegeben": "`s = 120 km`, `t = 2 h`", "gesucht": "`v`", "gesuchtSymbol": "v",
+      "loesung": 60, "einheit": "km/h", "alternativEinheiten": { "m/s": 3.6 },
+      "rechenweg": ["`v = \\frac{s}{t}`", "`v = \\frac{120 km}{2 h} = 60 km/h`", "In m/s: `60 : 3,6 ≈ 16,7 m/s`"],
+      "erklaerung": "Das ist die Durchschnittsgeschwindigkeit. Zwischendurch kann das Auto schneller oder langsamer gewesen sein." },
+    { "id": "k10-ge-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Rechne 108 km/h in m/s um.",
+      "gegeben": "`v = 108 km/h`", "gesucht": "`v` in m/s", "gesuchtSymbol": "v",
+      "loesung": 30, "einheit": "m/s",
+      "rechenweg": ["`108 km/h = \\frac{108 000 m}{3600 s}`", "`= 30 m/s` (oder kurz: 108 : 3,6 = 30)"],
+      "erklaerung": "Bei 108 km/h legt ein Auto in jeder Sekunde 30 m zurück, das ist etwa die Länge von zweieinhalb Linienbussen." },
+    { "id": "k10-ge-04", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Ordne jeder Bewegung die passende Bewegungsart zu.",
+      "paare": [
+        { "links": "Ein Zug fährt mit konstant 160 km/h auf gerader Strecke.", "rechts": "geradlinig gleichförmig" },
+        { "links": "Ein Stein fällt von einer Brücke.", "rechts": "geradlinig beschleunigt" },
+        { "links": "Ein Sitz eines Riesenrads dreht sich gleichmäßig.", "rechts": "kreisförmig" }
+      ],
+      "extraRechts": ["Ruhe"],
+      "erklaerung": "Auch eine gleichmäßige Kreisbewegung ist streng genommen beschleunigt, weil sich die Richtung ständig ändert." },
+    { "id": "k10-ge-05", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Eine Radfahrerin fährt 10 km mit 20 km/h und danach 10 km mit 10 km/h (bergauf). Wie groß ist ihre Durchschnittsgeschwindigkeit für die ganze Strecke?",
+      "gegeben": "1. Abschnitt: 10 km mit 20 km/h, 2. Abschnitt: 10 km mit 10 km/h", "gesucht": "Durchschnittsgeschwindigkeit", "gesuchtSymbol": "v",
+      "loesung": 13.333, "einheit": "km/h", "toleranz": 0.02,
+      "rechenweg": ["Zeit 1: `t_{1} = \\frac{10 km}{20 km/h} = 0,5 h`", "Zeit 2: `t_{2} = \\frac{10 km}{10 km/h} = 1 h`", "`v = \\frac{20 km}{1,5 h} ≈ 13,3 km/h`"],
+      "hinweis": "Nicht einfach den Mittelwert von 20 und 10 bilden! Berechne Gesamtweg und Gesamtzeit.",
+      "erklaerung": "Die Radfahrerin ist länger langsam als schnell unterwegs. Deshalb liegt der Durchschnitt unter 15 km/h." },
+    { "id": "k10-ge-06", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Was zeigt der Tacho eines Autos an?",
+      "optionen": [
+        { "text": "Die Momentangeschwindigkeit", "richtig": true },
+        { "text": "Die Durchschnittsgeschwindigkeit der Fahrt", "feedback": "Die zeigt der Bordcomputer, nicht der Tacho." },
+        { "text": "Den zurückgelegten Weg", "feedback": "Den Weg zeigt der Kilometerzähler." }
+      ],
+      "erklaerung": "Der Tacho misst die Geschwindigkeit im jeweiligen Augenblick." },
+    { "id": "k10-ge-07", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Schall legt in Luft 343 m pro Sekunde zurück. Du siehst einen Blitz und hörst den Donner 6 s später. Wie weit ist das Gewitter entfernt?",
+      "gegeben": "`v = 343 m/s`, `t = 6 s`", "gesucht": "Entfernung `s`", "gesuchtSymbol": "s",
+      "loesung": 2058, "einheit": "m", "alternativEinheiten": { "km": 1000 },
+      "rechenweg": ["`s = v · t`", "`s = 343 m/s · 6 s = 2058 m ≈ 2 km`"],
+      "erklaerung": "Das Licht kommt praktisch sofort an. Faustregel: Sekunden zwischen Blitz und Donner durch 3 ergibt die Entfernung in Kilometern." }
+  ]
+}

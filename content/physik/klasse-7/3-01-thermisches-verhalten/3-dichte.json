@@ -1,0 +1,238 @@
+{
+  "id": "k7-dichte",
+  "titel": "Masse, Volumen und Dichte",
+  "kurz": "Warum ein Kilo Federn und ein Kilo Blei gleich schwer, aber verschieden groß sind.",
+  "reihenfolge": 3,
+  "lernziele": [
+    {
+      "id": "lz1",
+      "niveau": "D",
+      "text": "Masse und Volumen eines Körpers unterscheiden und messen"
+    },
+    {
+      "id": "lz2",
+      "niveau": "E",
+      "text": "Die Dichte als Quotient aus Masse und Volumen beschreiben und berechnen"
+    },
+    {
+      "id": "lz3",
+      "niveau": "E",
+      "text": "Die Dichte experimentell bestimmen (z. B. mit der Überlaufmethode)"
+    },
+    {
+      "id": "lz4",
+      "niveau": "E",
+      "text": "Mit der Dichte erklären, ob ein Körper schwimmt oder sinkt"
+    }
+  ],
+  "verstehen": {
+    "einstieg": "Ein großer Baumstamm schwimmt auf dem Wasser, eine kleine Eisenschraube geht unter. Liegt das an der Masse?",
+    "abschnitte": [
+      {
+        "titel": "Masse und Volumen",
+        "text": "Die **Masse** `m` gibt an, wie schwer und träge ein Körper ist. Man misst sie mit einer Waage in Gramm (g) oder Kilogramm (kg).\n\nDas **Volumen** `V` gibt an, wie viel Raum ein Körper einnimmt. Man misst es in cm³, ml oder Liter (1 ml = 1 cm³, 1 l = 1000 cm³). Bei Quadern rechnet man Länge · Breite · Höhe. Unregelmäßige Körper taucht man in einen **Messzylinder** oder ein **Überlaufgefäß** und misst, wie viel Wasser sie verdrängen."
+      },
+      {
+        "titel": "Die Dichte",
+        "text": "Die **Dichte** `ρ` (griechisch „rho“) gibt an, welche Masse ein Kubikzentimeter eines Stoffes hat: `ρ = m / V`.\n\nDie Dichte ist eine **Stoffeigenschaft**: Ein kleiner und ein großer Eisenwürfel haben dieselbe Dichte. Mit ihr kann man Stoffe erkennen.\n\nEinige Werte in g/cm³: Holz (Fichte) etwa 0,5 · Eis 0,92 · Wasser 1,0 · Aluminium 2,7 · Eisen 7,9 · Blei 11,3 · Gold 19,3. Luft hat nur etwa 0,0012 g/cm³.\n\n**Teilchenmodell:** Die Dichte hängt davon ab, wie schwer die Teilchen sind und wie dicht sie gepackt sind."
+      },
+      {
+        "titel": "Schwimmen und Sinken",
+        "text": "Ein Körper aus einem Stoff mit **kleinerer Dichte als Wasser** schwimmt, einer mit **größerer Dichte** sinkt. Holz schwimmt, Eisen sinkt, Eis schwimmt gerade so (etwa 9/10 liegen unter Wasser).\n\nEin Stahlschiff schwimmt trotzdem, weil es innen hohl ist: Die **mittlere** Dichte von Stahl und eingeschlossener Luft ist kleiner als die von Wasser."
+      }
+    ],
+    "formeln": [
+      {
+        "formel": "ρ = \\frac{m}{V}",
+        "bedeutung": "Dichte `ρ` in g/cm³, Masse `m` in g, Volumen `V` in cm³"
+      },
+      {
+        "formel": "m = ρ · V",
+        "bedeutung": "Umgestellt nach der Masse"
+      }
+    ],
+    "merksatz": "Die Dichte ist der Quotient aus Masse und Volumen: `ρ = m / V`. Sie ist eine Eigenschaft des Stoffes, nicht des einzelnen Körpers.\n\nKörper mit kleinerer Dichte als eine Flüssigkeit schwimmen darin.",
+    "alltag": "Bei einem Unfall mit Öl auf dem Meer schwimmt das Öl oben, weil seine Dichte kleiner als die von Wasser ist. So kann man es mit Sperren einsammeln."
+  },
+  "interaktiv": [],
+  "uebungen": [
+    {
+      "id": "k7-di-08",
+      "typ": "zahl",
+      "schwierigkeit": "leicht",
+      "lernziel": "lz1",
+      "frage": "Ein quaderförmiger Holzklotz ist 5 cm lang, 4 cm breit und 2 cm hoch. Wie groß ist sein Volumen?",
+      "gegeben": "`a = 5 cm`, `b = 4 cm`, `c = 2 cm`",
+      "gesucht": "Volumen `V`",
+      "gesuchtSymbol": "V",
+      "loesung": 40,
+      "einheit": "cm³",
+      "alternativEinheiten": {
+        "ml": 1
+      },
+      "rechenweg": [
+        "`V = a · b · c`",
+        "`V = 5 cm · 4 cm · 2 cm = 40 cm³`"
+      ],
+      "erklaerung": "40 cm³ sind dasselbe wie 40 ml. Bei unregelmäßigen Körpern misst man das Volumen stattdessen mit dem Messzylinder."
+    },
+    {
+      "id": "k7-di-01",
+      "typ": "single",
+      "schwierigkeit": "leicht",
+      "lernziel": "lz2",
+      "frage": "Ein Würfel aus Eisen wird halbiert. Was gilt für die Dichte einer Hälfte?",
+      "optionen": [
+        {
+          "text": "Sie bleibt gleich.",
+          "richtig": true
+        },
+        {
+          "text": "Sie halbiert sich.",
+          "feedback": "Masse **und** Volumen halbieren sich. Ihr Quotient bleibt gleich."
+        },
+        {
+          "text": "Sie verdoppelt sich.",
+          "feedback": "Die Dichte hängt nur vom Stoff ab, nicht von der Größe des Körpers."
+        }
+      ],
+      "erklaerung": "Die Dichte ist eine Stoffeigenschaft. Jedes Stück Eisen hat etwa 7,9 g/cm³."
+    },
+    {
+      "id": "k7-di-02",
+      "typ": "zahl",
+      "schwierigkeit": "leicht",
+      "lernziel": "lz2",
+      "frage": "Ein Körper hat eine Masse von 540 g und ein Volumen von 200 cm³. Berechne seine Dichte.",
+      "gegeben": "`m = 540 g`, `V = 200 cm³`",
+      "gesucht": "Dichte `ρ`",
+      "gesuchtSymbol": "ρ",
+      "loesung": 2.7,
+      "einheit": "g/cm³",
+      "rechenweg": [
+        "`ρ = \\frac{m}{V}`",
+        "`ρ = \\frac{540 g}{200 cm³} = 2,7 g/cm³`"
+      ],
+      "erklaerung": "2,7 g/cm³ ist die Dichte von Aluminium. Mit der Dichte kann man also herausfinden, woraus ein Körper besteht."
+    },
+    {
+      "id": "k7-di-03",
+      "typ": "zahl",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz2",
+      "frage": "Ein Goldbarren hat ein Volumen von 50 cm³. Welche Masse hat er? (`ρ_{Gold}` = 19,3 g/cm³)",
+      "gegeben": "`V = 50 cm³`, `ρ = 19,3 g/cm³`",
+      "gesucht": "Masse `m`",
+      "gesuchtSymbol": "m",
+      "loesung": 965,
+      "einheit": "g",
+      "alternativEinheiten": {
+        "kg": 1000
+      },
+      "rechenweg": [
+        "`m = ρ · V`",
+        "`m = 19,3 g/cm³ · 50 cm³ = 965 g`"
+      ],
+      "hinweis": "Stelle `ρ = m / V` nach `m` um.",
+      "erklaerung": "Fast ein Kilogramm in einem Körper, der kleiner als eine Streichholzschachtel ist: Gold hat eine sehr große Dichte."
+    },
+    {
+      "id": "k7-di-04",
+      "typ": "reihenfolge",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz3",
+      "frage": "Bringe die Schritte zur Bestimmung der Dichte eines Steins mit dem Messzylinder in eine sinnvolle Reihenfolge.",
+      "elemente": [
+        "Masse des Steins mit der Waage bestimmen",
+        "Messzylinder teilweise mit Wasser füllen und das Volumen ablesen",
+        "Stein vorsichtig ins Wasser legen und das neue Volumen ablesen",
+        "Volumen des Steins als Differenz der beiden Werte berechnen",
+        "Dichte mit ρ = m / V berechnen"
+      ],
+      "erklaerung": "Den Stein wiegt man zuerst trocken. Nasses Wasser am Stein würde die Masse verfälschen."
+    },
+    {
+      "id": "k7-di-05",
+      "typ": "multi",
+      "schwierigkeit": "mittel",
+      "lernziel": "lz4",
+      "frage": "Welche dieser Körper schwimmen in Wasser (ρ = 1,0 g/cm³)?",
+      "optionen": [
+        {
+          "text": "Ein Fichtenholzbrett (ρ ≈ 0,5 g/cm³)",
+          "richtig": true
+        },
+        {
+          "text": "Ein Eiswürfel (ρ = 0,92 g/cm³)",
+          "richtig": true
+        },
+        {
+          "text": "Eine Aluminiumkugel, massiv (ρ = 2,7 g/cm³)",
+          "feedback": "Massives Aluminium hat eine größere Dichte als Wasser und sinkt."
+        },
+        {
+          "text": "Ein Bleigewicht (ρ = 11,3 g/cm³)",
+          "feedback": "Blei hat eine viel größere Dichte als Wasser."
+        }
+      ],
+      "erklaerung": "Entscheidend ist der Vergleich der Dichte mit der von Wasser, nicht die Masse oder die Größe."
+    },
+    {
+      "id": "k7-di-06",
+      "typ": "zahl",
+      "schwierigkeit": "schwer",
+      "lernziel": "lz3",
+      "frage": "Ein unbekannter Metallring hat eine Masse von 79 g. Im Messzylinder steigt der Wasserstand von 50 ml auf 60 ml. Berechne die Dichte des Rings.",
+      "gegeben": "`m = 79 g`, Wasserstand 50 ml → 60 ml",
+      "gesucht": "Dichte `ρ`",
+      "gesuchtSymbol": "ρ",
+      "loesung": 7.9,
+      "einheit": "g/cm³",
+      "rechenweg": [
+        "Volumen: `V = 60 ml − 50 ml = 10 ml = 10 cm³`",
+        "Dichte: `ρ = \\frac{79 g}{10 cm³} = 7,9 g/cm³`",
+        "Der Ring besteht also vermutlich aus Eisen (Stahl)."
+      ],
+      "hinweis": "Das Volumen des Rings ist der Unterschied der beiden Wasserstände. 1 ml = 1 cm³.",
+      "erklaerung": "Mit der Überlaufmethode bzw. dem Messzylinder kann man auch unregelmäßig geformte Körper vermessen."
+    },
+    {
+      "id": "k7-di-07",
+      "typ": "text",
+      "schwierigkeit": "schwer",
+      "lernziel": "lz4",
+      "frage": "Ein Schiff aus Stahl (ρ ≈ 7,9 g/cm³) schwimmt, obwohl Stahl eine viel größere Dichte als Wasser hat. Erkläre das.",
+      "stichworte": [
+        {
+          "aspekt": "Das Schiff ist innen hohl und enthält viel Luft",
+          "woerter": [
+            "hohl",
+            "luft",
+            "innen leer",
+            "hohlraum"
+          ]
+        },
+        {
+          "aspekt": "Entscheidend ist die mittlere Dichte des ganzen Schiffs",
+          "woerter": [
+            "mittlere dichte",
+            "durchschnitt",
+            "gesamte",
+            "ganze schiff",
+            "insgesamt"
+          ]
+        },
+        {
+          "aspekt": "Diese ist kleiner als die Dichte von Wasser",
+          "woerter": [
+            "kleiner als",
+            "geringer als",
+            "weniger als"
+          ]
+        }
+      ],
+      "musterloesung": "Das Schiff besteht nicht nur aus Stahl, sondern ist innen hohl und enthält viel Luft. Für das Schwimmen ist die mittlere Dichte des ganzen Schiffs entscheidend: seine gesamte Masse geteilt durch sein gesamtes Volumen. Weil das große Volumen zum großen Teil aus Luft besteht, ist diese mittlere Dichte kleiner als die Dichte von Wasser, und das Schiff schwimmt.",
+      "erklaerung": "Läuft Wasser in den Rumpf, steigt die mittlere Dichte, und das Schiff kann sinken."
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "id": "k7-gasdruck",
+  "titel": "Druck in Gasen und Luftdruck",
+  "kurz": "Woher der Druck in einem Gas kommt und warum eine Spraydose in der Sonne gefährlich ist.",
+  "reihenfolge": 4,
+  "lernziele": [
+    { "id": "lz1", "niveau": "E", "text": "Den Druck in Gasen mithilfe einfacher Teilchenvorstellungen deuten" },
+    { "id": "lz2", "niveau": "E", "text": "Den Zusammenhang zwischen Druck und Temperatur eines Gases bei konstantem Volumen beschreiben" },
+    { "id": "lz3", "niveau": "D", "text": "Den Luftdruck beschreiben, Einheiten angeben und Messmöglichkeiten nennen" },
+    { "id": "lz4", "niveau": "E", "text": "Sicherheitsregeln im Alltag mit dem Gasdruck begründen" }
+  ],
+  "verstehen": {
+    "einstieg": "Ein Fahrradreifen, der morgens gerade richtig aufgepumpt war, ist nach ein paar Stunden in der prallen Sonne deutlich härter. Es ist aber keine Luft hinzugekommen. Was ist passiert?",
+    "abschnitte": [
+      {
+        "titel": "Woher der Gasdruck kommt",
+        "text": "Die Teilchen eines Gases fliegen ständig umher und **prallen gegen die Wände** ihres Behälters. Jeder einzelne Stoß ist winzig, aber es sind unvorstellbar viele. Zusammen drücken sie mit einer großen Kraft gegen jede Fläche. Das ist der **Gasdruck**.\n\nDer Druck wird größer, wenn mehr Teilchen im Behälter sind (Aufpumpen) oder wenn das Gas auf ein kleineres Volumen zusammengedrückt wird."
+      },
+      {
+        "titel": "Druck und Temperatur",
+        "text": "Erwärmt man ein Gas in einem geschlossenen Behälter mit **festem Volumen**, steigt der Druck. Die Teilchen werden schneller, prallen **häufiger und heftiger** gegen die Wände.\n\nKühlt man das Gas ab, sinkt der Druck. (Genauer gilt: Der Druck ist proportional zur Temperatur in Kelvin. Verdoppelt sich die Kelvin-Temperatur, verdoppelt sich der Druck.)\n\nDeshalb dürfen Spraydosen nicht erhitzt oder in die Sonne gelegt werden: Der Druck kann so stark steigen, dass die Dose explodiert."
+      },
+      {
+        "titel": "Der Luftdruck",
+        "text": "Auch die Lufthülle der Erde übt einen Druck aus, den **Luftdruck**. Auf Meereshöhe beträgt er im Mittel etwa **1013 hPa** (Hektopascal). Die Einheit des Drucks ist das Pascal (Pa), außerdem nutzt man das bar: 1 bar = 1000 hPa.\n\nMit zunehmender Höhe wird die Luft dünner, und der Luftdruck nimmt ab. Auf der Zugspitze (fast 3000 m) sind es nur noch etwa 700 hPa.\n\nGemessen wird der Luftdruck mit einem **Barometer**. Wetterberichte nutzen ihn: Hoher Luftdruck bringt oft schönes Wetter."
+      }
+    ],
+    "merksatz": "Gasdruck entsteht durch die Stöße der Gasteilchen gegen die Wände. Bei festem Volumen steigt der Druck, wenn die Temperatur steigt.\n\nDer Luftdruck auf Meereshöhe beträgt etwa 1013 hPa und nimmt mit der Höhe ab.",
+    "alltag": "Eine leere, verschlossene Plastikflasche aus dem Flugzeug ist nach der Landung zusammengedrückt: Beim Verschließen in großer Höhe war der Luftdruck in der Kabine niedriger als am Boden."
+  },
+  "interaktiv": ["k7-teilchenmodell"],
+  "uebungen": [
+    { "id": "k7-gd-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Wie entsteht der Druck eines Gases in einem Behälter?",
+      "optionen": [
+        { "text": "Durch die Stöße der Gasteilchen gegen die Behälterwände", "richtig": true },
+        { "text": "Durch das Gewicht der Wände", "feedback": "Der Druck wirkt von innen auf alle Wände, auch nach oben. Er kommt vom Gas selbst." },
+        { "text": "Weil sich die Gasteilchen ausdehnen", "feedback": "Teilchen dehnen sich nicht aus. Entscheidend ist ihre Bewegung." }
+      ],
+      "erklaerung": "Unzählige winzige Stöße der Teilchen ergeben zusammen eine große Kraft auf jede Fläche." },
+    { "id": "k7-gd-02", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz2",
+      "frage": "Ein verschlossenes Glas mit Luft wird erwärmt. Was passiert mit dem Druck im Glas?",
+      "optionen": [
+        { "text": "Er steigt.", "richtig": true },
+        { "text": "Er sinkt.", "feedback": "Wärmere Teilchen sind schneller und stoßen heftiger gegen die Wände." },
+        { "text": "Er bleibt gleich.", "feedback": "Das Volumen bleibt gleich, aber die Teilchen werden schneller. Deshalb ändert sich der Druck." }
+      ],
+      "erklaerung": "Bei festem Volumen gilt: höhere Temperatur → schnellere Teilchen → häufigere und heftigere Stöße → größerer Druck." },
+    { "id": "k7-gd-03", "typ": "zuordnung", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Ordne zu.",
+      "paare": [
+        { "links": "mittlerer Luftdruck auf Meereshöhe", "rechts": "etwa 1013 hPa" },
+        { "links": "Messgerät für den Luftdruck", "rechts": "Barometer" },
+        { "links": "1 bar", "rechts": "1000 hPa" },
+        { "links": "Luftdruck auf einem hohen Berg", "rechts": "kleiner als auf Meereshöhe" }
+      ],
+      "extraRechts": ["Thermometer"],
+      "erklaerung": "Je höher man steigt, desto weniger Luft liegt über einem. Deshalb nimmt der Luftdruck mit der Höhe ab." },
+    { "id": "k7-gd-04", "typ": "text", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Auf Spraydosen steht: „Vor Sonnenbestrahlung und Temperaturen über 50 °C schützen.“ Begründe diese Warnung mit dem Teilchenmodell.",
+      "stichworte": [
+        { "aspekt": "Bei Erwärmung bewegen sich die Gasteilchen schneller", "woerter": ["schneller", "heftiger", "staerker bewegen"] },
+        { "aspekt": "Sie stoßen häufiger und heftiger gegen die Wände, der Druck steigt", "woerter": ["druck steigt", "druck wird groesser", "hoeherer druck", "groesserer druck", "stossen", "staerker gegen"] },
+        { "aspekt": "Die Dose kann platzen / explodieren", "woerter": ["platz", "explod", "reisst", "birst", "gefahr"] }
+      ],
+      "musterloesung": "In der Spraydose ist ein Gas eingeschlossen, das Volumen der Dose bleibt gleich. Wird die Dose erwärmt, bewegen sich die Gasteilchen schneller. Sie stoßen dadurch häufiger und heftiger gegen die Wände der Dose, und der Druck steigt. Wird der Druck zu groß, kann die Dose platzen oder explodieren.",
+      "erklaerung": "Aus demselben Grund darf man Gaskartuschen oder Feuerzeuge nicht im heißen Auto liegen lassen." },
+    { "id": "k7-gd-05", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Mit einer Luftpumpe wird mehr Luft in einen Fußball gepumpt. Warum steigt der Druck im Ball?",
+      "optionen": [
+        { "text": "Weil mehr Teilchen gegen die Wände stoßen", "richtig": true },
+        { "text": "Weil die Teilchen größer werden", "feedback": "Die Teilchen bleiben gleich groß. Es werden mehr." },
+        { "text": "Weil die Luft im Ball schwerer wird", "feedback": "Die Masse steigt zwar, aber der Druck entsteht durch die Stöße der Teilchen." }
+      ],
+      "erklaerung": "Mehr Teilchen im gleichen Volumen bedeuten mehr Stöße pro Sekunde gegen die Wand." },
+    { "id": "k7-gd-06", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Du verschließt eine leere Plastikflasche auf einem hohen Berg und trägst sie ins Tal. Was beobachtest du unten?",
+      "optionen": [
+        { "text": "Die Flasche wird eingedrückt.", "richtig": true },
+        { "text": "Die Flasche bläht sich auf.", "feedback": "Im Tal ist der Luftdruck außen **größer** als der eingeschlossene Bergluftdruck." },
+        { "text": "Nichts, verschlossene Flaschen verändern sich nicht.", "feedback": "Der Druckunterschied zwischen innen und außen drückt die weiche Flasche zusammen." }
+      ],
+      "erklaerung": "In der Flasche ist Luft mit dem niedrigen Druck vom Berg eingeschlossen. Im Tal drückt die Außenluft stärker, und die Flasche wird zusammengedrückt." },
+    { "id": "k7-gd-07", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz2",
+      "frage": "In einer geschlossenen Gasflasche (festes Volumen) herrscht bei 27 °C (300 K) ein Druck von 2 bar. Die Flasche wird auf 327 °C (600 K) erhitzt. Wie groß ist jetzt der Druck? (Der Druck ist proportional zur Temperatur in Kelvin.)",
+      "gegeben": "`p_{1} = 2 bar`, `T_{1} = 300 K`, `T_{2} = 600 K`", "gesucht": "Druck `p_{2}`", "gesuchtSymbol": "p_{2}",
+      "loesung": 4, "einheit": "bar", "alternativEinheiten": { "hPa": 0.001 },
+      "rechenweg": ["Die Kelvin-Temperatur verdoppelt sich: 300 K → 600 K.", "Also verdoppelt sich auch der Druck: `p_{2} = 2 · 2 bar = 4 bar`"],
+      "hinweis": "Rechne mit den Kelvin-Temperaturen, nicht mit den Celsius-Werten.",
+      "erklaerung": "In Grad Celsius sähe es nach einer Verzwölffachung aus (27 → 327). Proportional ist der Druck aber nur zur Kelvin-Temperatur." }
+  ]
+}

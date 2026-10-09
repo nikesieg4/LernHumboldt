@@ -1,0 +1,96 @@
+{
+  "id": "k7-temperatur-ausdehnung",
+  "titel": "Temperatur und Ausdehnung",
+  "kurz": "Celsius und Kelvin, warum Brücken Dehnungsfugen haben und was ein Bimetallstreifen kann.",
+  "reihenfolge": 2,
+  "lernziele": [
+    { "id": "lz1", "niveau": "D", "text": "Temperaturen in Grad Celsius und Kelvin angeben und umrechnen" },
+    { "id": "lz2", "niveau": "D", "text": "Die Längenänderung fester Körper bei Temperaturänderung beschreiben" },
+    { "id": "lz3", "niveau": "D", "text": "Die Volumenänderung von Flüssigkeiten und Gasen beschreiben und vergleichen" },
+    { "id": "lz4", "niveau": "E", "text": "Die Ausdehnung mit dem Teilchenmodell erklären und Anwendungen wie den Bimetallstreifen beschreiben" }
+  ],
+  "verstehen": {
+    "einstieg": "Im Sommer hängen Stromleitungen tiefer durch als im Winter. Warum?",
+    "abschnitte": [
+      {
+        "titel": "Celsius und Kelvin",
+        "text": "Die **Celsius-Skala** hat zwei feste Punkte: 0 °C ist die Schmelztemperatur von Eis, 100 °C die Siedetemperatur von Wasser (bei normalem Luftdruck).\n\nDie **Kelvin-Skala** beginnt am **absoluten Nullpunkt** bei −273 °C. Kälter geht es nicht, denn dort würde die Teilchenbewegung aufhören. Ein Schritt von 1 K ist genauso groß wie ein Schritt von 1 °C. Deshalb rechnet man einfach: Kelvin = Grad Celsius + 273.\n\nZimmertemperatur von 20 °C sind also 293 K."
+      },
+      {
+        "titel": "Ausdehnung beim Erwärmen",
+        "text": "Fast alle Stoffe **dehnen sich beim Erwärmen aus** und ziehen sich beim Abkühlen zusammen.\n\n**Feste Körper** dehnen sich am wenigsten aus, aber mit großer Kraft. Brücken und Schienen bekommen deshalb Dehnungsfugen.\n**Flüssigkeiten** dehnen sich stärker aus. Das nutzt man im Flüssigkeitsthermometer.\n**Gase** dehnen sich am stärksten aus, und alle Gase etwa gleich stark.\n\nAußerdem hängt die Ausdehnung vom **Stoff** ab: Aluminium dehnt sich z. B. etwa doppelt so stark aus wie Eisen.\n\n**Teilchenmodell:** Beim Erwärmen bewegen sich die Teilchen heftiger und brauchen mehr Platz. Die Abstände zwischen ihnen werden größer, die Teilchen selbst nicht."
+      },
+      {
+        "titel": "Bimetallstreifen und eine Ausnahme",
+        "text": "Ein **Bimetallstreifen** besteht aus zwei fest verbundenen Streifen verschiedener Metalle. Beim Erwärmen dehnt sich ein Metall stärker aus als das andere, und der Streifen **biegt sich** zur Seite des Metalls, das sich weniger ausdehnt. So kann er einen Stromkreis öffnen oder schließen, z. B. im Bügeleisen oder Wasserkocher.\n\n**Anomalie des Wassers:** Wasser hat bei 4 °C das kleinste Volumen. Kühlt es weiter ab, dehnt es sich wieder aus, und beim Gefrieren nimmt sein Volumen um etwa 9 % zu. Deshalb schwimmt Eis, Seen frieren von oben zu, und volle Glasflaschen platzen im Gefrierfach."
+      }
+    ],
+    "formeln": [
+      { "formel": "T in K = ϑ in °C + 273", "bedeutung": "Umrechnung von Grad Celsius (`ϑ`, „theta“) in Kelvin (`T`)" }
+    ],
+    "merksatz": "Körper dehnen sich beim Erwärmen aus und ziehen sich beim Abkühlen zusammen: Gase am stärksten, feste Körper am wenigsten.\n\nIm Teilchenmodell werden die **Abstände** zwischen den Teilchen größer, nicht die Teilchen selbst.",
+    "alltag": "Eisenbahnschienen werden mit Dehnungsfugen verlegt oder vorgespannt verschweißt. Sonst könnten sie sich an heißen Tagen verbiegen."
+  },
+  "interaktiv": ["k7-teilchenmodell"],
+  "uebungen": [
+    { "id": "k7-ta-01", "typ": "zahl", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Rechne 20 °C in Kelvin um.",
+      "gegeben": "`ϑ = 20 °C`", "gesucht": "Temperatur `T` in Kelvin", "gesuchtSymbol": "T",
+      "loesung": 293, "einheit": "K", "toleranz": 0.005,
+      "rechenweg": ["`T = ϑ + 273`", "`T = 20 + 273 = 293 K`"],
+      "erklaerung": "Ein Kelvin-Schritt ist genauso groß wie ein Celsius-Schritt. Die Kelvin-Skala ist nur um 273 verschoben." },
+    { "id": "k7-ta-02", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Flüssiger Stickstoff siedet bei 77 K. Wie viel Grad Celsius sind das?",
+      "gegeben": "`T = 77 K`", "gesucht": "Temperatur `ϑ` in °C", "gesuchtSymbol": "ϑ",
+      "loesung": -196, "einheit": "°C", "toleranz": 0.01,
+      "rechenweg": ["`ϑ = T − 273`", "`ϑ = 77 − 273 = −196 °C`"],
+      "hinweis": "Ziehe 273 ab. Das Ergebnis ist negativ.",
+      "erklaerung": "Temperaturen unter 273 K liegen unter dem Gefrierpunkt von Wasser, also im negativen Celsius-Bereich." },
+    { "id": "k7-ta-03", "typ": "reihenfolge", "schwierigkeit": "leicht", "lernziel": "lz3",
+      "frage": "Ordne nach der Stärke der Ausdehnung beim gleichen Erwärmen, beginnend mit der **schwächsten**.",
+      "elemente": ["feste Körper", "Flüssigkeiten", "Gase"],
+      "erklaerung": "Im festen Körper halten die Anziehungskräfte die Teilchen am stärksten zusammen, im Gas fast gar nicht." },
+    { "id": "k7-ta-04", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Warum haben Brücken Dehnungsfugen?",
+      "optionen": [
+        { "text": "Damit sich die Brücke bei Hitze ausdehnen kann, ohne Schaden zu nehmen", "richtig": true },
+        { "text": "Damit Regenwasser abfließen kann", "feedback": "Dafür gibt es Abflüsse. Die Fugen haben mit der Temperatur zu tun." },
+        { "text": "Damit die Brücke leichter wird", "feedback": "Die Fugen sparen kaum Gewicht. Sie geben der Brücke Platz zum Ausdehnen." }
+      ],
+      "erklaerung": "Feste Körper dehnen sich nur wenig aus, aber mit sehr großer Kraft. Ohne Fugen würde die Brücke Risse bekommen." },
+    { "id": "k7-ta-05", "typ": "single", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Ein Bimetallstreifen aus Eisen und Aluminium wird erwärmt. Aluminium dehnt sich stärker aus als Eisen. In welche Richtung biegt er sich?",
+      "optionen": [
+        { "text": "Zur Eisenseite", "richtig": true },
+        { "text": "Zur Aluminiumseite", "feedback": "Die Aluminiumseite wird länger. Ein Streifen biegt sich so, dass die längere Seite außen liegt." },
+        { "text": "Gar nicht, die Metalle gleichen sich aus", "feedback": "Gerade weil sich die Metalle unterschiedlich ausdehnen, muss sich der Streifen biegen." }
+      ],
+      "erklaerung": "Die stärker ausgedehnte Aluminiumseite liegt außen im Bogen, die Eisenseite innen. Der Streifen biegt sich also zur Eisenseite." },
+    { "id": "k7-ta-06", "typ": "text", "schwierigkeit": "mittel", "lernziel": "lz4",
+      "frage": "Erkläre mit dem Teilchenmodell, warum sich ein Metallstab beim Erwärmen ausdehnt.",
+      "stichworte": [
+        { "aspekt": "Die Teilchen bewegen (schwingen) beim Erwärmen heftiger", "woerter": ["heftiger", "schneller", "staerker", "schwingen", "bewegen"] },
+        { "aspekt": "Die Abstände zwischen den Teilchen werden größer", "woerter": ["abstand", "abstaende", "mehr platz", "weiter auseinander"] },
+        { "aspekt": "Die Teilchen selbst werden nicht größer", "woerter": ["nicht groesser", "teilchen selbst", "bleiben gleich gross", "nicht die teilchen"] }
+      ],
+      "musterloesung": "Im Metall schwingen die Teilchen um ihre festen Plätze. Beim Erwärmen schwingen sie heftiger und brauchen dafür mehr Platz. Dadurch werden die Abstände zwischen den Teilchen größer, und der ganze Stab wird länger. Die Teilchen selbst werden dabei nicht größer.",
+      "erklaerung": "Häufiger Fehler: „Die Teilchen dehnen sich aus.“ Im Modell ändern sich nur die Abstände." },
+    { "id": "k7-ta-07", "typ": "multi", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Welche Aussagen zur Anomalie des Wassers sind richtig?",
+      "optionen": [
+        { "text": "Wasser hat bei 4 °C sein kleinstes Volumen.", "richtig": true },
+        { "text": "Beim Gefrieren nimmt das Volumen von Wasser zu.", "richtig": true },
+        { "text": "Deshalb schwimmt Eis auf Wasser.", "richtig": true },
+        { "text": "Wasser zieht sich beim Gefrieren stark zusammen.", "feedback": "Genau umgekehrt: Wasser dehnt sich beim Gefrieren um etwa 9 % aus. Deshalb platzen volle Flaschen im Gefrierfach." }
+      ],
+      "erklaerung": "Weil 4 °C kaltes Wasser am dichtesten ist, sinkt es nach unten. Seen frieren deshalb von oben zu, und Fische können am Grund überwintern." },
+    { "id": "k7-ta-08", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Bei einem Flüssigkeitsthermometer steigt die Flüssigkeitssäule beim Erwärmen. Warum benutzt man dafür ein sehr dünnes Röhrchen?",
+      "optionen": [
+        { "text": "Damit schon eine kleine Volumenänderung einen deutlich sichtbaren Anstieg ergibt", "richtig": true },
+        { "text": "Damit die Flüssigkeit nicht verdunstet", "feedback": "Das Röhrchen ist verschlossen. Die Dünne hat einen anderen Grund." },
+        { "text": "Weil dünnes Glas die Wärme besser leitet", "feedback": "Es geht nicht um das Glas, sondern um den Querschnitt des Röhrchens." }
+      ],
+      "erklaerung": "Die Flüssigkeit dehnt sich nur wenig aus. In einem dünnen Röhrchen verteilt sich dieser kleine Volumenzuwachs auf eine lange Strecke. So kann man genau ablesen." }
+  ]
+}

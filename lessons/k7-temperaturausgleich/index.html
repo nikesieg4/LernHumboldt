@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Temperaturausgleich</title>
+<link rel="stylesheet" href="../../static/lesson-kit.css">
+<style>
+  .beaker { fill: none; stroke: var(--line); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+  .heat { fill: none; stroke: var(--warn); stroke-linecap: round; }
+  .heat-head { fill: var(--warn); }
+  .c1 { stroke: var(--c3); } .c2 { stroke: var(--ok); }
+  .curve { fill: none; stroke-width: 2.6; stroke-linejoin: round; }
+  .mixline { stroke: var(--muted); stroke-width: 1.4; stroke-dasharray: 6 4; }
+  #scene .lbl { font-size: 15px; }
+  .tlbl { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: .85rem; margin-top: 6px; }
+  .legend i { display: inline-block; width: 16px; height: 3px; margin-right: 5px; vertical-align: middle; }
+  .formula { background: var(--bg); border-radius: 10px; padding: 8px 10px; margin-top: 10px; font-size: .92rem; overflow-x: auto; }
+  .formula .f { font-size: 1.02rem; }
+  .ctrl.w1 > span { color: var(--c3); } .ctrl.w2 > span { color: var(--ok); }
+  .ctrl.w1 > span output, .ctrl.w2 > span output { color: var(--accent); }
+  fieldset { border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px 0; margin: 0 0 10px; }
+  legend { font-size: .85rem; font-weight: 650; padding: 0 4px; }
+</style>
+</head>
+<body>
+<h1>Temperaturausgleich</h1>
+<p class="muted small">Stelle die Masse und die Anfangstemperatur von zwei Wassermengen ein und drücke auf „Start“. Beobachte, wie sich die Temperaturen angleichen und in welche Richtung die Wärme fließt.</p>
+
+<div class="lk-grid">
+  <div>
+    <div class="lk-card">
+      <svg id="scene" viewBox="0 0 520 270" role="img" aria-labelledby="sceneTitle">
+        <title id="sceneTitle">Zwei Wassermengen im Kontakt</title>
+      </svg>
+      <p id="status" class="small" aria-live="polite"></p>
+    </div>
+    <div class="lk-card">
+      <h2>Temperaturverlauf</h2>
+      <svg id="chart" viewBox="0 0 520 250" role="img" aria-label="Diagramm: Temperatur beider Wassermengen gegen die Zeit"></svg>
+      <div class="legend">
+        <span><i style="background:var(--c3)"></i>Wasser 1</span>
+        <span><i style="background:var(--ok)"></i>Wasser 2</span>
+        <span><i style="background:var(--muted)"></i>Mischtemperatur (gestrichelt)</span>
+      </div>
+      <div class="formula" id="formula"></div>
+      <p class="small muted" id="note"></p>
+    </div>
+  </div>
+
+  <div>
+    <div class="lk-card">
+      <h2>Einstellungen</h2>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Versuch wählen">
+          <button type="button" id="mCup" aria-pressed="true">Becher im Becher</button>
+          <button type="button" id="mMix" aria-pressed="false">Zusammengießen</button>
+        </div>
+      </div>
+      <fieldset>
+        <legend id="leg1">Wasser 1 (innen)</legend>
+        <label class="ctrl w1"><span>Masse <span class="f">m<sub>1</sub></span> <output id="om1"></output></span>
+          <input type="range" id="sm1" min="50" max="500" step="50" value="200"></label>
+        <label class="ctrl w1"><span>Anfangstemperatur <span class="f">ϑ<sub>1</sub></span> <output id="oT1"></output></span>
+          <input type="range" id="sT1" min="0" max="100" step="1" value="80"></label>
+      </fieldset>
+      <fieldset>
+        <legend id="leg2">Wasser 2 (außen)</legend>
+        <label class="ctrl w2"><span>Masse <span class="f">m<sub>2</sub></span> <output id="om2"></output></span>
+          <input type="range" id="sm2" min="50" max="1000" step="50" value="200"></label>
+        <label class="ctrl w2"><span>Anfangstemperatur <span class="f">ϑ<sub>2</sub></span> <output id="oT2"></output></span>
+          <input type="range" id="sT2" min="0" max="100" step="1" value="20"></label>
+      </fieldset>
+      <div class="row">
+        <button type="button" id="bStart" class="primary">Start</button>
+        <button type="button" id="bReset">Zurücksetzen</button>
+      </div>
+      <div class="readouts">
+        <div class="readout"><span>Zeit <span class="f">t</span></span><b id="rt">0</b></div>
+        <div class="readout"><span>Wasser 1</span><b id="rT1"></b></div>
+        <div class="readout"><span>Wasser 2</span><b id="rT2"></b></div>
+        <div class="readout"><span>übertragene Wärme</span><b id="rQ"></b></div>
+      </div>
+    </div>
+
+    <div class="lk-card tasks">
+      <h2>Entdecke selbst <span class="small muted" data-task-count></span></h2>
+      <div class="task" data-goal="equal"><p class="task-q">Nimm gleich viel heißes und kaltes Wasser und lass den Ausgleich bis zum Ende laufen. Vergleiche die Endtemperatur mit den beiden Anfangstemperaturen.</p></div>
+      <div class="task">
+        <p class="task-q">Du mischst gleich viel Wasser von 20 °C und von 60 °C. Welche Temperatur stellt sich ein?</p>
+        <div class="choices">
+          <button type="button" data-fb="Temperaturen werden nicht addiert. Die Mischtemperatur liegt immer zwischen den Anfangstemperaturen.">80 °C</button>
+          <button type="button" data-ok data-fb="Richtig: Bei gleichen Massen liegt die Mischtemperatur genau in der Mitte: (20 °C + 60 °C) : 2 = 40 °C.">40 °C</button>
+          <button type="button" data-fb="Das heiße Wasser kühlt ab, das kalte erwärmt sich. Probiere es in der Simulation aus.">60 °C</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task" data-goal="thirty"><p class="task-q">Stelle 80&nbsp;°C heißes und 20&nbsp;°C kaltes Wasser ein. Wähle die Massen so, dass sich am Ende genau 30&nbsp;°C einstellen. Lass den Ausgleich bis zum Ende laufen.</p></div>
+      <div class="task" data-goal="reverse"><p class="task-q">Becher im Becher: Stelle innen das kältere Wasser ein und starte. In welche Richtung zeigt jetzt der Wärmepfeil?</p></div>
+      <div class="task">
+        <p class="task-q">Eine Badewanne mit 40 °C und eine Tasse Tee mit 80 °C: Welche Aussage stimmt?</p>
+        <div class="choices">
+          <button type="button" data-fb="Die Temperatur des Tees ist höher. Für die thermische Energie zählt aber auch, wie viele Teilchen sich bewegen.">Der Tee hat mehr thermische Energie, weil er heißer ist.</button>
+          <button type="button" data-ok data-fb="Genau: Die Temperatur sagt, wie heftig sich die Teilchen im Mittel bewegen. In der Badewanne sind aber viel mehr Teilchen, deshalb steckt dort mehr thermische Energie.">Der Tee hat die höhere Temperatur, die Badewanne mehr thermische Energie.</button>
+          <button type="button" data-fb="Temperatur und thermische Energie sind verschiedene Größen. Denke an die Masse.">Beide haben gleich viel Wärme.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="task">
+        <p class="task-q">Was bedeutet „Wärme“ in der Physik?</p>
+        <div class="choices">
+          <button type="button" data-fb="Die Temperatur misst man mit dem Thermometer. Wärme ist etwas anderes.">Ein anderes Wort für Temperatur.</button>
+          <button type="button" data-ok data-fb="Richtig: Wärme ist Energie, die wegen eines Temperaturunterschieds vom wärmeren zum kälteren Körper übertragen wird.">Energie, die vom wärmeren zum kälteren Körper übertragen wird.</button>
+          <button type="button" data-fb="Es fließt kein Stoff. Übertragen wird Energie, und zwar immer vom wärmeren zum kälteren Körper.">Ein Stoff, der vom kalten zum warmen Körper fließt.</button>
+        </div><p class="fb"></p>
+      </div>
+      <div class="all-done">Alles entdeckt! Weiter geht es mit den Übungen.</div>
+    </div>
+  </div>
+</div>
+
+<script src="../../static/lesson-kit.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var C = 4.19;  // spezifische Wärmekapazität von Wasser in J/(g·K)
+  var MODES = {
+    cup: { k: 100 / 3, unit: 'min', run: 15, axes: [[30, 5], [40, 5], [60, 10], [80, 10]] },        // k in g/min
+    mix: { k: 25, unit: 's', run: 12, axes: [[60, 10], [80, 10], [100, 20], [120, 20]] }            // k in g/s
+  };
+  // Zeitachse so wählen, dass der Ausgleich sicher fertig wird (etwa 8 Zeitkonstanten)
+  function axis() {
+    var a = MODES[S.mode].axes, need = 8 * tau();
+    for (var i = 0; i < a.length; i++) if (a[i][0] >= need) return { tmax: a[i][0], tick: a[i][1] };
+    return { tmax: a[a.length - 1][0], tick: a[a.length - 1][1] };
+  }
+  function speed() { return axis().tmax / MODES[S.mode].run; }   // Zeitraffer: Modellzeit pro echter Sekunde
+  var S = { mode: 'cup', m1: 200, m2: 200, T1: 80, T2: 20, t: 0, running: false, finished: false };
+  var blobs = [];
+
+  function el(tag, a, parent) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); (parent || scene).appendChild(e); return e; }
+  function txt(x, y, s, cls, anchor, parent) { var t = el('text', { x: x, y: y, class: cls || 'val', 'text-anchor': anchor || 'start' }, parent); t.textContent = s; return t; }
+  function water(T) { var p = Math.max(0, Math.min(100, T)); return 'color-mix(in srgb, var(--pos) ' + p.toFixed(0) + '%, var(--neg))'; }
+  function deg(T) { return LK.fmt(T, 1) + ' °C'; }
+
+  function Tm() { return (S.m1 * S.T1 + S.m2 * S.T2) / (S.m1 + S.m2); }
+  function tau() { return S.m1 * S.m2 / (MODES[S.mode].k * (S.m1 + S.m2)); }
+  function temps(t) {
+    var e = Math.exp(-t / tau()), m = Tm();
+    return [m + (S.T1 - m) * e, m + (S.T2 - m) * e];
+  }
+
+  // ------------------------------------------------------------ Bild
+  var scene = $('scene');
+  function arrow(x1, x2, y, w) {
+    var dir = x2 > x1 ? 1 : -1, head = 7 + w;
+    el('line', { class: 'heat', x1: x1, y1: y, x2: x2 - dir * head, y2: y, 'stroke-width': w });
+    el('path', { class: 'heat-head', d: 'M' + x2 + ' ' + y + ' L' + (x2 - dir * head) + ' ' + (y - head * 0.7) + ' L' + (x2 - dir * head) + ' ' + (y + head * 0.7) + ' Z' });
+  }
+
+  function makeBlobs() {
+    blobs = [];
+    var n = 60, n1 = Math.round(n * S.m1 / (S.m1 + S.m2));
+    for (var i = 0; i < n; i++) blobs.push({ w: i < n1 ? 1 : 2, u: Math.random(), v: Math.random(), a: Math.random() * 6.28 });
+  }
+
+  function drawScene() {
+    scene.innerHTML = '';
+    var tt = el('title', {}); tt.textContent = S.mode === 'cup' ? 'Becher mit Wasser 1 steht in einem größeren Becher mit Wasser 2' : 'Zwei Wassermengen werden zusammengegossen';
+    var T = temps(S.t), dT = T[0] - T[1], flow = Math.abs(dT) > 0.3;
+    if (S.mode === 'cup') {
+      var lvl2 = 236 - (70 + 90 * S.m2 / 1000), lvl1 = 236 - (65 + 95 * S.m1 / 500);
+      el('rect', { x: 102, y: lvl2, width: 316, height: 238 - lvl2, fill: water(T[1]), opacity: 0.55 });
+      el('path', { class: 'beaker', d: 'M100 60 V240 H420 V60' });
+      el('rect', { x: 206, y: 64, width: 108, height: 172, fill: 'var(--card)' });
+      el('rect', { x: 206, y: lvl1, width: 108, height: 236 - lvl1, fill: water(T[0]), opacity: 0.7 });
+      el('path', { class: 'beaker', d: 'M204 62 V238 H316 V62' });
+      txt(260, 50, 'Wasser 1 (innen): ' + S.m1 + ' g', 'lbl', 'middle');
+      txt(260, 262, 'Wasser 2 (außen): ' + S.m2 + ' g', 'lbl', 'middle');
+      txt(260, 222, deg(T[0]), 'tlbl', 'middle');
+      txt(152, 222, deg(T[1]), 'tlbl', 'middle');
+      txt(368, 222, deg(T[1]), 'tlbl', 'middle');
+      if (flow) {
+        var w = 2 + 6 * Math.min(1, Math.abs(dT) / 80), y = 190;
+        if (dT > 0) { arrow(232, 150, y, w); arrow(288, 370, y, w); }
+        else { arrow(150, 232, y, w); arrow(370, 288, y, w); }
+        txt(152, y - 14, 'Wärme', 'lbl', 'middle'); txt(368, y - 14, 'Wärme', 'lbl', 'middle');
+      }
+    } else if (S.t === 0) {
+      var h1 = 150 * S.m1 / 1000, h2 = 150 * S.m2 / 1000;
+      el('rect', { x: 72, y: 236 - h1, width: 136, height: h1, fill: water(S.T1), opacity: 0.7 });
+      el('path', { class: 'beaker', d: 'M70 70 V238 H210 V70' });
+      el('rect', { x: 312, y: 236 - h2, width: 136, height: h2, fill: water(S.T2), opacity: 0.7 });
+      el('path', { class: 'beaker', d: 'M310 70 V238 H450 V70' });
+      txt(140, 60, 'Wasser 1: ' + S.m1 + ' g', 'lbl', 'middle'); txt(380, 60, 'Wasser 2: ' + S.m2 + ' g', 'lbl', 'middle');
+      txt(140, 262, deg(S.T1), 'tlbl', 'middle'); txt(380, 262, deg(S.T2), 'tlbl', 'middle');
+      txt(260, 160, '+', 'tlbl', 'middle');
+    } else {
+      var lv = 236 - 168 * (S.m1 + S.m2) / 1500, x0 = 152, wd = 216;
+      el('rect', { x: x0, y: lv, width: wd, height: 236 - lv, fill: water(Tm()), opacity: 0.25 });
+      blobs.forEach(function (b) {
+        el('circle', { cx: x0 + 8 + b.u * (wd - 16), cy: lv + 8 + b.v * Math.max(0, 236 - lv - 16), r: 7, fill: water(T[b.w - 1]), stroke: b.w === 1 ? 'var(--c3)' : 'var(--ok)', 'stroke-width': 1.5, opacity: 0.9 });
+      });
+      el('path', { class: 'beaker', d: 'M150 64 V238 H370 V64' });
+      txt(260, 262, 'Mischung: ' + (S.m1 + S.m2) + ' g', 'lbl', 'middle');
+      if (flow) {
+        var hot = dT > 0 ? 1 : 2;
+        txt(hot === 1 ? 120 : 400, 32, 'Wasser ' + hot, 'lbl', 'middle');
+        txt(hot === 1 ? 400 : 120, 32, 'Wasser ' + (3 - hot), 'lbl', 'middle');
+        arrow(hot === 1 ? 170 : 350, hot === 1 ? 350 : 170, 28, 2 + 6 * Math.min(1, Math.abs(dT) / 80));
+        txt(260, 18, 'Wärme', 'lbl', 'middle');
+      }
+    }
+  }
+
+  // ------------------------------------------------------------ Diagramm
+  var chart = $('chart'), X0 = 50, X1 = 500, Y0 = 208, Y1 = 22;
+  function drawChart() {
+    chart.innerHTML = '';
+    var M = MODES[S.mode], A = axis();
+    var px = function (t) { return X0 + (X1 - X0) * t / A.tmax; }, py = function (T) { return Y0 - (Y0 - Y1) * T / 100; };
+    function c(tag, a) { return el(tag, a, chart); }
+    for (var T = 0; T <= 100; T += 20) {
+      c('line', { x1: X0, x2: X1, y1: py(T), y2: py(T), class: 'gridline' });
+      txt(X0 - 6, py(T) + 4, T, 'val', 'end', chart);
+    }
+    for (var t = 0; t <= A.tmax; t += A.tick) {
+      c('line', { x1: px(t), x2: px(t), y1: Y1, y2: Y0, class: 'gridline' });
+      txt(px(t), Y0 + 16, t, 'val', 'middle', chart);
+    }
+    c('line', { x1: X0, x2: X1, y1: Y0, y2: Y0, class: 'axis' });
+    c('line', { x1: X0, x2: X0, y1: Y0, y2: Y1, class: 'axis' });
+    txt(X1, Y0 + 34, 't in ' + M.unit, 'lbl', 'end', chart);
+    txt(8, 12, 'ϑ in °C', 'lbl', 'start', chart);
+    c('line', { x1: X0, x2: X1, y1: py(Tm()), y2: py(Tm()), class: 'mixline' });
+    var n = 120, p1 = [], p2 = [];
+    for (var i = 0; i <= n; i++) {
+      var ti = S.t * i / n, v = temps(ti);
+      p1.push(px(ti).toFixed(1) + ',' + py(v[0]).toFixed(1)); p2.push(px(ti).toFixed(1) + ',' + py(v[1]).toFixed(1));
+    }
+    c('polyline', { points: p1.join(' '), class: 'curve c1' });
+    c('polyline', { points: p2.join(' '), class: 'curve c2' });
+    var now = temps(S.t);
+    c('circle', { cx: px(S.t), cy: py(now[0]), r: 4, fill: 'var(--c3)' });
+    c('circle', { cx: px(S.t), cy: py(now[1]), r: 4, fill: 'var(--ok)' });
+  }
+
+  // ------------------------------------------------------------ Anzeigen
+  function render() {
+    var M = MODES[S.mode], T = temps(S.t), m = Tm();
+    $('om1').textContent = S.m1 + ' g'; $('om2').textContent = S.m2 + ' g';
+    $('oT1').textContent = S.T1 + ' °C'; $('oT2').textContent = S.T2 + ' °C';
+    $('leg1').textContent = S.mode === 'cup' ? 'Wasser 1 (innen)' : 'Wasser 1';
+    $('leg2').textContent = S.mode === 'cup' ? 'Wasser 2 (außen)' : 'Wasser 2';
+    $('rt').textContent = LK.fmt(S.t, S.mode === 'cup' ? 1 : 0) + ' ' + M.unit;
+    $('rT1').textContent = deg(T[0]); $('rT2').textContent = deg(T[1]);
+    var Q = C * S.m2 * (T[1] - S.T2) / 1000;   // in kJ, aufgenommen von Wasser 2
+    $('rQ').textContent = LK.fmt(Math.abs(Q), 1) + ' kJ';
+    $('formula').innerHTML = 'Mischtemperatur (gleicher Stoff): <span class="f">ϑ<sub>M</sub> = (m<sub>1</sub> · ϑ<sub>1</sub> + m<sub>2</sub> · ϑ<sub>2</sub>) : (m<sub>1</sub> + m<sub>2</sub>)</span><br>' +
+      '<span class="f">ϑ<sub>M</sub></span> = (' + S.m1 + ' g · ' + S.T1 + ' °C + ' + S.m2 + ' g · ' + S.T2 + ' °C) : ' + (S.m1 + S.m2) + ' g = <b>' + deg(m) + '</b>';
+    var st;
+    if (S.T1 === S.T2) st = 'Beide Wassermengen sind gleich warm. Es fließt keine Wärme.';
+    else if (S.finished) st = 'Ausgleich beendet: Beide haben jetzt ' + deg(m) + '. Es fließt keine Wärme mehr.';
+    else if (S.t === 0) st = 'Drücke auf „Start“.';
+    else st = 'Wärme fließt von Wasser ' + (T[0] > T[1] ? '1 zu Wasser 2' : '2 zu Wasser 1') + ', also vom wärmeren zum kälteren Wasser.';
+    if ($('status').textContent !== st) $('status').textContent = st;
+    $('note').textContent = 'Zeitraffer: 1 Sekunde entspricht ' + LK.fmt(speed(), 0) + (S.mode === 'cup' ? ' Minuten. ' : ' Sekunden. ') +
+      'Am Anfang ist der Temperaturunterschied groß, deshalb fließt viel Wärme und die Temperaturen ändern sich schnell. Später geht es immer langsamer. Vereinfachung: Wärmeverluste an den Becher und die Luft werden nicht berücksichtigt (c = 4,19 J/(g·K) für Wasser).';
+    $('bStart').textContent = S.running ? 'Anhalten' : (S.t > 0 && !S.finished ? 'Weiter' : 'Start');
+    drawScene(); drawChart();
+  }
+
+  function goals() {
+    if (S.mode === 'cup' && S.T1 < S.T2 && S.t > 0) LK.reach('reverse');
+    if (!S.finished) return;
+    if (S.m1 === S.m2 && Math.abs(S.T1 - S.T2) >= 20) LK.reach('equal');
+    var pair = (S.T1 === 80 && S.T2 === 20) || (S.T1 === 20 && S.T2 === 80);
+    if (pair && Math.abs(Tm() - 30) < 0.05) LK.reach('thirty');
+  }
+
+  // ------------------------------------------------------------ Ablauf
+  var last = performance.now();
+  function frame(now) {
+    var dt = Math.min(0.05, (now - last) / 1000); last = now;
+    if (S.running) {
+      var tmax = axis().tmax;
+      S.t = Math.min(tmax, S.t + dt * speed());
+      blobs.forEach(function (b) {
+        b.a += (Math.random() - 0.5) * 1.5;
+        b.u = Math.max(0, Math.min(1, b.u + Math.cos(b.a) * dt * 0.25));
+        b.v = Math.max(0, Math.min(1, b.v + Math.sin(b.a) * dt * 0.25));
+      });
+      var T = temps(S.t);
+      if (Math.abs(T[0] - T[1]) < 0.04 || S.t >= tmax) { S.finished = true; S.running = false; }
+      render(); goals();
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function reset() { S.t = 0; S.running = false; S.finished = false; makeBlobs(); render(); }
+  function setMode(m) {
+    S.mode = m;
+    $('mCup').setAttribute('aria-pressed', m === 'cup'); $('mMix').setAttribute('aria-pressed', m === 'mix');
+    reset();
+  }
+  $('mCup').onclick = function () { setMode('cup'); };
+  $('mMix').onclick = function () { setMode('mix'); };
+  [['sm1', 'm1'], ['sm2', 'm2'], ['sT1', 'T1'], ['sT2', 'T2']].forEach(function (p) {
+    $(p[0]).oninput = function () { S[p[1]] = Number(this.value); reset(); };
+  });
+  $('bStart').onclick = function () {
+    if (S.finished) { S.t = 0; S.finished = false; makeBlobs(); }
+    if (S.T1 === S.T2) { render(); return; }
+    S.running = !S.running; render(); goals();
+  };
+  $('bReset').onclick = reset;
+  reset();
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

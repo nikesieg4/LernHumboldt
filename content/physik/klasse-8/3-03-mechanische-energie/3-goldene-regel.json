@@ -1,0 +1,102 @@
+{
+  "id": "k8-goldene-regel",
+  "titel": "Goldene Regel der Mechanik",
+  "kurz": "Hebel, Flaschenzug und geneigte Ebene: Kraft sparen kann man, Arbeit nicht.",
+  "reihenfolge": 3,
+  "lernziele": [
+    { "id": "lz1", "niveau": "F", "text": "Die Goldene Regel der Mechanik formulieren und anwenden" },
+    { "id": "lz2", "niveau": "F", "text": "Das Hebelgesetz anwenden" },
+    { "id": "lz3", "niveau": "F", "text": "Feste Rolle, lose Rolle und Flaschenzug vergleichen und begründet auswählen" },
+    { "id": "lz4", "niveau": "F", "text": "Den Einsatz einfacher mechanischer Geräte (z. B. geneigte Ebene) beurteilen" }
+  ],
+  "verstehen": {
+    "einstieg": "Mit einem Flaschenzug kann ein einzelner Mensch einen Motor aus einem Auto heben. Bekommt man dabei etwas geschenkt?",
+    "abschnitte": [
+      {
+        "titel": "Die Goldene Regel",
+        "text": "Einfache mechanische Geräte (Hebel, Rollen, geneigte Ebene) können die nötige **Kraft verkleinern**. Dafür muss man einen **längeren Weg** in Kauf nehmen. Die Arbeit `W = F · s` bleibt (ohne Reibung) gleich:\n\n**„Was man an Kraft spart, muss man an Weg zusetzen.“**\n\nMit Reibung muss man sogar etwas **mehr** Arbeit verrichten. Arbeit sparen kann man also nie."
+      },
+      {
+        "titel": "Der Hebel",
+        "text": "Ein Hebel ist ein starrer Körper, der sich um eine **Drehachse** drehen kann. Er ist im Gleichgewicht, wenn gilt:\n\n`F_{1} · a_{1} = F_{2} · a_{2}` (Kraft mal Hebelarm links = Kraft mal Hebelarm rechts)\n\nEin langer Hebelarm erlaubt eine kleine Kraft. Beispiele: Brechstange, Schubkarre, Nussknacker, Wippe, Flaschenöffner."
+      },
+      {
+        "titel": "Rollen und Flaschenzug",
+        "text": "**Feste Rolle:** Sie ist an der Decke befestigt und ändert nur die **Richtung** der Kraft. Man zieht nach unten statt nach oben, aber mit derselben Kraft.\n\n**Lose Rolle:** Sie hängt mit der Last am Seil. Die Last verteilt sich auf **zwei Seilstücke**, man braucht nur die **halbe Kraft**, muss aber doppelt so viel Seil ziehen.\n\n**Flaschenzug:** Mehrere feste und lose Rollen kombiniert. Bei `n` tragenden Seilstücken gilt: Kraft = Gewichtskraft / n, Seilweg = n · Hubhöhe."
+      },
+      {
+        "titel": "Die geneigte Ebene",
+        "text": "Statt eine Last senkrecht hochzuheben, kann man sie über eine **Rampe** schieben. Je flacher die Rampe, desto kleiner die nötige Kraft, aber desto länger der Weg. Ohne Reibung gilt: `F · l = F_{G} · h` (Rampenlänge `l`, Höhe `h`).\n\nAuch Serpentinen am Berg und Schrauben (eine aufgewickelte geneigte Ebene) nutzen dieses Prinzip."
+      }
+    ],
+    "formeln": [
+      { "formel": "F_{1} · s_{1} = F_{2} · s_{2}", "bedeutung": "Goldene Regel: Die Arbeit auf beiden Seiten ist gleich (ohne Reibung)" },
+      { "formel": "F_{1} · a_{1} = F_{2} · a_{2}", "bedeutung": "Hebelgesetz mit den Hebelarmen `a_{1}` und `a_{2}`" },
+      { "formel": "F = \\frac{F_{G}}{n}", "bedeutung": "Flaschenzug mit `n` tragenden Seilstücken; Seilweg `s = n · h`" }
+    ],
+    "merksatz": "**Goldene Regel der Mechanik:** Was man an Kraft spart, muss man an Weg zusetzen. Die Arbeit bleibt gleich, mit Reibung wird sie sogar etwas größer.",
+    "alltag": "Eine Rollstuhlrampe darf laut Bauvorschrift höchstens 6 % Steigung haben, also auf 1 m Strecke nur 6 cm ansteigen. So bleibt die nötige Kraft klein genug."
+  },
+  "interaktiv": ["k8-flaschenzug"],
+  "uebungen": [
+    { "id": "k8-gr-01", "typ": "single", "schwierigkeit": "leicht", "lernziel": "lz1",
+      "frage": "Wie lautet die Goldene Regel der Mechanik?",
+      "optionen": [
+        { "text": "Was man an Kraft spart, muss man an Weg zusetzen.", "richtig": true },
+        { "text": "Mit Maschinen kann man Arbeit sparen.", "feedback": "Arbeit kann man nicht sparen, nur Kraft." },
+        { "text": "Je länger der Weg, desto größer die Kraft.", "feedback": "Umgekehrt: Ein längerer Weg erlaubt eine kleinere Kraft." }
+      ],
+      "erklaerung": "Das Produkt aus Kraft und Weg, also die Arbeit, bleibt gleich." },
+    { "id": "k8-gr-02", "typ": "zuordnung", "schwierigkeit": "leicht", "lernziel": "lz3",
+      "frage": "Ordne zu, was die Geräte bewirken (ohne Reibung).",
+      "paare": [
+        { "links": "feste Rolle", "rechts": "ändert nur die Richtung der Kraft" },
+        { "links": "lose Rolle", "rechts": "halbe Kraft, doppelter Seilweg" },
+        { "links": "Flaschenzug mit 4 tragenden Seilen", "rechts": "ein Viertel der Kraft, vierfacher Seilweg" }
+      ],
+      "extraRechts": ["halbe Kraft, halber Seilweg"],
+      "erklaerung": "„Halbe Kraft, halber Weg“ würde die Arbeit verkleinern. Das widerspricht der Goldenen Regel." },
+    { "id": "k8-gr-03", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz3",
+      "frage": "Eine Last mit der Gewichtskraft 600 N wird mit einem Flaschenzug mit 4 tragenden Seilstücken gehoben. Welche Zugkraft ist nötig (ohne Reibung und Rollengewicht)?",
+      "gegeben": "`F_{G} = 600 N`, `n = 4`", "gesucht": "Zugkraft `F`", "gesuchtSymbol": "F",
+      "loesung": 150, "einheit": "N",
+      "rechenweg": ["`F = \\frac{F_{G}}{n}`", "`F = \\frac{600 N}{4} = 150 N`"],
+      "erklaerung": "Die Last verteilt sich auf 4 Seilstücke. Jedes trägt ein Viertel." },
+    { "id": "k8-gr-04", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz1",
+      "frage": "Mit demselben Flaschenzug (4 tragende Seile) soll die Last 1,5 m hoch gehoben werden. Wie viel Seil muss man ziehen?",
+      "gegeben": "`n = 4`, `h = 1,5 m`", "gesucht": "Seilweg `s`", "gesuchtSymbol": "s",
+      "loesung": 6, "einheit": "m", "alternativEinheiten": { "cm": 0.01 },
+      "rechenweg": ["`s = n · h`", "`s = 4 · 1,5 m = 6 m`", "Kontrolle: 150 N · 6 m = 900 J = 600 N · 1,5 m"],
+      "erklaerung": "Ein Viertel der Kraft, dafür der vierfache Weg. Die Arbeit bleibt mit 900 J gleich." },
+    { "id": "k8-gr-05", "typ": "zahl", "schwierigkeit": "mittel", "lernziel": "lz2",
+      "frage": "Auf einer Wippe sitzt ein Kind mit 300 N Gewichtskraft 2 m von der Drehachse entfernt. Wie weit von der Achse muss sich ein Erwachsener mit 800 N auf die andere Seite setzen, damit die Wippe im Gleichgewicht ist?",
+      "gegeben": "`F_{1} = 300 N`, `a_{1} = 2 m`, `F_{2} = 800 N`", "gesucht": "Hebelarm `a_{2}`", "gesuchtSymbol": "a_{2}",
+      "loesung": 0.75, "einheit": "m", "alternativEinheiten": { "cm": 0.01 },
+      "rechenweg": ["Hebelgesetz: `F_{1} · a_{1} = F_{2} · a_{2}`", "`a_{2} = \\frac{300 N · 2 m}{800 N} = 0,75 m`"],
+      "hinweis": "Kraft mal Hebelarm muss auf beiden Seiten gleich sein.",
+      "erklaerung": "Der schwerere Erwachsene muss näher an die Achse rücken." },
+    { "id": "k8-gr-06", "typ": "single", "schwierigkeit": "schwer", "lernziel": "lz3",
+      "frage": "Du willst einen schweren Sack allein auf einen Dachboden ziehen. Du hast eine feste und eine lose Rolle. Was ist die beste Wahl?",
+      "optionen": [
+        { "text": "Beide kombinieren: Die lose Rolle halbiert die Kraft, die feste lässt dich bequem nach unten ziehen.", "richtig": true },
+        { "text": "Nur die feste Rolle, weil sie die Kraft halbiert", "feedback": "Die feste Rolle ändert nur die Richtung, nicht den Betrag der Kraft." },
+        { "text": "Gar keine Rolle, weil Rollen die Arbeit vergrößern", "feedback": "Durch Reibung wird die Arbeit etwas größer, aber die nötige Kraft kann viel kleiner werden. Das ist oft entscheidend." }
+      ],
+      "erklaerung": "Als einfacher Flaschenzug ergibt die Kombination die halbe Kraft und eine bequeme Zugrichtung." },
+    { "id": "k8-gr-07", "typ": "zahl", "schwierigkeit": "schwer", "lernziel": "lz4",
+      "frage": "Ein Fass mit 500 N Gewichtskraft wird über eine 4 m lange Rampe auf eine 1 m hohe Laderampe gerollt. Welche Kraft ist ohne Reibung entlang der Rampe nötig?",
+      "gegeben": "`F_{G} = 500 N`, `h = 1 m`, `l = 4 m`", "gesucht": "Kraft `F`", "gesuchtSymbol": "F",
+      "loesung": 125, "einheit": "N",
+      "rechenweg": ["Goldene Regel: `F · l = F_{G} · h`", "`F = \\frac{500 N · 1 m}{4 m} = 125 N`"],
+      "erklaerung": "Der vierfache Weg erlaubt ein Viertel der Kraft." },
+    { "id": "k8-gr-08", "typ": "text", "schwierigkeit": "schwer", "lernziel": "lz1",
+      "frage": "Ein Werbeprospekt verspricht: „Mit unserem Flaschenzug sparen Sie 75 % Ihrer Arbeit!“ Bewerte diese Aussage.",
+      "stichworte": [
+        { "aspekt": "Arbeit kann man nicht sparen (Goldene Regel)", "woerter": ["nicht sparen", "keine arbeit", "goldene regel", "arbeit bleibt", "gleiche arbeit"] },
+        { "aspekt": "Man spart Kraft, muss dafür aber einen längeren Weg ziehen", "woerter": ["kraft", "weg", "laenger", "mehr seil"] },
+        { "aspekt": "Wegen Reibung ist die Arbeit sogar etwas größer", "woerter": ["reibung", "sogar mehr", "etwas mehr", "groesser"] }
+      ],
+      "musterloesung": "Die Aussage ist falsch. Nach der Goldenen Regel der Mechanik kann ein Flaschenzug keine Arbeit sparen. Mit 4 tragenden Seilen braucht man zwar nur 25 % der Kraft, muss dafür aber den vierfachen Seilweg ziehen. Die Arbeit `W = F · s` bleibt gleich. Wegen der Reibung in den Rollen und des Gewichts der losen Rollen muss man sogar etwas mehr Arbeit verrichten. Richtig wäre: „Sie sparen 75 % Kraft.“",
+      "erklaerung": "Im Alltag werden Kraft und Arbeit oft verwechselt. In der Physik sind es verschiedene Größen." }
+  ]
+}
